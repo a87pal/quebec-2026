@@ -1,0 +1,472 @@
+{
+ "Artist's Bluff": {
+  "lat": 44.18057,
+  "lon": -71.69529,
+  "matched": "Artists Bluff, Franconia, Grafton County, New Hampshire, 035",
+  "query": "Artists Bluff Franconia New Hampshire",
+  "region": "franconia",
+  "source": "osm:node/5352572570",
+  "verified": "2026-08-11"
+ },
+ "Atwater Market": {
+  "lat": 45.47964,
+  "lon": -73.57678,
+  "matched": "Marché Atwater, Avenue Greene, Le Sud-Ouest, Montréal, Agglo",
+  "query": "Atwater Market Montreal, Quebec",
+  "region": "montreal",
+  "source": "osm:node/12125417451",
+  "verified": "2026-08-11"
+ },
+ "Baie-Saint-Paul": {
+  "lat": 47.443,
+  "lon": -70.501,
+  "query": "Baie-Saint-Paul",
+  "region": "route",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Baie-Ste-Catherine": {
+  "lat": 48.107,
+  "lon": -69.731,
+  "query": "Baie-Sainte-Catherine Quebec",
+  "region": "route",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Botanical Garden": {
+  "lat": 45.55954,
+  "lon": -73.56124,
+  "matched": "Jardin botanique de Montréal, 4101, Rosemont–La Petite-Patri",
+  "query": "Montreal Botanical Garden",
+  "region": "montreal",
+  "source": "osm:way/87382664",
+  "verified": "2026-08-11"
+ },
+ "Cannon Mtn Tramway": {
+  "lat": 44.1719,
+  "lon": -71.6976,
+  "query": "Cannon Mountain Aerial Tramway New Hampshire",
+  "region": "franconia",
+  "source": "manual: OSM node is the summit station ~1 km away; this is the base station you board at",
+  "verified": null
+ },
+ "Canyon Sainte-Anne": {
+  "lat": 47.057,
+  "lon": -70.856,
+  "query": "Canyon Sainte-Anne Quebec",
+  "region": "beaupre",
+  "source": "manual: OSM way spans the whole canyon; this is the visitor entrance",
+  "verified": null
+ },
+ "Cassis Monna & Filles": {
+  "lat": 46.906,
+  "lon": -71.079,
+  "query": "Cassis Monna et Filles Île d'Orléans",
+  "region": "beaupre",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Cheshire, CT": {
+  "lat": 41.49894,
+  "lon": -72.90099,
+  "matched": "Cheshire, Naugatuck Valley Planning Region, Connecticut, 064",
+  "query": "Cheshire Connecticut",
+  "region": "route",
+  "source": "osm:relation/11049401",
+  "verified": "2026-08-11"
+ },
+ "Château Frontenac": {
+  "lat": 46.812,
+  "lon": -71.2052,
+  "query": "Château Frontenac",
+  "region": "quebec",
+  "source": "manual: geocoder returns a château of the same name in the Dordogne, France",
+  "verified": null
+ },
+ "Derby Line": {
+  "lat": 45.00533,
+  "lon": -72.09965,
+  "matched": "Derby Line, Derby, Orleans County, Vermont, United States",
+  "query": "Derby Line Vermont",
+  "region": "route",
+  "source": "osm:relation/199079",
+  "verified": "2026-08-11"
+ },
+ "Deschambault": {
+  "lat": 46.652,
+  "lon": -71.921,
+  "query": "Deschambault-Grondines Quebec",
+  "region": "route",
+  "source": "manual: OSM relation covers the merged Deschambault-Grondines; this is Deschambault village",
+  "verified": null
+ },
+ "Esplanade Tranquille": {
+  "lat": 45.5096,
+  "lon": -73.56493,
+  "matched": "Esplanade Tranquille, Quartier des Spectacles, Ville-Marie, ",
+  "query": "Esplanade Tranquille Montreal",
+  "region": "montreal",
+  "source": "osm:relation/17797676",
+  "verified": "2026-08-11"
+ },
+ "Flume Gorge": {
+  "lat": 44.0975,
+  "lon": -71.6796,
+  "query": "Flume Gorge New Hampshire",
+  "region": "franconia",
+  "source": "manual: OSM node is on the trail; this is the visitor centre where you park and buy the ticket",
+  "verified": null
+ },
+ "Greenleaf Hut": {
+  "lat": 44.16044,
+  "lon": -71.6604,
+  "matched": "Greenleaf Hut, Greenleaf Trail, Franconia, Grafton County, N",
+  "query": "Greenleaf Hut New Hampshire",
+  "region": "franconia",
+  "source": "osm:way/328889921",
+  "verified": "2026-08-11"
+ },
+ "Hautes-Gorges": {
+  "lat": 47.868,
+  "lon": -70.421,
+  "query": "Parc national des Hautes-Gorges-de-la-Rivière-Malbaie",
+  "region": "route",
+  "source": "manual: OSM relation centroid of the whole park; this is the Équerre sector you actually drive to",
+  "verified": null
+ },
+ "Kondiaronk Belvédère": {
+  "lat": 45.50353,
+  "lon": -73.58705,
+  "matched": "Belvédère Kondiaronk, Ville-Marie, Montréal, Agglomération d",
+  "query": "Kondiaronk Belvedere Montreal",
+  "region": "montreal",
+  "source": "osm:way/182750657",
+  "verified": "2026-08-11"
+ },
+ "La Citadelle": {
+  "lat": 46.80749,
+  "lon": -71.20765,
+  "matched": "La Citadelle de Québec, Promenade des Gouverneurs, Vieux-Qué",
+  "query": "Citadelle of Quebec",
+  "region": "quebec",
+  "source": "osm:relation/5877711",
+  "verified": "2026-08-11"
+ },
+ "La Malbaie": {
+  "lat": 47.653,
+  "lon": -70.152,
+  "query": "La Malbaie Quebec",
+  "region": "charlevoix",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Lafayette Place trailhead": {
+  "lat": 44.1427,
+  "lon": -71.68529,
+  "matched": "Lafayette Campground, 9, Franconia Notch Parkway, Franconia,",
+  "query": "Lafayette Place Campground Franconia Notch New Hampshire",
+  "region": "franconia",
+  "source": "osm:way/291788963",
+  "verified": "2026-08-11"
+ },
+ "Les Éboulements": {
+  "lat": 47.483,
+  "lon": -70.343,
+  "query": "Les Éboulements Quebec",
+  "region": "charlevoix",
+  "source": "manual: municipality centroid; this is the village on Route 362",
+  "verified": null
+ },
+ "Lincoln": {
+  "lat": 44.0462,
+  "lon": -71.6712,
+  "query": "Lincoln New Hampshire",
+  "region": "franconia",
+  "source": "manual: town relation centroid is up in the mountains; this is Lincoln village",
+  "verified": null
+ },
+ "Lincoln, NH": {
+  "lat": 44.046,
+  "lon": -71.678,
+  "query": "Lincoln New Hampshire",
+  "region": "route",
+  "source": "manual: town relation centroid is up in the mountains; this is Lincoln village",
+  "verified": null
+ },
+ "Little Haystack ≈4,760 ft": {
+  "lat": 44.14044,
+  "lon": -71.64577,
+  "matched": "Little Haystack Mountain, Franconia, Grafton County, New Ham",
+  "query": "Little Haystack Mountain New Hampshire",
+  "region": "franconia",
+  "source": "osm:node/357730283",
+  "verified": "2026-08-11"
+ },
+ "Lévis ferry": {
+  "lat": 46.8135,
+  "lon": -71.2003,
+  "query": "Quebec City–Lévis Ferry terminal Quebec",
+  "region": "quebec",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "MONTRÉAL": {
+  "lat": 45.508,
+  "lon": -73.567,
+  "query": "Montreal Quebec",
+  "region": "route",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Marché Jean-Talon": {
+  "lat": 45.53591,
+  "lon": -73.61506,
+  "matched": "Marché Jean Talon, 7070, Avenue Henri-Julien, La Petite-Patr",
+  "query": "Jean-Talon Market Montreal",
+  "region": "montreal",
+  "source": "osm:way/22876797",
+  "verified": "2026-08-11"
+ },
+ "Montmorency Falls": {
+  "lat": 46.89075,
+  "lon": -71.14774,
+  "matched": "Chute Montmorency, Boischatel, La Côte-de-Beaupré, Capitale-",
+  "query": "Montmorency Falls",
+  "region": "beaupre",
+  "source": "osm:node/1199354691",
+  "verified": "2026-08-11"
+ },
+ "Morrin Centre": {
+  "lat": 46.81272,
+  "lon": -71.21054,
+  "matched": "Morrin Centre, Chaussée des Écossais, Vieux-Québec, Vieux-Qu",
+  "query": "Morrin Centre Quebec City",
+  "region": "quebec",
+  "source": "osm:way/27073750",
+  "verified": "2026-08-11"
+ },
+ "Mt. Lafayette 5,249 ft": {
+  "lat": 44.16071,
+  "lon": -71.64438,
+  "matched": "Mount Lafayette, Franconia, Grafton County, New Hampshire, U",
+  "query": "Mount Lafayette New Hampshire",
+  "region": "franconia",
+  "source": "osm:node/357730240",
+  "verified": "2026-08-11"
+ },
+ "Mt. Lincoln 5,089 ft": {
+  "lat": 44.14883,
+  "lon": -71.64457,
+  "matched": "Mount Lincoln, Franconia, Grafton County, New Hampshire, Uni",
+  "query": "Mount Lincoln New Hampshire",
+  "region": "franconia",
+  "source": "osm:node/357730273",
+  "verified": "2026-08-11"
+ },
+ "Musée de la civilisation": {
+  "lat": 46.81517,
+  "lon": -71.2023,
+  "matched": "Musée de la Civilisation de Québec, 85, Rue Dalhousie, Vieux",
+  "query": "Musée de la civilisation Quebec City",
+  "region": "quebec",
+  "source": "osm:node/2546008681",
+  "verified": "2026-08-11"
+ },
+ "Notre-Dame Basilica + AURA": {
+  "lat": 45.50444,
+  "lon": -73.55599,
+  "matched": "Basilique Notre-Dame, 110, Rue Notre-Dame Ouest, Vieux-Montr",
+  "query": "Notre-Dame Basilica Montreal",
+  "region": "montreal",
+  "source": "osm:way/4320792",
+  "verified": "2026-08-11"
+ },
+ "Notre-Dame de Québec": {
+  "lat": 46.8144,
+  "lon": -71.2076,
+  "query": "Notre-Dame de Québec Basilica-Cathedral",
+  "region": "quebec",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Petit-Champlain": {
+  "lat": 46.81146,
+  "lon": -71.20353,
+  "matched": "Rue du Petit-Champlain, Vieux-Québec, Vieux-Québec–Cap-Blanc",
+  "query": "Rue du Petit-Champlain Quebec City",
+  "region": "quebec",
+  "source": "osm:way/27369585",
+  "verified": "2026-08-11"
+ },
+ "Place Royale": {
+  "lat": 46.81317,
+  "lon": -71.20281,
+  "matched": "Place Royale, Vieux-Québec, Vieux-Québec–Cap-Blanc–Colline-P",
+  "query": "Place Royale Quebec City",
+  "region": "quebec",
+  "source": "osm:way/27073360",
+  "verified": "2026-08-11"
+ },
+ "Plains of Abraham": {
+  "lat": 46.803,
+  "lon": -71.2192,
+  "query": "Plains of Abraham Quebec City",
+  "region": "quebec",
+  "source": "manual: OSM label node sits off the battlefield proper; this is mid-park",
+  "verified": null
+ },
+ "Pointe-à-Callière": {
+  "lat": 45.5026,
+  "lon": -73.55418,
+  "matched": "Pointe-à-Callière, 350, Place Royale, Vieux-Montréal, Ville-",
+  "query": "Pointe-à-Callière Montreal, Quebec",
+  "region": "montreal",
+  "source": "osm:way/87411702",
+  "verified": "2026-08-11"
+ },
+ "Porte Saint-Louis": {
+  "lat": 46.80944,
+  "lon": -71.2113,
+  "matched": "Porte Saint-Louis, Rue Saint-Louis, Colline Parlementaire, V",
+  "query": "Porte Saint-Louis Quebec City",
+  "region": "quebec",
+  "source": "osm:node/463014733",
+  "verified": "2026-08-11"
+ },
+ "QUÉBEC CITY": {
+  "lat": 46.81374,
+  "lon": -71.20841,
+  "matched": "Québec, Agglomération de Québec, Capitale-Nationale, Québec,",
+  "query": "Quebec City",
+  "region": "route",
+  "source": "osm:relation/2319206",
+  "verified": "2026-08-11"
+ },
+ "Québec City": {
+  "lat": 46.8135,
+  "lon": -71.216,
+  "query": "Quebec City",
+  "region": "beaupre",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Saint Joseph's Oratory": {
+  "lat": 45.49205,
+  "lon": -73.6167,
+  "matched": "Oratoire St-Joseph, 3800, Chemin Queen-Mary, Côte-des-Neiges",
+  "query": "Saint Joseph's Oratory Montreal",
+  "region": "montreal",
+  "source": "osm:relation/6275154",
+  "verified": "2026-08-11"
+ },
+ "Saint-Irénée": {
+  "lat": 47.573,
+  "lon": -70.212,
+  "query": "Saint-Irénée Quebec",
+  "region": "charlevoix",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Saint-Jean": {
+  "lat": 46.9145,
+  "lon": -70.9036,
+  "query": "Saint-Jean-de-l'Île-d'Orléans Quebec",
+  "region": "beaupre",
+  "source": "manual: parish relation centroid is inland; this is the Manoir Mauvide-Genest",
+  "verified": null
+ },
+ "Sainte-Anne-de-Beaupré": {
+  "lat": 47.02385,
+  "lon": -70.92897,
+  "matched": "Basilica of Sainte-Anne-de-Beaupré",
+  "query": "Basilica of Sainte-Anne-de-Beaupré",
+  "region": "beaupre",
+  "source": "wikidata:Q810148",
+  "verified": "2026-08-11"
+ },
+ "Sainte-Famille": {
+  "lat": 46.9611,
+  "lon": -70.9586,
+  "query": "Sainte-Famille Île d'Orléans Quebec",
+  "region": "beaupre",
+  "source": "manual: parish relation centroid is inland; this is the 1743 church on the shore road",
+  "verified": null
+ },
+ "Sainte-Pétronille": {
+  "lat": 46.853,
+  "lon": -71.137,
+  "query": "Sainte-Pétronille Quebec",
+  "region": "beaupre",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "St-Benoît-du-Lac": {
+  "lat": 45.281,
+  "lon": -72.248,
+  "query": "Saint-Benoît-du-Lac Abbey Quebec",
+  "region": "route",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "St-Viateur & Fairmount Bagel": {
+  "lat": 45.5227,
+  "lon": -73.6031,
+  "query": "St-Viateur Bagel Montreal",
+  "region": "montreal",
+  "source": "manual: geocoder returns the Saint-Laurent branch; this is the Mile End original",
+  "verified": null
+ },
+ "Tadoussac": {
+  "lat": 48.1391,
+  "lon": -69.7194,
+  "query": "Tadoussac Quebec",
+  "region": "charlevoix",
+  "source": "typed-by-hand",
+  "verified": null
+ },
+ "Tam-Tams": {
+  "lat": 45.51422,
+  "lon": -73.58522,
+  "matched": "Monument à sir George-Étienne Cartier, 4056, Avenue du Parc,",
+  "query": "George-Étienne Cartier Monument Montreal",
+  "region": "montreal",
+  "source": "osm:way/143352036",
+  "verified": "2026-08-11"
+ },
+ "The Basin": {
+  "lat": 44.11988,
+  "lon": -71.68149,
+  "matched": "The Basin, East, Franconia Notch Bike Path, Lincoln, Grafton",
+  "query": "The Basin Franconia Notch New Hampshire",
+  "region": "franconia",
+  "source": "osm:way/404865214",
+  "verified": "2026-08-11"
+ },
+ "Trois-Rivières": {
+  "lat": 46.34323,
+  "lon": -72.54285,
+  "matched": "Trois-Rivières, Mauricie, Québec, Canada",
+  "query": "Trois-Rivières Quebec",
+  "region": "route",
+  "source": "osm:relation/7711553",
+  "verified": "2026-08-11"
+ },
+ "YOUR BASE — Plateau / Mile End": {
+  "lat": 45.52314,
+  "lon": -73.59512,
+  "matched": "Mile End, Le Plateau-Mont-Royal, Montréal, Agglomération de ",
+  "query": "Mile End Montreal",
+  "region": "montreal",
+  "source": "osm:relation/9940746",
+  "verified": "2026-08-11"
+ },
+ "YOUR BASE — St-Jean-Baptiste": {
+  "lat": 46.80969,
+  "lon": -71.22299,
+  "matched": "Saint-Jean-Baptiste, La Cité-Limoilou, Québec, Agglomération",
+  "query": "Saint-Jean-Baptiste Quebec City",
+  "region": "quebec",
+  "source": "osm:relation/7716092",
+  "verified": "2026-08-11"
+ }
+}
