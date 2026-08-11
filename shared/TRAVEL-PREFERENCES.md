@@ -2,7 +2,7 @@
 
 **Purpose.** Hand this file to Claude at the start of planning any new destination. It captures who we are, how we travel, and the exact shape of the document we want back. Start a new session with the prompt at the bottom.
 
-**Last updated:** August 2026 (built while planning Québec & Montréal, Aug 26 – Sep 6, 2026 — see `PLANNING-NOTES.md` and `quebec-v3.html` in this folder for a worked example of the finished deliverable)
+**Last updated:** August 2026 (built while planning Québec & Montréal, Aug 26 – Sep 6, 2026 — see `destinations/montreal-quebec/` — its `guide.html` and `PLANNING-NOTES.md` are the worked example of the finished deliverable)
 
 ---
 
@@ -209,7 +209,7 @@ For any new destination, always check:
 
 > I want to plan a trip to **[DESTINATION]**, **[DATES]** — driving from Cheshire, CT, or flying into **[AIRPORT]**.
 >
-> Read `TRAVEL-PREFERENCES.md` in this folder first — it has who we are, how we travel, and the exact spec for the document I want.
+> Read `shared/TRAVEL-PREFERENCES.md` first — it has who we are, how we travel, and the exact spec for the document I want. `tools/README.md` covers the map machinery, and `CLAUDE.md` the repo rules.
 >
 > Non-negotiables: hub-and-spoke bases, walkable authentic neighbourhoods, the vegetarian/omnivore food split, verified working images, real maps on a real basemap, every evening accounted for, and the three-layer expandable HTML structure.
 >
@@ -217,7 +217,7 @@ For any new destination, always check:
 >
 > Research current facts on the web before writing — hours, prices, festivals during our exact dates, seasonal cutoffs and closures. Tell me what we'd be missing and what would make it once-in-a-lifetime.
 >
-> Deliver: the HTML guide, an `images/` folder, and `PLANNING-NOTES.md` with your reasoning and trade-offs.
+> Deliver it as a new folder `destinations/<slug>/`: `guide.html`, `images/`, `meta.json`, `maps/` (with `maps.json` and `markers.py`), and `PLANNING-NOTES.md` with your reasoning and trade-offs.
 
 ---
 
@@ -226,6 +226,11 @@ For any new destination, always check:
 The Québec guide is not a one-off document — it is the output of a small
 pipeline that lives in **`tools/`** in this repo. Read **`tools/README.md`**
 before building a guide for a new city; it covers the whole thing end to end.
+
+Each trip lives in its own folder under `destinations/<slug>/`, and every tool
+takes `--dest <slug>`. A landing page listing all of them is generated from
+each folder's `meta.json`. See `README.md` for the layout and `CLAUDE.md` for
+the rules.
 
 What is already built and reusable:
 
@@ -240,8 +245,12 @@ What is already built and reusable:
 - **`boxes.py`** — refuses to let two labels overlap or a label cover another
   marker's dot.
 - **`maps.py` / `validate.py`** — splice into the guide and check nothing broke.
-- **`deploy.sh`** (repo root) — rebuild, verify every asset resolves, publish to
-  GitHub Pages.
+- **`build.py`** (repo root) — inject the hosted-only `<head>` tags from
+  `meta.json`, verify every asset resolves, render the landing page, write
+  `dist/`.
+- **`check.sh`** (repo root) — the whole chain as one gate, and what CI runs.
+- **`deploy.sh`** (repo root) — check, build, commit, push. GitHub Actions
+  publishes to Pages from there.
 
 The guide's own structure — six parts, collapsible days, thumbnail maps that
 expand — is worth copying too. See `PLANNING-NOTES.md` §8 for why it is shaped

@@ -43,6 +43,39 @@ def textof(t):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t)).strip()
 
 
+# --- structural checks, shared with build.py -------------------------------
+def tag_balance(html):
+    """[(tag, opens, closes)] for every tag type that does not balance."""
+    out = []
+    for tag in TAGS:
+        o = len(re.findall(r"<%s[\s>]" % tag, html))
+        c = len(re.findall(r"</%s>" % tag, html))
+        if o != c:
+            out.append((tag, o, c))
+    return out
+
+
+def duplicate_ids(html):
+    return sorted(k for k, v in collections.Counter(re.findall(r'\sid="([^"]+)"', html)).items() if v > 1)
+
+
+def dead_links(html):
+    """Internal href="#..." targets with no matching id."""
+    return sorted({h for h in re.findall(r'href="#([^"]+)"', html) if ('id="%s"' % h) not in html})
+
+
+def structural_problems(html):
+    """One-line summaries of every hard failure. Empty means structurally sound."""
+    out = []
+    for tag, o, c in tag_balance(html):
+        out.append("unbalanced <%s> (%d open, %d close)" % (tag, o, c))
+    for i in duplicate_ids(html):
+        out.append('duplicate id="%s"' % i)
+    for h in dead_links(html):
+        out.append('dead internal link href="#%s"' % h)
+    return out
+
+
 def main():
     def extra(ap):
         ap.add_argument('--baseline', default='HEAD',
@@ -55,14 +88,12 @@ def main():
     fatal = []
 
     print("=== tag balance ===")
-    bad = 0
-    for tag in TAGS:
-        o = len(re.findall(r"<%s[\s>]" % tag, new)); c = len(re.findall(r"</%s>" % tag, new))
-        if o != c:
-            print("  UNBALANCED %-8s open=%d close=%d" % (tag, o, c)); bad += 1
-    print("  all balanced" if not bad else "  %d unbalanced" % bad)
-    if bad:
-        fatal.append("%d unbalanced tag type(s)" % bad)
+    unbalanced = tag_balance(new)
+    for tag, o, c in unbalanced:
+        print("  UNBALANCED %-8s open=%d close=%d" % (tag, o, c))
+    print("  all balanced" if not unbalanced else "  %d unbalanced" % len(unbalanced))
+    if unbalanced:
+        fatal.append("%d unbalanced tag type(s)" % len(unbalanced))
 
     print("\n=== outline ===")
     for m in re.finditer(r'<section class="part[^"]*" id="([^"]+)">|<h2>(.*?)</h2>|<div class="subsec" id="([^"]+)">|<h3>(.*?)</h3>', new):
@@ -84,7 +115,7 @@ def main():
         print("   no <nav> block")
 
     print("\n=== all internal links resolve ===")
-    miss = sorted({h for h in re.findall(r'href="#([^"]+)"', new) if ('id="%s"' % h) not in new})
+    miss = dead_links(new)
     print("   ", miss or "all resolve")
     if miss:
         fatal.append("%d dead internal link(s)" % len(miss))
@@ -96,7 +127,7 @@ def main():
     print("   open-by-default details:", len(re.findall(r'<details[^>]*\sopen', new)))
 
     print("\n=== duplicate ids ===")
-    d = [k for k, v in collections.Counter(re.findall(r'\sid="([^"]+)"', new)).items() if v > 1]
+    d = duplicate_ids(new)
     print("   ", d or "none")
     if d:
         fatal.append("%d duplicate id(s)" % len(d))

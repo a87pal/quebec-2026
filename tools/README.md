@@ -1,8 +1,9 @@
 # Trip-guide toolchain
 
-Scripts that build the maps and validate the guide. Written for the Québec &
-Montréal 2026 trip, but the whole pipeline is reusable for a different
-destination — see **Starting a new city** at the bottom.
+Scripts that build the maps and validate the guides. This directory is the
+**engine**: it hardcodes no destination, no map name and no machine path. Every
+script takes `--dest SLUG` and reads its data from `destinations/<slug>/maps/`.
+See **Starting a new city** at the bottom.
 
 Everything here is plain Python 3 with no third-party packages, no API keys and
 no build step. The published page has no runtime dependencies at all: the maps
@@ -14,33 +15,43 @@ a service changes.
 ## The pipeline
 
 ```
+maps.json     you write this: bounding box, zoom, display width per map
+   ↓
 tiles.py      download Esri basemap tiles for each map's bounding box
-   ↓          → images/tiles/<map>/<x>_<y>.jpg   + tilemeta.json
+   ↓          → images/tiles/<map>/<x>_<y>.jpg   + maps/tilemeta.json
+markers.py    you write this: markers, routes, legends, captions — build(m)
+   ↓
 resolve.py    look every marker's coordinates up from Wikidata / OSM
-   ↓          → places.json
+   ↓          → maps/places.json
 overlay.py    project lat/lon → SVG, draw routes + markers, emit map fragments
-   ↓          → gmap_<map>.html
+   ↓          → maps/gmap_<map>.html
 boxes.py      check no two labels overlap and no label covers another dot
    ↓
-maps.py       splice the fragments into quebec-v3.html
+maps.py       splice the fragments into the destination's guide.html
    ↓
 validate.py   tag balance, duplicate ids, dead anchors, content preservation
    ↓
-../deploy.sh  rebuild site/index.html, verify assets, commit, push
+../check.sh   all of the above as one gate, plus build.py — this is what CI runs
+../deploy.sh  check, build, commit, push
 ```
 
 Run order for a full map rebuild:
 
 ```sh
-python3 tools/tiles.py                       # only when a bbox or zoom changes
-python3 tools/resolve.py --seed              # only when markers are added
-python3 tools/resolve.py --write             # coordinates from Wikidata/OSM
-python3 tools/overlay.py                     # regenerate the six fragments
-python3 tools/boxes.py                       # must report 0 overlaps, 0 dot-covers
-python3 tools/maps.py                        # splice into the guide
-python3 tools/validate.py                    # must report "all balanced"
+D=montreal-quebec                                  # or omit --dest if there is only one
+python3 tools/tiles.py    --dest $D                # only when a bbox or zoom changes
+python3 tools/resolve.py  --dest $D --seed         # only when markers are added
+python3 tools/resolve.py  --dest $D --write        # coordinates from Wikidata/OSM
+python3 tools/overlay.py  --dest $D                # regenerate the fragments
+python3 tools/boxes.py    --dest $D                # must report 0 overlaps, 0 dot-covers
+python3 tools/maps.py     --dest $D                # splice into the guide
+python3 tools/validate.py --dest $D                # must report "all balanced"
 ./deploy.sh "what changed"
 ```
+
+`./check.sh` runs the overlay → boxes → maps → validate → build chain for every
+destination and additionally fails if a committed `guide.html` is stale with
+respect to its `markers.py`. Run it before committing; CI runs the same script.
 
 ---
 
@@ -58,7 +69,10 @@ There is no map library. Each map is:
 Because both layers scale identically, the overlay stays registered at any size —
 which is what makes the thumbnail/expand behaviour possible.
 
-`tilemeta.json` is the contract between the two halves. For each map it records
+`maps/tilemeta.json` is the contract between the two halves, and it must stay
+next to `maps.json` where `overlay.py` reads it — the two once pointed at
+different directories, and `tiles.py` reported success while `overlay.py` went
+on using stale metadata. For each map it records
 zoom `z`, the tile range, the composite size `W`/`H`, and the pixel origin
 `ox`/`oy` of the top-left tile. A marker's SVG position is just:
 
@@ -92,6 +106,9 @@ them are pixels, not queryable features. So coordinates come from `resolve.py`:
 and the date it was `verified`. Rules:
 
 - **Never hand-edit a `lat`/`lon` in `places.json`.** Fix the `query` and re-run.
+  `--seed` preserves hand-written queries, so sharpening one is safe. (It did
+  not always: it used to regenerate the query for every unresolved place, which
+  is exactly the set whose queries had been sharpened by hand.)
 - If a place genuinely has no good source — a viewpoint, a trailhead, "the spot
   on the ridge where the trees stop" — set `"source": "manual: <why>"`.
   `resolve.py` will leave it alone forever.
@@ -154,15 +171,20 @@ neighbours changed; look at the list, do not just read the count.
 
 ## Starting a new city
 
-1. Copy `tiles.py` and edit the `MAPS` dict — one entry per map, with a bounding
-   box and a zoom. Zoom 8 suits a multi-day driving route, 10–13 a region, 13 a
-   city, 15 a historic core. Run it; check the printed tile counts are sane
+Nothing in this directory needs editing. Everything below is new files under
+`destinations/<slug>/maps/`.
+
+1. Write `maps.json` — one entry per map, with a bounding box, a zoom, a display
+   width and a `context` string used to disambiguate coordinate lookups. Zoom 8
+   suits a multi-day driving route, 10–13 a region, 13 a city, 15 a historic
+   core. Run `tiles.py --dest <slug>`; check the printed tile counts are sane
    (a few hundred total, not thousands).
-2. Write the marker and route lists in `overlay.py`, one block per map. Put in
-   approximate coordinates — they are placeholders.
-3. `resolve.py --seed`, sharpen the `query` fields, then `--write`. Review
-   everything it flags.
-4. `overlay.py` → `boxes.py` → fix collisions → `maps.py` → `validate.py`.
+2. Write `markers.py`, defining `build(m)` that returns `{map_name: fragment}`.
+   One block per map. Put in approximate coordinates — they are placeholders.
+3. `resolve.py --dest <slug> --seed`, sharpen the `query` fields, then
+   `--write`. Review everything it flags.
+4. `overlay.py` → `boxes.py` → fix collisions → `maps.py` → `validate.py`,
+   or just `./check.sh`.
 5. Screenshot each map with headless Chrome and **look at it against the
    basemap**. The printed place names on the tiles are the ground truth that
    caught every error we have had. Automated checks did not find those; looking

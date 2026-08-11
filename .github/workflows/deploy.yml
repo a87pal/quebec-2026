@@ -1,0 +1,50 @@
+name: Deploy to GitHub Pages
+
+# Requires: Settings -> Pages -> Source = "GitHub Actions" (not "Deploy from a branch").
+#
+# Free for public repos: Actions minutes are unlimited and Pages is included.
+# Nothing here hits the network, because tiles and coordinates are committed
+# artifacts - tools/tiles.py and tools/resolve.py stay local by design.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it half-published.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # No setup-python: ubuntu-latest ships python3 and the toolchain is
+      # deliberately stdlib-only, so there is nothing to install.
+      - name: Gates (maps, structure, assets)
+        run: ./check.sh
+
+      - name: Build site
+        run: python3 build.py
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

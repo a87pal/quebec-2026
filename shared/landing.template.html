@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Travel guides — A &amp; K</title>
+<meta name="theme-color" content="#1d5540"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta property="og:title" content="Travel guides — A &amp; K"/>
+<meta property="og:description" content="Self-contained guides for the trips we are actually taking."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E"/>
+<style>
+/* Palette and type deliberately match the guides, so the landing page reads
+   as the cover of the same publication rather than a separate site. */
+:root{
+ --ink:#1a2320; --muted:#67746c; --paper:#f5f1e8; --card:#fffdf8;
+ --forest:#26503f; --wine:#7d413c; --gold:#b3853f; --line:#ded5c8;
+ --soft:#ece6da; --sand:#efe8db;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+ line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:var(--forest);text-decoration-thickness:1px;text-underline-offset:3px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500}
+
+header{position:relative;overflow:hidden;background:
+ radial-gradient(120% 100% at 15% 0%,#2f5f4a 0%,#20402f 55%,#182b21 100%);
+ color:#fff;padding:clamp(56px,11vw,120px) 26px clamp(48px,9vw,96px)}
+header::after{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(90% 70% at 90% 110%,rgba(179,133,63,.30),transparent 60%)}
+.inner{max-width:1180px;margin:auto;position:relative;z-index:1}
+.kicker{text-transform:uppercase;letter-spacing:.2em;font-size:.74rem;font-weight:800;color:#e6c684}
+h1{font-size:clamp(2.7rem,8vw,6rem);line-height:.94;margin:.55rem 0 .3rem;max-width:15ch;
+ font-style:italic;text-shadow:0 3px 40px rgba(0,0,0,.45)}
+.lede{font-size:1.06rem;max-width:62ch;color:#e2eae2}
+
+main{max-width:1180px;margin:auto;padding:clamp(34px,6vw,64px) 22px 90px}
+h2{font-size:clamp(1.5rem,3vw,2rem);margin:0 0 4px;letter-spacing:.01em}
+h2::after{content:"";display:block;width:52px;height:3px;border-radius:2px;
+ background:var(--gold);margin:10px 0 22px}
+section+section{margin-top:56px}
+
+.dgrid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
+.dcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+ border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;
+ box-shadow:0 10px 30px rgba(36,44,38,.05);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.dcard:hover,.dcard:focus-visible{transform:translateY(-3px);border-color:#c9bda8;
+ box-shadow:0 16px 38px rgba(36,44,38,.13);outline:none}
+.dthumb{aspect-ratio:16/10;background:var(--soft);overflow:hidden}
+.dthumb img{width:100%;height:100%;object-fit:cover;display:block;
+ filter:saturate(.9) contrast(1.03);transition:transform .4s ease}
+.dcard:hover .dthumb img{transform:scale(1.035)}
+.dbody{padding:18px 19px 20px;display:flex;flex-direction:column;flex:1}
+.dkick{text-transform:uppercase;letter-spacing:.11em;font-size:.7rem;font-weight:800;color:var(--gold)}
+.dcard h3{font-size:1.42rem;margin:.35rem 0 .1rem;line-height:1.2}
+.dtag{font-family:Georgia,serif;font-style:italic;color:var(--wine);margin:0 0 .5rem;font-size:1.02rem}
+.dblurb{margin:0 0 14px;color:var(--muted);font-size:.95rem;flex:1}
+.dgo{font-size:.8rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--forest)}
+.empty{color:var(--muted)}
+
+footer{border-top:1px solid var(--line);background:var(--sand);
+ padding:26px 22px 40px;color:var(--muted);font-size:.83rem}
+footer .inner{max-width:1180px}
+footer p{margin:.35rem 0;max-width:80ch}
+
+@media(max-width:560px){
+ .dgrid{grid-template-columns:1fr}
+ h1{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ .dcard,.dthumb img{transition:none}
+ .dcard:hover{transform:none}
+ .dcard:hover .dthumb img{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <div class="kicker">A &amp; K · {{COUNT}} guides</div>
+    <h1>Where we're going.</h1>
+    <p class="lede">Self-contained guides for trips we are actually taking — hub-and-spoke bases,
+    every evening accounted for, and an address, a price and an opening time behind every claim.</p>
+  </div>
+</header>
+
+<main>
+{{CARDS}}
+</main>
+
+<footer>
+  <div class="inner">
+    <p>Photographs from Wikimedia Commons, under their respective licences.</p>
+    <p>Basemap tiles: Esri World Topo — Esri, HERE, Garmin, USGS, NGA, OpenStreetMap contributors.</p>
+    <p>Personal itineraries. Verify hours, prices and bookings with the operator before you pay.</p>
+  </div>
+</footer>
+
+</body>
+</html>

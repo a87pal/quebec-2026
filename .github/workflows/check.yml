@@ -1,0 +1,25 @@
+name: Check
+
+# Same gates as the deploy workflow, without publishing. Runs on pull requests
+# and on branches, so a broken map or a dead anchor is caught before it reaches
+# main and before anything goes live.
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Gates (maps, structure, assets)
+        run: ./check.sh
+
+      - name: Build site
+        run: python3 build.py
