@@ -138,13 +138,18 @@ def build_landing(built):
     past = sorted([x for x in listed if x[1].get('end', '9999') < today],
                   key=lambda x: x[1].get('start', ''), reverse=True)
 
+    def grid(heading, items):
+        # "solo" lets a lone guide render as a feature banner rather than one
+        # small card stranded in a full-width grid.
+        cls = 'dgrid solo' if len(items) == 1 else 'dgrid'
+        return '<h2>%s</h2>\n<div class="%s">%s</div>' % (
+            heading, cls, ''.join(card(s, m) for s, m in items))
+
     chunks = []
     if upcoming:
-        chunks.append('<h2>Ahead</h2>\n<div class="dgrid">%s</div>'
-                      % ''.join(card(s, m) for s, m in upcoming))
+        chunks.append(grid('Ahead', upcoming))
     if past:
-        chunks.append('<h2>Been</h2>\n<div class="dgrid">%s</div>'
-                      % ''.join(card(s, m) for s, m in past))
+        chunks.append(grid('Been', past))
     if not chunks:
         chunks.append('<p class="empty">No guides yet.</p>')
 

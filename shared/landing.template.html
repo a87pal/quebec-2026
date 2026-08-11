@@ -60,6 +60,19 @@ section+section{margin-top:56px}
 .dgo{font-size:.8rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--forest)}
 .empty{color:var(--muted)}
 
+/* A single guide in a full-width grid reads as an unfinished page. On its own
+   it becomes a feature banner instead; the plain grid returns at two or more. */
+@media(min-width:760px){
+ .dgrid.solo{grid-template-columns:1fr}
+ .dgrid.solo .dcard{flex-direction:row}
+ .dgrid.solo .dthumb{flex:0 0 46%;aspect-ratio:auto;min-height:290px}
+ .dgrid.solo .dbody{padding:34px 36px;justify-content:center}
+ .dgrid.solo h3{font-size:1.95rem}
+ .dgrid.solo .dtag{font-size:1.12rem}
+ .dgrid.solo .dblurb{font-size:1.02rem;max-width:46ch;flex:0}
+ .dgrid.solo .dgo{margin-top:16px}
+}
+
 footer{border-top:1px solid var(--line);background:var(--sand);
  padding:26px 22px 40px;color:var(--muted);font-size:.83rem}
 footer .inner{max-width:1180px}
