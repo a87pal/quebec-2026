@@ -8,9 +8,11 @@ map and glaring at z13-15. Nothing in the Esri basemap can be queried -- the
 tiles are raster JPEGs and the place names on them are painted pixels -- so the
 coordinates have to come from somewhere else. They come from here.
 
-  python3 tools/resolve.py --seed     build places.json from overlay.py
+  python3 tools/resolve.py --seed     build places.json from markers.py
   python3 tools/resolve.py            look everything up, report drift
   python3 tools/resolve.py --write    same, and accept moves under --max-accept
+
+Add --dest SLUG to target a specific destination.
 
 Sources, in order: Wikidata (P625), then OSM Nominatim. Both keyless and free.
 Anything that moves further than --max-accept is REPORTED, never auto-applied:
@@ -18,14 +20,22 @@ a bad search hit is worse than a coordinate that is 200 m off.
 """
 import argparse, io, json, math, os, re, sys, time, urllib.parse, urllib.request
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PLACES = os.path.join(HERE, "places.json")
-OVERLAY = os.path.join(HERE, "overlay.py")
-UA = {"User-Agent": "quebec-trip-guide/1.0 (personal itinerary; contact via github.com/a87pal)"}
+import _dest
+
+UA = {"User-Agent": "travel-guide-toolchain/1.0 (personal itinerary; contact via github.com/a87pal)"}
+
+# Set by main() once --dest is resolved.
+PLACES = MARKERS = CACHE = None
+_cache = {}
 
 
-CACHE = os.path.join(HERE, ".resolve-cache.json")
-_cache = json.load(io.open(CACHE)) if os.path.exists(CACHE) else {}
+def _bind(dest):
+    """Point the module at one destination's map data."""
+    global PLACES, MARKERS, CACHE, _cache
+    PLACES = os.path.join(dest.mapdir, "places.json")
+    MARKERS = os.path.join(dest.mapdir, "markers.py")
+    CACHE = os.path.join(dest.mapdir, ".resolve-cache.json")
+    _cache = json.load(io.open(CACHE)) if os.path.exists(CACHE) else {}
 
 
 def _save_cache():
@@ -92,17 +102,17 @@ def nominatim(query):
 
 
 # --------------------------------------------------------------- seeding
-MARKER = re.compile(r'marker\(P,\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*,\s*"([^"]+)"')
+MARKER = re.compile(r'\bmarker\(P,\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*,\s*"([^"]+)"')
+REGION = re.compile(r"\bmk\('(\w+)'\)")
 
-def seed():
-    """Pull the current marker coordinates out of overlay.py as a starting point."""
-    src = io.open(OVERLAY, encoding="utf-8").read()
+def seed(dest):
+    """Pull the current marker coordinates out of markers.py as a starting point."""
+    src = io.open(MARKERS, encoding="utf-8").read()
     # which map each marker belongs to, so we can add regional context to queries
     region, out = None, {}
-    ctx = {"route": "", "franconia": "New Hampshire", "montreal": "Montreal, Quebec",
-           "quebec": "Quebec City", "beaupre": "Quebec", "charlevoix": "Charlevoix, Quebec"}
+    ctx = {k: v.get("context", "") for k, v in dest.load("maps.json").items()}
     for line in src.split("\n"):
-        m = re.search(r"mk\('(\w+)'\)", line)
+        m = REGION.search(line)
         if m:
             region = m.group(1)
         for lat, lon, name in MARKER.findall(line):
@@ -113,11 +123,23 @@ def seed():
                         "query": (key + " " + ctx.get(region, "")).strip(),
                         "source": "typed-by-hand", "verified": None}
     existing = json.load(io.open(PLACES)) if os.path.exists(PLACES) else {}
-    for k, v in existing.items():                       # never clobber a resolved entry
-        if k in out and v.get("source", "").startswith(("wikidata:", "osm:", "manual:")):
-            out[k] = v
+    resolved = queries = 0
+    for k, v in existing.items():
+        if k not in out:
+            continue
+        if v.get("source", "").startswith(("wikidata:", "osm:", "manual:")):
+            out[k] = v                                  # resolved: keep the whole entry
+            resolved += 1
+        elif v.get("query"):
+            # Unresolved, but the query may have been sharpened by hand - and an
+            # unresolved place is precisely one whose auto-generated query failed.
+            # Regenerating it here would throw away the fix the README asks for.
+            out[k]["query"] = v["query"]
+            queries += 1
     json.dump(out, io.open(PLACES, "w"), indent=1, ensure_ascii=False, sort_keys=True)
     print("seeded %d places -> %s" % (len(out), PLACES))
+    print("  kept %d resolved entries, %d hand-written queries, %d new"
+          % (resolved, queries, len(out) - resolved - queries))
 
 
 # --------------------------------------------------------------- resolving
@@ -178,15 +200,18 @@ def resolve(write, max_accept, only):
 
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--seed", action="store_true", help="rebuild places.json from overlay.py")
+    ap = argparse.ArgumentParser(description="Resolve marker coordinates from Wikidata/OSM.")
+    _dest.add_arg(ap)
+    ap.add_argument("--seed", action="store_true", help="rebuild places.json from markers.py")
     ap.add_argument("--write", action="store_true", help="apply coordinates under --max-accept")
     ap.add_argument("--max-accept", type=float, default=2000,
                     help="metres; further than this is flagged, never auto-applied")
     ap.add_argument("--only", default="", help="substring filter, for retrying one place")
     a = ap.parse_args()
+    dest = _dest.resolve(a.dest)
+    _bind(dest)
     if a.seed:
-        seed()
+        seed(dest)
     else:
         if not os.path.exists(PLACES):
             sys.exit("no places.json — run with --seed first")

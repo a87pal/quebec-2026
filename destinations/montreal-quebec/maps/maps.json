@@ -1,0 +1,8 @@
+{
+  "route":      { "z": 8,  "lat": [41.10,    48.60],   "lon": [-76.60,   -67.40],   "dispw": 1100, "context": "" },
+  "franconia":  { "z": 13, "lat": [44.015,   44.205],  "lon": [-71.760,  -71.590],  "dispw": 720,  "context": "New Hampshire" },
+  "montreal":   { "z": 13, "lat": [45.462,   45.578],  "lon": [-73.665,  -73.495],  "dispw": 1100, "context": "Montreal, Quebec" },
+  "quebec":     { "z": 15, "lat": [46.7955,  46.8235], "lon": [-71.2400, -71.1855], "dispw": 1100, "context": "Quebec City" },
+  "beaupre":    { "z": 12, "lat": [46.795,   47.095],  "lon": [-71.290,  -70.775],  "dispw": 1100, "context": "Quebec" },
+  "charlevoix": { "z": 10, "lat": [47.330,   48.230],  "lon": [-70.760,  -69.560],  "dispw": 720,  "context": "Charlevoix, Quebec" }
+}

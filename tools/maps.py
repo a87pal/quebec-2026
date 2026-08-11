@@ -1,39 +1,70 @@
 #!/usr/bin/env python3
-"""Splice regenerated maps into the guide, add thumbnail/expand behaviour."""
-import io, re, sys
-SRC="/Users/anand.palaniappan1/src/qubec/quebec-v3.html"
-GEN="/Users/anand.palaniappan1/src/qubec/tools/"
-T=io.open(SRC,encoding="utf-8").read()
+"""Splice regenerated maps into the guide, add thumbnail/expand behaviour.
 
-def close_div(s,i):
-    o=re.compile(r"<div[\s>]"); c=re.compile(r"</div>"); d=0
+Uses depth-aware <div> matching rather than a regex - the blocks contain
+nested divs and a regex silently eats the wrong closing tag. Idempotent: the
+CSS and JS are only injected once.
+
+Usage:  python3 tools/maps.py [--dest SLUG]
+"""
+import io, os, re, sys
+
+import _dest
+
+
+def close_div(s, i):
+    o = re.compile(r"<div[\s>]"); c = re.compile(r"</div>"); d = 0
     while True:
-        mo=o.search(s,i); mc=c.search(s,i)
-        if mo and mo.start()<mc.start(): d+=1; i=mo.end()
+        mo = o.search(s, i); mc = c.search(s, i)
+        if mo and mo.start() < mc.start():
+            d += 1; i = mo.end()
         else:
-            d-=1; i=mc.end()
-            if d==0: return i
+            d -= 1; i = mc.end()
+            if d == 0:
+                return i
 
-# ---- replace each gmapwrap block with the regenerated one -----------------
-out=[]; pos=0; n=0
-for m in re.finditer(r'<div class="gmapwrap">',T):
-    if m.start()<pos: continue
-    end=close_div(T,m.start())
-    block=T[m.start():end]
-    name=re.search(r'images/tiles/([a-z]+)/',block).group(1)
-    gen=io.open(GEN+"gmap_%s.html"%name,encoding="utf-8").read().strip()
-    out.append(T[pos:m.start()]); out.append(gen); pos=end; n+=1
-out.append(T[pos:])
-T="".join(out)
-if n!=6: sys.exit("replaced %d maps, expected 6"%n)
 
-# ---- CSS: thumbnail by default, full size when opened --------------------
-ANCHOR=".gmapwrap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:20px 0}"
-assert ANCHOR in T
-if ".mapzoom{" in T:
-    io.open(SRC,"w",encoding="utf-8").write(T)
-    print("spliced %d maps (css/js already present) · %d KB"%(n,len(T)//1024)); raise SystemExit
-CSS = ANCHOR + """
+def need(s, anchor, what):
+    if anchor not in s:
+        sys.exit('error: %s anchor not found in the guide - did it change?\n  looking for: %s'
+                 % (what, anchor[:90]))
+
+
+def main():
+    dest, _ = _dest.from_args('Splice generated map fragments into the guide.')
+    src = dest.guide
+    expected = len(dest.load('maps.json'))
+    T = io.open(src, encoding="utf-8").read()
+
+    # ---- replace each gmapwrap block with the regenerated one -----------------
+    out = []; pos = 0; n = 0
+    for m in re.finditer(r'<div class="gmapwrap">', T):
+        if m.start() < pos:
+            continue
+        end = close_div(T, m.start())
+        block = T[m.start():end]
+        found = re.search(r'images/tiles/([a-z0-9_-]+)/', block)
+        if not found:
+            sys.exit('error: a gmapwrap block has no images/tiles/<name>/ reference')
+        name = found.group(1)
+        frag = dest.fragment(name)
+        if not os.path.exists(frag):
+            sys.exit('error: %s missing - run overlay.py first' % frag)
+        gen = io.open(frag, encoding="utf-8").read().strip()
+        out.append(T[pos:m.start()]); out.append(gen); pos = end; n += 1
+    out.append(T[pos:])
+    T = "".join(out)
+    if n != expected:
+        sys.exit("replaced %d maps, expected %d (maps.json)" % (n, expected))
+
+    # ---- CSS: thumbnail by default, full size when opened --------------------
+    ANCHOR = ".gmapwrap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:20px 0}"
+    need(T, ANCHOR, 'map CSS')
+    if ".mapzoom{" in T:
+        io.open(src, "w", encoding="utf-8").write(T)
+        print("spliced %d maps (css/js already present) · %d KB" % (n, len(T) // 1024))
+        return
+    CSS = ANCHOR + """
 .gmapwrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 16px;align-items:start}
 .gmapwrap .gmap{height:210px;width:auto;cursor:zoom-in}
 .gmapwrap .gmapfoot{display:none}
@@ -54,12 +85,12 @@ CSS = ANCHOR + """
  .gmapwrap .gmap{height:auto;width:100%}
  .mapzoom{align-self:flex-start}
 }"""
-T=T.replace(ANCHOR,CSS,1)
+    T = T.replace(ANCHOR, CSS, 1)
 
-# ---- JS: toggle -----------------------------------------------------------
-JS_ANCHOR="/* print: everything open */"
-assert JS_ANCHOR in T
-JS = """/* maps: thumbnail until clicked */
+    # ---- JS: toggle -----------------------------------------------------------
+    JS_ANCHOR = "/* print: everything open */"
+    need(T, JS_ANCHOR, 'map JS')
+    JS = """/* maps: thumbnail until clicked */
 document.querySelectorAll('.gmapwrap').forEach(function(w){
   var btn=w.querySelector('.mapzoom'), map=w.querySelector('.gmap');
   if(!btn||!map) return;
@@ -75,18 +106,22 @@ document.querySelectorAll('.gmapwrap').forEach(function(w){
   });
 });
 """ + JS_ANCHOR
-T=T.replace(JS_ANCHOR,JS,1)
+    T = T.replace(JS_ANCHOR, JS, 1)
 
-PR_OLD="window.addEventListener('beforeprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.dataset.pre=d.open?'1':''; d.open=true; }); });"
-assert PR_OLD in T
-PR_NEW=("window.addEventListener('beforeprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.dataset.pre=d.open?'1':''; d.open=true; });"
-        " document.querySelectorAll('.gmapwrap').forEach(function(w){ w.dataset.pre=w.classList.contains('mapopen')?'1':''; w.classList.add('mapopen'); }); });")
-T=T.replace(PR_OLD,PR_NEW,1)
-PA_OLD="window.addEventListener('afterprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.open=d.dataset.pre==='1'; }); });"
-assert PA_OLD in T
-PA_NEW=("window.addEventListener('afterprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.open=d.dataset.pre==='1'; });"
-        " document.querySelectorAll('.gmapwrap').forEach(function(w){ w.classList.toggle('mapopen',w.dataset.pre==='1'); }); });")
-T=T.replace(PA_OLD,PA_NEW,1)
+    PR_OLD = "window.addEventListener('beforeprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.dataset.pre=d.open?'1':''; d.open=true; }); });"
+    need(T, PR_OLD, 'beforeprint handler')
+    PR_NEW = ("window.addEventListener('beforeprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.dataset.pre=d.open?'1':''; d.open=true; });"
+              " document.querySelectorAll('.gmapwrap').forEach(function(w){ w.dataset.pre=w.classList.contains('mapopen')?'1':''; w.classList.add('mapopen'); }); });")
+    T = T.replace(PR_OLD, PR_NEW, 1)
+    PA_OLD = "window.addEventListener('afterprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.open=d.dataset.pre==='1'; }); });"
+    need(T, PA_OLD, 'afterprint handler')
+    PA_NEW = ("window.addEventListener('afterprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.open=d.dataset.pre==='1'; });"
+              " document.querySelectorAll('.gmapwrap').forEach(function(w){ w.classList.toggle('mapopen',w.dataset.pre==='1'); }); });")
+    T = T.replace(PA_OLD, PA_NEW, 1)
 
-io.open(SRC,"w",encoding="utf-8").write(T)
-print("spliced %d maps · %d KB"%(n,len(T)//1024))
+    io.open(src, "w", encoding="utf-8").write(T)
+    print("spliced %d maps · %d KB" % (n, len(T) // 1024))
+
+
+if __name__ == '__main__':
+    main()
