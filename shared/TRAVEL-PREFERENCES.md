@@ -172,7 +172,8 @@ Plus an **Expand all / Collapse all** control per day, deep-link support, and au
 | Museums | What's in, what's missing, honest ranking |
 | Watch/read/listen first | Films, TV, books, music to prime the trip |
 | Gear | Weather table, hiking kit, city kit, documents/money/phone |
-| Book & budget | Booking timeline in three urgency tiers, price table, total estimate |
+| Planning sheet | A spreadsheet filled in **on the page**: status, when-to-book, dates, confirmation numbers, phone, currency, estimate vs paid, notes. Saves to `localStorage`, exports to CSV and JSON, imports the JSON back. Above it, live stat tiles and an outstanding-versus-done checklist; below it, a cost breakdown by category. Seed it with everything that has to be booked, and with anything already booked marked as such |
+| Book & budget | Reference price table and the all-in estimate. The booking timeline itself belongs in the planning sheet, not in prose — one source of truth |
 | Driving | Local rules that differ, signage, parking, border, live-check links |
 | Sources | Every official operator link, with a "verify before you pay" caveat |
 

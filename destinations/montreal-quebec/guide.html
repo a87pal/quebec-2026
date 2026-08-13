@@ -340,6 +340,73 @@ footer a{color:#b9d6c3}
  .timeline{padding:0 18px 16px}
  .strategy{margin:14px 18px}
 }
+/* ---- the planning sheet: filled in on the page, saved in this browser ---- */
+.pbar{height:9px;border-radius:999px;background:#e4dccd;overflow:hidden;margin:4px 0 7px}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#2c5f47,#4f9070);transition:width .35s ease}
+.fine{font-size:.84rem;color:var(--muted);max-width:94ch}
+.planbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:24px 0 10px}
+.chips,.planbtns{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;
+  font:800 .74rem Inter,system-ui,sans-serif;color:var(--muted);cursor:pointer;letter-spacing:.03em}
+.chip:hover{border-color:#c9bda9;color:var(--ink)}
+.chip.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.pbtn{border:1px solid #cdbfa5;background:#fff;border-radius:999px;padding:7px 13px;
+  font:700 .78rem Inter,system-ui,sans-serif;color:var(--forest);cursor:pointer;white-space:nowrap}
+.pbtn:hover{background:var(--sand)}
+.pbtn.warn2{color:var(--wine);border-color:#e0c4c0}
+.ratew{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;
+  border-radius:999px;padding:4px 8px 4px 13px;font:700 .76rem Inter,system-ui,sans-serif;color:var(--muted)}
+.ratew input{width:54px;border:1px solid var(--line);border-radius:7px;padding:4px 6px;text-align:right;
+  font:700 .78rem Inter,system-ui,sans-serif;color:var(--ink)}
+.savetag{font:800 .7rem Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--forest);opacity:0;transition:opacity .25s}
+.savetag.on{opacity:1}
+table.sheet{min-width:1220px;font-size:.85rem}
+table.sheet th{white-space:nowrap}
+table.sheet td{padding:2px 4px;vertical-align:middle}
+table.sheet input,table.sheet select{width:100%;min-width:0;border:1px solid transparent;background:transparent;
+  border-radius:8px;padding:6px 7px;font:inherit;font-family:inherit;color:inherit}
+table.sheet input:hover,table.sheet select:hover{border-color:#e3dacb;background:#fffdf7}
+table.sheet input:focus,table.sheet select:focus{outline:none;border-color:var(--forest);background:#fff;
+  box-shadow:0 0 0 2px rgba(38,80,63,.13)}
+table.sheet tr.grp td{background:var(--sand);padding:9px 11px}
+table.sheet tr.grp span{font:800 .72rem Inter,system-ui,sans-serif;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--forest);margin-right:12px}
+.addrow{border:1px dashed #c6b89e;background:transparent;border-radius:999px;padding:2px 10px;
+  font:700 .7rem Inter,system-ui,sans-serif;color:var(--muted);cursor:pointer}
+.addrow:hover{color:var(--forest);border-color:var(--forest);background:#fff}
+.delrow{border:none;background:transparent;color:#c3b6a3;font-size:.95rem;line-height:1;cursor:pointer;
+  padding:4px 7px;border-radius:6px}
+.delrow:hover{color:var(--wine);background:#fbeeeb}
+.c-item{min-width:250px}.c-notes{min-width:300px}.c-when{min-width:170px}
+.c-conf{min-width:140px}.c-phone{min-width:126px}.c-pri{min-width:126px}.c-st{min-width:148px}
+.c-cur{width:96px}.c-num{width:104px}
+/* the controls fill their cell, so the column has to be told its own width
+   here - a width:100% child contributes nothing to an auto table layout */
+.c-item input{min-width:286px}.c-notes input{min-width:290px}.c-when input{min-width:162px}
+.c-conf input{min-width:132px}.c-phone input{min-width:118px}
+.c-pri select{min-width:118px}.c-st select{min-width:132px}
+.c-cur select{min-width:80px}.c-num input{min-width:80px}
+.c-num input{text-align:right;font-variant-numeric:tabular-nums}
+.c-st select{font-weight:800;font-size:.73rem;text-transform:uppercase;letter-spacing:.04em}
+tr[data-st="booked"]{background:#f2f8f4}
+tr[data-st="booked"] .c-st select{color:#2b5540}
+tr[data-st="todo"] .c-st select{color:#7a5321}
+tr[data-st="walkin"] .c-st select{color:#2f5563}
+tr[data-st="skip"]{opacity:.45}
+tr[data-st="skip"] .c-item input{text-decoration:line-through}
+th.ra,.costs td+td{text-align:right}
+.costs td:first-child+td{text-align:right}
+.costs tr.tot td{background:var(--sand);font-weight:800;color:var(--forest)}
+ul.ticks.done li:before{content:"\2611";color:var(--forest)}
+ul.ticks li.empty{color:var(--muted);font-style:italic}
+ul.ticks li.empty:before{content:"\2014";color:var(--line)}
+ul.ticks .tickcost{color:var(--muted);white-space:nowrap}
+#pkLists .card h4{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+#pkLists .card h4 em{font-style:normal;font-family:Inter,system-ui,sans-serif;font-size:.7rem;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+@media(max-width:760px){.planbtns{width:100%}}
+@media print{.planbar,.delrow,.addrow{display:none}table.sheet{min-width:0;font-size:.72rem}}
 @media print{
  nav{display:none}.hero{min-height:420px}.day{break-inside:avoid}
  body{background:#fff}
@@ -367,7 +434,7 @@ footer a{color:#b9d6c3}
 </header>
 
 <nav>
-<a href="#trip">The trip</a><a href="#days">Day by day</a><a href="#reservations">Reservations</a><a href="#before">Before you go</a><a href="#stats">Stats</a><a href="#sources">Sources</a>
+<a href="#trip">The trip</a><a href="#days">Day by day</a><a href="#planning">Planning</a><a href="#before">Before you go</a><a href="#stats">Stats</a><a href="#sources">Sources</a>
 </nav>
 
 <main>
@@ -424,7 +491,7 @@ footer a{color:#b9d6c3}
 <table>
 <thead><tr><th>Leg</th><th>Distance</th><th>Driving</th><th>Notes</th></tr></thead>
 <tbody>
-<tr><td><b>Cheshire → Lincoln, NH</b><br/><span style="color:var(--muted)">Wed 26th, 6:00 p.m.</span></td><td>≈230 mi / 370 km</td><td>4 h 00 – 4 h 30</td><td>Night drive, arrive ≈10:15–10:45 p.m. Two corridors: I-91 N through Vermont, or I-93 N via Manchester/Concord. <b>Confirm late check-in when you book.</b></td></tr>
+<tr><td><b>Cheshire → Lincoln, NH</b><br/><span style="color:var(--muted)">Wed 26th, 6:00 p.m.</span></td><td>≈230 mi / 370 km</td><td>4 h 00 – 4 h 30</td><td>Night drive, arrive ≈10:15–10:45 p.m. Two corridors: I-91 N through Vermont, or I-93 N via Manchester/Concord. <b>Lockbox self check-in at 36 Lodge Road</b>, so no desk to reach.</td></tr>
 <tr><td><b>Lincoln → Lafayette Place</b></td><td>7 mi / 11 km</td><td>12 min</td><td>Trailhead. Park by 7:00 a.m.</td></tr>
 <tr><td><b>Lincoln → Saint-Benoît-du-Lac, QC</b></td><td>≈150 mi / 240 km</td><td>2 h 45 + border</td><td>I-93 N → I-91 N → cross at Derby Line / Stanstead → A-55 N.</td></tr>
 <tr><td><b>Abbey → Montréal</b></td><td>85 mi / 135 km</td><td>1 h 30</td><td>A-10 W. Park the car and leave it.</td></tr>
@@ -1244,49 +1311,66 @@ footer a{color:#b9d6c3}
 
 
 <!-- ============ PART THREE · RESERVATIONS ============ -->
-<section class="part" id="reservations">
-<div class="parthead"><div class="pnum">Part three</div><h2>Reservations</h2><p class="plede">What to book and in what order, what the whole thing costs, and every decision that has to be made before you leave: beds, guides, dinners, nights out, museums.</p></div>
+<section class="part" id="planning">
+<div class="parthead"><div class="pnum">Part three</div><h2>Planning</h2><p class="plede">A working sheet you fill in on this page — every booking, what it cost, what is still outstanding — and behind it the reference prices, the four beds, the guides and the food.</p></div>
+
+<div class="subsec" id="tracker">
+<div class="kicker">The spreadsheet</div>
+<h3>Every booking, what it cost, and what is still outstanding.</h3>
+<p class="lede">Fill this in on the page. It saves into this browser as you type — no account, no server, nothing leaves the machine. <b>Export CSV</b> to open it in a spreadsheet; <b>export JSON</b> to hand back for a guide update, or to carry the sheet to another device and <b>import</b> it there.</p>
+
+<div class="grid4" style="margin:22px 0 10px">
+<div class="card stat"><b id="pkBooked">—</b><span>Reservations made</span></div>
+<div class="card stat"><b id="pkPaid">—</b><span>Committed so far</span></div>
+<div class="card stat"><b id="pkLeft">—</b><span>Still to pay, at these estimates</span></div>
+<div class="card stat"><b id="pkTotal">—</b><span>Projected all-in, for two</span></div>
+</div>
+<div class="pbar"><i id="pkBar"></i></div>
+<p class="fine" id="pkNote">Loading the sheet…</p>
+
+<div class="grid3" id="pkLists" style="margin-top:20px"></div>
+<details class="l3" style="margin-top:12px"><summary><span id="pkDoneSum">Done</span></summary><div class="l3body"><ul class="ticks done" id="pkDone" style="grid-template-columns:1fr"></ul></div></details>
+
+<div class="planbar">
+<div class="chips">
+<button class="chip on" data-filter="all" type="button">All</button>
+<button class="chip" data-filter="todo" type="button">To do</button>
+<button class="chip" data-filter="booked" type="button">Booked</button>
+<button class="chip" data-filter="walkin" type="button">No booking</button>
+<button class="chip" data-filter="skip" type="button">Skipped</button>
+</div>
+<div class="planbtns">
+<label class="ratew">C$1 = US$<input id="pkRate" inputmode="decimal" type="text" value="0.73"/></label>
+<button class="pbtn" id="pkCsv" type="button">Export CSV</button>
+<button class="pbtn" id="pkJson" type="button">Export JSON</button>
+<button class="pbtn" id="pkImport" type="button">Import JSON</button>
+<button class="pbtn warn2" id="pkReset" type="button">Reset</button>
+<span class="savetag" id="pkSaved"></span>
+</div>
+</div>
+
+<div class="tablewrap">
+<table class="sheet">
+<thead><tr><th>Status</th><th>Item</th><th>When to book</th><th>Date &amp; time</th><th>Confirmation</th><th>Phone</th><th>Cur</th><th>Est.</th><th>Paid</th><th>Notes</th><th></th></tr></thead>
+<tbody id="pkBody"></tbody>
+</table>
+</div>
+<p class="fine">Estimates are per line for <b>two people</b> unless the note says otherwise, in the currency beside them. Put a figure in <b>Paid</b> and that line stops counting as an estimate. Rows marked <b>Skipped</b> drop out of every total, so that is the honest way to cut something rather than deleting it.</p>
+
+<h3 style="margin-top:30px">Cost breakdown</h3>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Category</th><th class="ra">Lines</th><th class="ra">Committed</th><th class="ra">Still to pay</th><th class="ra">Projected</th></tr></thead>
+<tbody class="costs" id="pkCost"></tbody>
+</table>
+</div>
+<p class="fine">Canadian figures converted at the rate in the toolbar. The projection runs above the <b>US$3,300–4,400</b> this guide planned for, and two lines account for most of it: lodging came in at <b>US$2,025.78</b> against a US$1,450–1,950 estimate, and the marquee dinners are itemised at menu prices rather than averaged into a daily figure. Mark the Nordic spa and the ghost walk as skipped and it falls back toward the top of the range.</p>
+</div>
 
 <div class="subsec" id="book">
-<div class="kicker">Book &amp; budget</div>
-<h3>What to book, in what order, and what it all costs.</h3>
-<p class="lede">The urgent list and the money first. Then five drawers: where you sleep, who shows you round, where you eat, what’s on each night, and which museums earn the hours. Open the one you need.</p>
-<div class="grid3" style="margin-bottom:20px">
-<div class="card" style="border-color:#d9b98d;background:#fffaf0">
-<h4>Book this week</h4>
-<ul style="padding-left:18px;margin:0">
-<li><b>All four lodgings.</b> Lincoln (peak) and Baie-Saint-Paul (Labour Day weekend) are the urgent two.</li>
-<li><b>Whale cruise</b> — 10:15 a.m., Sep 4, Baie-Sainte-Catherine.</li>
-<li><b>Onhwa' Lumina</b> — Sep 3, 8:00 p.m.</li>
-<li><b>AURA</b> at Notre-Dame — Sat Aug 29 evening.</li>
-<li><b>Gardens of Light</b> — Aug 30, opening weekend.</li>
-<li><b>Marquee dinners:</b> Sushi Momo, Légende, Damas, La Traite.</li>
-<li><b>Montréal Greeter</b> request — volunteers, limited slots.</li>
-</ul>
-</div>
-<div class="card">
-<h4>Book 3–6 weeks out</h4>
-<ul style="padding-left:18px;margin:0">
-<li>Citadelle guided tour</li>
-<li>Musée de la civilisation, Pointe-à-Callière</li>
-<li>Huron-Wendat Museum guided programme</li>
-<li>Old Prison tour, Trois-Rivières (English times are limited)</li>
-<li>Free walking tours — Québec City caps group size, 48 h minimum</li>
-<li>Bota Bota or Strøm spa, if you want one</li>
-<li>Baie-Saint-Paul dinners for the holiday weekend</li>
-</ul>
-</div>
-<div class="card">
-<h4>Book days before / on the day</h4>
-<ul style="padding-left:18px;margin:0">
-<li>Flume Gorge timed ticket — only if the forecast says you'll need it</li>
-<li>Montmorency park access + cable car</li>
-<li>Sépaq day access for Hautes-Gorges + the bateau-mouche</li>
-<li>Canyon Sainte-Anne</li>
-<li>Everything else on Île d'Orléans and Route 362 — just turn up</li>
-</ul>
-</div>
-</div>
+<div class="kicker">Reference prices</div>
+<h3>What each thing costs, before you commit to it.</h3>
+<p class="lede">Adult prices per person unless noted. These are the numbers behind the estimates in the sheet above — planning figures gathered ahead of your dates, so verify each on the operator's own site before you pay.</p>
 <h3>Planning prices — verify each before you pay</h3>
 <div class="tablewrap">
 <table>
@@ -1308,18 +1392,13 @@ footer a{color:#b9d6c3}
 </tbody>
 </table>
 </div>
-<div class="grid4" style="margin-top:20px">
-<div class="card stat"><b>≈US$1,450–1,950</b><span>Lodging, 11 nights, two people</span></div>
-<div class="card stat"><b>≈US$300–380</b><span>Fuel + tolls, ≈2,400 km</span></div>
-<div class="card stat"><b>≈US$550–750</b><span>Attractions &amp; activities for two, including the whales</span></div>
-<div class="card stat"><b>≈US$900–1,300</b><span>Food, on the groceries-plus-one-dinner rhythm</span></div>
-</div>
-<p style="color:var(--muted);font-size:.9rem;margin-top:10px"><b>All-in, roughly US$3,300–4,400 for two</b>, excluding parking and souvenirs — for twelve days. Prices here are planning figures gathered ahead of time; confirm every one on the operator's own site before you pay.</p>
+<p style="color:var(--muted);font-size:.9rem;margin-top:10px"><b>Lodging is booked and cost US$2,025.78</b> for eleven nights, two people — above the US$1,450–1,950 planned for, for exactly the reason predicted: Lincoln at peak and Charlevoix on Labour Day weekend. Everything else is still an estimate, and the running total is in the sheet above. Prices here are planning figures gathered ahead of time; confirm every one on the operator's own site before you pay.</p>
 </div>
 
 <details class="l1" id="stay">
-<summary><span class="l1t">Where you sleep — live in the neighbourhood, not the postcard</span><span class="l1s">Four bases · real prices · groceries · parking</span><span class="l1c">›</span></summary>
+<summary><span class="l1t">Where you sleep — live in the neighbourhood, not the postcard</span><span class="l1s">Four bases, all booked · groceries · parking · the two surprises</span><span class="l1c">›</span></summary>
 <div class="l1body">
+<div class="note" style="background:#eef4ee;border-left-color:var(--forest)"><strong>All four are booked.</strong> Dates, addresses, check-in methods and what each cost are in <a href="#tracker">the sheet above</a>. Read on anyway for groceries, parking and what is in walking distance — and note that two of the four landed somewhere other than this guide's first recommendation. Both are flagged where it matters.</div>
 <p class="lede">The rule for both cities: stay <em>just</em> outside the historic core. You get a real street, locals' prices, better food, and a ten-minute walk to the monuments. Inside the walls you pay double to sleep above a souvenir shop. Target ≈ US$100–150/night; the honest range for these dates is below.</p>
 
 <div class="warn"><strong>Québec law, worth knowing before you book:</strong> every legal short-term rental in the province must display a <strong>CITQ registration number</strong> in the listing. Unregistered listings get pulled — sometimes days before arrival. If you can't find the number, message the host and ask for it before you pay. <a href="https://www.quebec.ca/en/tourism-and-recreation/tourist-accommodation">Québec tourist-accommodation rules →</a></div>
@@ -1327,9 +1406,10 @@ footer a{color:#b9d6c3}
 <div class="grid2" style="margin-top:20px">
 
 <div class="card">
-<div class="kicker" style="color:var(--wine)">Base 1 · Aug 26–27 · 2 nights</div>
+<div class="kicker" style="color:var(--wine)">Base 1 · Aug 26–27 · 2 nights · booked</div>
 <h3>Lincoln / North Woodstock, New Hampshire</h3>
 <p><b>Why here:</b> the only real service town at the mouth of Franconia Notch. Twelve minutes to the Lafayette Place trailhead, which is what matters when you're parking at seven in the morning.</p>
+<p><b>✓ Booked · 36 Lodge Road, Lincoln.</b> In Wednesday Aug 26 from 4 p.m., out Friday Aug 28 at 11 a.m. Lockbox self check-in, free parking on site, <b>US$346.12</b> for the two nights; late checkout requested. The lockbox is what makes the paragraph below a non-issue rather than the one avoidable disaster of the trip.</p>
 <p><b>Book a place that takes a 10:30 p.m. arrival</b> — self check-in, a lockbox, or a front desk that stays staffed. Confirm it in writing. Arriving at a dark lobby after four hours of driving is the one avoidable disaster on this trip.</p>
 <p><b>Realistic price:</b> US$160–230 a night. Late August is peak in the Whites and there is no cheap option — accept it for two nights and stop shopping.</p>
 <p><b>Look at:</b> the <b>Woodstock Inn Station &amp; Brewery</b> in North Woodstock (walk to dinner and beer, which after 9 hours on the ridge is the entire point); condo rentals at <b>Loon Mountain</b> (kitchen + parking, often the best value); the small motels along Main St in Lincoln.</p>
@@ -1338,9 +1418,10 @@ footer a{color:#b9d6c3}
 </div>
 
 <div class="card">
-<div class="kicker" style="color:var(--wine)">Base 2 · Aug 28–30 · 3 nights</div>
+<div class="kicker" style="color:var(--wine)">Base 2 · Aug 28–30 · 3 nights · booked</div>
 <h3>Montréal — Plateau Mont-Royal / Mile End</h3>
 <p><b>Why here:</b> this is the Montréal people mean when they say they love Montréal. Brick and greystone plexes with the exterior spiral staircases you'll see nowhere else on the continent, resident-built green alleys, two rival 24-hour bagel bakeries, Café Olimpico, and dinner at neighbourhood prices. <b>Not Old Montréal</b> — pretty, expensive, and empty of anyone who lives there.</p>
+<p><b>✓ Booked · 3613 boulevard Saint-Laurent.</b> In Friday Aug 28 from 3 p.m., out Monday Aug 31 at 11 a.m. Smart-lock entry, free parking, <b>US$514.16</b> for three nights. <b>Note where that is:</b> the bottom of the Main, south of the rectangle described next and closer to the Quartier Latin than to Mile End. You trade the two bagel bakeries at the north end for the Quartier des Spectacles at the south — Esplanade Tranquille and MUTEK are roughly a fifteen-minute walk, which makes three free festival nights genuinely easy. Schwartz's is three blocks north. Nothing is at the door on the métro; walk, or pick up the Saint-Laurent bus.</p>
 <p><b>The exact rectangle to search:</b> south of av. Van Horne, north of av. du Mont-Royal, between bd Saint-Laurent and av. du Parc. Métro Laurier, Mont-Royal, Outremont or Rosemont within 10 minutes.</p>
 <p><b>Realistic price:</b> C$150–210 (≈US$110–155) for an entire 1-bedroom. Under C$140 exists further east.</p>
 <p><b>If you'd rather have a hotel:</b> the Plateau barely has any, which is the point. The two that work — <b>Auberge de La Fontaine</b> (facing Parc La Fontaine, breakfast included, the best "neighbourhood hotel" answer in the city) and <b>Casa Bianca</b> (a B&amp;B in a 1910 mansion on Esplanade, facing Mount Royal). Both ≈C$220–290.</p>
@@ -1350,9 +1431,10 @@ footer a{color:#b9d6c3}
 </div>
 
 <div class="card">
-<div class="kicker" style="color:var(--wine)">Base 3 · Aug 31 – Sep 3 · 4 nights</div>
+<div class="kicker" style="color:var(--wine)">Base 3 · Aug 31 – Sep 3 · 4 nights · booked</div>
 <h3>Québec City — Faubourg Saint-Jean-Baptiste</h3>
 <p><b>Why here:</b> it starts at Porte Saint-Jean and runs downhill west. You are eight minutes' walk from the Château Frontenac and simultaneously on the best independent food street in the city, surrounded by people who live there. Bohemian, colourful, lively at night, and priced for locals.</p>
+<p><b>✓ Booked · 735 boulevard Charest Est.</b> In Monday Aug 31 from 4 p.m., out Friday Sep 4 at 11 a.m. Free parking at 450 rue du Parvis, four minutes' walk; access details arrive 24 hours before you do. <b>US$788.52</b> for four nights. <b>This is Saint-Roch, not the Faubourg</b> — the alternate below rather than the first recommendation. The good half of that trade is on your doorstep: rue Saint-Joseph, L'Orygine and Le Don Végane are a walk, and Le Grand Marché is a short drive. The other half is the hill — Old Québec is up the côte d'Abraham or a staircase, about fifteen minutes and a climb every time. Plan the Lower Town, Petit-Champlain and ferry days as your easy ones and do the walled city in one push.</p>
 <p><b>Two good alternates:</b> <b>Saint-Roch</b> in the Lower Town — younger, design-and-restaurant heavy, superb food, but a real hill to climb home. <b>Montcalm / avenue Cartier</b> — leafier, quieter, stately houses, best if you want calm and the Plains at your door.</p>
 <p><b>Realistic price:</b> C$160–230 (≈US$115–170) for an apartment. <b>Here a hotel is often the better buy</b> — Québec has excellent small independents at Airbnb money.</p>
 <p><b>Hotels worth it:</b> <b>Hôtel du Vieux-Québec</b> (breakfast basket to your door, genuinely well run) · <b>Le Clos Saint-Louis</b> (two Victorian houses inside the walls, usually under C$260) · <b>Hôtel Château Bellevue</b> (steps from Dufferin Terrace, plain but unbeatable location) · and the splurge, <b>Auberge Saint-Antoine</b>, a Relais &amp; Châteaux built <em>over its own archaeological dig</em> with artefacts displayed in the walls of the rooms.</p>
@@ -1362,9 +1444,10 @@ footer a{color:#b9d6c3}
 </div>
 
 <div class="card">
-<div class="kicker" style="color:var(--wine)">Base 4 · Sep 4–5 · 2 nights · decided</div>
+<div class="kicker" style="color:var(--wine)">Base 4 · Sep 4–5 · 2 nights · booked</div>
 <h3>Baie-Saint-Paul, Charlevoix</h3>
 <p><b>Why here:</b> a single main street with roughly thirty galleries on it, wedged between mountain walls and the St. Lawrence, inside a meteorite crater, and the town where Cirque du Soleil was invented by street performers in 1984. It is the only Charlevoix base where you can park once and walk to dinner.</p>
+<p><b>✓ Booked · 352 rang de Saint-Placide Sud.</b> In Friday Sep 4 from 4 p.m., out Sunday Sep 6 at 11 a.m. Lockbox, free parking, <b>US$376.98</b> for two nights. <b>This is the farmhouse option, up the valley</b> — fields and silence rather than the gallery street, which means the park-once-and-walk-to-dinner argument below does not apply to you. Budget roughly ten minutes each way into town both evenings, do the IGA and bakery run on the way in on Friday, and settle who is driving before the wine list arrives.</p>
 <details class="l3" style="margin:10px 0 12px"><summary><span>Baie-Saint-Paul or La Malbaie? The full comparison</span></summary><div class="l3body">
 <p style="margin-top:0">This is a real decision, not a formality — La Malbaie is meaningfully closer to both nature days. Here is the whole trade.</p>
 <div class="tablewrap"><table><thead><tr><th></th><th>Baie-Saint-Paul</th><th>La Malbaie</th></tr></thead><tbody>
@@ -1388,7 +1471,7 @@ footer a{color:#b9d6c3}
 
 </div>
 
-<div class="note"><strong>Ten-night lodging budget:</strong> roughly <strong>US$1,450–1,950</strong> total for two, if you book in the next few weeks. The two nights that will blow the average are Lincoln (peak White Mountains) and Baie-Saint-Paul (Labour Day) — and both are one-shot, so pay it and move on. Montréal is where you'll comfortably land under US$120.</div>
+<div class="note"><strong>Eleven nights, booked: US$2,025.78 for two.</strong> Lincoln US$346.12 · Montréal US$514.16 · Québec US$788.52 · Baie-Saint-Paul US$376.98. That is above the US$1,450–1,950 this section planned for, and it is the two nights predicted above that did it: Lincoln at peak in the Whites, and Charlevoix on Labour Day weekend. The consolation is real — <strong>parking is free at all four</strong>, which quietly deletes the C$15–25 a night budgeted for Montréal and Québec City.</div>
 </div>
 </details>
 
@@ -1471,66 +1554,6 @@ footer a{color:#b9d6c3}
 <p style="margin-top:12px"><b>Worth paying for, once:</b> <b>Les Promenades Fantômes</b> — Québec City's lantern-lit evening ghost walk. Serious travellers rate it not for the ghosts but for the actual 17th-century social history smuggled inside.</p>
 </div>
 
-</div>
-</div>
-</details>
-
-<details class="l1" id="events">
-<summary><span class="l1t">What’s on, every single night</span><span class="l1s">Eleven nights · MUTEK free on all three Montréal nights · AURA vs Gardens of Light</span><span class="l1c">›</span></summary>
-<div class="l1body">
-<p class="lede">This is not a footnote. Every evening of this trip has something on it, and most of it costs nothing. Verify final schedules about two weeks out — festival programmes shift.</p>
-
-<div class="tablewrap">
-<table>
-<thead><tr><th>Night</th><th>What's on</th><th>Where</th><th>Cost</th></tr></thead>
-<tbody>
-<tr><td><b>Wed Aug 26</b></td><td>Arrival, White Mountains</td><td>Lincoln, NH</td><td>—</td></tr>
-<tr><td><b>Thu Aug 27</b></td><td>Post-ridge dinner and beer</td><td>Woodstock Inn Brewery</td><td>US$25</td></tr>
-<tr><td><b>Fri Aug 28</b></td><td><b>MUTEK · Expérience</b> — free outdoor stage, ambient / techno / live electronics, 5 p.m.–midnight</td><td>Esplanade Tranquille, Montréal</td><td><b>Free</b></td></tr>
-<tr><td><b>Sat Aug 29</b></td><td><b>AURA</b> at Notre-Dame Basilica (30 min) → <b>MUTEK Expérience</b>, 10 min walk<br/><em>or</em> <b>Gardens of Light</b> opening night at the Botanical Garden</td><td>Old Montréal → Quartier des Spectacles</td><td>≈C$30 + free</td></tr>
-<tr><td><b>Sun Aug 30</b></td><td><b>Tam-Tams</b> drum circle on Mount Royal, ≈12–6 p.m. → <b>Gardens of Light</b> after dusk → <b>MUTEK closing night</b></td><td>Mount Royal · Botanical Garden · Esplanade Tranquille</td><td>Free / ticketed / <b>Free</b></td></tr>
-<tr><td><b>Mon Aug 31</b></td><td>Arrival evening on rue Saint-Jean — buskers and terraces</td><td>Saint-Jean-Baptiste, Québec</td><td><b>Free</b></td></tr>
-<tr><td><b>Tue Sep 1</b></td><td>Sunset crossing on the Lévis ferry; street performers on Dufferin Terrace</td><td>Old Québec</td><td>C$4.25</td></tr>
-<tr><td><b>Wed Sep 2</b></td><td>Sunset from Sainte-Pétronille, Île d'Orléans</td><td>Île d'Orléans</td><td><b>Free</b></td></tr>
-<tr><td><b>Thu Sep 3</b></td><td><b>Onhwa' Lumina</b> — Moment Factory night walk, 8:00 / 8:20 / 8:40 p.m.</td><td>Wendake</td><td>≈C$34</td></tr>
-<tr><td><b>Fri Sep 4</b></td><td>Gallery street and dinner; Charlevoix arrival</td><td>Baie-Saint-Paul</td><td><b>Free</b></td></tr>
-<tr><td><b>Sat Sep 5</b></td><td>Last night — rue Saint-Jean-Baptiste galleries, microbrewery</td><td>Baie-Saint-Paul</td><td><b>Free</b></td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="card" style="margin-top:18px;background:#fbf7ee;border-color:#ddc9a5"><h3 style="margin-top:0">AURA or Gardens of Light? You cannot do both on one evening.</h3><p>They are at opposite ends of the island, both start after dark, and both run about the same hours. Here is the honest comparison.</p><div class="tablewrap"><table><thead><tr><th></th><th>AURA · Notre-Dame Basilica</th><th>Gardens of Light · Botanical Garden</th></tr></thead><tbody><tr><td><b>What it is</b></td><td>Moment Factory turns the basilica's own vault, columns and altar into a projection surface, with an orchestral score through the nave.</td><td>A 2 km walk after dark through the Chinese, Japanese and First Nations gardens, lit by hand-made silk lanterns from Shanghai.</td></tr><tr><td><b>Time cost, door to door</b></td><td><b>≈90 min.</b> The show is 30 minutes; Old Montréal is 20 minutes from the Plateau.</td><td><b>≈3½ hours.</b> The garden is 1½–2 h on its feet, plus 35–40 min each way to Pie-IX.</td></tr><tr><td><b>Weather</b></td><td>Entirely indoors. <b>The rain plan.</b></td><td>Entirely outdoors. Rain ruins it.</td></tr><tr><td><b>Physical</b></td><td>You sit or stand still.</td><td>2 km on gravel, after a full day of walking.</td></tr><tr><td><b>Pairs with</b></td><td>The Old Montréal day, and <b>MUTEK is 10 minutes' walk away</b> afterwards.</td><td>Nothing — it is the whole evening, and it is the wrong side of the city from everything else.</td></tr><tr><td><b>Books out</b></td><td>Summer Fri/Sat sell out. Buy now.</td><td>Aug 29 is <b>opening weekend</b>. Buy now.</td></tr><tr><td><b>Which is more spectacular</b></td><td>Higher peak. Thirty minutes you will not forget.</td><td>Lower peak, longer and more romantic. A walk, not a show.</td></tr></tbody></table></div><p style="margin-bottom:0"><b>The recommendation, and why the itinerary is built this way:</b> <b>AURA on Saturday</b> — it caps the Old Montréal day and hands you MUTEK straight afterwards for free. <b>Gardens of Light on Sunday</b>, because Sunday has no competing evening. If you only want one: <b>take AURA.</b> It is a third of the time, it is rain-proof, and it is the more astonishing of the two. If you take both, be honest that Sunday becomes a very long day — bagels, Jean-Talon, Tam-Tams, the Oratory <em>and</em> a 2 km night walk in the east end. The clean fix is to move Saint Joseph's Oratory to Saturday afternoon.</p></div>
-<div class="grid2" style="margin-top:18px">
-<div class="card"><h4>MUTEK, in your favour</h4><p style="margin:0">The festival runs <b>Aug 25–30, 2026</b> — its 27th edition, 120+ artists including Jeff Mills and Rival Consoles. The <b>Expérience</b> series on Esplanade Tranquille is outdoors, free, and runs <b>every evening from 5 p.m. to midnight</b>. Your three Montréal nights are the 28th, 29th and 30th. There is no ticket to buy and no plan to make — walk in, stay as long as it holds you. Paid indoor programmes are entirely optional. <a href="https://montreal.mutek.org/en/esplanade-tranquille">Programme →</a></p></div>
-<div class="card"><h4>Three honest notes</h4><p style="margin:0 0 8px"><b>JOAT, the street dance festival, opens the day after you leave Montréal.</b> The largest street dance festival in the Americas — breaking, hip hop, popping, krump, 250+ artists, free outdoor programming — runs <b>Sep 1–7, 2026</b> in the same Quartier des Spectacles. You're in Québec City for all of it. The consolation is exact: MUTEK occupies the identical slot in the identical square on all three of your Montréal nights.</p><p style="margin:0 0 8px"><b>Québec City has no equivalent free festival in your window.</b> Envol et Macadam — the city's big alternative-music festival, with a free opening night — runs <b>Sep 10–12, 2026</b>, four days after you leave. Rather than pretend otherwise: your Québec City evenings are Onhwa' Lumina, the ferry, the terrace performers on Dufferin, and rue Saint-Jean.</p><p style="margin:0"><b>Québec Pride (Fête Arc-en-ciel)</b> is expected around <b>Sep 4–6</b>. You leave the city on the 4th — expect extra activity around Place d'Youville that morning. Confirm dates closer to the time.</p></div>
-</div>
-</div>
-</details>
-
-<details class="l1" id="museums">
-<summary><span class="l1t">Museums — what’s already in, and what you’re missing</span><span class="l1s">Six in the itinerary · three world-class ones that aren’t</span><span class="l1c">›</span></summary>
-<div class="l1body">
-<p class="lede">Six museums are built into the days above. Three more are genuinely world-class and are not, because something had to give. Here is the honest ranking so you can swap deliberately.</p>
-
-<div class="grid2">
-<div class="card">
-<h3>Already in the itinerary</h3>
-<ul style="padding-left:18px;margin:0">
-<li><b>Pointe-à-Callière</b>, Montréal — Day 3. Built over the 1642 founding site; you walk a buried river. Best archaeology museum in Canada.</li>
-<li><b>Musée de la civilisation</b>, Québec — Day 8. Safdie building, First Peoples exhibition curated with the eleven nations. The city's best.</li>
-<li><b>Musée huron-wendat</b>, Wendake — Day 8. A nation's own national museum.</li>
-<li><b>Plains of Abraham Museum</b> — Day 6. The clearest account of 1759 you'll get.</li>
-<li><b>Royal 22<sup>e</sup> Régiment Museum</b>, inside the Citadelle — Day 6, included in the tour.</li>
-<li><b>Musée POP &amp; the Old Prison</b>, Trois-Rivières — Day 5. Toured by former inmates.</li>
-</ul>
-</div>
-<div class="card" style="background:#fbf7ee">
-<h3>The three you're currently missing</h3>
-<p><b>1 · MNBAQ — Musée national des beaux-arts du Québec.</b> Ten minutes' walk from your door, standing <em>on</em> the Plains of Abraham. Four reasons it is the strongest addition available to you:</p><ul style="padding-left:18px;margin:0 0 10px"><li><b>Riopelle's <em>Tribute to Rosa Luxemburg</em>.</b> Thirty paintings forming a triptych <b>over 40 metres long</b> — the largest work Jean Paul Riopelle ever made, painted in a single furious autumn in 1992 after Joan Mitchell, his partner of twenty years, died. It has three custom-built galleries to itself. It is one of the great works of 20th-century Canadian art and almost no American visitor has heard of it.</li><li><b>The museum is partly a prison.</b> The Charles-Baillairgé Pavilion is the former Québec City jail, built 1861–67, absorbed into the museum in 1987 — and the <b>old cells are still there</b>, inside the galleries. There is a guided tour of them.</li><li><b>The Brousseau Inuit collection</b> — among the most important holdings of Inuit art anywhere, shown in purpose-built white galleries.</li><li><b>The building.</b> The Pierre Lassonde Pavilion (OMA New York with Provencher_Roy, 2016) cascades down Grande Allée in stacked glass boxes and is worth twenty minutes on its own.</li></ul><p style="margin:0 0 8px">And thematically it is the missing half of this trip: the Musée de la civilisation tells you what Québec <em>remembers</em>; the MNBAQ shows you what it <em>made</em>.</p><p style="margin:0 0 8px"><b>Where it fits:</b> <b>Day 6, straight after the Plains of Abraham</b> — it is 400 metres from the battlefield monuments, so it costs you no travel at all. If Day 6 is already too long, take it instead of the Musée de la civilisation on Day 8 morning; you cannot do both museums <em>and</em> Wendake in one day.</p><p style="margin:0"><b>⚠ Check before you go:</b> the new <b>Espace Riopelle – Michael Audain Pavilion</b> opens <b>20–21 October 2026</b>, six weeks after you leave. The Riopelle holdings may be partly de-installed in early September while they move. Confirm that <em>Tribute to Rosa Luxemburg</em> is on view before you build the day around it.</p>
-<p><b>2 · McCord Stewart Museum, Montréal.</b> Compact, two hours, downtown. The social history of the city plus the <b>Notman Photographic Archives</b> — over a million 19th-century photographs of Montréal, and seeing the streets you just walked as they were in 1875 is genuinely startling. <b>Slot into Day 3 if Old Montréal runs short.</b></p>
-<p><b>3 · Montréal Museum of Fine Arts (MMFA).</b> Four connected pavilions, one of the largest art museums in Canada. Go specifically for the <b>Canadian and Indigenous art wing</b> — the Group of Seven, Riopelle, and a serious Inuit collection. A half-day if you're an art couple; skip if you're not.</p>
-<p style="margin-bottom:0"><b>Rain insurance:</b> <b>Space for Life</b> in Montréal — the <b>Biodôme</b> (four complete ecosystems indoors, including a Laurentian maple forest and a sub-Antarctic island with live penguins) and the rebuilt <b>Insectarium</b>, which is one of the most inventive natural-history spaces built anywhere this decade. Same site as the Botanical Garden, so it pairs with Gardens of Light on Day 4.</p>
-</div>
 </div>
 </div>
 </details>
@@ -1623,7 +1646,7 @@ footer a{color:#b9d6c3}
 
 <!-- ============ PART FIVE · STATS ============ -->
 <section class="part" id="stats">
-<div class="parthead"><div class="pnum">Part five</div><h2>Stats</h2><p class="plede">The superlatives, the one-of-a-kinds, the things that only exist inside your exact dates — and the fifteen nobody else will have found.</p></div>
+<div class="parthead"><div class="pnum">Part five</div><h2>Stats</h2><p class="plede">The superlatives, the one-of-a-kinds and the things that only exist inside your exact dates; the fifteen nobody else will have found; what is on every single night; and which museums earn the hours.</p></div>
 
 <div class="subsec" id="why">
 <div class="kicker">The pitch</div>
@@ -1694,6 +1717,64 @@ footer a{color:#b9d6c3}
 <div class="card"><h4>Papeterie Saint-Gilles</h4><small style="color:var(--muted)">Day 9 · Route 362</small><p>Handmade cotton paper with wildflowers pressed into the sheets, made the same way since 1965, at sea level below an 18% descent.</p></div>
 <div class="card"><h4>Espace Félix-Leclerc</h4><small style="color:var(--muted)">Day 7 · Île d'Orléans</small><p>Québec's founding singer-songwriter — the man who effectively invented the <em>chansonnier</em> tradition — lived, wrote and is buried on the island. Understanding him explains a lot about the province.</p></div>
 <div class="card"><h4>Wilensky's Light Lunch</h4><small style="color:var(--muted)">Day 4 · Mile End</small><p>Open since 1932, serves one sandwich, always with mustard, and refuses to cut it in half. Featured in Mordecai Richler's <em>Duddy Kravitz</em>. A five-minute institution.</p></div>
+</div>
+</div>
+
+<div class="subsec" id="events">
+<div class="kicker">Eleven nights</div>
+<h3>What’s on, every single night.</h3>
+<p class="lede">This is not a footnote. Every evening of this trip has something on it, and most of it costs nothing. Verify final schedules about two weeks out — festival programmes shift. The four that need buying are rows in <a href="#tracker">the planning sheet</a>.</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Night</th><th>What's on</th><th>Where</th><th>Cost</th></tr></thead>
+<tbody>
+<tr><td><b>Wed Aug 26</b></td><td>Arrival, White Mountains</td><td>Lincoln, NH</td><td>—</td></tr>
+<tr><td><b>Thu Aug 27</b></td><td>Post-ridge dinner and beer</td><td>Woodstock Inn Brewery</td><td>US$25</td></tr>
+<tr><td><b>Fri Aug 28</b></td><td><b>MUTEK · Expérience</b> — free outdoor stage, ambient / techno / live electronics, 5 p.m.–midnight</td><td>Esplanade Tranquille, Montréal</td><td><b>Free</b></td></tr>
+<tr><td><b>Sat Aug 29</b></td><td><b>AURA</b> at Notre-Dame Basilica (30 min) → <b>MUTEK Expérience</b>, 10 min walk<br/><em>or</em> <b>Gardens of Light</b> opening night at the Botanical Garden</td><td>Old Montréal → Quartier des Spectacles</td><td>≈C$30 + free</td></tr>
+<tr><td><b>Sun Aug 30</b></td><td><b>Tam-Tams</b> drum circle on Mount Royal, ≈12–6 p.m. → <b>Gardens of Light</b> after dusk → <b>MUTEK closing night</b></td><td>Mount Royal · Botanical Garden · Esplanade Tranquille</td><td>Free / ticketed / <b>Free</b></td></tr>
+<tr><td><b>Mon Aug 31</b></td><td>Arrival evening on rue Saint-Jean — buskers and terraces</td><td>Saint-Jean-Baptiste, Québec</td><td><b>Free</b></td></tr>
+<tr><td><b>Tue Sep 1</b></td><td>Sunset crossing on the Lévis ferry; street performers on Dufferin Terrace</td><td>Old Québec</td><td>C$4.25</td></tr>
+<tr><td><b>Wed Sep 2</b></td><td>Sunset from Sainte-Pétronille, Île d'Orléans</td><td>Île d'Orléans</td><td><b>Free</b></td></tr>
+<tr><td><b>Thu Sep 3</b></td><td><b>Onhwa' Lumina</b> — Moment Factory night walk, 8:00 / 8:20 / 8:40 p.m.</td><td>Wendake</td><td>≈C$34</td></tr>
+<tr><td><b>Fri Sep 4</b></td><td>Gallery street and dinner; Charlevoix arrival</td><td>Baie-Saint-Paul</td><td><b>Free</b></td></tr>
+<tr><td><b>Sat Sep 5</b></td><td>Last night — rue Saint-Jean-Baptiste galleries, microbrewery</td><td>Baie-Saint-Paul</td><td><b>Free</b></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card" style="margin-top:18px;background:#fbf7ee;border-color:#ddc9a5"><h3 style="margin-top:0">AURA or Gardens of Light? You cannot do both on one evening.</h3><p>They are at opposite ends of the island, both start after dark, and both run about the same hours. Here is the honest comparison.</p><div class="tablewrap"><table><thead><tr><th></th><th>AURA · Notre-Dame Basilica</th><th>Gardens of Light · Botanical Garden</th></tr></thead><tbody><tr><td><b>What it is</b></td><td>Moment Factory turns the basilica's own vault, columns and altar into a projection surface, with an orchestral score through the nave.</td><td>A 2 km walk after dark through the Chinese, Japanese and First Nations gardens, lit by hand-made silk lanterns from Shanghai.</td></tr><tr><td><b>Time cost, door to door</b></td><td><b>≈90 min.</b> The show is 30 minutes; Old Montréal is 20 minutes from the Plateau.</td><td><b>≈3½ hours.</b> The garden is 1½–2 h on its feet, plus 35–40 min each way to Pie-IX.</td></tr><tr><td><b>Weather</b></td><td>Entirely indoors. <b>The rain plan.</b></td><td>Entirely outdoors. Rain ruins it.</td></tr><tr><td><b>Physical</b></td><td>You sit or stand still.</td><td>2 km on gravel, after a full day of walking.</td></tr><tr><td><b>Pairs with</b></td><td>The Old Montréal day, and <b>MUTEK is 10 minutes' walk away</b> afterwards.</td><td>Nothing — it is the whole evening, and it is the wrong side of the city from everything else.</td></tr><tr><td><b>Books out</b></td><td>Summer Fri/Sat sell out. Buy now.</td><td>Aug 29 is <b>opening weekend</b>. Buy now.</td></tr><tr><td><b>Which is more spectacular</b></td><td>Higher peak. Thirty minutes you will not forget.</td><td>Lower peak, longer and more romantic. A walk, not a show.</td></tr></tbody></table></div><p style="margin-bottom:0"><b>The recommendation, and why the itinerary is built this way:</b> <b>AURA on Saturday</b> — it caps the Old Montréal day and hands you MUTEK straight afterwards for free. <b>Gardens of Light on Sunday</b>, because Sunday has no competing evening. If you only want one: <b>take AURA.</b> It is a third of the time, it is rain-proof, and it is the more astonishing of the two. If you take both, be honest that Sunday becomes a very long day — bagels, Jean-Talon, Tam-Tams, the Oratory <em>and</em> a 2 km night walk in the east end. The clean fix is to move Saint Joseph's Oratory to Saturday afternoon.</p></div>
+<div class="grid2" style="margin-top:18px">
+<div class="card"><h4>MUTEK, in your favour</h4><p style="margin:0">The festival runs <b>Aug 25–30, 2026</b> — its 27th edition, 120+ artists including Jeff Mills and Rival Consoles. The <b>Expérience</b> series on Esplanade Tranquille is outdoors, free, and runs <b>every evening from 5 p.m. to midnight</b>. Your three Montréal nights are the 28th, 29th and 30th. There is no ticket to buy and no plan to make — walk in, stay as long as it holds you. Paid indoor programmes are entirely optional. <a href="https://montreal.mutek.org/en/esplanade-tranquille">Programme →</a></p></div>
+<div class="card"><h4>Three honest notes</h4><p style="margin:0 0 8px"><b>JOAT, the street dance festival, opens the day after you leave Montréal.</b> The largest street dance festival in the Americas — breaking, hip hop, popping, krump, 250+ artists, free outdoor programming — runs <b>Sep 1–7, 2026</b> in the same Quartier des Spectacles. You're in Québec City for all of it. The consolation is exact: MUTEK occupies the identical slot in the identical square on all three of your Montréal nights.</p><p style="margin:0 0 8px"><b>Québec City has no equivalent free festival in your window.</b> Envol et Macadam — the city's big alternative-music festival, with a free opening night — runs <b>Sep 10–12, 2026</b>, four days after you leave. Rather than pretend otherwise: your Québec City evenings are Onhwa' Lumina, the ferry, the terrace performers on Dufferin, and rue Saint-Jean.</p><p style="margin:0"><b>Québec Pride (Fête Arc-en-ciel)</b> is expected around <b>Sep 4–6</b>. You leave the city on the 4th — expect extra activity around Place d'Youville that morning. Confirm dates closer to the time.</p></div>
+</div>
+</div>
+
+<div class="subsec" id="museums">
+<div class="kicker">Six in, three out</div>
+<h3>Museums — what’s already in, and what you’re missing.</h3>
+<p class="lede">Six museums are built into the days above. Three more are genuinely world-class and are not, because something had to give. Here is the honest ranking so you can swap deliberately.</p>
+
+<div class="grid2">
+<div class="card">
+<h3>Already in the itinerary</h3>
+<ul style="padding-left:18px;margin:0">
+<li><b>Pointe-à-Callière</b>, Montréal — Day 3. Built over the 1642 founding site; you walk a buried river. Best archaeology museum in Canada.</li>
+<li><b>Musée de la civilisation</b>, Québec — Day 8. Safdie building, First Peoples exhibition curated with the eleven nations. The city's best.</li>
+<li><b>Musée huron-wendat</b>, Wendake — Day 8. A nation's own national museum.</li>
+<li><b>Plains of Abraham Museum</b> — Day 6. The clearest account of 1759 you'll get.</li>
+<li><b>Royal 22<sup>e</sup> Régiment Museum</b>, inside the Citadelle — Day 6, included in the tour.</li>
+<li><b>Musée POP &amp; the Old Prison</b>, Trois-Rivières — Day 5. Toured by former inmates.</li>
+</ul>
+</div>
+<div class="card" style="background:#fbf7ee">
+<h3>The three you're currently missing</h3>
+<p><b>1 · MNBAQ — Musée national des beaux-arts du Québec.</b> Ten minutes' walk from your door, standing <em>on</em> the Plains of Abraham. Four reasons it is the strongest addition available to you:</p><ul style="padding-left:18px;margin:0 0 10px"><li><b>Riopelle's <em>Tribute to Rosa Luxemburg</em>.</b> Thirty paintings forming a triptych <b>over 40 metres long</b> — the largest work Jean Paul Riopelle ever made, painted in a single furious autumn in 1992 after Joan Mitchell, his partner of twenty years, died. It has three custom-built galleries to itself. It is one of the great works of 20th-century Canadian art and almost no American visitor has heard of it.</li><li><b>The museum is partly a prison.</b> The Charles-Baillairgé Pavilion is the former Québec City jail, built 1861–67, absorbed into the museum in 1987 — and the <b>old cells are still there</b>, inside the galleries. There is a guided tour of them.</li><li><b>The Brousseau Inuit collection</b> — among the most important holdings of Inuit art anywhere, shown in purpose-built white galleries.</li><li><b>The building.</b> The Pierre Lassonde Pavilion (OMA New York with Provencher_Roy, 2016) cascades down Grande Allée in stacked glass boxes and is worth twenty minutes on its own.</li></ul><p style="margin:0 0 8px">And thematically it is the missing half of this trip: the Musée de la civilisation tells you what Québec <em>remembers</em>; the MNBAQ shows you what it <em>made</em>.</p><p style="margin:0 0 8px"><b>Where it fits:</b> <b>Day 6, straight after the Plains of Abraham</b> — it is 400 metres from the battlefield monuments, so it costs you no travel at all. If Day 6 is already too long, take it instead of the Musée de la civilisation on Day 8 morning; you cannot do both museums <em>and</em> Wendake in one day.</p><p style="margin:0"><b>⚠ Check before you go:</b> the new <b>Espace Riopelle – Michael Audain Pavilion</b> opens <b>20–21 October 2026</b>, six weeks after you leave. The Riopelle holdings may be partly de-installed in early September while they move. Confirm that <em>Tribute to Rosa Luxemburg</em> is on view before you build the day around it.</p>
+<p><b>2 · McCord Stewart Museum, Montréal.</b> Compact, two hours, downtown. The social history of the city plus the <b>Notman Photographic Archives</b> — over a million 19th-century photographs of Montréal, and seeing the streets you just walked as they were in 1875 is genuinely startling. <b>Slot into Day 3 if Old Montréal runs short.</b></p>
+<p><b>3 · Montréal Museum of Fine Arts (MMFA).</b> Four connected pavilions, one of the largest art museums in Canada. Go specifically for the <b>Canadian and Indigenous art wing</b> — the Group of Seven, Riopelle, and a serious Inuit collection. A half-day if you're an art couple; skip if you're not.</p>
+<p style="margin-bottom:0"><b>Rain insurance:</b> <b>Space for Life</b> in Montréal — the <b>Biodôme</b> (four complete ecosystems indoors, including a Laurentian maple forest and a sub-Antarctic island with live penguins) and the rebuilt <b>Insectarium</b>, which is one of the most inventive natural-history spaces built anywhere this decade. Same site as the Botanical Garden, so it pairs with Gardens of Light on Day 4.</p>
+</div>
 </div>
 </div>
 </section>
@@ -1835,6 +1916,436 @@ document.querySelectorAll('.gmapwrap').forEach(function(w){
 /* print: everything open */
 window.addEventListener('beforeprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.dataset.pre=d.open?'1':''; d.open=true; }); document.querySelectorAll('.gmapwrap').forEach(function(w){ w.dataset.pre=w.classList.contains('mapopen')?'1':''; w.classList.add('mapopen'); }); });
 window.addEventListener('afterprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.open=d.dataset.pre==='1'; }); document.querySelectorAll('.gmapwrap').forEach(function(w){ w.classList.toggle('mapopen',w.dataset.pre==='1'); }); });
+</script>
+
+<script>
+/* ============================================================================
+   The planning sheet. Everything lives in localStorage on this machine —
+   no account, no server, no request. SEED is the shipped starting state;
+   what you type is stored as a diff against it, so a guide update that adds
+   new rows still reaches a sheet you have already been filling in.
+   ============================================================================ */
+(function(){
+var body=document.getElementById('pkBody');
+if(!body) return;
+
+var KEY='travel.montreal-quebec.plan.v1', RATE0=0.73;
+var CATS=[['stay','Lodging'],['travel','Travel & driving'],['tickets','Tickets, tours & museums'],
+          ['evening','Evenings'],['food','Food & drink'],['admin','Admin & before you go']];
+var PRIS=[['now','This week'],['soon','3–6 weeks'],['later','Days before'],['day','On the day'],['none','No deadline']];
+var STS=[['todo','To do'],['booked','Booked'],['walkin','No booking'],['skip','Skipped']];
+var FIELDS=['cat','item','status','pri','when','conf','phone','cur','est','paid','notes'];
+var COLS=['id'].concat(FIELDS);
+
+/* id, cat, item, status, pri, when, conf, phone, cur, est, paid, notes */
+var SEED=[
+['stay-nh','stay','Lincoln, NH — Airbnb, 36 Lodge Road','booked','now','In Wed Aug 26, 4 p.m. / out Fri Aug 28, 11 a.m.','Airbnb','','USD',346.12,346.12,'Two nights. Lockbox self check-in, free parking. Late checkout requested.'],
+['stay-mtl','stay','Montréal — Airbnb, 3613 bd Saint-Laurent','booked','now','In Fri Aug 28, 3 p.m. / out Mon Aug 31, 11 a.m.','Airbnb','','USD',514.16,514.16,'Three nights. Smart lock, free parking. Lower Plateau; 15 min walk to Esplanade Tranquille.'],
+['stay-qc','stay','Québec City — Airbnb, 735 bd Charest Est','booked','now','In Mon Aug 31, 4 p.m. / out Fri Sep 4, 11 a.m.','Airbnb','','USD',788.52,788.52,'Four nights. Saint-Roch. Parking at 450 rue du Parvis, 4 min walk. Access details 24 h before arrival.'],
+['stay-bsp','stay','Baie-Saint-Paul — Airbnb, 352 rang de Saint-Placide Sud','booked','now','In Fri Sep 4, 4 p.m. / out Sun Sep 6, 11 a.m.','Airbnb','','USD',376.98,376.98,'Two nights. Lockbox, free parking. Up the valley — a 10 min drive into town for dinner.'],
+
+['fuel','travel','Fuel and tolls, about 2,400 km','walkin','day','Across the twelve days','','','USD',340,'','Fill in Vermont before crossing north, and in Québec City before Charlevoix. Stations thin out past Baie-Saint-Paul.'],
+['phone','travel','Canada phone plan or eSIM','todo','soon','Before Aug 26','','','USD',50,'','Confirm the carrier rate or buy an eSIM. Roaming is where trip budgets quietly die.'],
+['parkmeter','travel','Metered parking on day trips','walkin','day','As you go','','','CAD',60,'','All four stays include parking, so this is meters only. P$ Service mobile in Montréal, Copilote in Québec City.'],
+
+['whale','tickets','Whale cruise, AML 3 h — Baie-Sainte-Catherine','todo','now','Fri Sep 4, 10:15 a.m. (Day 9)','','','CAD',270,'','From about C$135 each. Whale guarantee applies. The most urgent thing left on this sheet.'],
+['greeter','tickets','Montréal Greeter request','todo','now','Fri Aug 28 or Sat Aug 29','','','CAD',0,'','Free, volunteers, limited slots. Request 2-4 weeks ahead and name a theme.'],
+['pac','tickets','Pointe-à-Callière','todo','soon','Sat Aug 29 (Day 3)','','','CAD',60,'','About C$30 each.'],
+['prison','tickets','Old Prison tour, Trois-Rivières','todo','soon','Mon Aug 31, on the drive (Day 5)','','','CAD',40,'','English times are limited. Book before you leave Montréal.'],
+['citadelle','tickets','La Citadelle guided tour','todo','soon','Tue Sep 1 (Day 6)','','','CAD',36,'','Includes the Royal 22e Régiment Museum.'],
+['walkqc','tickets','Free walking tour, Québec City','todo','soon','Tue Sep 1 or Wed Sep 2, about 10 a.m.','','','CAD',50,'','Pay-what-you-wish, budget C$20–25 each. 48 h minimum, group sizes capped.'],
+['mnbaq','tickets','MNBAQ — the optional addition','todo','soon','Tue Sep 1, after the Plains','','','CAD',50,'','Check that Tribute to Rosa Luxemburg is still on view — the Riopelle rooms move for the new pavilion in October.'],
+['mcq','tickets','Musée de la civilisation','todo','soon','Thu Sep 3, morning (Day 8)','','','CAD',48,'','The First Peoples exhibition is the reason to go.'],
+['wendat','tickets','Musée huron-wendat, guided programme','todo','soon','Thu Sep 3 (Day 8)','','','CAD',40,'','The guided programme needs booking; general admission does not.'],
+['voicemap','tickets','VoiceMap audio tours','todo','soon','Download before you leave wifi','','','CAD',30,'','About C$8–12 each. Two or three is plenty.'],
+['spa','tickets','Bota Bota or Strøm Nordic spa','todo','soon','Optional — one evening','','','CAD',210,'','C$69 after 5 p.m. at Strøm, up to C$104 peak. The obvious line to cut if the total looks wrong.'],
+['walkmtl','tickets','Free walking tour, Old Montréal','todo','later','Sat Aug 29, morning','','','CAD',50,'','Tip-based, meet at Place Jacques-Cartier.'],
+['flume','tickets','Flume Gorge timed ticket','todo','later','Thu Aug 27','','','USD',36,'','Only if the forecast makes it the wet-weather plan. US$18 online, US$21 at the gate.'],
+['ghost','tickets','Les Promenades Fantômes ghost walk','todo','later','A Québec City evening','','','CAD',60,'','Optional. Rated for the 17th-century social history, not the ghosts.'],
+['montmorency','tickets','Montmorency Falls, access + cable car','walkin','day','Wed Sep 2 (Day 7)','','','CAD',58,'','About C$13.90 access and C$14.95 cable car return, each.'],
+['canyon','tickets','Canyon Sainte-Anne','walkin','day','Wed Sep 2 (Day 7)','','','CAD',30,'','Three suspension bridges. About C$15 each.'],
+['ferry','tickets','Québec–Lévis ferry, return for two','walkin','day','Tue Sep 1, at sunset','','','CAD',17,'','C$4.25 each way. Best-value view in Canada.'],
+['crypt','tickets','Notre-Dame de Québec crypt','walkin','day','Tue Sep 1 (Day 6)','','','CAD',10,'','The church and the Holy Door are free.'],
+['sepaq','tickets','Sépaq day access, Hautes-Gorges + bateau-mouche','walkin','day','Sat Sep 5 (Day 10)','','','CAD',100,'','C$10 each per day for access; the cruise is extra, the internal shuttle is free.'],
+['parks','tickets','Parks Canada sites — Fortifications, Saint-Louis, Artillery Park, Pointe-Noire','walkin','none','Sep 1–4','','','CAD',0,'','Free to Sep 7 on the Canada Strong Pass. Nothing to obtain — turn up. Worth roughly C$60–80 to you.'],
+
+['aura','evening','AURA, Notre-Dame Basilica','todo','now','Sat Aug 29, evening (Day 3)','','','CAD',60,'','Summer Fri/Sat sell out. Separate from daytime basilica admission.'],
+['gardens','evening','Gardens of Light, Botanical Garden','todo','now','Sun Aug 30, after dusk (Day 4)','','','CAD',50,'','Aug 29 is opening weekend; Sunday is the night that fits the itinerary.'],
+['lumina','evening','Onhwa\' Lumina, Wendake','todo','now','Thu Sep 3, 8:00 p.m. (Day 8)','','','CAD',88,'','About C$33.75 + tax each, plus C$10.50 parking. Nightly Aug 28 – Sep 6 only.'],
+['mutek','evening','MUTEK Expérience, Esplanade Tranquille','walkin','none','Fri Aug 28 – Sun Aug 30, 5 p.m. to midnight','','','CAD',0,'','Free, outdoors, no ticket. Walk in on all three Montréal nights.'],
+['tamtams','evening','Tam-Tams, Mount Royal','walkin','none','Sun Aug 30, about noon to 6 p.m.','','','CAD',0,'','Sundays only. Free.'],
+
+['din-momo','food','Sushi Momo, Plateau','todo','now','One Montréal night','','','CAD',130,'','Fully vegan. K\'s special dinner in Montréal — reserve now.'],
+['din-damas','food','Damas, Outremont','todo','now','One Montréal night','','','CAD',180,'','Grand room, worth dressing for. Reserve.'],
+['din-legende','food','Légende par La Tanière, Québec City','todo','now','One Québec City night','','','CAD',380,'','Book weeks ahead, and ask for the vegetarian tasting menu at reservation - not on the night.'],
+['din-traite','food','La Traite, Wendake','todo','now','Thu Sep 3, before Lumina','','','CAD',170,'','Pairs with Onhwa\' Lumina the same evening.'],
+['din-bsp','food','Baie-Saint-Paul dinners, Friday and Saturday','todo','soon','Sep 4 and Sep 5','','','CAD',200,'','Les Faux Bergers or Le Mouton Noir. Labour Day weekend — book both, and remember you are driving in.'],
+['din-papillon','food','Le Vin Papillon, Little Burgundy','todo','later','One Montréal night','','','CAD',120,'','No reservations at last check — confirm the policy and go early.'],
+['din-nh','food','Woodstock Inn Station & Brewery','walkin','day','Thu Aug 27, after the ridge','','','USD',60,'','Walkable from Lincoln. No booking needed.'],
+['groceries','food','Groceries, lunches, coffee, casual dinners','walkin','none','Twelve days','','','USD',480,'','Breakfast at home, lunch grazed from markets, one proper dinner out. Roughly US$40 a day for two.'],
+
+['docs','admin','Passports, registration, proof of insurance','todo','now','Before Aug 26','','','USD',0,'','No fresh produce, plants or firewood across in either direction.'],
+['card','admin','No-foreign-transaction-fee card, plus C$150 cash','todo','soon','Before Aug 26','','','USD',0,'','The card alone saves about 3% of the whole trip. Cash is for meters, tips and farm stands.'],
+['offline','admin','Download offline maps and every VoiceMap tour','todo','later','On hotel wifi','','','USD',0,'','Québec province and New Hampshire.'],
+['border','admin','Check both border wait times','walkin','day','Aug 28 north, Sep 6 south','','','USD',0,'','Labour Day Sunday afternoon is the worst window of the year.']
+].map(function(a){ var o={},i; for(i=0;i<COLS.length;i++) o[COLS[i]]=a[i]; return o; });
+
+/* ---- state --------------------------------------------------------------- */
+function loadState(){
+  var st=null;
+  try{ st=JSON.parse(localStorage.getItem(KEY)); }catch(e){ st=null; }
+  if(!st||typeof st!=='object') st={};
+  if(!st.ov||typeof st.ov!=='object') st.ov={};
+  if(!(st.extra instanceof Array)) st.extra=[];
+  if(typeof st.rate!=='number'||!(st.rate>0)) st.rate=RATE0;
+  return st;
+}
+var S=loadState(), NEXT=1, FILTER='all';
+S.extra.forEach(function(r){ var n=parseInt(String(r.id).slice(1),10); if(n>=NEXT) NEXT=n+1; });
+
+var savedTag=document.getElementById('pkSaved'), savedTimer=null;
+function save(){
+  try{ localStorage.setItem(KEY,JSON.stringify(S)); }
+  catch(e){ if(savedTag){ savedTag.textContent='Not saved'; savedTag.className='savetag on'; } return; }
+  if(!savedTag) return;
+  savedTag.textContent='Saved'; savedTag.className='savetag on';
+  clearTimeout(savedTimer);
+  savedTimer=setTimeout(function(){ savedTag.className='savetag'; },1300);
+}
+function rowsNow(){
+  var out=[],i,j,o,r;
+  for(i=0;i<SEED.length;i++){
+    o=S.ov[SEED[i].id];
+    if(o&&o.del) continue;
+    r={id:SEED[i].id};
+    for(j=0;j<FIELDS.length;j++) r[FIELDS[j]]=SEED[i][FIELDS[j]];
+    if(o) for(j=0;j<FIELDS.length;j++) if(o[FIELDS[j]]!==undefined) r[FIELDS[j]]=o[FIELDS[j]];
+    out.push(r);
+  }
+  for(i=0;i<S.extra.length;i++) out.push(S.extra[i]);
+  return out;
+}
+function put(id,f,v){
+  var i;
+  if(id.charAt(0)==='x'){
+    for(i=0;i<S.extra.length;i++) if(S.extra[i].id===id){ S.extra[i][f]=v; break; }
+  } else {
+    if(!S.ov[id]) S.ov[id]={};
+    S.ov[id][f]=v;
+  }
+  save();
+}
+function label(list,v){ for(var i=0;i<list.length;i++) if(list[i][0]===v) return list[i][1]; return v||''; }
+function num(v){ var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,'')); return isFinite(n)?n:0; }
+function usd(r,f){ var n=num(r[f]); return r.cur==='CAD'? n*S.rate : n; }
+function money(n){ return 'US$'+Math.round(n).toLocaleString('en-US'); }
+function local(r,f){ var n=num(r[f]); if(!n) return ''; return (r.cur==='CAD'?'C$':'US$')+Math.round(n).toLocaleString('en-US'); }
+
+/* ---- building the sheet ---------------------------------------------------- */
+function pick(opts,val,cls){
+  var el=document.createElement('select'),i,o;
+  if(cls) el.className=cls;
+  for(i=0;i<opts.length;i++){
+    o=document.createElement('option');
+    o.value=opts[i][0]; o.textContent=opts[i][1];
+    if(opts[i][0]===val) o.selected=true;
+    el.appendChild(o);
+  }
+  return el;
+}
+function field(val,ph){
+  var el=document.createElement('input');
+  el.type='text'; el.value=(val==null||val==='')?'':String(val);
+  if(ph) el.placeholder=ph;
+  return el;
+}
+var GROUPS={};
+function rowEl(r){
+  var tr=document.createElement('tr');
+  tr.setAttribute('data-id',r.id);
+  tr.setAttribute('data-st',r.status);
+  function cell(cls,node,f,ev){
+    var td=document.createElement('td');
+    td.className=cls; td.appendChild(node);
+    if(node.tagName==='INPUT') node.title=node.value;
+    node.addEventListener(ev||'input',function(){
+      put(r.id,f,node.value);
+      if(node.tagName==='INPUT') node.title=node.value;
+      if(f==='status') tr.setAttribute('data-st',node.value);
+      refresh();
+    });
+    tr.appendChild(td);
+  }
+  cell('c-st',pick(STS,r.status),'status','change');
+  cell('c-item',field(r.item,'What is it?'),'item');
+  cell('c-pri',pick(PRIS,r.pri),'pri','change');
+  cell('c-when',field(r.when,'When'),'when');
+  cell('c-conf',field(r.conf,''),'conf');
+  cell('c-phone',field(r.phone,''),'phone');
+  cell('c-cur',pick([['USD','US$'],['CAD','C$']],r.cur),'cur','change');
+  cell('c-num',field(r.est,'0'),'est');
+  cell('c-num',field(r.paid,''),'paid');
+  cell('c-notes',field(r.notes,''),'notes');
+  var b=document.createElement('button');
+  b.type='button'; b.className='delrow'; b.textContent='\u2715';
+  b.title='Remove this row';
+  b.addEventListener('click',function(){
+    if(!confirm('Remove "'+(r.item||'this row')+'" from the sheet?')) return;
+    if(r.id.charAt(0)==='x'){
+      S.extra=S.extra.filter(function(e){ return e.id!==r.id; });
+    } else {
+      if(!S.ov[r.id]) S.ov[r.id]={};
+      S.ov[r.id].del=1;
+    }
+    save(); render();
+  });
+  var td=document.createElement('td');
+  td.className='c-del'; td.appendChild(b); tr.appendChild(td);
+  return tr;
+}
+function addRow(cat){
+  var r={id:'x'+(NEXT++),cat:cat,item:'',status:'todo',pri:'soon',when:'',conf:'',phone:'',cur:'CAD',est:'',paid:'',notes:''};
+  S.extra.push(r); save(); render();
+  var n=body.querySelector('tr[data-id="'+r.id+'"] .c-item input');
+  if(n) n.focus();
+}
+function render(){
+  while(body.firstChild) body.removeChild(body.firstChild);
+  GROUPS={};
+  var rs=rowsNow(),c,i,key,tr,td,sp,add;
+  for(c=0;c<CATS.length;c++){
+    key=CATS[c][0];
+    tr=document.createElement('tr'); tr.className='grp';
+    td=document.createElement('td'); td.setAttribute('colspan','11');
+    sp=document.createElement('span'); sp.textContent=CATS[c][1]; td.appendChild(sp);
+    add=document.createElement('button');
+    add.type='button'; add.className='addrow'; add.textContent='+ add a row';
+    add.addEventListener('click',(function(k){ return function(){ addRow(k); }; })(key));
+    td.appendChild(add); tr.appendChild(td); body.appendChild(tr);
+    GROUPS[key]={head:tr,rows:[]};
+    for(i=0;i<rs.length;i++) if(rs[i].cat===key){
+      var e=rowEl(rs[i]);
+      GROUPS[key].rows.push(e);
+      body.appendChild(e);
+    }
+  }
+  refresh();
+}
+
+/* ---- totals, checklist, cost breakdown ------------------------------------- */
+function ul(node){ while(node.firstChild) node.removeChild(node.firstChild); return node; }
+function li(text,cost){
+  var e=document.createElement('li');
+  e.appendChild(document.createTextNode(text));
+  if(cost){
+    var sm=document.createElement('span');
+    sm.className='tickcost'; sm.textContent=' \u00b7 '+cost;
+    e.appendChild(sm);
+  }
+  return e;
+}
+function refresh(){
+  var rs=rowsNow(),i,r,c;
+  var per={},booked=0,bookable=0,todo=0,spent=0,owing=0;
+  for(i=0;i<CATS.length;i++) per[CATS[i][0]]={n:0,spent:0,owing:0};
+  for(i=0;i<rs.length;i++){
+    r=rs[i];
+    if(r.status==='skip') continue;
+    var g=per[r.cat]; if(!g) continue;
+    var p=usd(r,'paid'), o=p>0?0:usd(r,'est');
+    g.n++; g.spent+=p; g.owing+=o;
+    spent+=p; owing+=o;
+    if(r.status==='booked'){ booked++; bookable++; }
+    else if(r.status==='todo'){ todo++; bookable++; }
+  }
+  document.getElementById('pkBooked').textContent=booked+' of '+bookable;
+  document.getElementById('pkPaid').textContent=money(spent);
+  document.getElementById('pkLeft').textContent=money(owing);
+  document.getElementById('pkTotal').textContent=money(spent+owing);
+  document.getElementById('pkBar').style.width=(bookable?Math.round(booked/bookable*100):0)+'%';
+  document.getElementById('pkNote').textContent=
+    booked+' booked, '+todo+' still to arrange, '+(rs.length-bookable)+' that need no booking or are skipped. '+
+    'Saved in this browser only \u2014 export before you clear your history.';
+
+  /* outstanding, by how soon it has to happen */
+  var buckets=[['Book this week',['now']],['Book 3–6 weeks out',['soon']],['Closer to the day',['later','day','none']]];
+  var lists=ul(document.getElementById('pkLists'));
+  for(c=0;c<buckets.length;c++){
+    var card=document.createElement('div'); card.className='card';
+    var h=document.createElement('h4');
+    h.appendChild(document.createTextNode(buckets[c][0]));
+    var em=document.createElement('em'); h.appendChild(em); card.appendChild(h);
+    var list=document.createElement('ul'); list.className='ticks'; list.style.gridTemplateColumns='1fr';
+    var n=0;
+    for(i=0;i<rs.length;i++){
+      r=rs[i];
+      if(r.status!=='todo') continue;
+      if(buckets[c][1].indexOf(r.pri)<0) continue;
+      list.appendChild(li(r.item||'(unnamed)',local(r,'est')));
+      n++;
+    }
+    if(!n){ var e=li('Nothing outstanding.',''); e.className='empty'; list.appendChild(e); }
+    em.textContent=n?(n+' left'):'clear';
+    card.appendChild(list); lists.appendChild(card);
+  }
+
+  /* what is already done */
+  var done=ul(document.getElementById('pkDone')), dn=0, dpaid=0;
+  for(i=0;i<rs.length;i++){
+    r=rs[i];
+    if(r.status!=='booked') continue;
+    var bits=r.item||'(unnamed)';
+    if(r.when) bits+=' \u00b7 '+r.when;
+    if(r.conf) bits+=' \u00b7 '+r.conf;
+    done.appendChild(li(bits,local(r,'paid')||local(r,'est')));
+    dn++; dpaid+=usd(r,'paid');
+  }
+  if(!dn){ var e2=li('Nothing booked yet.',''); e2.className='empty'; done.appendChild(e2); }
+  document.getElementById('pkDoneSum').textContent=
+    dn?('Done \u2014 '+dn+' booked, '+money(dpaid)+' committed'):'Done \u2014 nothing yet';
+
+  /* cost breakdown */
+  var cost=ul(document.getElementById('pkCost')),k;
+  function row(cells,cls){
+    var t=document.createElement('tr');
+    if(cls) t.className=cls;
+    for(var j=0;j<cells.length;j++){
+      var d=document.createElement('td');
+      d.textContent=cells[j];
+      t.appendChild(d);
+    }
+    return t;
+  }
+  for(i=0;i<CATS.length;i++){
+    k=CATS[i][0];
+    if(!per[k].n) continue;
+    cost.appendChild(row([CATS[i][1],String(per[k].n),money(per[k].spent),money(per[k].owing),
+                          money(per[k].spent+per[k].owing)]));
+  }
+  cost.appendChild(row(['All in, for two','',money(spent),money(owing),money(spent+owing)],'tot'));
+
+  /* the filter */
+  for(i=0;i<CATS.length;i++){
+    var G=GROUPS[CATS[i][0]]; if(!G) continue;
+    var vis=0;
+    for(var j=0;j<G.rows.length;j++){
+      var show=(FILTER==='all')||(G.rows[j].getAttribute('data-st')===FILTER);
+      G.rows[j].style.display=show?'':'none';
+      if(show) vis++;
+    }
+    G.head.style.display=vis?'':'none';
+  }
+}
+
+/* ---- export, import, reset -------------------------------------------------- */
+function download(name,text,mime){
+  var b=new Blob([text],{type:mime}), u=URL.createObjectURL(b);
+  var link=document.createElement('a');
+  link.href=u; link.download=name;
+  document.body.appendChild(link); link.click();
+  setTimeout(function(){ URL.revokeObjectURL(u); link.parentNode.removeChild(link); },0);
+}
+function csvCell(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; }
+function exportCSV(){
+  var rs=rowsNow(), out=[], i, r;
+  out.push(['Category','Item','Status','When to book','Date & time','Confirmation','Phone','Currency',
+            'Estimate','Paid','Notes','Estimate US$','Paid US$'].map(csvCell).join(','));
+  for(i=0;i<rs.length;i++){
+    r=rs[i];
+    out.push([label(CATS,r.cat),r.item,label(STS,r.status),label(PRIS,r.pri),r.when,r.conf,r.phone,r.cur,
+              r.est,r.paid,r.notes,usd(r,'est').toFixed(2),usd(r,'paid').toFixed(2)].map(csvCell).join(','));
+  }
+  out.push('');
+  out.push([csvCell('Rate used'),csvCell('C$1 = US$'+S.rate)].join(','));
+  download('quebec-2026-planning.csv','\ufeff'+out.join('\r\n'),'text/csv;charset=utf-8');
+}
+function exportJSON(){
+  var rs=rowsNow(),i,j,clean=[];
+  for(i=0;i<rs.length;i++){
+    var o={id:rs[i].id};
+    for(j=0;j<FIELDS.length;j++) o[FIELDS[j]]=rs[i][FIELDS[j]];
+    clean.push(o);
+  }
+  download('quebec-2026-planning.json',JSON.stringify(
+    {guide:'montreal-quebec',schema:'planning.v1',
+     exported:new Date().toISOString().slice(0,10),rate:S.rate,rows:clean},null,2),'application/json');
+}
+function applyImport(d){
+  if(!d||!(d.rows instanceof Array)||!d.rows.length){ alert('That file has no rows in it.'); return; }
+  var byId={},i,j,seen={};
+  for(i=0;i<SEED.length;i++) byId[SEED[i].id]=SEED[i];
+  S.ov={}; S.extra=[]; NEXT=1;
+  if(typeof d.rate==='number'&&d.rate>0) S.rate=d.rate;
+  for(i=0;i<d.rows.length;i++){
+    var r=d.rows[i];
+    if(!r||!r.id) continue;
+    seen[r.id]=1;
+    if(byId[r.id]){
+      var o={};
+      for(j=0;j<FIELDS.length;j++)
+        if(r[FIELDS[j]]!==undefined&&String(r[FIELDS[j]])!==String(byId[r.id][FIELDS[j]]))
+          o[FIELDS[j]]=r[FIELDS[j]];
+      S.ov[r.id]=o;
+    } else {
+      var e={id:'x'+(NEXT++)};
+      for(j=0;j<FIELDS.length;j++) e[FIELDS[j]]=r[FIELDS[j]]!==undefined?r[FIELDS[j]]:'';
+      if(!e.cat) e.cat='tickets';
+      if(!e.status) e.status='todo';
+      if(!e.pri) e.pri='soon';
+      if(!e.cur) e.cur='CAD';
+      S.extra.push(e);
+    }
+  }
+  for(i=0;i<SEED.length;i++) if(!seen[SEED[i].id]){
+    if(!S.ov[SEED[i].id]) S.ov[SEED[i].id]={};
+    S.ov[SEED[i].id].del=1;
+  }
+  var rate=document.getElementById('pkRate');
+  if(rate) rate.value=S.rate;
+  save(); render();
+}
+document.getElementById('pkCsv').addEventListener('click',exportCSV);
+document.getElementById('pkJson').addEventListener('click',exportJSON);
+document.getElementById('pkImport').addEventListener('click',function(){
+  var f=document.createElement('input');
+  f.type='file'; f.accept='.json,application/json';
+  f.addEventListener('change',function(){
+    var file=f.files&&f.files[0]; if(!file) return;
+    var rd=new FileReader();
+    rd.onload=function(){
+      var d=null;
+      try{ d=JSON.parse(String(rd.result)); }catch(e){ alert('That is not readable JSON.'); return; }
+      if(!confirm('Replace the sheet with the contents of '+file.name+'?')) return;
+      applyImport(d);
+    };
+    rd.readAsText(file);
+  });
+  f.click();
+});
+document.getElementById('pkReset').addEventListener('click',function(){
+  if(!confirm('Clear everything you have typed and go back to the sheet as it shipped?')) return;
+  S={ov:{},extra:[],rate:RATE0}; NEXT=1;
+  var rate=document.getElementById('pkRate');
+  if(rate) rate.value=RATE0;
+  save(); render();
+});
+var rateBox=document.getElementById('pkRate');
+rateBox.value=S.rate;
+rateBox.addEventListener('input',function(){
+  var v=parseFloat(rateBox.value);
+  if(isFinite(v)&&v>0){ S.rate=v; save(); refresh(); }
+});
+var chips=document.querySelectorAll('.chip[data-filter]');
+for(var ci=0;ci<chips.length;ci++) chips[ci].addEventListener('click',(function(btn){
+  return function(){
+    FILTER=btn.getAttribute('data-filter');
+    for(var k=0;k<chips.length;k++) chips[k].className='chip'+(chips[k]===btn?' on':'');
+    refresh();
+  };
+})(chips[ci]));
+
+render();
+})();
 </script>
 
 </body>

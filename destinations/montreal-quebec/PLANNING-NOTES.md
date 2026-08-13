@@ -127,16 +127,18 @@ The guide is ordered the way you'd actually use it, not the way it was researche
 |---|---|
 | **1 · The trip** | The shape of the trip (route map, day-by-day table, driving legs) · The thread |
 | **2 · Day by day** | Act I Franconia · Act II Montréal · Act III Québec City · Act IV Charlevoix |
-| **3 · Reservations** | Book & budget · Where to stay · Food · Tours · Music & events · Museums |
+| **3 · Planning** | The spreadsheet · Reference prices · Where to stay · Food · Tours |
 | **4 · Before you go** | Gear · Driving · Watch first |
-| **5 · Stats** | Why go (the 21 reasons) · Hidden gems |
+| **5 · Stats** | Why go (the 21 reasons) · Hidden gems · What's on every night · Museums |
 | **6 · Sources** | — |
 
 **What is collapsed by default, and why**
 
 - **The day-by-day table** and **the driving legs** — both are lookup tables, not reading. You open them on the morning you need them.
 - **Every one of the twelve days.** Collapsed, each day is one row: number, title, weekday, and the effort line. All twelve fit on about a screen per act, so you can find "the Wendake day" without scrolling through Montréal. Expanding gives the photo, the strategy box and the full stop-by-stop timeline exactly as before.
-- **The thread's argument**, and the five Reservations subsections.
+- **The thread's argument**, and the three reference drawers in Planning (where you sleep, food, tours).
+
+**Why Planning is a spreadsheet and not prose.** The booking timeline used to be three static cards — book this week, book in three to six weeks, book on the day — which is a list you read once and then cannot use. It is now a table you type into: status, dates, confirmation number, phone, estimate against what you actually paid. It saves into the browser, exports to CSV and JSON, and the urgency cards, the done list and the cost breakdown are all computed from it, so there is exactly one place a fact lives. The JSON is the round trip: export it, hand it back, and the sheet's shipped starting state can be updated to match reality. **What's on every night** and **Museums** moved out of Planning and into Stats, where the rest of the trip's inventory already lives — neither is something you book from, and the planning sheet carries the four evening tickets that are.
 
 Nothing is collapsed that you'd want to read straight through — the part headers, the act headers, and everything in Before you go and Stats stay open.
 

@@ -13,3 +13,5 @@ destinations/*/maps/.resolve-cache.json
 
 .DS_Store
 __pycache__/
+
+.tmp/

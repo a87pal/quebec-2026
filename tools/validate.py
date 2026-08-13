@@ -132,12 +132,16 @@ def main():
     if d:
         fatal.append("%d duplicate id(s)" % len(d))
 
-    if 'id="reservations"' in new:
-        print("\n=== drawer order in reservations ===")
-        res = new[new.index('id="reservations"'):]
-        cut = res.find("</section>")
-        res = res[:(cut + 400) if cut >= 0 else len(res)]
-        print("   ", re.findall(r'<details class="l1" id="([^"]+)">', res))
+    # Drawer order per part, so a bad slice that reshuffles or drops a level-1
+    # drawer shows up as a changed line. No part id is hardcoded here - which
+    # one holds the drawers is the guide's business, not the engine's.
+    print("\n=== level-1 drawers, by part ===")
+    parts = list(re.finditer(r'<section class="part[^"]*" id="([^"]+)">', new))
+    for k, m in enumerate(parts):
+        end = parts[k + 1].start() if k + 1 < len(parts) else len(new)
+        drawers = re.findall(r'<details class="l1" id="([^"]+)">', new[m.start():end])
+        if drawers:
+            print("   #%-12s %s" % (m.group(1), drawers))
 
     print("\n=== content preserved ===")
     old, spec = read_baseline(dest, args.baseline)
