@@ -361,52 +361,62 @@ footer a{color:#b9d6c3}
 .savetag{font:800 .7rem Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;
   color:var(--forest);opacity:0;transition:opacity .25s}
 .savetag.on{opacity:1}
-table.sheet{min-width:1220px;font-size:.85rem}
-table.sheet th{white-space:nowrap}
-table.sheet td{padding:2px 4px;vertical-align:middle}
-table.sheet input,table.sheet select{width:100%;min-width:0;border:1px solid transparent;background:transparent;
+.sheetfoot{display:flex;align-items:center;gap:14px;margin:10px 0 14px}
+
+/* the table itself is fixed-layout: the <col> widths are the contract, which
+   is what makes a drag-to-resize handle possible at all */
+table.sheet{table-layout:fixed;font-size:.85rem}
+table.sheet th{position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  user-select:none;-webkit-user-select:none;cursor:pointer;padding-right:15px}
+table.sheet th:hover{background:#e7dfcf}
+th .dir{color:var(--gold);margin-left:5px;font-size:.66rem;vertical-align:1px}
+th .grip{position:absolute;top:0;right:0;bottom:0;width:9px;cursor:col-resize;border-radius:3px}
+th .grip:hover{background:var(--gold);opacity:.5}
+th.dragging{opacity:.35}
+th.dropL{box-shadow:inset 3px 0 0 var(--wine)}
+th.dropR{box-shadow:inset -3px 0 0 var(--wine)}
+table.sheet td{padding:3px 4px;vertical-align:top;overflow:hidden}
+.sheet textarea{width:100%;display:block;border:1px solid transparent;background:transparent;
+  border-radius:8px;padding:6px 7px;font:inherit;font-family:inherit;font-size:.82rem;color:#4a564f;
+  line-height:1.4;resize:none;overflow:hidden}
+.sheet textarea:hover{border-color:#e3dacb;background:#fffdf7}
+.sheet textarea:focus{outline:none;border-color:var(--forest);background:#fff;
+  box-shadow:0 0 0 2px rgba(38,80,63,.13);color:var(--ink)}
+.sheet input,.sheet select{width:100%;min-width:0;border:1px solid transparent;background:transparent;
   border-radius:8px;padding:6px 7px;font:inherit;font-family:inherit;color:inherit}
-table.sheet input:hover,table.sheet select:hover{border-color:#e3dacb;background:#fffdf7}
-table.sheet input:focus,table.sheet select:focus{outline:none;border-color:var(--forest);background:#fff;
+table.sheet tr{border-bottom:1px solid var(--line)}
+.sheet input:hover,.sheet select:hover{border-color:#e3dacb;background:#fffdf7}
+.sheet input:focus,.sheet select:focus{outline:none;border-color:var(--forest);background:#fff;
   box-shadow:0 0 0 2px rgba(38,80,63,.13)}
-table.sheet tr.grp td{background:var(--sand);padding:9px 11px}
-table.sheet tr.grp span{font:800 .72rem Inter,system-ui,sans-serif;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--forest);margin-right:12px}
-.addrow{border:1px dashed #c6b89e;background:transparent;border-radius:999px;padding:2px 10px;
-  font:700 .7rem Inter,system-ui,sans-serif;color:var(--muted);cursor:pointer}
-.addrow:hover{color:var(--forest);border-color:var(--forest);background:#fff}
+.c-pri input{text-align:center;font-weight:800;color:#a2977f;font-size:.8rem}
+.c-status select{font-weight:800;font-size:.73rem;text-transform:uppercase;letter-spacing:.04em}
+.c-cat select{font-size:.81rem;color:#4c5a52}
+.c-start input,.c-end input{font-size:.8rem;color:#3b4741}
+.itemwrap,.costwrap{display:flex;align-items:center;gap:1px}
+.itemwrap input{flex:1 1 auto}
+.itemwrap a,.itemwrap button{flex:0 0 auto;border:none;background:transparent;text-decoration:none;
+  font-size:.86rem;line-height:1;padding:5px 4px;border-radius:6px;cursor:pointer}
+.itemwrap a{color:var(--forest)}
+.itemwrap button{color:#cfc4b0;opacity:0;font-size:.76rem;transition:opacity .12s}
+tr:hover .itemwrap button,.itemwrap button:focus{opacity:1}
+.itemwrap a:hover,.itemwrap button:hover{background:var(--sand);color:var(--wine)}
+.costwrap select{width:auto;flex:0 0 auto;font-weight:700;color:#8e8471;font-size:.78rem;padding:6px 2px}
+.costwrap input{flex:1 1 auto;text-align:right;font-variant-numeric:tabular-nums;color:#8e8471}
+.costpaid{display:block;text-align:right;padding:6px 8px;font-weight:800;color:var(--ink);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+tr[data-st="booked"]{background:#f2f8f4}
+tr[data-st="booked"] .c-status select{color:#2b5540}
+tr[data-st="todo"] .c-status select{color:#7a5321}
+tr[data-st="walkin"] .c-status select{color:#2f5563}
+tr[data-st="skip"]{opacity:.45}
+tr[data-st="skip"] .c-item input{text-decoration:line-through}
 .delrow{border:none;background:transparent;color:#c3b6a3;font-size:.95rem;line-height:1;cursor:pointer;
   padding:4px 7px;border-radius:6px}
 .delrow:hover{color:var(--wine);background:#fbeeeb}
-.c-item{min-width:250px}.c-notes{min-width:300px}.c-when{min-width:170px}
-.c-conf{min-width:140px}.c-phone{min-width:126px}.c-pri{min-width:126px}.c-st{min-width:148px}
-.c-cur{width:96px}.c-num{width:104px}
-/* the controls fill their cell, so the column has to be told its own width
-   here - a width:100% child contributes nothing to an auto table layout */
-.c-item input{min-width:286px}.c-notes input{min-width:290px}.c-when input{min-width:162px}
-.c-conf input{min-width:132px}.c-phone input{min-width:118px}
-.c-pri select{min-width:118px}.c-st select{min-width:132px}
-.c-cur select{min-width:80px}.c-num input{min-width:80px}
-.c-num input{text-align:right;font-variant-numeric:tabular-nums}
-.c-st select{font-weight:800;font-size:.73rem;text-transform:uppercase;letter-spacing:.04em}
-tr[data-st="booked"]{background:#f2f8f4}
-tr[data-st="booked"] .c-st select{color:#2b5540}
-tr[data-st="todo"] .c-st select{color:#7a5321}
-tr[data-st="walkin"] .c-st select{color:#2f5563}
-tr[data-st="skip"]{opacity:.45}
-tr[data-st="skip"] .c-item input{text-decoration:line-through}
 th.ra,.costs td+td{text-align:right}
-.costs td:first-child+td{text-align:right}
 .costs tr.tot td{background:var(--sand);font-weight:800;color:var(--forest)}
-ul.ticks.done li:before{content:"\2611";color:var(--forest)}
-ul.ticks li.empty{color:var(--muted);font-style:italic}
-ul.ticks li.empty:before{content:"\2014";color:var(--line)}
-ul.ticks .tickcost{color:var(--muted);white-space:nowrap}
-#pkLists .card h4{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-#pkLists .card h4 em{font-style:normal;font-family:Inter,system-ui,sans-serif;font-size:.7rem;font-weight:800;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 @media(max-width:760px){.planbtns{width:100%}}
-@media print{.planbar,.delrow,.addrow{display:none}table.sheet{min-width:0;font-size:.72rem}}
+@media print{.planbar,.delrow,.sheetfoot,th .grip{display:none}table.sheet{font-size:.7rem}}
 @media print{
  nav{display:none}.hero{min-height:420px}.day{break-inside:avoid}
  body{background:#fff}
@@ -1328,9 +1338,6 @@ ul.ticks .tickcost{color:var(--muted);white-space:nowrap}
 <div class="pbar"><i id="pkBar"></i></div>
 <p class="fine" id="pkNote">Loading the sheet…</p>
 
-<div class="grid3" id="pkLists" style="margin-top:20px"></div>
-<details class="l3" style="margin-top:12px"><summary><span id="pkDoneSum">Done</span></summary><div class="l3body"><ul class="ticks done" id="pkDone" style="grid-template-columns:1fr"></ul></div></details>
-
 <div class="planbar">
 <div class="chips">
 <button class="chip on" data-filter="all" type="button">All</button>
@@ -1351,11 +1358,13 @@ ul.ticks .tickcost{color:var(--muted);white-space:nowrap}
 
 <div class="tablewrap">
 <table class="sheet">
-<thead><tr><th>Status</th><th>Item</th><th>When to book</th><th>Date &amp; time</th><th>Confirmation</th><th>Phone</th><th>Cur</th><th>Est.</th><th>Paid</th><th>Notes</th><th></th></tr></thead>
+<colgroup id="pkCols"></colgroup>
+<thead><tr id="pkHead"></tr></thead>
 <tbody id="pkBody"></tbody>
 </table>
 </div>
-<p class="fine">Estimates are per line for <b>two people</b> unless the note says otherwise, in the currency beside them. Put a figure in <b>Paid</b> and that line stops counting as an estimate. Rows marked <b>Skipped</b> drop out of every total, so that is the honest way to cut something rather than deleting it.</p>
+<div class="sheetfoot"><button class="pbtn" id="pkAdd" type="button">+ add a row</button><span class="fine" id="pkCount"></span></div>
+<p class="fine"><b>How it works.</b> Click a heading to sort, drag a heading to reorder the columns, drag a heading's right edge to resize it. Marking a row <b>Booked</b> locks its amount: it becomes what you actually paid, in black, and you set the status back to <em>To do</em> if you need to change it. Anything still grey is an estimate for two people. <b>Skipped</b> rows drop out of every total — the honest way to cut something rather than deleting it. The <b>↗</b> beside a name opens its site; the pencil that appears when you hover a row sets or changes that link. <b>Start and end are the itinerary's own slots, not operator confirmations</b> — move them as you book. Notes wrap and grow, so nothing is hidden behind a scroll.</p>
 
 <h3 style="margin-top:30px">Cost breakdown</h3>
 <div class="tablewrap">
@@ -1921,83 +1930,142 @@ window.addEventListener('afterprint',function(){ document.querySelectorAll('deta
 <script>
 /* ============================================================================
    The planning sheet. Everything lives in localStorage on this machine —
-   no account, no server, no request. SEED is the shipped starting state;
-   what you type is stored as a diff against it, so a guide update that adds
-   new rows still reaches a sheet you have already been filling in.
+   no account, no server, no request. SEED is the shipped starting state and
+   what you type is stored as a diff against it, so adding rows to the guide
+   later still reaches a sheet you have already been filling in.
    ============================================================================ */
 (function(){
 var body=document.getElementById('pkBody');
 if(!body) return;
 
-var KEY='travel.montreal-quebec.plan.v1', RATE0=0.73;
-var CATS=[['stay','Lodging'],['travel','Travel & driving'],['tickets','Tickets, tours & museums'],
-          ['evening','Evenings'],['food','Food & drink'],['admin','Admin & before you go']];
-var PRIS=[['now','This week'],['soon','3–6 weeks'],['later','Days before'],['day','On the day'],['none','No deadline']];
+var KEY='travel.montreal-quebec.plan.v2', OLDKEY='travel.montreal-quebec.plan.v1', RATE0=0.73;
+var CATS=[['lodging','Lodging'],['food','Food'],['transportation','Transportation'],
+          ['attractions','Attractions'],['admin','Admin']];
 var STS=[['todo','To do'],['booked','Booked'],['walkin','No booking'],['skip','Skipped']];
-var FIELDS=['cat','item','status','pri','when','conf','phone','cur','est','paid','notes'];
+var CURS=[['USD','US$'],['CAD','C$']];
+var FIELDS=['pri','status','cat','item','url','start','end','cur','amt','notes'];
 var COLS=['id'].concat(FIELDS);
 
-/* id, cat, item, status, pri, when, conf, phone, cur, est, paid, notes */
+/* key, heading, default width, kind */
+var COLDEF=[
+ ['pri','Pri',74,'num'],
+ ['status','Status',130,'status'],
+ ['cat','Category',152,'cat'],
+ ['item','Item',330,'item'],
+ ['start','Start',200,'dt'],
+ ['end','End',200,'dt'],
+ ['amt','Cost',148,'cost'],
+ ['notes','Notes',420,'notes']
+];
+var COLBY={},i0;
+for(i0=0;i0<COLDEF.length;i0++) COLBY[COLDEF[i0][0]]=COLDEF[i0];
+
+var GM='https://www.google.com/maps/search/?api=1&query=';
+/* id, pri, status, cat, item, url, start, end, cur, amt, notes */
 var SEED=[
-['stay-nh','stay','Lincoln, NH — Airbnb, 36 Lodge Road','booked','now','In Wed Aug 26, 4 p.m. / out Fri Aug 28, 11 a.m.','Airbnb','','USD',346.12,346.12,'Two nights. Lockbox self check-in, free parking. Late checkout requested.'],
-['stay-mtl','stay','Montréal — Airbnb, 3613 bd Saint-Laurent','booked','now','In Fri Aug 28, 3 p.m. / out Mon Aug 31, 11 a.m.','Airbnb','','USD',514.16,514.16,'Three nights. Smart lock, free parking. Lower Plateau; 15 min walk to Esplanade Tranquille.'],
-['stay-qc','stay','Québec City — Airbnb, 735 bd Charest Est','booked','now','In Mon Aug 31, 4 p.m. / out Fri Sep 4, 11 a.m.','Airbnb','','USD',788.52,788.52,'Four nights. Saint-Roch. Parking at 450 rue du Parvis, 4 min walk. Access details 24 h before arrival.'],
-['stay-bsp','stay','Baie-Saint-Paul — Airbnb, 352 rang de Saint-Placide Sud','booked','now','In Fri Sep 4, 4 p.m. / out Sun Sep 6, 11 a.m.','Airbnb','','USD',376.98,376.98,'Two nights. Lockbox, free parking. Up the valley — a 10 min drive into town for dinner.'],
+['stay-nh',1,'booked','lodging','Lincoln, NH — Airbnb',GM+'36+Lodge+Road+Lincoln+NH+03251','2026-08-26T16:00','2026-08-28T11:00','USD',346.12,'36 Lodge Road. Two nights. Lockbox self check-in, free parking. Late checkout requested.'],
+['stay-mtl',2,'booked','lodging','Montréal — Airbnb',GM+'3613+Boulevard+Saint-Laurent+Montreal+QC+H2X+2V5','2026-08-28T15:00','2026-08-31T11:00','USD',514.16,'3613 bd Saint-Laurent. Three nights. Smart lock, free parking. Lower Plateau; 15 min walk to Esplanade Tranquille, Schwartz\'s three blocks north.'],
+['stay-qc',3,'booked','lodging','Québec City — Airbnb',GM+'735+Boulevard+Charest+Est+Quebec+QC+G1K+3J7','2026-08-31T16:00','2026-09-04T11:00','USD',788.52,'735 bd Charest Est, Saint-Roch. Four nights. Parking at 450 rue du Parvis, 4 min walk. Access details 24 h before arrival. Old Québec is up a real hill.'],
+['stay-bsp',4,'booked','lodging','Baie-Saint-Paul — Airbnb',GM+'352+Rang+Saint-Placide+Sud+Baie-Saint-Paul+QC+G3Z3A9','2026-09-04T16:00','2026-09-06T11:00','USD',376.98,'352 rang de Saint-Placide Sud. Two nights. Lockbox, free parking. Up the valley — a 10 min drive into town, so you are driving to dinner.'],
 
-['fuel','travel','Fuel and tolls, about 2,400 km','walkin','day','Across the twelve days','','','USD',340,'','Fill in Vermont before crossing north, and in Québec City before Charlevoix. Stations thin out past Baie-Saint-Paul.'],
-['phone','travel','Canada phone plan or eSIM','todo','soon','Before Aug 26','','','USD',50,'','Confirm the carrier rate or buy an eSIM. Roaming is where trip budgets quietly die.'],
-['parkmeter','travel','Metered parking on day trips','walkin','day','As you go','','','CAD',60,'','All four stays include parking, so this is meters only. P$ Service mobile in Montréal, Copilote in Québec City.'],
-
-['whale','tickets','Whale cruise, AML 3 h — Baie-Sainte-Catherine','todo','now','Fri Sep 4, 10:15 a.m. (Day 9)','','','CAD',270,'','From about C$135 each. Whale guarantee applies. The most urgent thing left on this sheet.'],
-['greeter','tickets','Montréal Greeter request','todo','now','Fri Aug 28 or Sat Aug 29','','','CAD',0,'','Free, volunteers, limited slots. Request 2-4 weeks ahead and name a theme.'],
-['pac','tickets','Pointe-à-Callière','todo','soon','Sat Aug 29 (Day 3)','','','CAD',60,'','About C$30 each.'],
-['prison','tickets','Old Prison tour, Trois-Rivières','todo','soon','Mon Aug 31, on the drive (Day 5)','','','CAD',40,'','English times are limited. Book before you leave Montréal.'],
-['citadelle','tickets','La Citadelle guided tour','todo','soon','Tue Sep 1 (Day 6)','','','CAD',36,'','Includes the Royal 22e Régiment Museum.'],
-['walkqc','tickets','Free walking tour, Québec City','todo','soon','Tue Sep 1 or Wed Sep 2, about 10 a.m.','','','CAD',50,'','Pay-what-you-wish, budget C$20–25 each. 48 h minimum, group sizes capped.'],
-['mnbaq','tickets','MNBAQ — the optional addition','todo','soon','Tue Sep 1, after the Plains','','','CAD',50,'','Check that Tribute to Rosa Luxemburg is still on view — the Riopelle rooms move for the new pavilion in October.'],
-['mcq','tickets','Musée de la civilisation','todo','soon','Thu Sep 3, morning (Day 8)','','','CAD',48,'','The First Peoples exhibition is the reason to go.'],
-['wendat','tickets','Musée huron-wendat, guided programme','todo','soon','Thu Sep 3 (Day 8)','','','CAD',40,'','The guided programme needs booking; general admission does not.'],
-['voicemap','tickets','VoiceMap audio tours','todo','soon','Download before you leave wifi','','','CAD',30,'','About C$8–12 each. Two or three is plenty.'],
-['spa','tickets','Bota Bota or Strøm Nordic spa','todo','soon','Optional — one evening','','','CAD',210,'','C$69 after 5 p.m. at Strøm, up to C$104 peak. The obvious line to cut if the total looks wrong.'],
-['walkmtl','tickets','Free walking tour, Old Montréal','todo','later','Sat Aug 29, morning','','','CAD',50,'','Tip-based, meet at Place Jacques-Cartier.'],
-['flume','tickets','Flume Gorge timed ticket','todo','later','Thu Aug 27','','','USD',36,'','Only if the forecast makes it the wet-weather plan. US$18 online, US$21 at the gate.'],
-['ghost','tickets','Les Promenades Fantômes ghost walk','todo','later','A Québec City evening','','','CAD',60,'','Optional. Rated for the 17th-century social history, not the ghosts.'],
-['montmorency','tickets','Montmorency Falls, access + cable car','walkin','day','Wed Sep 2 (Day 7)','','','CAD',58,'','About C$13.90 access and C$14.95 cable car return, each.'],
-['canyon','tickets','Canyon Sainte-Anne','walkin','day','Wed Sep 2 (Day 7)','','','CAD',30,'','Three suspension bridges. About C$15 each.'],
-['ferry','tickets','Québec–Lévis ferry, return for two','walkin','day','Tue Sep 1, at sunset','','','CAD',17,'','C$4.25 each way. Best-value view in Canada.'],
-['crypt','tickets','Notre-Dame de Québec crypt','walkin','day','Tue Sep 1 (Day 6)','','','CAD',10,'','The church and the Holy Door are free.'],
-['sepaq','tickets','Sépaq day access, Hautes-Gorges + bateau-mouche','walkin','day','Sat Sep 5 (Day 10)','','','CAD',100,'','C$10 each per day for access; the cruise is extra, the internal shuttle is free.'],
-['parks','tickets','Parks Canada sites — Fortifications, Saint-Louis, Artillery Park, Pointe-Noire','walkin','none','Sep 1–4','','','CAD',0,'','Free to Sep 7 on the Canada Strong Pass. Nothing to obtain — turn up. Worth roughly C$60–80 to you.'],
-
-['aura','evening','AURA, Notre-Dame Basilica','todo','now','Sat Aug 29, evening (Day 3)','','','CAD',60,'','Summer Fri/Sat sell out. Separate from daytime basilica admission.'],
-['gardens','evening','Gardens of Light, Botanical Garden','todo','now','Sun Aug 30, after dusk (Day 4)','','','CAD',50,'','Aug 29 is opening weekend; Sunday is the night that fits the itinerary.'],
-['lumina','evening','Onhwa\' Lumina, Wendake','todo','now','Thu Sep 3, 8:00 p.m. (Day 8)','','','CAD',88,'','About C$33.75 + tax each, plus C$10.50 parking. Nightly Aug 28 – Sep 6 only.'],
-['mutek','evening','MUTEK Expérience, Esplanade Tranquille','walkin','none','Fri Aug 28 – Sun Aug 30, 5 p.m. to midnight','','','CAD',0,'','Free, outdoors, no ticket. Walk in on all three Montréal nights.'],
-['tamtams','evening','Tam-Tams, Mount Royal','walkin','none','Sun Aug 30, about noon to 6 p.m.','','','CAD',0,'','Sundays only. Free.'],
-
-['din-momo','food','Sushi Momo, Plateau','todo','now','One Montréal night','','','CAD',130,'','Fully vegan. K\'s special dinner in Montréal — reserve now.'],
-['din-damas','food','Damas, Outremont','todo','now','One Montréal night','','','CAD',180,'','Grand room, worth dressing for. Reserve.'],
-['din-legende','food','Légende par La Tanière, Québec City','todo','now','One Québec City night','','','CAD',380,'','Book weeks ahead, and ask for the vegetarian tasting menu at reservation - not on the night.'],
-['din-traite','food','La Traite, Wendake','todo','now','Thu Sep 3, before Lumina','','','CAD',170,'','Pairs with Onhwa\' Lumina the same evening.'],
-['din-bsp','food','Baie-Saint-Paul dinners, Friday and Saturday','todo','soon','Sep 4 and Sep 5','','','CAD',200,'','Les Faux Bergers or Le Mouton Noir. Labour Day weekend — book both, and remember you are driving in.'],
-['din-papillon','food','Le Vin Papillon, Little Burgundy','todo','later','One Montréal night','','','CAD',120,'','No reservations at last check — confirm the policy and go early.'],
-['din-nh','food','Woodstock Inn Station & Brewery','walkin','day','Thu Aug 27, after the ridge','','','USD',60,'','Walkable from Lincoln. No booking needed.'],
-['groceries','food','Groceries, lunches, coffee, casual dinners','walkin','none','Twelve days','','','USD',480,'','Breakfast at home, lunch grazed from markets, one proper dinner out. Roughly US$40 a day for two.'],
-
-['docs','admin','Passports, registration, proof of insurance','todo','now','Before Aug 26','','','USD',0,'','No fresh produce, plants or firewood across in either direction.'],
-['card','admin','No-foreign-transaction-fee card, plus C$150 cash','todo','soon','Before Aug 26','','','USD',0,'','The card alone saves about 3% of the whole trip. Cash is for meters, tips and farm stands.'],
-['offline','admin','Download offline maps and every VoiceMap tour','todo','later','On hotel wifi','','','USD',0,'','Québec province and New Hampshire.'],
-['border','admin','Check both border wait times','walkin','day','Aug 28 north, Sep 6 south','','','USD',0,'','Labour Day Sunday afternoon is the worst window of the year.']
+['whale',5,'todo','attractions','Whale cruise, AML 3 h','https://www.croisieresaml.com/en/our-cruises/charlevoix','2026-09-04T10:15','2026-09-04T13:15','CAD',270,'Baie-Sainte-Catherine. From about C$135 each. Whale guarantee applies. The most urgent thing left on this sheet.'],
+['aura',6,'todo','attractions','AURA, Notre-Dame Basilica','https://www.basiliquenotredame.ca/en/events/the-aura-experience','2026-08-29T19:30','2026-08-29T20:00','CAD',60,'Thirty minutes, indoors, the rain plan. Summer Fri/Sat sell out. Separate from daytime basilica admission — confirm the showtime.'],
+['gardens',7,'todo','attractions','Gardens of Light, Botanical Garden','https://espacepourlavie.ca/en/gardens-light','2026-08-30T20:00','2026-08-30T22:00','CAD',50,'Aug 29 is opening weekend; Sunday is the night that fits. A 2 km walk after dark, and rain ruins it.'],
+['lumina',8,'todo','attractions','Onhwa\' Lumina, Wendake','https://onhwalumina.ca/en/','2026-09-03T20:00','2026-09-03T21:15','CAD',88,'About C$33.75 + tax each, plus C$10.50 parking. Nightly Aug 28 – Sep 6 only. Slots at 8:00, 8:20 and 8:40 p.m.'],
+['din-legende',9,'todo','food','Légende par La Tanière',GM+'Legende+par+La+Taniere+Quebec+City','2026-09-01T19:30','2026-09-01T22:00','CAD',380,'The splurge, C$150+ each. Book weeks ahead and ask for the vegetarian tasting menu at reservation — not on the night.'],
+['din-momo',10,'todo','food','Sushi Momo',GM+'Sushi+Momo+Montreal','2026-08-28T19:30','2026-08-28T21:00','CAD',130,'Fully vegan, Plateau. K\'s special dinner in Montréal — reserve now.'],
+['din-damas',11,'todo','food','Damas',GM+'Damas+Outremont+Montreal','2026-08-30T19:00','2026-08-30T21:30','CAD',180,'Syrian, Outremont. Grand room, worth dressing for. Reserve.'],
+['din-traite',12,'todo','food','La Traite, Wendake',GM+'La+Traite+Hotel-Musee+Premieres+Nations+Wendake','2026-09-03T18:00','2026-09-03T19:45','CAD',170,'Indigenous fine dining, and it pairs with Onhwa\' Lumina the same evening.'],
+['greeter',13,'todo','attractions','Montréal Greeter walk','https://internationalgreeter.org/destinations/montreal','2026-08-29T10:00','2026-08-29T12:30','CAD',0,'Free, volunteers, limited slots. Request 2–4 weeks ahead and name a theme. Either this or the free Old Montréal tour, not both.'],
+['din-bsp',14,'todo','food','Baie-Saint-Paul dinners ×2',GM+'restaurants+rue+Saint-Jean-Baptiste+Baie-Saint-Paul','2026-09-04T19:30','2026-09-05T21:00','CAD',200,'Les Faux Bergers or Le Mouton Noir, Friday and Saturday. Labour Day weekend — book both, and remember you are driving in.'],
+['prison',15,'todo','attractions','Old Prison, Trois-Rivières',GM+'Vieille+prison+de+Trois-Rivieres','2026-08-31T13:00','2026-08-31T14:30','CAD',40,'On the drive to Québec City. Toured by former inmates. English times are limited — book before you leave Montréal.'],
+['pac',16,'todo','attractions','Pointe-à-Callière','https://pacmusee.qc.ca/en/plan-your-visit/hours-and-rates/','2026-08-29T13:00','2026-08-29T15:30','CAD',60,'About C$30 each. Built over the 1642 founding site; you walk a buried river.'],
+['citadelle',17,'todo','attractions','La Citadelle guided tour','https://www.lacitadelle.qc.ca/en/admission-hours','2026-09-01T11:30','2026-09-01T13:00','CAD',36,'Includes the Royal 22e Régiment Museum.'],
+['mcq',18,'todo','attractions','Musée de la civilisation','https://mcq.org/en/visit/schedule-and-rates/','2026-09-03T10:00','2026-09-03T12:30','CAD',48,'The First Peoples exhibition is the reason to go.'],
+['wendat',19,'todo','attractions','Musée huron-wendat','https://museehuronwendat.ca/en/','2026-09-03T14:00','2026-09-03T16:00','CAD',40,'The guided programme needs booking; general admission does not.'],
+['walkqc',20,'todo','attractions','Free walking tour, Québec City','https://www.guruwalk.com/quebec-city','2026-09-01T09:30','2026-09-01T11:00','CAD',50,'Pay-what-you-wish, budget C$20–25 each. 48 h minimum, group sizes capped in Petit-Champlain.'],
+['mnbaq',21,'todo','attractions','MNBAQ — the optional addition','https://www.mnbaq.org/en','2026-09-01T14:00','2026-09-01T16:30','CAD',50,'Check that Tribute to Rosa Luxemburg is still on view — the Riopelle rooms move for the new pavilion in October.'],
+['spa',22,'todo','attractions','Bota Bota or Strøm Nordic spa',GM+'Strom+Nordic+Spa+Vieux-Quebec','2026-09-02T17:00','2026-09-02T20:00','CAD',210,'Optional. C$69 after 5 p.m. at Strøm, up to C$104 peak. The obvious line to cut if the total looks wrong.'],
+['phone',23,'todo','transportation','Canada phone plan or eSIM','','2026-08-24T09:00','2026-08-24T10:00','USD',50,'Confirm the carrier rate or buy an eSIM. Roaming is where trip budgets quietly die.'],
+['card',24,'todo','admin','Travel card and C$150 cash','','2026-08-24T09:00','2026-08-24T10:00','USD',0,'A card with no foreign-transaction fee saves about 3% of the whole trip. Cash is for meters, tips and farm stands.'],
+['docs',25,'todo','admin','Passports and vehicle papers','','2026-08-25T09:00','2026-08-25T10:00','USD',0,'Passports, registration, proof of insurance. No fresh produce, plants or firewood across in either direction.'],
+['voicemap',26,'todo','attractions','VoiceMap audio tours','https://voicemap.me/tour/quebec-city','2026-08-27T20:00','2026-08-27T20:30','CAD',30,'About C$8–12 each, two or three is plenty. Download on wifi before you leave the room.'],
+['din-papillon',27,'todo','food','Le Vin Papillon',GM+'Le+Vin+Papillon+Montreal','2026-08-29T18:00','2026-08-29T20:00','CAD',120,'Little Burgundy. No reservations at last check — confirm the policy and go early.'],
+['walkmtl',28,'todo','attractions','Free walking tour, Old Montréal','https://freemontrealtours.com/free-old-montreal-tour/','2026-08-29T10:00','2026-08-29T11:30','CAD',50,'Tip-based, meet at Place Jacques-Cartier. The fallback if the Greeter request does not come through.'],
+['flume',29,'todo','attractions','Flume Gorge','https://www.nhstateparks.org/find-parks-trails/flume-gorge','2026-08-27T09:00','2026-08-27T11:00','USD',36,'Only if the forecast makes it the wet-weather plan instead of the ridge. US$18 online, US$21 at the gate.'],
+['ghost',30,'todo','attractions','Les Promenades Fantômes',GM+'Les+Promenades+Fantomes+Quebec+City','2026-09-02T20:30','2026-09-02T22:00','CAD',60,'Optional. Rated for the 17th-century social history, not the ghosts.'],
+['offline',31,'todo','admin','Offline maps and VoiceMap downloads','','2026-08-27T21:00','2026-08-27T21:30','USD',0,'Québec province and New Hampshire, plus every audio tour, on hotel wifi.'],
+['montmorency',32,'walkin','attractions','Montmorency Falls + cable car','https://www.sepaq.com/destinations/parc-chute-montmorency/','2026-09-02T10:00','2026-09-02T12:00','CAD',58,'About C$13.90 access and C$14.95 cable car return, each. 83 m, thirty metres taller than Niagara.'],
+['canyon',33,'walkin','attractions','Canyon Sainte-Anne','https://canyonsa.qc.ca/en/','2026-09-02T13:00','2026-09-02T15:00','CAD',30,'Three suspension bridges. About C$15 each.'],
+['sepaq',34,'walkin','attractions','Hautes-Gorges day access + cruise','https://www.sepaq.com/pq/hgo/','2026-09-05T09:00','2026-09-05T16:00','CAD',100,'C$10 each per day for access; the bateau-mouche is extra, the internal shuttle is free.'],
+['ferry',35,'walkin','transportation','Québec–Lévis ferry, return for two','https://www.traversiers.com/en/our-ferries/quebec-city-levis-ferry/fares','2026-09-01T18:30','2026-09-01T19:30','CAD',17,'C$4.25 each way. Best-value view in Canada — go at sunset.'],
+['crypt',36,'walkin','attractions','Notre-Dame de Québec crypt',GM+'Notre-Dame+de+Quebec+Basilica-Cathedral','2026-09-01T12:00','2026-09-01T12:45','CAD',10,'The church and the Holy Door are free; the crypt is C$5 each.'],
+['parks',37,'walkin','attractions','Parks Canada sites, all four','https://parks.canada.ca/lhn-nhs/qc/fortifications','2026-09-01T09:00','2026-09-04T11:00','CAD',0,'Fortifications, Saint-Louis Forts & Châteaux, Artillery Park, Pointe-Noire. Free to Sep 7 on the Canada Strong Pass — nothing to obtain, turn up. Worth roughly C$60–80 to you.'],
+['mutek',38,'walkin','attractions','MUTEK Expérience, Esplanade Tranquille','https://montreal.mutek.org/en/esplanade-tranquille','2026-08-28T17:00','2026-08-30T23:59','CAD',0,'Free, outdoors, no ticket, 5 p.m. to midnight. Walk in on all three Montréal nights.'],
+['tamtams',39,'walkin','attractions','Tam-Tams, Mount Royal',GM+'Tam-Tams+Mount+Royal+Montreal','2026-08-30T12:00','2026-08-30T18:00','CAD',0,'Sundays only, and Sunday Aug 30 is yours. Free.'],
+['din-nh',40,'walkin','food','Woodstock Inn Station & Brewery',GM+'Woodstock+Inn+Station+and+Brewery+North+Woodstock+NH','2026-08-27T19:30','2026-08-27T21:00','USD',60,'Walkable from Lincoln, own beer, vegetarian options that are not an afterthought. No booking needed.'],
+['parkmeter',41,'walkin','transportation','Metered parking on day trips','','2026-08-26T09:00','2026-09-06T20:00','CAD',60,'All four stays include parking, so this is meters only. P$ Service mobile in Montréal, Copilote in Québec City.'],
+['fuel',42,'walkin','transportation','Fuel and tolls, about 2,400 km','','2026-08-26T09:00','2026-09-06T20:00','USD',340,'Fill in Vermont before crossing north, and in Québec City before Charlevoix. Stations thin out past Baie-Saint-Paul.'],
+['groceries',43,'walkin','food','Groceries, lunches and coffee','','2026-08-26T18:00','2026-09-06T09:00','USD',480,'Breakfast at home, lunch grazed from markets, one proper dinner out. Roughly US$40 a day for two.'],
+['border',44,'walkin','transportation','Check both border wait times','https://www.cbsa-asfc.gc.ca/bwt-taf/menu-eng.html','2026-08-28T11:00','2026-09-06T14:00','USD',0,'Northbound Derby Line, southbound probably Lacolle. Labour Day Sunday afternoon is the worst window of the year.']
 ].map(function(a){ var o={},i; for(i=0;i<COLS.length;i++) o[COLS[i]]=a[i]; return o; });
 
-/* ---- state --------------------------------------------------------------- */
+var SEEDBY={},si;
+for(si=0;si<SEED.length;si++) SEEDBY[SEED[si].id]=SEED[si];
+
+/* ---- state ----------------------------------------------------------------
+   v1 of this sheet had separate estimate and paid columns, a when-to-book
+   tier and confirmation/phone fields. Anything typed into those is carried
+   forward rather than dropped on the floor. */
+function migrateV1(){
+  var old=null;
+  try{ old=JSON.parse(localStorage.getItem(OLDKEY)); }catch(e){ return null; }
+  if(!old||!old.ov) return null;
+  var CATMAP={stay:'lodging',travel:'transportation',tickets:'attractions',
+              evening:'attractions',food:'food',admin:'admin'};
+  function carry(o,seed){
+    var n={},tail=[];
+    if(o.del) n.del=1;
+    if(o.item!==undefined) n.item=o.item;
+    if(o.status!==undefined) n.status=o.status;
+    if(o.cur!==undefined) n.cur=o.cur;
+    if(o.cat!==undefined&&CATMAP[o.cat]) n.cat=CATMAP[o.cat];
+    if(o.paid!==undefined&&String(o.paid)!=='') n.amt=o.paid;
+    else if(o.est!==undefined) n.amt=o.est;
+    if(o.conf) tail.push('Ref: '+o.conf);
+    if(o.phone) tail.push('Tel: '+o.phone);
+    if(o.when) tail.push('Was: '+o.when);
+    var base=(o.notes!==undefined)?o.notes:(seed?seed.notes:'');
+    if(tail.length) n.notes=base+(base?' · ':'')+tail.join(' · ');
+    else if(o.notes!==undefined) n.notes=o.notes;
+    return n;
+  }
+  var st={ov:{},extra:[],rate:(typeof old.rate==='number'&&old.rate>0)?old.rate:RATE0},k,i;
+  for(k in old.ov) st.ov[k]=carry(old.ov[k],SEEDBY[k]);
+  if(old.extra instanceof Array) for(i=0;i<old.extra.length;i++){
+    var e=old.extra[i], n=carry(e,null);
+    n.id=e.id; n.pri=99; n.start=''; n.end='';
+    n.cat=CATMAP[e.cat]||'attractions'; n.item=e.item||''; n.url='';
+    if(n.status===undefined) n.status='todo';
+    if(n.cur===undefined) n.cur='CAD';
+    if(n.amt===undefined) n.amt='';
+    if(n.notes===undefined) n.notes='';
+    st.extra.push(n);
+  }
+  return st;
+}
 function loadState(){
   var st=null;
   try{ st=JSON.parse(localStorage.getItem(KEY)); }catch(e){ st=null; }
-  if(!st||typeof st!=='object') st={};
+  if(!st||typeof st!=='object') st=migrateV1()||{};
   if(!st.ov||typeof st.ov!=='object') st.ov={};
   if(!(st.extra instanceof Array)) st.extra=[];
   if(typeof st.rate!=='number'||!(st.rate>0)) st.rate=RATE0;
+  if(!(st.cols instanceof Array)||!st.cols.length) st.cols=COLDEF.map(function(c){ return c[0]; });
+  st.cols=st.cols.filter(function(k){ return !!COLBY[k]; });
+  COLDEF.forEach(function(c){ if(st.cols.indexOf(c[0])<0) st.cols.push(c[0]); });
+  if(!st.w||typeof st.w!=='object') st.w={};
+  if(!st.sort||typeof st.sort!=='object') st.sort={key:'pri',dir:1};
   return st;
 }
 var S=loadState(), NEXT=1, FILTER='all';
@@ -2036,15 +2104,106 @@ function put(id,f,v){
   save();
 }
 function label(list,v){ for(var i=0;i<list.length;i++) if(list[i][0]===v) return list[i][1]; return v||''; }
+function rank(list,v){ for(var i=0;i<list.length;i++) if(list[i][0]===v) return i; return list.length; }
 function num(v){ var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,'')); return isFinite(n)?n:0; }
-function usd(r,f){ var n=num(r[f]); return r.cur==='CAD'? n*S.rate : n; }
+function usd(r){ var n=num(r.amt); return r.cur==='CAD'? n*S.rate : n; }
 function money(n){ return 'US$'+Math.round(n).toLocaleString('en-US'); }
-function local(r,f){ var n=num(r[f]); if(!n) return ''; return (r.cur==='CAD'?'C$':'US$')+Math.round(n).toLocaleString('en-US'); }
+function localAmt(r){
+  var n=num(r.amt);
+  return (r.cur==='CAD'?'C$':'US$')+n.toLocaleString('en-US',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2});
+}
+function prettyDT(v){
+  if(!v) return '';
+  var m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(v);
+  if(!m) return v;
+  var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var h=parseInt(m[4],10), ap=h<12?'a.m.':'p.m.', h12=(h%12)||12;
+  return MN[parseInt(m[2],10)-1]+' '+parseInt(m[3],10)+', '+h12+':'+m[5]+' '+ap;
+}
 
-/* ---- building the sheet ---------------------------------------------------- */
-function pick(opts,val,cls){
+/* ---- header, colgroup, resize and reorder ---------------------------------- */
+var head=document.getElementById('pkHead'), cg=document.getElementById('pkCols');
+function widthOf(k){ return S.w[k]||COLBY[k][2]; }
+function renderHead(){
+  while(cg.firstChild) cg.removeChild(cg.firstChild);
+  while(head.firstChild) head.removeChild(head.firstChild);
+  S.cols.forEach(function(k){
+    var c=document.createElement('col');
+    c.style.width=widthOf(k)+'px';
+    c.setAttribute('data-k',k);
+    cg.appendChild(c);
+    var th=document.createElement('th');
+    th.setAttribute('data-k',k);
+    th.draggable=true;
+    th.title='Click to sort · drag to reorder · drag the edge to resize';
+    th.appendChild(document.createTextNode(COLBY[k][1]));
+    if(S.sort.key===k){
+      var d=document.createElement('span');
+      d.className='dir'; d.textContent=S.sort.dir>0?'\u25b2':'\u25bc';
+      th.appendChild(d);
+    }
+    var grip=document.createElement('span');
+    grip.className='grip'; grip.draggable=false;
+    grip.addEventListener('pointerdown',startResize);
+    th.appendChild(grip);
+    th.addEventListener('click',function(e){
+      if(e.target===grip) return;
+      if(S.sort.key===k) S.sort.dir=-S.sort.dir; else { S.sort.key=k; S.sort.dir=1; }
+      save(); renderHead(); renderBody();
+    });
+    th.addEventListener('dragstart',function(e){
+      DRAG=k; th.classList.add('dragging');
+      e.dataTransfer.effectAllowed='move';
+      try{ e.dataTransfer.setData('text/plain',k); }catch(err){}
+    });
+    th.addEventListener('dragend',function(){ DRAG=null; clearDrop(); th.classList.remove('dragging'); });
+    th.addEventListener('dragover',function(e){
+      if(!DRAG||DRAG===k) return;
+      e.preventDefault(); clearDrop();
+      var b=th.getBoundingClientRect();
+      th.classList.add(e.clientX < b.left+b.width/2 ? 'dropL' : 'dropR');
+    });
+    th.addEventListener('drop',function(e){
+      if(!DRAG||DRAG===k) return;
+      e.preventDefault();
+      var b=th.getBoundingClientRect(), before=e.clientX < b.left+b.width/2;
+      var order=S.cols.filter(function(x){ return x!==DRAG; });
+      var at=order.indexOf(k)+(before?0:1);
+      order.splice(at,0,DRAG);
+      S.cols=order; clearDrop(); save(); renderHead(); renderBody();
+    });
+    head.appendChild(th);
+  });
+  var cx=document.createElement('col'); cx.style.width='38px'; cg.appendChild(cx);
+  head.appendChild(document.createElement('th'));
+}
+var DRAG=null;
+function clearDrop(){
+  var t=head.querySelectorAll('th');
+  for(var i=0;i<t.length;i++) t[i].classList.remove('dropL','dropR');
+}
+function startResize(e){
+  var grip=e.currentTarget, th=grip.parentNode, k=th.getAttribute('data-k');
+  var x0=e.clientX, w0=widthOf(k), col=cg.querySelector('col[data-k="'+k+'"]');
+  e.preventDefault(); e.stopPropagation();
+  th.draggable=false;
+  try{ grip.setPointerCapture(e.pointerId); }catch(err){}
+  function move(ev){
+    var w=Math.max(52,Math.round(w0+(ev.clientX-x0)));
+    S.w[k]=w; if(col) col.style.width=w+'px';
+  }
+  function up(){
+    grip.removeEventListener('pointermove',move);
+    grip.removeEventListener('pointerup',up);
+    th.draggable=true; save();
+  }
+  grip.addEventListener('pointermove',move);
+  grip.addEventListener('pointerup',up);
+}
+
+/* ---- the rows --------------------------------------------------------------- */
+function pick(opts,val){
   var el=document.createElement('select'),i,o;
-  if(cls) el.className=cls;
   for(i=0;i<opts.length;i++){
     o=document.createElement('option');
     o.value=opts[i][0]; o.textContent=opts[i][1];
@@ -2053,110 +2212,140 @@ function pick(opts,val,cls){
   }
   return el;
 }
-function field(val,ph){
+function field(val,ph,type){
   var el=document.createElement('input');
-  el.type='text'; el.value=(val==null||val==='')?'':String(val);
+  el.type=type||'text';
+  el.value=(val==null)?'':String(val);
   if(ph) el.placeholder=ph;
   return el;
 }
-var GROUPS={};
-function rowEl(r){
-  var tr=document.createElement('tr');
-  tr.setAttribute('data-id',r.id);
-  tr.setAttribute('data-st',r.status);
-  function cell(cls,node,f,ev){
-    var td=document.createElement('td');
-    td.className=cls; td.appendChild(node);
-    if(node.tagName==='INPUT') node.title=node.value;
-    node.addEventListener(ev||'input',function(){
-      put(r.id,f,node.value);
-      if(node.tagName==='INPUT') node.title=node.value;
-      if(f==='status') tr.setAttribute('data-st',node.value);
-      refresh();
-    });
-    tr.appendChild(td);
-  }
-  cell('c-st',pick(STS,r.status),'status','change');
-  cell('c-item',field(r.item,'What is it?'),'item');
-  cell('c-pri',pick(PRIS,r.pri),'pri','change');
-  cell('c-when',field(r.when,'When'),'when');
-  cell('c-conf',field(r.conf,''),'conf');
-  cell('c-phone',field(r.phone,''),'phone');
-  cell('c-cur',pick([['USD','US$'],['CAD','C$']],r.cur),'cur','change');
-  cell('c-num',field(r.est,'0'),'est');
-  cell('c-num',field(r.paid,''),'paid');
-  cell('c-notes',field(r.notes,''),'notes');
-  var b=document.createElement('button');
-  b.type='button'; b.className='delrow'; b.textContent='\u2715';
-  b.title='Remove this row';
-  b.addEventListener('click',function(){
-    if(!confirm('Remove "'+(r.item||'this row')+'" from the sheet?')) return;
-    if(r.id.charAt(0)==='x'){
-      S.extra=S.extra.filter(function(e){ return e.id!==r.id; });
-    } else {
-      if(!S.ov[r.id]) S.ov[r.id]={};
-      S.ov[r.id].del=1;
-    }
-    save(); render();
+function grow(t){ t.style.height='auto'; t.style.height=(t.scrollHeight+2)+'px'; }
+function bind(r,node,f,ev,tr){
+  var isDT=(node.tagName==='INPUT'&&node.type==='datetime-local');
+  if(node.tagName==='INPUT') node.title=isDT?prettyDT(node.value):node.value;
+  node.addEventListener(ev||'input',function(){
+    put(r.id,f,node.value);
+    if(node.tagName==='INPUT') node.title=isDT?prettyDT(node.value):node.value;
+    if(node.tagName==='TEXTAREA') grow(node);
+    if(f==='status'){ tr.setAttribute('data-st',node.value); renderBody(); return; }
+    refresh();
   });
-  var td=document.createElement('td');
-  td.className='c-del'; td.appendChild(b); tr.appendChild(td);
-  return tr;
+  return node;
 }
-function addRow(cat){
-  var r={id:'x'+(NEXT++),cat:cat,item:'',status:'todo',pri:'soon',when:'',conf:'',phone:'',cur:'CAD',est:'',paid:'',notes:''};
-  S.extra.push(r); save(); render();
-  var n=body.querySelector('tr[data-id="'+r.id+'"] .c-item input');
-  if(n) n.focus();
-}
-function render(){
-  while(body.firstChild) body.removeChild(body.firstChild);
-  GROUPS={};
-  var rs=rowsNow(),c,i,key,tr,td,sp,add;
-  for(c=0;c<CATS.length;c++){
-    key=CATS[c][0];
-    tr=document.createElement('tr'); tr.className='grp';
-    td=document.createElement('td'); td.setAttribute('colspan','11');
-    sp=document.createElement('span'); sp.textContent=CATS[c][1]; td.appendChild(sp);
-    add=document.createElement('button');
-    add.type='button'; add.className='addrow'; add.textContent='+ add a row';
-    add.addEventListener('click',(function(k){ return function(){ addRow(k); }; })(key));
-    td.appendChild(add); tr.appendChild(td); body.appendChild(tr);
-    GROUPS[key]={head:tr,rows:[]};
-    for(i=0;i<rs.length;i++) if(rs[i].cat===key){
-      var e=rowEl(rs[i]);
-      GROUPS[key].rows.push(e);
-      body.appendChild(e);
+function cellFor(r,k,tr){
+  var td=document.createElement('td'), kind=COLBY[k][3];
+  td.className='c-'+k;
+  if(kind==='num'){
+    td.appendChild(bind(r,field(r.pri,'','text'),'pri','input',tr));
+  } else if(kind==='status'){
+    td.appendChild(bind(r,pick(STS,r.status),'status','change',tr));
+  } else if(kind==='cat'){
+    td.appendChild(bind(r,pick(CATS,r.cat),'cat','change',tr));
+  } else if(kind==='dt'){
+    td.appendChild(bind(r,field(r[k],'','datetime-local'),k,'change',tr));
+  } else if(kind==='item'){
+    var w=document.createElement('div'); w.className='itemwrap';
+    w.appendChild(bind(r,field(r.item,'What is it?'),'item','input',tr));
+    if(r.url){
+      var a=document.createElement('a');
+      a.href=r.url; a.target='_blank'; a.rel='noopener';
+      a.textContent='\u2197'; a.title=r.url;
+      w.appendChild(a);
     }
+    var pen=document.createElement('button');
+    pen.type='button'; pen.textContent='\u270e';
+    pen.title=r.url?'Change the link':'Add a link';
+    pen.addEventListener('click',function(){
+      var v=prompt('Link for "'+(r.item||'this row')+'"',r.url||'https://');
+      if(v===null) return;
+      v=v.trim();
+      if(v&&!/^https?:\/\//i.test(v)) v='https://'+v;
+      put(r.id,'url',v); renderBody();
+    });
+    w.appendChild(pen);
+    td.appendChild(w);
+  } else if(kind==='cost'){
+    if(r.status==='booked'){
+      var b=document.createElement('span');
+      b.className='costpaid'; b.textContent=localAmt(r);
+      b.title='Paid. Set the status back to To do to change it.';
+      td.appendChild(b);
+    } else {
+      var cw=document.createElement('div'); cw.className='costwrap';
+      cw.appendChild(bind(r,pick(CURS,r.cur),'cur','change',tr));
+      cw.appendChild(bind(r,field(r.amt,'0'),'amt','input',tr));
+      td.appendChild(cw);
+    }
+  } else if(kind==='notes'){
+    var ta=document.createElement('textarea');
+    ta.rows=1; ta.value=(r.notes==null)?'':String(r.notes);
+    ta.placeholder='Notes';
+    td.appendChild(bind(r,ta,'notes','input',tr));
+  } else {
+    td.appendChild(bind(r,field(r[k],''),k,'input',tr));
   }
+  return td;
+}
+function sorted(rs){
+  var k=S.sort.key, d=S.sort.dir;
+  return rs.slice().sort(function(a,b){
+    var x,y;
+    if(k==='pri'){ x=num(a.pri); y=num(b.pri); }
+    else if(k==='amt'){ x=usd(a); y=usd(b); }
+    else if(k==='cat'){ x=rank(CATS,a.cat); y=rank(CATS,b.cat); }
+    else if(k==='status'){ x=rank(STS,a.status); y=rank(STS,b.status); }
+    else { x=String(a[k]||'\uffff'); y=String(b[k]||'\uffff'); return d*(x<y?-1:x>y?1:0); }
+    return d*(x-y);
+  });
+}
+function renderBody(){
+  while(body.firstChild) body.removeChild(body.firstChild);
+  var rs=sorted(rowsNow()),i,j;
+  for(i=0;i<rs.length;i++){
+    var r=rs[i], tr=document.createElement('tr');
+    tr.setAttribute('data-id',r.id);
+    tr.setAttribute('data-st',r.status);
+    for(j=0;j<S.cols.length;j++) tr.appendChild(cellFor(r,S.cols[j],tr));
+    var td=document.createElement('td'); td.className='c-del';
+    var del=document.createElement('button');
+    del.type='button'; del.className='delrow'; del.textContent='\u2715';
+    del.title='Remove this row';
+    del.addEventListener('click',(function(row){ return function(){
+      if(!confirm('Remove "'+(row.item||'this row')+'" from the sheet?')) return;
+      if(row.id.charAt(0)==='x') S.extra=S.extra.filter(function(e){ return e.id!==row.id; });
+      else { if(!S.ov[row.id]) S.ov[row.id]={}; S.ov[row.id].del=1; }
+      save(); renderBody();
+    }; })(r));
+    td.appendChild(del); tr.appendChild(td);
+    body.appendChild(tr);
+  }
+  var tas=body.querySelectorAll('textarea');
+  for(i=0;i<tas.length;i++) grow(tas[i]);
   refresh();
 }
+document.getElementById('pkAdd').addEventListener('click',function(){
+  var rs=rowsNow(), top=0;
+  for(var i=0;i<rs.length;i++) top=Math.max(top,num(rs[i].pri));
+  var r={id:'x'+(NEXT++),pri:top+1,status:'todo',cat:'attractions',item:'',url:'',
+         start:'',end:'',cur:'CAD',amt:'',notes:''};
+  S.extra.push(r); save(); renderBody();
+  var n=body.querySelector('tr[data-id="'+r.id+'"] .c-item input');
+  if(n){ n.focus(); n.scrollIntoView({block:'center'}); }
+});
 
-/* ---- totals, checklist, cost breakdown ------------------------------------- */
-function ul(node){ while(node.firstChild) node.removeChild(node.firstChild); return node; }
-function li(text,cost){
-  var e=document.createElement('li');
-  e.appendChild(document.createTextNode(text));
-  if(cost){
-    var sm=document.createElement('span');
-    sm.className='tickcost'; sm.textContent=' \u00b7 '+cost;
-    e.appendChild(sm);
-  }
-  return e;
-}
+/* ---- totals and the cost breakdown ------------------------------------------ */
 function refresh(){
-  var rs=rowsNow(),i,r,c;
-  var per={},booked=0,bookable=0,todo=0,spent=0,owing=0;
+  var rs=rowsNow(),i,r;
+  var per={},booked=0,bookable=0,todo=0,spent=0,owing=0,shown=0;
   for(i=0;i<CATS.length;i++) per[CATS[i][0]]={n:0,spent:0,owing:0};
   for(i=0;i<rs.length;i++){
     r=rs[i];
     if(r.status==='skip') continue;
     var g=per[r.cat]; if(!g) continue;
-    var p=usd(r,'paid'), o=p>0?0:usd(r,'est');
-    g.n++; g.spent+=p; g.owing+=o;
-    spent+=p; owing+=o;
-    if(r.status==='booked'){ booked++; bookable++; }
-    else if(r.status==='todo'){ todo++; bookable++; }
+    var v=usd(r);
+    g.n++;
+    if(r.status==='booked'){ booked++; bookable++; spent+=v; g.spent+=v; }
+    else { if(r.status==='todo'){ todo++; bookable++; } owing+=v; g.owing+=v; }
   }
   document.getElementById('pkBooked').textContent=booked+' of '+bookable;
   document.getElementById('pkPaid').textContent=money(spent);
@@ -2164,48 +2353,11 @@ function refresh(){
   document.getElementById('pkTotal').textContent=money(spent+owing);
   document.getElementById('pkBar').style.width=(bookable?Math.round(booked/bookable*100):0)+'%';
   document.getElementById('pkNote').textContent=
-    booked+' booked, '+todo+' still to arrange, '+(rs.length-bookable)+' that need no booking or are skipped. '+
-    'Saved in this browser only \u2014 export before you clear your history.';
+    booked+' booked, '+todo+' still to arrange, '+(rs.length-bookable)+
+    ' that need no booking or are skipped. Saved in this browser only \u2014 export before you clear your history.';
 
-  /* outstanding, by how soon it has to happen */
-  var buckets=[['Book this week',['now']],['Book 3–6 weeks out',['soon']],['Closer to the day',['later','day','none']]];
-  var lists=ul(document.getElementById('pkLists'));
-  for(c=0;c<buckets.length;c++){
-    var card=document.createElement('div'); card.className='card';
-    var h=document.createElement('h4');
-    h.appendChild(document.createTextNode(buckets[c][0]));
-    var em=document.createElement('em'); h.appendChild(em); card.appendChild(h);
-    var list=document.createElement('ul'); list.className='ticks'; list.style.gridTemplateColumns='1fr';
-    var n=0;
-    for(i=0;i<rs.length;i++){
-      r=rs[i];
-      if(r.status!=='todo') continue;
-      if(buckets[c][1].indexOf(r.pri)<0) continue;
-      list.appendChild(li(r.item||'(unnamed)',local(r,'est')));
-      n++;
-    }
-    if(!n){ var e=li('Nothing outstanding.',''); e.className='empty'; list.appendChild(e); }
-    em.textContent=n?(n+' left'):'clear';
-    card.appendChild(list); lists.appendChild(card);
-  }
-
-  /* what is already done */
-  var done=ul(document.getElementById('pkDone')), dn=0, dpaid=0;
-  for(i=0;i<rs.length;i++){
-    r=rs[i];
-    if(r.status!=='booked') continue;
-    var bits=r.item||'(unnamed)';
-    if(r.when) bits+=' \u00b7 '+r.when;
-    if(r.conf) bits+=' \u00b7 '+r.conf;
-    done.appendChild(li(bits,local(r,'paid')||local(r,'est')));
-    dn++; dpaid+=usd(r,'paid');
-  }
-  if(!dn){ var e2=li('Nothing booked yet.',''); e2.className='empty'; done.appendChild(e2); }
-  document.getElementById('pkDoneSum').textContent=
-    dn?('Done \u2014 '+dn+' booked, '+money(dpaid)+' committed'):'Done \u2014 nothing yet';
-
-  /* cost breakdown */
-  var cost=ul(document.getElementById('pkCost')),k;
+  var cost=document.getElementById('pkCost'),k;
+  while(cost.firstChild) cost.removeChild(cost.firstChild);
   function row(cells,cls){
     var t=document.createElement('tr');
     if(cls) t.className=cls;
@@ -2224,20 +2376,17 @@ function refresh(){
   }
   cost.appendChild(row(['All in, for two','',money(spent),money(owing),money(spent+owing)],'tot'));
 
-  /* the filter */
-  for(i=0;i<CATS.length;i++){
-    var G=GROUPS[CATS[i][0]]; if(!G) continue;
-    var vis=0;
-    for(var j=0;j<G.rows.length;j++){
-      var show=(FILTER==='all')||(G.rows[j].getAttribute('data-st')===FILTER);
-      G.rows[j].style.display=show?'':'none';
-      if(show) vis++;
-    }
-    G.head.style.display=vis?'':'none';
+  var trs=body.querySelectorAll('tr[data-id]');
+  for(i=0;i<trs.length;i++){
+    var show=(FILTER==='all')||(trs[i].getAttribute('data-st')===FILTER);
+    trs[i].style.display=show?'':'none';
+    if(show) shown++;
   }
+  document.getElementById('pkCount').textContent=
+    shown===rs.length?(rs.length+' rows'):(shown+' of '+rs.length+' rows shown');
 }
 
-/* ---- export, import, reset -------------------------------------------------- */
+/* ---- export, import, reset ---------------------------------------------------- */
 function download(name,text,mime){
   var b=new Blob([text],{type:mime}), u=URL.createObjectURL(b);
   var link=document.createElement('a');
@@ -2247,51 +2396,49 @@ function download(name,text,mime){
 }
 function csvCell(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; }
 function exportCSV(){
-  var rs=rowsNow(), out=[], i, r;
-  out.push(['Category','Item','Status','When to book','Date & time','Confirmation','Phone','Currency',
-            'Estimate','Paid','Notes','Estimate US$','Paid US$'].map(csvCell).join(','));
+  var rs=sorted(rowsNow()), out=[], i, r;
+  out.push(['Priority','Status','Category','Item','Link','Start','End','Currency','Amount',
+            'Notes','Amount US$','Paid?'].map(csvCell).join(','));
   for(i=0;i<rs.length;i++){
     r=rs[i];
-    out.push([label(CATS,r.cat),r.item,label(STS,r.status),label(PRIS,r.pri),r.when,r.conf,r.phone,r.cur,
-              r.est,r.paid,r.notes,usd(r,'est').toFixed(2),usd(r,'paid').toFixed(2)].map(csvCell).join(','));
+    out.push([r.pri,label(STS,r.status),label(CATS,r.cat),r.item,r.url,r.start,r.end,r.cur,r.amt,
+              r.notes,usd(r).toFixed(2),r.status==='booked'?'paid':'estimate'].map(csvCell).join(','));
   }
   out.push('');
   out.push([csvCell('Rate used'),csvCell('C$1 = US$'+S.rate)].join(','));
   download('quebec-2026-planning.csv','\ufeff'+out.join('\r\n'),'text/csv;charset=utf-8');
 }
 function exportJSON(){
-  var rs=rowsNow(),i,j,clean=[];
+  var rs=sorted(rowsNow()),i,j,clean=[];
   for(i=0;i<rs.length;i++){
     var o={id:rs[i].id};
     for(j=0;j<FIELDS.length;j++) o[FIELDS[j]]=rs[i][FIELDS[j]];
     clean.push(o);
   }
   download('quebec-2026-planning.json',JSON.stringify(
-    {guide:'montreal-quebec',schema:'planning.v1',
+    {guide:'montreal-quebec',schema:'planning.v2',
      exported:new Date().toISOString().slice(0,10),rate:S.rate,rows:clean},null,2),'application/json');
 }
 function applyImport(d){
   if(!d||!(d.rows instanceof Array)||!d.rows.length){ alert('That file has no rows in it.'); return; }
-  var byId={},i,j,seen={};
-  for(i=0;i<SEED.length;i++) byId[SEED[i].id]=SEED[i];
+  var i,j,seen={};
   S.ov={}; S.extra=[]; NEXT=1;
   if(typeof d.rate==='number'&&d.rate>0) S.rate=d.rate;
   for(i=0;i<d.rows.length;i++){
     var r=d.rows[i];
     if(!r||!r.id) continue;
     seen[r.id]=1;
-    if(byId[r.id]){
+    if(SEEDBY[r.id]){
       var o={};
       for(j=0;j<FIELDS.length;j++)
-        if(r[FIELDS[j]]!==undefined&&String(r[FIELDS[j]])!==String(byId[r.id][FIELDS[j]]))
+        if(r[FIELDS[j]]!==undefined&&String(r[FIELDS[j]])!==String(SEEDBY[r.id][FIELDS[j]]))
           o[FIELDS[j]]=r[FIELDS[j]];
       S.ov[r.id]=o;
     } else {
       var e={id:'x'+(NEXT++)};
       for(j=0;j<FIELDS.length;j++) e[FIELDS[j]]=r[FIELDS[j]]!==undefined?r[FIELDS[j]]:'';
-      if(!e.cat) e.cat='tickets';
+      if(rank(CATS,e.cat)===CATS.length) e.cat='attractions';
       if(!e.status) e.status='todo';
-      if(!e.pri) e.pri='soon';
       if(!e.cur) e.cur='CAD';
       S.extra.push(e);
     }
@@ -2302,7 +2449,7 @@ function applyImport(d){
   }
   var rate=document.getElementById('pkRate');
   if(rate) rate.value=S.rate;
-  save(); render();
+  save(); renderBody();
 }
 document.getElementById('pkCsv').addEventListener('click',exportCSV);
 document.getElementById('pkJson').addEventListener('click',exportJSON);
@@ -2323,11 +2470,12 @@ document.getElementById('pkImport').addEventListener('click',function(){
   f.click();
 });
 document.getElementById('pkReset').addEventListener('click',function(){
-  if(!confirm('Clear everything you have typed and go back to the sheet as it shipped?')) return;
-  S={ov:{},extra:[],rate:RATE0}; NEXT=1;
+  if(!confirm('Clear everything you have typed, and the column layout, and go back to the sheet as it shipped?')) return;
+  S={ov:{},extra:[],rate:RATE0,cols:COLDEF.map(function(c){ return c[0]; }),w:{},sort:{key:'pri',dir:1}};
+  NEXT=1;
   var rate=document.getElementById('pkRate');
   if(rate) rate.value=RATE0;
-  save(); render();
+  save(); renderHead(); renderBody();
 });
 var rateBox=document.getElementById('pkRate');
 rateBox.value=S.rate;
@@ -2344,7 +2492,8 @@ for(var ci=0;ci<chips.length;ci++) chips[ci].addEventListener('click',(function(
   };
 })(chips[ci]));
 
-render();
+renderHead();
+renderBody();
 })();
 </script>
 
