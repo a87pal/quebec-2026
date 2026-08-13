@@ -340,7 +340,7 @@ footer a{color:#b9d6c3}
    is what makes a drag-to-resize handle possible at all */
 table.sheet{table-layout:fixed;font-size:.85rem}
 table.sheet th{position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  user-select:none;-webkit-user-select:none;cursor:pointer;padding-right:15px}
+  user-select:none;-webkit-user-select:none;cursor:pointer;padding-right:12px}
 table.sheet th:hover{background:#e7dfcf}
 th .dir{color:var(--gold);margin-left:5px;font-size:.66rem;vertical-align:1px}
 th .grip{position:absolute;top:0;right:0;bottom:0;width:9px;cursor:col-resize;border-radius:3px}
@@ -361,12 +361,34 @@ table.sheet tr{border-bottom:1px solid var(--line)}
 .sheet input:hover,.sheet select:hover{border-color:#e3dacb;background:#fffdf7}
 .sheet input:focus,.sheet select:focus{outline:none;border-color:var(--forest);background:#fff;
   box-shadow:0 0 0 2px rgba(38,80,63,.13)}
-.c-pri input{text-align:center;font-weight:800;color:#a2977f;font-size:.8rem}
-.c-status select{font-weight:800;font-size:.73rem;text-transform:uppercase;letter-spacing:.04em}
-.c-cat select{font-size:.81rem;color:#4c5a52}
-.c-start input,.c-end input{font-size:.8rem;color:#3b4741}
+.c-pri input{text-align:center;font-weight:800;color:#a2977f;font-size:.8rem;padding:6px 2px}
+.c-status{text-align:center}
+.c-status input{width:15px;height:15px;margin:8px auto 0;display:block;padding:0;border:none;
+  background:none;accent-color:var(--forest);cursor:pointer}
+.c-status input:hover{background:none;border:none}
+.stnone{display:block;width:100%;height:30px;border:none;background:transparent;color:#cfc4b0;
+  cursor:pointer;font-size:.9rem;padding:0;line-height:30px}
+.stnone:hover{color:var(--wine)}
+.stnone.walk:hover:after{content:"\2610"}
+.caticon{position:relative;height:30px}
+.caticon span{display:block;text-align:center;font-size:.95rem;line-height:30px;
+  filter:saturate(.72);cursor:pointer}
+.caticon select{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;
+  padding:0;border:none;cursor:pointer}
+.catkey{font-size:.78rem;color:var(--muted)}
+.catkey b{font-weight:400;margin-right:3px}
+.c-start,.c-end{position:relative;overflow:visible}
+.dtbtn{display:block;width:100%;text-align:left;border:1px solid transparent;background:transparent;
+  border-radius:8px;padding:7px 6px;font:inherit;font-size:.78rem;color:#3b4741;cursor:pointer;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dtbtn:hover{border-color:#e3dacb;background:#fffdf7}
+.dtedit{position:absolute!important;left:1px;top:1px;z-index:8;width:192px!important;
+  border:1px solid var(--forest)!important;background:#fff!important;
+  box-shadow:0 6px 20px rgba(40,50,44,.18)}
 .itemwrap,.costwrap{display:flex;align-items:center;gap:1px}
-.itemwrap input{flex:1 1 auto}
+.itemwrap{align-items:flex-start}
+.itemwrap textarea{flex:1 1 auto;font-size:.84rem;color:var(--ink)}
+.itemwrap a,.itemwrap button{margin-top:3px}
 .itemwrap a,.itemwrap button{flex:0 0 auto;border:none;background:transparent;text-decoration:none;
   font-size:.86rem;line-height:1;padding:5px 4px;border-radius:6px;cursor:pointer}
 .itemwrap a{color:var(--forest)}
@@ -382,7 +404,7 @@ tr[data-st="booked"] .c-status select{color:#2b5540}
 tr[data-st="todo"] .c-status select{color:#7a5321}
 tr[data-st="walkin"] .c-status select{color:#2f5563}
 tr[data-st="skip"]{opacity:.45}
-tr[data-st="skip"] .c-item input{text-decoration:line-through}
+tr[data-st="skip"] .c-item textarea{text-decoration:line-through}
 .delrow{border:none;background:transparent;color:#c3b6a3;font-size:.95rem;line-height:1;cursor:pointer;
   padding:4px 7px;border-radius:6px}
 .delrow:hover{color:var(--wine);background:#fbeeeb}
@@ -1336,8 +1358,8 @@ th.ra,.costs td+td{text-align:right}
 <tbody id="pkBody"></tbody>
 </table>
 </div>
-<div class="sheetfoot"><button class="pbtn" id="pkAdd" type="button">+ add a row</button><span class="fine" id="pkCount"></span></div>
-<p class="fine"><b>How it works.</b> Click a heading to sort, drag a heading to reorder the columns, drag a heading's right edge to resize it. Marking a row <b>Booked</b> locks its amount: it becomes what you actually paid, in black, and you set the status back to <em>To do</em> if you need to change it. Anything still grey is an estimate for two people. <b>Skipped</b> rows drop out of every total — the honest way to cut something rather than deleting it. The <b>↗</b> beside a name opens its site; the pencil that appears when you hover a row sets or changes that link. <b>Start and end are the itinerary's own slots, not operator confirmations</b> — move them as you book. Notes wrap and grow, so nothing is hidden behind a scroll.</p>
+<div class="sheetfoot"><button class="pbtn" id="pkAdd" type="button">+ add a row</button><span class="fine" id="pkCount"></span><span class="catkey" id="pkKey"></span></div>
+<p class="fine"><b>How it works.</b> Click a heading to sort, drag a heading to reorder the columns, drag a heading's right edge to resize it. The <b>✓</b> column is the booking: an empty box is still to do, a ticked box is booked, and <em>no box at all</em> means there is nothing to book — click one of those empty cells to cycle it to skipped and on to a to-do. Alt-click a box to skip that row. Ticking a box locks the amount: it becomes what you actually paid, in black, and you untick it to change it. Anything still grey is an estimate for two people, and <b>skipped</b> rows drop out of every total — the honest way to cut something rather than deleting it. Click a date to open a picker; only the month and day are shown, since every row is 2026. The <b>↗</b> beside a name opens its site, and the pencil on hover sets or changes that link. <b>Start and end are the itinerary's own slots, not operator confirmations</b> — move them as you book. Names and notes wrap and grow, so nothing is hidden behind a scroll.</p>
 
 <h3 style="margin-top:30px">Cost breakdown</h3>
 <div class="tablewrap">
@@ -1912,8 +1934,9 @@ var body=document.getElementById('pkBody');
 if(!body) return;
 
 var KEY='travel.montreal-quebec.plan.v2', OLDKEY='travel.montreal-quebec.plan.v1', RATE0=0.73;
-var CATS=[['lodging','Lodging'],['food','Food'],['transportation','Transportation'],
-          ['attractions','Attractions'],['admin','Admin']];
+var CATS=[['lodging','Lodging','\ud83d\udecf'],['food','Food','\ud83c\udf7d'],
+          ['transportation','Transportation','\ud83d\ude97'],
+          ['attractions','Attractions','\ud83c\udf9f'],['admin','Admin','\ud83d\udccb']];
 var STS=[['todo','To do'],['booked','Booked'],['walkin','No booking'],['skip','Skipped']];
 var CURS=[['USD','US$'],['CAD','C$']];
 var FIELDS=['pri','status','cat','item','url','start','end','cur','amt','notes'];
@@ -1921,14 +1944,14 @@ var COLS=['id'].concat(FIELDS);
 
 /* key, heading, default width, kind */
 var COLDEF=[
- ['pri','Pri',74,'num'],
- ['status','Status',130,'status'],
- ['cat','Category',152,'cat'],
- ['item','Item',330,'item'],
- ['start','Start',200,'dt'],
- ['end','End',200,'dt'],
- ['amt','Cost',148,'cost'],
- ['notes','Notes',420,'notes']
+ ['pri','#',50,'num'],
+ ['status','\u2713',44,'status'],
+ ['cat','Cat',54,'cat'],
+ ['item','Item',215,'item'],
+ ['start','Start',126,'dt'],
+ ['end','End',126,'dt'],
+ ['amt','Cost',132,'cost'],
+ ['notes','Notes',400,'notes']
 ];
 var COLBY={},i0;
 for(i0=0;i0<COLDEF.length;i0++) COLBY[COLDEF[i0][0]]=COLDEF[i0];
@@ -2085,13 +2108,23 @@ function localAmt(r){
   var n=num(r.amt);
   return (r.cur==='CAD'?'C$':'US$')+n.toLocaleString('en-US',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2});
 }
+var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function parts(v){
+  var m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(v||'');
+  if(!m) return null;
+  var h=parseInt(m[4],10);
+  return {mon:MONTHS[parseInt(m[2],10)-1],day:parseInt(m[3],10),
+          h12:(h%12)||12,min:m[5],ap:h<12?'am':'pm'};
+}
+/* month and day only - the year is the same for every row on this trip */
+function shortDT(v){
+  var p=parts(v);
+  return p? (p.mon+' '+p.day+', '+p.h12+':'+p.min+' '+p.ap) : '';
+}
 function prettyDT(v){
-  if(!v) return '';
-  var m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(v);
-  if(!m) return v;
-  var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var h=parseInt(m[4],10), ap=h<12?'a.m.':'p.m.', h12=(h%12)||12;
-  return MN[parseInt(m[2],10)-1]+' '+parseInt(m[3],10)+', '+h12+':'+m[5]+' '+ap;
+  var p=parts(v);
+  if(!p) return v||'';
+  return p.mon+' '+p.day+', 2026, '+p.h12+':'+p.min+' '+(p.ap==='am'?'a.m.':'p.m.');
 }
 
 /* ---- header, colgroup, resize and reorder ---------------------------------- */
@@ -2211,14 +2244,53 @@ function cellFor(r,k,tr){
   if(kind==='num'){
     td.appendChild(bind(r,field(r.pri,'','text'),'pri','input',tr));
   } else if(kind==='status'){
-    td.appendChild(bind(r,pick(STS,r.status),'status','change',tr));
+    /* empty box = still to do, ticked = booked, no box at all = nothing to
+       book. Alt-click a box to skip the row; click an empty cell to cycle. */
+    if(r.status==='todo'||r.status==='booked'){
+      var cb=document.createElement('input');
+      cb.type='checkbox'; cb.checked=(r.status==='booked');
+      cb.title=cb.checked?'Booked. Untick to change the amount. Alt-click to skip.'
+                         :'Still to book. Tick it when you have. Alt-click to skip.';
+      cb.addEventListener('click',function(e){
+        put(r.id,'status', e.altKey?'skip':(cb.checked?'booked':'todo'));
+        renderBody();
+      });
+      td.appendChild(cb);
+    } else {
+      var nb=document.createElement('button');
+      nb.type='button';
+      nb.className='stnone'+(r.status==='skip'?' skipd':' walk');
+      nb.textContent=(r.status==='skip')?'\u2013':'';
+      nb.title=(r.status==='skip')?'Skipped, and out of every total. Click to make it a to-do.'
+                                  :'Nothing to book. Click to skip it, again to make it a to-do.';
+      nb.addEventListener('click',function(){
+        put(r.id,'status', r.status==='walkin'?'skip':'todo');
+        renderBody();
+      });
+      td.appendChild(nb);
+    }
   } else if(kind==='cat'){
-    td.appendChild(bind(r,pick(CATS,r.cat),'cat','change',tr));
+    var cwrap=document.createElement('div'); cwrap.className='caticon';
+    var ic=document.createElement('span');
+    ic.textContent=icon(r.cat); ic.setAttribute('aria-hidden','true');
+    cwrap.appendChild(ic);
+    var csel=pick(CATS.map(function(c){ return [c[0],c[2]+'  '+c[1]]; }),r.cat);
+    csel.title=label(CATS,r.cat);
+    cwrap.appendChild(bind(r,csel,'cat','change',tr));
+    td.appendChild(cwrap);
   } else if(kind==='dt'){
-    td.appendChild(bind(r,field(r[k],'','datetime-local'),k,'change',tr));
+    var btn=document.createElement('button');
+    btn.type='button'; btn.className='dtbtn';
+    btn.textContent=shortDT(r[k])||'\u2013';
+    btn.title=prettyDT(r[k])||'Click to set a date and time';
+    btn.addEventListener('click',function(){ openDT(td,r,k); });
+    td.appendChild(btn);
   } else if(kind==='item'){
     var w=document.createElement('div'); w.className='itemwrap';
-    w.appendChild(bind(r,field(r.item,'What is it?'),'item','input',tr));
+    var ita=document.createElement('textarea');
+    ita.rows=1; ita.value=(r.item==null)?'':String(r.item);
+    ita.placeholder='What is it?';
+    w.appendChild(bind(r,ita,'item','input',tr));
     if(r.url){
       var a=document.createElement('a');
       a.href=r.url; a.target='_blank'; a.rel='noopener';
@@ -2258,6 +2330,29 @@ function cellFor(r,k,tr){
     td.appendChild(bind(r,field(r[k],''),k,'input',tr));
   }
   return td;
+}
+function icon(c){ for(var i=0;i<CATS.length;i++) if(CATS[i][0]===c) return CATS[i][2]; return '\u00b7'; }
+/* the compact label is a button; the real picker only appears while you edit,
+   floated over the cell so a 116px column does not clip it */
+function openDT(td,r,k){
+  var shown=td.firstChild;
+  if(!shown||shown.tagName!=='BUTTON') return;
+  var inp=document.createElement('input');
+  inp.type='datetime-local'; inp.className='dtedit'; inp.value=r[k]||'';
+  td.replaceChild(inp,shown);
+  inp.focus();
+  if(inp.showPicker){ try{ inp.showPicker(); }catch(e){} }
+  var done=false;
+  function close(){
+    if(done) return;
+    done=true;
+    put(r.id,k,inp.value);
+    renderBody();
+  }
+  inp.addEventListener('blur',close);
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key==='Escape') inp.blur();
+  });
 }
 function sorted(rs){
   var k=S.sort.key, d=S.sort.dir;
@@ -2357,6 +2452,12 @@ function refresh(){
   }
   document.getElementById('pkCount').textContent=
     shown===rs.length?(rs.length+' rows'):(shown+' of '+rs.length+' rows shown');
+  var key=document.getElementById('pkKey');
+  if(key&&!key.firstChild) for(i=0;i<CATS.length;i++){
+    var kb=document.createElement('b'); kb.textContent=CATS[i][2];
+    key.appendChild(kb);
+    key.appendChild(document.createTextNode(CATS[i][1]+(i<CATS.length-1?'\u00a0\u00b7 ':'')));
+  }
 }
 
 /* ---- export, import, reset ---------------------------------------------------- */
