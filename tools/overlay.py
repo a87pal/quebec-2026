@@ -351,10 +351,19 @@ class Maps(object):
             # TRAVEL-PREFERENCES section 8: pair maps with live navigation
             # links. Every pin has a verified coordinate, so every marker that
             # is not already a day deep-link becomes one.
+            href = ('https://www.google.com/maps/search/?api=1&amp;query=%.5f,%.5f'
+                    % (s['lat'], s['lon']))
+            # A Place ID names one exact place, so the link opens the real
+            # entry - hours, phone, Directions - instead of dropping a pin at a
+            # coordinate. The coordinate stays as `query` on purpose: Google
+            # uses it only when the place ID will not resolve, so an ID that
+            # goes stale degrades to the right spot rather than a wrong guess.
+            pid = (self.places.get(s['label'].strip()) or {}).get('place_id')
+            if pid:
+                href += '&amp;query_place_id=' + html.escape(pid)
             o = ('<a class="mklink" target="_blank" rel="noopener" '
-                 'href="https://www.google.com/maps/search/?api=1&amp;query=%.5f,%.5f" '
-                 'aria-label="%s — open in Google Maps">%s</a>'
-                 % (s['lat'], s['lon'], html.escape(s['label']), o))
+                 'href="%s" aria-label="%s — open in Google Maps">%s</a>'
+                 % (href, html.escape(s['label']), o))
         return o
 
     # Routing data is OpenStreetMap-derived and carries an ODbL attribution

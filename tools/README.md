@@ -29,10 +29,14 @@ legs.json     you write this: which places each drivable leg runs through
    ↓
 routes.py     fetch real road geometry, distance and driving time from OSRM
    ↓          → maps/routes.json
+placeid.py    resolve each place to a Google Place ID, so links name it exactly
+   ↓          → places.json again (place_id only; never a coordinate)
 overlay.py    project lat/lon → SVG, draw routes, place labels, emit fragments
    ↓          → maps/gmap_<map>.html  + maps/.placement.json
 boxes.py      re-check the placement: no overlaps, no covered dots, nothing off-map
    ↓
+savedlist.py  build the checklist for loading a Google Maps saved list
+   ↓          → maps/savedlist.html
 maps.py       splice the fragments into guide.html, fill the leg table
    ↓
 validate.py   tag balance, duplicate ids, dead anchors, content preservation
@@ -41,15 +45,19 @@ validate.py   tag balance, duplicate ids, dead anchors, content preservation
 ../deploy.sh  check, build, commit, push
 ```
 
-Three of those touch the network and none of them run in CI: `tiles.py`,
-`resolve.py` and `routes.py`. Their output — tiles, `places.json`, `routes.json` —
-is committed, which is why `check.sh` and `build.py` work offline.
+Four of those touch the network and none of them run in CI: `tiles.py`,
+`resolve.py`, `routes.py` and `placeid.py`. Their output — tiles, `places.json`,
+`routes.json` — is committed, which is why `check.sh` and `build.py` work offline.
+
+`tripmap.py` sits outside the pipeline: it exports the whole trip as KML for
+import into Google My Maps, which is a different phone surface from the saved
+list and needs no per-place tapping. See **Saved lists** below for which to use.
 
 ### Ask before you build a map
 
-**`tiles.py`, `resolve.py` and `routes.py` need explicit approval every time.
-Do not run them because a rebuild seems tidy.** They are the expensive third of
-the pipeline and the cost is not yours to spend:
+**`tiles.py`, `resolve.py`, `routes.py` and `placeid.py` need explicit approval
+every time. Do not run them because a rebuild seems tidy.** They are the
+expensive third of the pipeline and the cost is not yours to spend:
 
 - `tiles.py` pulls **one HTTP request per tile** from Esri's basemap service.
   A single z16 neighbourhood map is 20–25 tiles; a four-map pass was 294. That
@@ -60,21 +68,24 @@ the pipeline and the cost is not yours to spend:
   an hour.
 - `routes.py` hits OSRM's demo server or spends **OpenRouteService API-key
   quota**, both rate-limited.
+- `placeid.py` spends **Google Cloud quota on a billable account**. One
+  destination fits many times over in the monthly free allowance, but the
+  account behind the key is a real one with a card attached to it.
 
 They are also the only stages that can *silently* make the guide worse: a
 geocoder hit can overwrite a hand-reasoned pin (see "Things that have bitten
 us"), and a re-fetch can move a route under a caption that still describes the
 old one.
 
-The free stages — `overlay.py`, `boxes.py`, `maps.py`, `validate.py`,
-`check.sh`, `build.py` — are local, offline and idempotent. **Run those freely.
+The free stages — `overlay.py`, `boxes.py`, `savedlist.py`, `maps.py`,
+`validate.py`, `check.sh`, `build.py` — are local, offline and idempotent. **Run those freely.
 Almost every map change is one of those**: nothing needs re-downloading unless a
 bounding box, a zoom, a marker's identity or a leg's endpoints actually changed.
 
 Approval means the person asked for it or agreed to it for this change. It does
 not carry over to the next one.
 
-Run order for a full map rebuild — **the first six lines need approval**:
+Run order for a full map rebuild — **the first eight lines need approval**:
 
 ```sh
 D=montreal-quebec                                  # or omit --dest if there is only one
@@ -84,8 +95,11 @@ python3 tools/resolve.py  --dest $D --write        # coordinates from OSM/Wikida
 python3 tools/kml.py      --dest $D --export       # then verify the pins in Google My Maps
 python3 tools/kml.py      --dest $D --import out.kml --write
 python3 tools/routes.py   --dest $D --fetch        # road geometry + driving times
+python3 tools/placeid.py  --dest $D                # dry run - review every delta
+python3 tools/placeid.py  --dest $D --write        # Place IDs, for exact Maps links
 python3 tools/overlay.py  --dest $D                # regenerate the fragments
 python3 tools/boxes.py    --dest $D                # must report 0 overlaps, 0 dot-covers
+python3 tools/savedlist.py --dest $D               # the saved-list checklist
 python3 tools/maps.py     --dest $D                # splice into the guide (snapshots it first)
 python3 tools/validate.py --dest $D                # must report "all balanced"
 ./deploy.sh "what changed"
@@ -259,6 +273,23 @@ Maps Platform Service Specific Terms:
 Either clause alone rules it out. OSM-derived routing under ODbL has neither
 problem: cache it forever, draw it over any basemap, attribute it.
 
+**One narrow exception, and why it is not a contradiction.** `placeid.py` does
+call a Google API and does commit what it gets back. Both clauses above still
+hold, and it clears them rather than ignoring them:
+
+- Place IDs are **explicitly exempt** from the §3.2.3(b) caching restriction —
+  Google's own documentation says so and offers a free call to refresh one. The
+  30-day cap that rules out `routes.json` does not reach them.
+- Nothing Google-derived is ever *drawn*. A Place ID goes into an outbound
+  `google.com/maps` link and nowhere else; the pins on the Esri basemap keep
+  coming from OSM and Wikidata via `resolve.py`. The non-Google-map clause is
+  about Content displayed on the map, and no Content is.
+
+That is also why `placeid.py` stores so little. It sees Google's `displayName`
+and `location`, uses them to print a sanity check, and throws them away — those
+*are* Content under the 30-day rule. It keeps the ID, the date and the distance
+it measured, and it asserts that it has not moved a coordinate before it writes.
+
 `markers.py` then draws
 it with `m.leg(P, "chemin-du-roy", fallback=[...])`; the fallback is the old
 schematic vertex list, used only until the leg has been fetched, so a guide
@@ -287,6 +318,90 @@ hand-drawn and their captions say they are schematic, which is what
 > rather than retrying it six times. Switch to `--provider ors`, or run the fetch
 > from another network. Everything else in the toolchain works either way,
 > because `routes.json` is committed.
+
+---
+
+## Saved lists — the phone surface for driving
+
+The guide's own maps are the offline artifact: Esri tiles and inline SVG, no
+network, printable. They are not what you navigate from. That is a **Google Maps
+saved list**, which draws on the main Maps map, syncs to the phone and gives you
+native turn-by-turn.
+
+**There is no API for saved lists, and no import path.** Not a missing scope, not
+a deprecated endpoint — it has never existed, and the open feature request dates
+from late 2025. So the list is loaded by hand, and no amount of tooling changes
+that. What tooling *can* remove is the part that is actually slow and actually
+error-prone: confirming that what Google found is the place you meant.
+
+`placeid.py` resolves each place to a Place ID; `savedlist.py` builds a
+checklist whose links carry it:
+
+```
+https://www.google.com/maps/search/?api=1&query=<lat>,<lon>&query_place_id=<ID>
+```
+
+That opens one exact place instead of a search. The documented `api=1` Search
+action takes only `query` and `query_place_id` — there is no location-bias,
+viewport or centre parameter — so a Place ID is the only supported way to make
+such a link unambiguous. The coordinate stays as `query` because Google falls
+back to it when the ID will not resolve, so a stale ID degrades to the right
+spot rather than a confident wrong one.
+
+### Towns, and the places inside them
+
+A geocoder's answer for a town is its administrative centre — a road junction
+near the middle, not the wharf or the dining street you actually drive to. These
+maps deliberately pin the site rather than the town, so `placeid.py` holds any
+administrative result to `--max-admin` (250 m) and reports the rest. Without that
+cap, `Lincoln` resolved to the town 998 m from the rental it is supposed to be,
+and passed a 1 km distance check on its way through.
+
+Two escape hatches, both set by hand because a script cannot tell "the town" from
+"a place in the town":
+
+- **`"place_scope": "town"`** on a `places.json` entry says the centroid *is* the
+  target — a route-overview label, a border crossing, somewhere you pass through.
+  Such an entry is judged against `--max-town` (6 km) instead, which still
+  catches the failure that matters: a same-named town in the wrong region.
+- **`maps/extras.json`** holds places that belong on the driving list but are not
+  map markers, which is how the attraction survives when its town's pin becomes
+  the centroid. Each names a `near` place, whose coordinate biases the search and
+  measures the answer, so an extra gets the same verification as a marker without
+  needing a coordinate of its own:
+
+```json
+{"Croisières AML — whale wharf": {
+   "query": "Croisières AML 159 Route 138 Baie-Sainte-Catherine Quebec",
+   "near": "Baie-Ste-Catherine", "note": "where the whale cruise boards"}}
+```
+
+Extras are committed, appear in their anchor's region on the checklist, and fall
+back to their `query` text rather than a coordinate they do not have.
+
+### Working the list
+
+The checklist does the sequencing and nothing else: <kbd>Enter</kbd> opens the
+next place, you click Save, <kbd>Space</kbd> ticks and advances, <kbd>←</kbd>
+steps back and unticks. Progress lives in `localStorage`, so it survives a
+reload and can be done in sittings. Load it once on a laptop, then **share the
+list** rather than repeating it on a second account.
+
+**No browser automation, deliberately.** Driving a signed-in Google account with
+Playwright or an extension means Google's terms, an account worth far more than
+the fifteen minutes it saves, and selectors written against a UI that rotates
+its class names. The sequencing was the slow part, and sequencing needs no
+automation.
+
+### Saved list or My Maps?
+
+`tripmap.py` exports the whole trip as KML for **Google My Maps**, which imports
+in one step with no per-place tapping. The trade is at the other end: My Maps
+will not navigate *along* a drawn line and only hands off from a pin tap, and
+custom maps cannot be downloaded for offline use from the phone.
+
+Use the saved list for driving. Use `tripmap.py` when you want the whole shape
+of the trip on a phone for free, or as a review surface. They are not exclusive.
 
 ---
 
@@ -347,12 +462,24 @@ regenerated fragment, using depth-aware `<div>` matching rather than a regex —
 the blocks contain nested divs and a regex will silently eat the wrong closing
 tag. It is idempotent: the CSS and JS are only injected once. It also fills the
 Distance and Driving cells of every `<tr data-leg="…">` row from `routes.json`,
-and says so and changes nothing when a leg has not been fetched.
+and says so and changes nothing when a leg has not been fetched. It also splices
+the saved-list section, matching to the first `</section>` — sections do not nest
+here, and it checks that assumption rather than trusting it.
+
+**`maps.py` is the only script that writes `guide.html`.** `savedlist.py` emits a
+fragment and stops, so the snapshot-before-rewrite net in `_dest.snapshot_guide`
+stays in one place rather than being reimplemented per tool.
+
+**`savedlist.py`** carries its own `<style>` and `<script>` inside the fragment,
+so re-splicing replaces them wholesale. That is idempotent by construction,
+rather than by the inject-once check `maps.py` needs for the map CSS.
 
 **`_proj.py`** is the web-mercator projection, the tile-range maths and the
 geodesic distance, shared by everything that needs them. **`_http.py`** is the
-cached backing-off GET that `resolve.py` and `routes.py` both use. **`_metrics.py`**
-is the text-width table. **`_dest.py`** resolves `--dest` to paths.
+cached backing-off client — a GET for `resolve.py` and `routes.py`, and a POST
+with headers for `placeid.py`, whose cache key folds in the request body so two
+different searches to one endpoint cannot collide. **`_metrics.py`** is the
+text-width table. **`_dest.py`** resolves `--dest` to paths.
 
 **`validate.py`** is the safety net for any scripted edit of the guide. It checks
 tag balance, section order, duplicate ids, that every `href="#…"` resolves, and —

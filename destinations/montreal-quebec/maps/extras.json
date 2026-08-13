@@ -1,0 +1,50 @@
+{
+ "Croisières AML — whale wharf": {
+  "near": "Baie-Ste-Catherine",
+  "note": "where the whale cruise boards",
+  "place_delta_m": 83,
+  "place_id": "ChIJO_Pr-2PTv0wRuHDyA7iJGDY",
+  "place_verified": "2026-08-13",
+  "query": "Croisières AML 159 Route 138 Baie-Sainte-Catherine Quebec"
+ },
+ "Domaine Forget": {
+  "near": "Saint-Irénée",
+  "note": "concert hall above the river",
+  "place_delta_m": 8,
+  "place_id": "ChIJy7aoLE4Bv0wRQWr76HcAmhU",
+  "place_verified": "2026-08-13",
+  "query": "Domaine Forget 5 Rang Saint-Antoine Saint-Irénée Quebec"
+ },
+ "Haskell Free Library": {
+  "near": "Derby Line",
+  "note": "on the border; front door is on US soil",
+  "place_delta_m": 162,
+  "place_id": "ChIJI4LDLkRvtkwRDhg7wseT4GU",
+  "place_verified": "2026-08-13",
+  "query": "Haskell Free Library and Opera House Derby Line Vermont"
+ },
+ "Manoir Richelieu": {
+  "near": "La Malbaie",
+  "note": "the clifftop hotel and casino",
+  "place_delta_m": 10,
+  "place_id": "ChIJYwSzugqqv0wRUOX2Ciyd5TI",
+  "place_verified": "2026-08-13",
+  "query": "Fairmont Le Manoir Richelieu 181 Rue Richelieu La Malbaie Quebec"
+ },
+ "Rue Saint-Jean-Baptiste": {
+  "near": "Baie-Saint-Paul",
+  "note": "the dining and gallery street",
+  "place_delta_m": 47,
+  "place_id": "ChIJB-YElEoRv0wRFVecxdVPCFU",
+  "place_verified": "2026-08-13",
+  "query": "Rue Saint-Jean-Baptiste Baie-Saint-Paul Quebec"
+ },
+ "Tadoussac ferry landing": {
+  "near": "Tadoussac",
+  "note": "free ferry across the Saguenay",
+  "place_delta_m": 27,
+  "place_id": "ChIJOcpxHrbVv0wRROjD0qFjQmo",
+  "place_verified": "2026-08-13",
+  "query": "Traverse Tadoussac Baie-Sainte-Catherine ferry Rue du Bateau-Passeur Tadoussac"
+ }
+}

@@ -49,6 +49,34 @@ def hm(sec):
 
 MEASURED = re.compile(r'<span class="legm">.*?</span>', re.S)
 
+SL_OPEN = '<section class="part" id="savedlist">'
+SL_CLOSE = '</section>'
+
+
+def savedlist(T, dest):
+    """Replace the saved-list section with the generated one.
+
+    Sections do not nest in these guides, so this matches to the first
+    </section> rather than counting depth the way the gmapwrap blocks have to -
+    but it checks that assumption instead of trusting it, because a nested
+    <section> would make it eat the wrong closing tag silently.
+    """
+    frag = os.path.join(dest.mapdir, 'savedlist.html')
+    if not os.path.exists(frag):
+        return T, False
+    n = T.count(SL_OPEN)
+    if n != 1:
+        sys.exit('error: expected exactly 1 saved-list section, found %d' % n)
+    i = T.index(SL_OPEN)
+    j = T.index(SL_CLOSE, i)
+    if '<section' in T[i + len(SL_OPEN):j]:
+        sys.exit('error: a <section> is nested inside the saved-list section - '
+                 'this splice would eat the wrong closing tag')
+    gen = io.open(frag, encoding='utf-8').read().strip()
+    if not gen.startswith(SL_OPEN) or not gen.endswith(SL_CLOSE):
+        sys.exit('error: %s is not a whole saved-list section' % frag)
+    return T[:i] + gen + T[j + len(SL_CLOSE):], True
+
 
 def legtable(T, dest):
     """Fill the Distance cell of any <tr data-leg="..."> row, annotate Driving.
@@ -138,13 +166,18 @@ def main():
     # ---- leg table: measured distances and times ------------------------------
     T, legs, have = legtable(T, dest)
 
+    # ---- saved-list checklist -------------------------------------------------
+    # Carries its own CSS and JS, so re-splicing replaces them wholesale and the
+    # inject-once dance below does not apply to it.
+    T, sl = savedlist(T, dest)
+
     # ---- CSS: thumbnail by default, full size when opened --------------------
     ANCHOR = ".gmapwrap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:20px 0}"
     need(T, ANCHOR, 'map CSS')
     if ".mapzoom{" in T:
         io.open(src, "w", encoding="utf-8").write(T)
-        print("spliced %d maps, %d leg row(s) (css/js already present) · %d KB"
-              % (n, legs, len(T) // 1024))
+        print("spliced %d maps, %d leg row(s)%s (css/js already present) · %d KB"
+              % (n, legs, ', saved list' if sl else '', len(T) // 1024))
         return
     CSS = ANCHOR + """
 .gmapwrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 16px;align-items:start}
@@ -202,7 +235,8 @@ document.querySelectorAll('.gmapwrap').forEach(function(w){
     T = T.replace(PA_OLD, PA_NEW, 1)
 
     io.open(src, "w", encoding="utf-8").write(T)
-    print("spliced %d maps, %d leg row(s) · %d KB" % (n, legs, len(T) // 1024))
+    print("spliced %d maps, %d leg row(s)%s · %d KB"
+          % (n, legs, ', saved list' if sl else '', len(T) // 1024))
 
 
 if __name__ == '__main__':

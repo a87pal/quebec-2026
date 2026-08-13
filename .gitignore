@@ -6,8 +6,10 @@ dist/
 # tracked. The committed inputs are, because rebuilding those means
 # re-hitting rate-limited Esri/Wikidata/OSM.
 destinations/*/maps/gmap_*.html
+destinations/*/maps/savedlist.html
 destinations/*/maps/.resolve-cache.json
 destinations/*/maps/.routes-cache.json
+destinations/*/maps/.placeid-cache.json
 destinations/*/maps/.placement.json
 
 # Review surface for tools/kml.py, regenerated from places.json on demand.

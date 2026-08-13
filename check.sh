@@ -19,6 +19,11 @@ for d in destinations/*/; do
   # on. boxes.py then re-checks the placement it produced.
   python3 tools/overlay.py  --dest "$slug"   # fragments from committed inputs
   python3 tools/boxes.py    --dest "$slug"   # must be 0 overlaps, 0 dot-covers
+  # Also regenerated from committed inputs (places.json), for the same reason:
+  # it catches a guide whose checklist is stale with respect to the places.
+  if grep -q 'id="savedlist"' "$d/guide.html" 2>/dev/null; then
+    python3 tools/savedlist.py --dest "$slug"
+  fi
   python3 tools/maps.py     --dest "$slug"   # splice them into the guide
   python3 tools/validate.py --dest "$slug"   # structure + prose preservation
   # Advisory, and offline: reports legs whose endpoints have moved since their
