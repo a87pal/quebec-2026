@@ -175,6 +175,18 @@ Yes, and lose the best alpine day of the trip for a 40-minute detour. It's also 
 - **Saguenay Fjord proper** (Baie-Éternité, Cap Trinité) is another 1 h 15 past Tadoussac. The cruise gives you the fjord mouth; the full fjord needs a night in Saguenay.
 - **Tadoussac itself** is included as optional on Day 9 — it's the oldest surviving French settlement in the Americas (1600, eight years before Québec City) and the ferry to it is free. If the day runs long it's the right thing to cut, but note what you're cutting.
 - **Isle-aux-Coudres** — free ferry from Saint-Joseph-de-la-Rive, ~1 hour minimum. Listed as an option, not built in.
+- **JOAT — the largest street dance festival in the Americas** — runs **Sep 1–7, 2026** in the Quartier des Spectacles, opening the day after you leave Montréal. Battles, breaking, hip hop, popping, krump. The consolation is exact: MUTEK occupies the identical square on all three of the nights you *are* there.
+- **Gardens of Light** opens **Sep 3, 2026** — three days after you leave Montréal. See §11.4; this one was got wrong twice before it was got right.
+
+### Museums considered and not built in
+
+Moved here from the guide when the standalone museums ranking was cut. None of
+these belongs to a day, which is exactly why none of them belongs in the guide.
+
+- **MNBAQ, Québec City** — cut on these dates specifically, not on merit. Espace Riopelle opens 22 Oct 2026 and two pavilions are shut until then; *Tribute to Rosa Luxemburg* goes on view the same day. Reasoning in §11.1. A short version of this survives in the Day 6 logistics so nobody re-adds it on the ground.
+- **McCord Stewart, Montréal** — two hours, downtown, and the **Notman Photographic Archives** (over a million 19th-century photographs of the city) are the draw. The swap-in if Old Montréal runs short on Day 3.
+- **Montréal Museum of Fine Arts** — go for the Canadian and Indigenous wing or not at all. Half a day, and only if the weather has already ruined something better.
+- **Biodôme and the rebuilt Insectarium**, Space for Life — the standing rain plan for Montréal, Métro Pie-IX. With Gardens of Light out of range this is now the only reason to make that trip east.
 
 ---
 

@@ -166,12 +166,11 @@ Plus an **Expand all / Collapse all** control per day, deep-link support, and au
 | The route | Overall map + leg table + base summary |
 | Where to stay | Per base: neighbourhood rationale, price reality, named options, **groceries**, parking |
 | Tours | Greeters, free walks, audio, official programmes |
-| Day by day | The three-layer itinerary, with region maps |
+| Day by day | The three-layer itinerary, with region maps. **Every day carries its own breakfast, lunch and dinner** with prices, the evening's plan, and any game-time call that belongs to it |
+| Game-time calls | The decisions that depend on weather, energy or the running total — cost, when you decide, and the rule. Kept out of the planning sheet, because a maybe is not a booking |
 | Food | The three-tier vegetarian split, markets, groceries, phrases |
-| Events calendar | **Every night accounted for**, free things called out. Not a footnote. |
 | Hidden gems | The things nobody tells you, already folded into the days |
-| Museums | What's in, what's missing, honest ranking |
-| Watch/read/listen first | Films, TV, books, music to prime the trip |
+| Watch/read/listen first | **Ranked and short.** Three films at most, plus a short if one exists, plus a listening order. No books, no TV — they do not get watched before a trip. **Every title links to both IMDb and Wikipedia**, with the IDs verified, not guessed |
 | Gear | Weather table, hiking kit, city kit, documents/money/phone |
 | Planning sheet | A spreadsheet filled in **on the page**, one row per thing that has to happen: priority, a booking checkbox, which base you are at, a one-letter category, item (with a link to its site), start and end as real date-times, one cost column carrying its own currency, and a wrapping notes column. Spend width on the two columns that hold sentences and a glyph on everything else — the sheet has to fit a laptop. Whatever is a glyph in the table should also be a dropdown filter above it. Headings sort, drag to reorder, drag their edge to resize. Marking a row booked turns its estimate into what was paid and locks it. Saves to `localStorage`, exports to CSV and JSON, imports the JSON back. Live stat tiles above, a cost breakdown by category below. Seed it with everything bookable, and mark what is already booked |
 | Book & budget | Reference price table and the all-in estimate. The booking timeline itself belongs in the planning sheet, not in prose — one source of truth |
@@ -179,6 +178,20 @@ Plus an **Expand all / Collapse all** control per day, deep-link support, and au
 | Sources | Every official operator link, with a "verify before you pay" caveat |
 
 **Also always deliver:** a separate `PLANNING-NOTES.md` with the reasoning, trade-offs, what was cut and why, and comparison to commercial tour operators covering the same ground.
+
+---
+
+### What we tried and dropped
+
+- **A standalone events calendar** and a **standalone museums ranking** were
+  both in the Québec guide and both were cut in August 2026. Each turned out to
+  be a table restating the day-by-day one line at a time. **Put the evening on
+  the day**, and put the museum on the day it is near. What genuinely does not
+  belong to a day — a festival that starts after we leave, a museum whose best
+  room is shut — belongs in `PLANNING-NOTES.md`, not in the guide.
+- The test that separates them: *if a reader would only ever look at this while
+  standing somewhere, it goes on the day.* Only reference material that gets
+  consulted before the trip earns a section of its own.
 
 ---
 
@@ -213,7 +226,7 @@ For any new destination, always check:
 >
 > Read `shared/TRAVEL-PREFERENCES.md` first — it has who we are, how we travel, and the exact spec for the document I want. `tools/README.md` covers the map machinery, and `CLAUDE.md` the repo rules.
 >
-> Non-negotiables: hub-and-spoke bases, walkable authentic neighbourhoods, the vegetarian/omnivore food split, verified working images, real maps on a real basemap, every evening accounted for, and the three-layer expandable HTML structure.
+> Non-negotiables: hub-and-spoke bases, walkable authentic neighbourhoods, the vegetarian/omnivore food split, verified working images, real maps on a real basemap, every evening accounted for **on its own day**, and the three-layer expandable HTML structure.
 >
 > If we're flying: default to public transport, and tell me exactly which segments actually need a rental car. If a rental is needed, **price both a same-location loop and a one-way pickup/drop-off and show me the difference** — don't assume one-way is fine.
 >
