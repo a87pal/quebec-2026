@@ -14,6 +14,10 @@ destinations/*/maps/.placement.json
 # routes.json IS tracked - it holds fetched OSRM geometry.
 destinations/*/maps/places.kml
 
+# Local safety net: maps.py copies guide.html here before rewriting it in
+# place, keeping the last 10. Recovery is a plain cp. Never committed.
+destinations/*/.guide-history/
+
 # API keys never belong in this repo - it is published to GitHub Pages.
 # routes.py reads ORS_API_KEY from the environment; nothing needs a key file.
 .env

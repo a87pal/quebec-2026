@@ -57,7 +57,7 @@ python3 tools/kml.py      --dest $D --import out.kml --write
 python3 tools/routes.py   --dest $D --fetch        # road geometry + driving times
 python3 tools/overlay.py  --dest $D                # regenerate the fragments
 python3 tools/boxes.py    --dest $D                # must report 0 overlaps, 0 dot-covers
-python3 tools/maps.py     --dest $D                # splice into the guide
+python3 tools/maps.py     --dest $D                # splice into the guide (snapshots it first)
 python3 tools/validate.py --dest $D                # must report "all balanced"
 ./deploy.sh "what changed"
 ```

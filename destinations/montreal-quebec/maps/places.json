@@ -505,15 +505,6 @@
   "verified": "2026-08-13",
   "was": "osm:relation/7711553"
  },
- "YOUR BASE — Plateau / Mile End": {
-  "lat": 45.51418,
-  "lon": -73.57286,
-  "matched": "Tonic Salon Spa, 3613, Boulevard Saint-Laurent, Le Plateau-M",
-  "query": "3613 Boulevard Saint-Laurent, Montreal, QC",
-  "region": "montreal",
-  "source": "osm:node/7960937785",
-  "verified": "2026-08-12"
- },
  "YOUR BASE — Rang Saint-Placide": {
   "lat": 47.36836,
   "lon": -70.61766,
@@ -524,13 +515,24 @@
   "verified": "2026-08-13",
   "was": "manual: Nominatim matched the road, not house 352 - the rang runs 8-13 km from town, so this point is approximate. Drag it to the house in Google My Maps."
  },
- "YOUR BASE — St-Jean-Baptiste": {
+ "YOUR BASE — Saint-Roch": {
   "lat": 46.81494,
   "lon": -71.21944,
   "matched": "Le Caïman, 735, Boulevard Charest Est, Saint-Roch, La Cité-L",
   "query": "735 Boulevard Charest Est, Quebec City, QC",
   "region": "quebec",
   "source": "osm:way/332982652",
-  "verified": "2026-08-12"
+  "verified": "2026-08-12",
+  "was_key": "YOUR BASE — St-Jean-Baptiste"
+ },
+ "YOUR BASE — The Main": {
+  "lat": 45.51418,
+  "lon": -73.57286,
+  "matched": "Tonic Salon Spa, 3613, Boulevard Saint-Laurent, Le Plateau-M",
+  "query": "3613 Boulevard Saint-Laurent, Montreal, QC",
+  "region": "montreal",
+  "source": "osm:node/7960937785",
+  "verified": "2026-08-12",
+  "was_key": "YOUR BASE — Plateau / Mile End"
  }
 }

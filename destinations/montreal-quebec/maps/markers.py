@@ -80,7 +80,7 @@ def build(m):
     b = []
     b.append(m.dash('walk', P, [(45.5227, -73.6031), (45.5300, -73.6100), (45.5366, -73.6152)], 5))
     b.append(m.dash('walk', P, [(45.5152, -73.5849), (45.5090, -73.5880), (45.5039, -73.5877), (45.4990, -73.6020), (45.4923, -73.6180)], 5))
-    b.append(m.marker(P, 45.5230, -73.5960, "YOUR BASE — Plateau / Mile End", "nights 3–5", "base", r=12))
+    b.append(m.marker(P, 45.5230, -73.5960, "YOUR BASE — The Main", "nights 3–5 · bd Saint-Laurent", "base", r=12))
     b.append(m.marker(P, 45.5227, -73.6020, "St-Viateur Bagel", "24 h · Mile End", "stop", r=7))
     b.append(m.marker(P, 45.5229, -73.5952, "Fairmount Bagel", "24 h · 5 min from St-Viateur", "stop", r=7))
     b.append(m.marker(P, 45.5366, -73.6152, "Marché Jean-Talon", "peak harvest", "hi"))
@@ -102,7 +102,7 @@ def build(m):
     P, _ = m.mk('quebec')
     b = []
     b.append(m.dash('walk', P, [(46.8108, -71.2247), (46.8112, -71.2188), (46.8109, -71.2117), (46.8078, -71.2065), (46.8030, -71.2192), (46.8072, -71.2150), (46.8120, -71.2052), (46.8144, -71.2076), (46.8137, -71.2049), (46.8123, -71.2028), (46.8135, -71.2033), (46.8135, -71.2003)], 5))
-    b.append(m.marker(P, 46.8108, -71.2247, "YOUR BASE — St-Jean-Baptiste", "nights 6–9", "base", r=12))
+    b.append(m.marker(P, 46.8108, -71.2247, "YOUR BASE — Saint-Roch", "nights 6–9 · below the cliff", "base", r=12))
     b.append(m.marker(P, 46.8109, -71.2117, "Porte Saint-Louis", "start the ramparts", "stop", r=7))
     b.append(m.marker(P, 46.8078, -71.2065, "La Citadelle", "star fort", "hi"))
     b.append(m.marker(P, 46.8030, -71.2192, "Plains of Abraham", "1759 battlefield", "hi"))

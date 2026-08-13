@@ -108,6 +108,10 @@ def main():
     dest, _ = _dest.from_args('Splice generated map fragments into the guide.')
     src = dest.guide
     expected = len(dest.load('maps.json'))
+    # This script rewrites the guide in place. Snapshot it first: an
+    # uncommitted prose pass has been lost here before, and a copy costs
+    # nothing. See _dest.snapshot_guide.
+    dest.snapshot_guide()
     T = io.open(src, encoding="utf-8").read()
 
     # ---- replace each gmapwrap block with the regenerated one -----------------

@@ -5,7 +5,7 @@ The scripts here are the engine; everything trip-specific lives under
 destinations/<slug>/. Nothing in tools/ may hardcode a slug, a machine path
 or a map name.
 """
-import argparse, json, os, sys
+import argparse, json, os, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -50,6 +50,42 @@ class Dest(object):
 
     def fragment(self, name):
         return self._path('gmap_%s.html' % name)
+
+    def snapshot_guide(self, keep=10):
+        """Copy guide.html into .guide-history/ before a script rewrites it.
+
+        maps.py edits the guide in place, so anything unsaved in it - a prose
+        pass that has not been committed yet - is one bad `git checkout` or one
+        pipeline run away from being unrecoverable. This has happened. The
+        snapshots are cheap (a few hundred KB), gitignored, and the last `keep`
+        are retained; recovery is a plain `cp`.
+
+        Returns the snapshot path, or None if there was no guide to copy.
+        """
+        if not os.path.exists(self.guide):
+            return None
+        d = os.path.join(self.dir, '.guide-history')
+        if not os.path.isdir(d):
+            os.makedirs(d)
+        with open(self.guide, 'rb') as f:
+            body = f.read()
+        prev = sorted(os.path.join(d, n) for n in os.listdir(d) if n.endswith('.html'))
+        # Identical to the newest snapshot? Nothing changed since; don't churn.
+        if prev:
+            with open(prev[-1], 'rb') as f:
+                if f.read() == body:
+                    return prev[-1]
+        stamp = time.strftime('%Y%m%d-%H%M%S')
+        p = os.path.join(d, 'guide-%s.html' % stamp)
+        n = 1
+        while os.path.exists(p):          # same second, second run
+            p = os.path.join(d, 'guide-%s-%d.html' % (stamp, n))
+            n += 1
+        with open(p, 'wb') as f:
+            f.write(body)
+        for old in sorted(os.path.join(d, x) for x in os.listdir(d) if x.endswith('.html'))[:-keep]:
+            os.remove(old)
+        return p
 
     def __repr__(self):
         return '<Dest %s>' % self.slug

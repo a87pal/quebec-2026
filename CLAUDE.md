@@ -60,6 +60,15 @@ untouched, and a script that then prints "done" hides the failure. `maps.py`
 does this; keep it that way. Then run `tools/validate.py`, which diffs the
 prose against `git show HEAD:` to catch content a bad slice dropped silently.
 
+**Commit prose before running the map pipeline.** `maps.py` rewrites
+`guide.html` in place, so an uncommitted prose pass lives only in the working
+tree — and resetting the guide to get a clean base for re-splicing takes the
+prose with it. This has already cost one full rewrite. Order of operations:
+finish the prose → commit it → run the map pipeline → commit the maps.
+As a backstop, `maps.py` copies the guide into `destinations/<slug>/.guide-history/`
+before touching it and keeps the last ten; the directory is gitignored and
+recovery is a plain `cp`.
+
 ## meta.json
 
 ```json
