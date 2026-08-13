@@ -90,10 +90,9 @@ The bases are booked and are not all where the prose assumed:
   Saint-Jean-Baptiste end to end" now says drive down first, and settle who is
   driving before the wine list arrives.
 
-**Still open:** two map marker labels are stale — `YOUR BASE — Plateau / Mile
-End` and `YOUR BASE — St-Jean-Baptiste`. Renaming them means changing the key in
-both `markers.py` and `places.json` and re-running overlay → maps. Not done here
-because it is map data, not copy.
+**Closed in §12:** the two stale marker labels (`YOUR BASE — Plateau / Mile
+End`, `YOUR BASE — St-Jean-Baptiste`) were renamed to `YOUR BASE — The Main` and
+`YOUR BASE — Saint-Roch` when the neighbourhood maps were built.
 
 ### Fact-check log
 
@@ -511,3 +510,102 @@ unconfirmed however many times it appears.
 - Sagamité's broth (game-based or not) and whether it needs a reservation
 - AURA's 2026 showtimes if the Saturday turns wet
 - Strøm's same-day after-5 p.m. rate for a Wednesday
+
+
+---
+
+## 12. The four bases, measured
+
+Prompted by: *"we now have concrete airbnb locations … realistic expectations
+for walking to attractions nearby."* Everything in "Where you sleep" that used
+to be advice about **choosing** a base was cut, because all four are booked and
+that advice is now unactionable noise. What replaced it is four things per base:
+groceries, transport, measured walks, and the thing nobody mentions.
+
+### 12.1 Why the cards needed new maps
+
+The ask was to move each base card beside a mini map. `tools/maps.py` replaces
+every `gmapwrap` block in the guide and asserts the count equals
+`len(maps.json)`, matching each block by its tile-directory name — so one map
+cannot appear twice in a page. Reusing `montreal` or `charlevoix` beside the
+cards was therefore not possible, and four new maps were built instead:
+`home-nh`, `home-mtl`, `home-qc`, `home-bsp`. That is the better answer anyway;
+the region maps are at z8–z13 and say nothing about a supermarket.
+
+One legend convention across all four, so the maps read without a key: **green
+is your door, wine is where the food comes from, gold is how you move, white is
+somewhere you walk to.** `home-bsp` is the only `home-*` map with a drawn leg,
+because it is the only base whose central fact is a distance rather than a
+walking time.
+
+### 12.2 What the measurements changed
+
+Walks and drives were routed on OpenRouteService (`foot-walking` and `driving`),
+shops and stations pulled from Overpass. Eleven prose claims contradicted the
+routed figure and were corrected in place, each one saying so rather than
+quietly changing:
+
+| Was | Measured | Where it mattered |
+|---|---|---|
+| Lincoln → Lafayette Place 7 mi / 12 min | **9 mi / 15 km, 16–20 min** | Day 1 leg table, route chip, and the 7:15 parking plan |
+| Woodstock Inn "walkable" from the Lincoln base | **3.5 km, 42 min on foot** — a four-minute drive | Day 1 dinner, the gear card, the NH food card, and the planning-sheet SEED row |
+| St-Viateur Bagel "ten minutes" from 3613 | **34 minutes** | Day 3 breakfast |
+| Shop at "PA Supermarché or Provigo on the way in" | PA is **2 km** north; **Metro, 3575 av du Parc is 6 min** | Day 2 arrival, Day 3 shop, the shopping card |
+| Esplanade Tranquille "roughly fifteen minutes" | **10 minutes** | the Montréal base card |
+| Farmhouse → Baie-Saint-Paul "ten minutes" | **14.2 km, 721 s — twelve** | Day 10, and the Charlevoix base card |
+| Metro Plus "two minutes from your door" | **233 m, 2.8 min — three** | three separate places in the guide |
+
+Two findings were worth more than the numbers:
+
+- **Lafayette Place is a divided parkway with a lot on each side.** Routing to
+  the stored pin gave 21.8 km / 26 min because it climbed past the exit and
+  doubled back: the pin was the *southbound* campground lot. The northbound lot
+  is both the larger one and the side you arrive on. The guide now names it.
+- **Hautes-Gorges is 80 km from the farmhouse, not the 65 km measured from the
+  town centre.** The rang adds ~15 km each way to the Acropole day, which is the
+  strongest remaining argument for taking the riverboat instead.
+
+### 12.3 What was cut, and where it went
+
+- **"Realistic price", "Look at", "If you'd rather have a hotel"** — deleted at
+  all four bases. Predicting a price for a booking that has been paid for is
+  worse than useless; it invites second-guessing.
+- **The Baie-Saint-Paul vs La Malbaie comparison table** — deleted from the
+  guide, and the reasoning kept here: La Malbaie saves roughly an hour on Day 10
+  and half an hour on Day 9, gives most of it back on Sunday, and loses on Route
+  362 being driven in the wrong direction at the wrong time of day. It was
+  decided in favour of Baie-Saint-Paul and then **the farmhouse booking undercut
+  the deciding argument anyway** — "park once and walk to dinner" is not true at
+  352 rang Saint-Placide. The decision still stands on Route 362 and on dinner
+  prices; it no longer stands on walkability, and the guide says so.
+- **Named producers** (À Chacun Son Pain, Vergers Pedneault, Laiterie
+  Charlevoix's Le 1608) already appear on Days 9–10 and in the food cards, so
+  the base card points at them rather than repeating the list.
+
+Three things kept that a tidier card would have dropped: the **CITQ registration
+number** warning, the **Lauberivière** paragraph, and the **nightclub at 3614**.
+All three are the kind of fact a traveller would rather have found here.
+
+### 12.4 Two engine notes
+
+- **`tools/resolve.py` had a silent seeding bug.** `REGION` was
+  `r"\bmk\('(\w+)'\)"`, which matches no part of a hyphenated map name, so
+  `mk('home-nh')` left `region` holding the *previous* map's value. Every marker
+  on the four new maps was seeded with the wrong regional context — queries that
+  looked entirely reasonable, pointing at the wrong province. Fixed to
+  `[\w-]+`. The lesson is the failure mode, not the regex: the wrong answer
+  looked exactly like the right one.
+- **Laiterie Charlevoix was not drawn.** Nominatim put it 3275 m from the
+  fallback, over `--max-accept`, so `resolve.py` refused it — correctly. The OSM
+  node is real (`node/9447715577`, `shop=dairy`) but it falls outside the
+  `home-bsp` bbox and could not be eyeballed on Google's basemap from here, so
+  the marker was cut and the place pruned rather than published unverified.
+
+### 12.5 Left alone deliberately
+
+- **OSM still lists J.A. Moisan with opening hours.** The closure (January 2025)
+  was re-checked and holds; OSM is stale. No change.
+- **RTC network change, 22 August 2026** — nine days before arrival, so any
+  route map printed earlier is wrong. Stated in the Québec base card rather than
+  worked into the day plans, because the lift and the ferry mean they may never
+  need a bus.
