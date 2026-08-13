@@ -18,20 +18,22 @@
   "verified": "2026-08-11"
  },
  "Baie-Saint-Paul": {
-  "lat": 47.443,
-  "lon": -70.501,
+  "lat": 47.44565,
+  "lon": -70.51113,
   "query": "Baie-Saint-Paul",
   "region": "route",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:way/41162401 (Rue Saint-Jean-Baptiste - the dining and gallery street)",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Baie-Ste-Catherine": {
-  "lat": 48.107,
-  "lon": -69.731,
+  "lat": 48.1161,
+  "lon": -69.72315,
   "query": "Baie-Sainte-Catherine Quebec",
   "region": "route",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:node/1216423737 (whale-cruise wharf, 159 Route 138 (Croisières AML))",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Botanical Garden": {
   "lat": 45.55954,
@@ -43,28 +45,31 @@
   "verified": "2026-08-11"
  },
  "Cannon Mtn Tramway": {
-  "lat": 44.1719,
-  "lon": -71.6976,
+  "lat": 44.17303,
+  "lon": -71.69254,
   "query": "Cannon Mountain Aerial Tramway New Hampshire",
   "region": "franconia",
-  "source": "manual: OSM node is the summit station ~1 km away; this is the base station you board at",
-  "verified": null
+  "source": "osm:way/328888941 (260 Tramway Drive - where you park and board)",
+  "verified": "2026-08-13",
+  "was": "manual: OSM node is the summit station ~1 km away; this is the base station you board at"
  },
  "Canyon Sainte-Anne": {
-  "lat": 47.057,
-  "lon": -70.856,
+  "lat": 47.07449,
+  "lon": -70.87704,
   "query": "Canyon Sainte-Anne Quebec",
   "region": "beaupre",
-  "source": "manual: OSM way spans the whole canyon; this is the visitor entrance",
-  "verified": null
+  "source": "osm:way/845887343 (the canyon site itself; the old pin was a stretch of Avenue Royale)",
+  "verified": "2026-08-13",
+  "was": "manual: OSM way spans the whole canyon; this is the visitor entrance"
  },
  "Cassis Monna & Filles": {
-  "lat": 46.906,
-  "lon": -71.079,
+  "lat": 46.87713,
+  "lon": -71.0941,
   "query": "Cassis Monna et Filles Île d'Orléans",
   "region": "beaupre",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "gmaps: placed by hand on Google basemap (not in OpenStreetMap)",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Cheshire, CT": {
   "lat": 41.49894,
@@ -76,12 +81,14 @@
   "verified": "2026-08-11"
  },
  "Château Frontenac": {
-  "lat": 46.812,
-  "lon": -71.2052,
-  "query": "Château Frontenac",
+  "lat": 46.81182,
+  "lon": -71.20514,
+  "matched": "Fairmont Le Château Frontenac, 1, Rue des Carrières, Vieux-Q",
+  "query": "Fairmont Le Château Frontenac, Quebec City, Quebec",
   "region": "quebec",
-  "source": "manual: geocoder returns a château of the same name in the Dordogne, France",
-  "verified": null
+  "source": "osm:relation/32580",
+  "verified": "2026-08-13",
+  "was": "manual: geocoder returns a château of the same name in the Dordogne, France"
  },
  "Derby Line": {
   "lat": 45.00533,
@@ -93,12 +100,14 @@
   "verified": "2026-08-11"
  },
  "Deschambault": {
-  "lat": 46.652,
-  "lon": -71.921,
-  "query": "Deschambault-Grondines Quebec",
+  "lat": 46.64796,
+  "lon": -71.92762,
+  "matched": "Église Saint-Joseph, 115, Rue de l'Église, Deschambault, Des",
+  "query": "Église Saint-Joseph de Deschambault, Quebec",
   "region": "route",
-  "source": "manual: OSM relation covers the merged Deschambault-Grondines; this is Deschambault village",
-  "verified": null
+  "source": "osm:way/231768870",
+  "verified": "2026-08-13",
+  "was": "manual: OSM relation covers the merged Deschambault-Grondines; this is Deschambault village"
  },
  "Esplanade Tranquille": {
   "lat": 45.5096,
@@ -109,13 +118,33 @@
   "source": "osm:relation/17797676",
   "verified": "2026-08-11"
  },
+ "Fairmount Bagel": {
+  "lat": 45.52289,
+  "lon": -73.59523,
+  "matched": "Fairmount Bagel, 74, Avenue Fairmount Ouest, Mile-End, Le Pl",
+  "query": "Fairmount Bagel, 74 Avenue Fairmount Ouest, Montreal",
+  "region": "montreal",
+  "source": "osm:node/1607111414",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
+ },
  "Flume Gorge": {
-  "lat": 44.0975,
-  "lon": -71.6796,
-  "query": "Flume Gorge New Hampshire",
+  "lat": 44.09712,
+  "lon": -71.67979,
+  "matched": "Flume Gorge & Visitor Center, 852, Daniel Webster Highway, L",
+  "query": "Flume Gorge Visitor Center, Lincoln, New Hampshire",
+  "region": null,
+  "source": "osm:way/180270356",
+  "verified": "2026-08-13"
+ },
+ "Flume Gorge Visitor Center": {
+  "lat": 44.09712,
+  "lon": -71.67979,
+  "query": "Flume Gorge Visitor Center New Hampshire",
   "region": "franconia",
-  "source": "manual: OSM node is on the trail; this is the visitor centre where you park and buy the ticket",
-  "verified": null
+  "source": "osm:way/180270356 (Flume Gorge & Visitor Center, 852 Daniel Webster Hwy)",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Greenleaf Hut": {
   "lat": 44.16044,
@@ -127,12 +156,13 @@
   "verified": "2026-08-11"
  },
  "Hautes-Gorges": {
-  "lat": 47.868,
-  "lon": -70.421,
+  "lat": 47.85519,
+  "lon": -70.42845,
   "query": "Parc national des Hautes-Gorges-de-la-Rivière-Malbaie",
   "region": "route",
-  "source": "manual: OSM relation centroid of the whole park; this is the Équerre sector you actually drive to",
-  "verified": null
+  "source": "gmaps: placed by hand on Google basemap (not in OpenStreetMap)",
+  "verified": "2026-08-13",
+  "was": "manual: OSM relation centroid of the whole park; this is the Équerre sector you actually drive to"
  },
  "Kondiaronk Belvédère": {
   "lat": 45.50353,
@@ -153,12 +183,13 @@
   "verified": "2026-08-11"
  },
  "La Malbaie": {
-  "lat": 47.653,
-  "lon": -70.152,
+  "lat": 47.62044,
+  "lon": -70.14567,
   "query": "La Malbaie Quebec",
   "region": "charlevoix",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:relation/14122509 (Fairmont Le Manoir Richelieu, 181 Rue Richelieu)",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Lafayette Place trailhead": {
   "lat": 44.1427,
@@ -178,20 +209,22 @@
   "verified": null
  },
  "Lincoln": {
-  "lat": 44.0462,
-  "lon": -71.6712,
+  "lat": 44.04883,
+  "lon": -71.65759,
   "query": "Lincoln New Hampshire",
   "region": "franconia",
-  "source": "manual: town relation centroid is up in the mountains; this is Lincoln village",
-  "verified": null
+  "source": "gmaps: the Airbnb doubles as this pin (your instruction)",
+  "verified": "2026-08-13",
+  "was": "manual: town relation centroid is up in the mountains; this is Lincoln village"
  },
  "Lincoln, NH": {
-  "lat": 44.046,
-  "lon": -71.678,
+  "lat": 44.04883,
+  "lon": -71.65759,
   "query": "Lincoln New Hampshire",
   "region": "route",
-  "source": "manual: town relation centroid is up in the mountains; this is Lincoln village",
-  "verified": null
+  "source": "gmaps: the Airbnb doubles as this pin (your instruction)",
+  "verified": "2026-08-13",
+  "was": "manual: town relation centroid is up in the mountains; this is Lincoln village"
  },
  "Little Haystack ≈4,760 ft": {
   "lat": 44.14044,
@@ -203,20 +236,23 @@
   "verified": "2026-08-11"
  },
  "Lévis ferry": {
-  "lat": 46.8135,
-  "lon": -71.2003,
-  "query": "Quebec City–Lévis Ferry terminal Quebec",
+  "lat": 46.81186,
+  "lon": -71.20199,
+  "matched": "Gare fluviale, 10, Rue des Traversiers, Vieux-Québec, Vieux-",
+  "query": "Gare fluviale de Québec, Quebec City",
   "region": "quebec",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:way/239525238",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "MONTRÉAL": {
-  "lat": 45.508,
-  "lon": -73.567,
+  "lat": 45.51418,
+  "lon": -73.57286,
   "query": "Montreal Quebec",
   "region": "route",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "gmaps: the Airbnb doubles as this pin (your instruction)",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Marché Jean-Talon": {
   "lat": 45.53591,
@@ -282,12 +318,14 @@
   "verified": "2026-08-11"
  },
  "Notre-Dame de Québec": {
-  "lat": 46.8144,
-  "lon": -71.2076,
-  "query": "Notre-Dame de Québec Basilica-Cathedral",
+  "lat": 46.8138,
+  "lon": -71.20609,
+  "matched": "Basilique cathédrale Notre-Dame-de-Québec, 16, Rue de Buade,",
+  "query": "Basilique-cathédrale Notre-Dame de Québec, Quebec City",
   "region": "quebec",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:way/103862161",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Petit-Champlain": {
   "lat": 46.81146,
@@ -308,12 +346,14 @@
   "verified": "2026-08-11"
  },
  "Plains of Abraham": {
-  "lat": 46.803,
-  "lon": -71.2192,
-  "query": "Plains of Abraham Quebec City",
+  "lat": 46.80746,
+  "lon": -71.21246,
+  "matched": "Musée des plaines d'Abraham, Avenue Wilfrid-Laurier, Colline",
+  "query": "Musée des plaines d'Abraham, Quebec City",
   "region": "quebec",
-  "source": "manual: OSM label node sits off the battlefield proper; this is mid-park",
-  "verified": null
+  "source": "osm:node/12646637089",
+  "verified": "2026-08-13",
+  "was": "manual: OSM label node sits off the battlefield proper; this is mid-park"
  },
  "Pointe-à-Callière": {
   "lat": 45.5026,
@@ -343,12 +383,13 @@
   "verified": "2026-08-11"
  },
  "Québec City": {
-  "lat": 46.8135,
-  "lon": -71.216,
+  "lat": 46.81494,
+  "lon": -71.21944,
   "query": "Quebec City",
   "region": "beaupre",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "gmaps: the Airbnb doubles as this pin (your instruction)",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Saint Joseph's Oratory": {
   "lat": 45.49205,
@@ -360,20 +401,23 @@
   "verified": "2026-08-11"
  },
  "Saint-Irénée": {
-  "lat": 47.573,
-  "lon": -70.212,
+  "lat": 47.56379,
+  "lon": -70.20806,
   "query": "Saint-Irénée Quebec",
   "region": "charlevoix",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:way/662065989 (Domaine Forget, 5 Rang Saint-Antoine)",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Saint-Jean": {
-  "lat": 46.9145,
-  "lon": -70.9036,
-  "query": "Saint-Jean-de-l'Île-d'Orléans Quebec",
+  "lat": 46.9141,
+  "lon": -70.90267,
+  "matched": "Manoir Mauvide-Genest, Chemin Royal, Faubourg-des-Tuyaux, Sa",
+  "query": "Manoir Mauvide-Genest, Saint-Jean-de-l'Ile-d'Orleans",
   "region": "beaupre",
-  "source": "manual: parish relation centroid is inland; this is the Manoir Mauvide-Genest",
-  "verified": null
+  "source": "osm:way/1443925340",
+  "verified": "2026-08-13",
+  "was": "manual: parish relation centroid is inland; this is the Manoir Mauvide-Genest"
  },
  "Sainte-Anne-de-Beaupré": {
   "lat": 47.02385,
@@ -385,44 +429,53 @@
   "verified": "2026-08-11"
  },
  "Sainte-Famille": {
-  "lat": 46.9611,
-  "lon": -70.9586,
-  "query": "Sainte-Famille Île d'Orléans Quebec",
+  "lat": 46.97381,
+  "lon": -70.96216,
+  "matched": "Église de la Sainte-Famille de l'île d'Orléans, Chemin Royal",
+  "query": "Église Sainte-Famille, Ile d'Orleans, Quebec",
   "region": "beaupre",
-  "source": "manual: parish relation centroid is inland; this is the 1743 church on the shore road",
-  "verified": null
+  "source": "osm:way/104330090",
+  "verified": "2026-08-13",
+  "was": "manual: parish relation centroid is inland; this is the 1743 church on the shore road"
  },
  "Sainte-Pétronille": {
-  "lat": 46.853,
-  "lon": -71.137,
-  "query": "Sainte-Pétronille Quebec",
+  "lat": 46.84513,
+  "lon": -71.13219,
+  "matched": "La bibliothèque La ressource, Rue du Quai, Sainte-Pétronille",
+  "query": "Bibliotheque Sainte-Petronille ile Orleans",
   "region": "beaupre",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:library",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "St-Benoît-du-Lac": {
-  "lat": 45.281,
-  "lon": -72.248,
-  "query": "Saint-Benoît-du-Lac Abbey Quebec",
+  "lat": 45.16636,
+  "lon": -72.27082,
+  "matched": "Abbaye de Saint Benoît du Lac, Abbaye-de-Saint-Benoît-du-Lac",
+  "query": "Abbaye Saint-Benoît-du-Lac, Quebec",
   "region": "route",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:way/104934323",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
- "St-Viateur & Fairmount Bagel": {
-  "lat": 45.5227,
-  "lon": -73.6031,
-  "query": "St-Viateur Bagel Montreal",
+ "St-Viateur Bagel": {
+  "lat": 45.52268,
+  "lon": -73.60195,
+  "matched": "St-Viateur Bagel, 263, Rue Saint-Viateur Ouest, Mile-End, Le",
+  "query": "St-Viateur Bagel, 263 Rue Saint-Viateur Ouest, Montreal",
   "region": "montreal",
-  "source": "manual: geocoder returns the Saint-Laurent branch; this is the Mile End original",
-  "verified": null
+  "source": "osm:node/1751185097",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Tadoussac": {
-  "lat": 48.1391,
-  "lon": -69.7194,
+  "lat": 48.13937,
+  "lon": -69.72659,
   "query": "Tadoussac Quebec",
   "region": "charlevoix",
-  "source": "typed-by-hand",
-  "verified": null
+  "source": "osm:way/ferry (ferry landing, Rue du Bateau-Passeur)",
+  "verified": "2026-08-13",
+  "was": "typed-by-hand"
  },
  "Tam-Tams": {
   "lat": 45.51422,
@@ -443,30 +496,41 @@
   "verified": "2026-08-11"
  },
  "Trois-Rivières": {
-  "lat": 46.34323,
-  "lon": -72.54285,
-  "matched": "Trois-Rivières, Mauricie, Québec, Canada",
-  "query": "Trois-Rivières Quebec",
+  "lat": 46.34511,
+  "lon": -72.53936,
+  "matched": "Vieille prison de Trois-Rivières, 200, Rue Laviolette, Saint",
+  "query": "Vieille prison de Trois-Rivières, Quebec",
   "region": "route",
-  "source": "osm:relation/7711553",
-  "verified": "2026-08-11"
+  "source": "osm:way/100252158",
+  "verified": "2026-08-13",
+  "was": "osm:relation/7711553"
  },
  "YOUR BASE — Plateau / Mile End": {
-  "lat": 45.52314,
-  "lon": -73.59512,
-  "matched": "Mile End, Le Plateau-Mont-Royal, Montréal, Agglomération de ",
-  "query": "Mile End Montreal",
+  "lat": 45.51418,
+  "lon": -73.57286,
+  "matched": "Tonic Salon Spa, 3613, Boulevard Saint-Laurent, Le Plateau-M",
+  "query": "3613 Boulevard Saint-Laurent, Montreal, QC",
   "region": "montreal",
-  "source": "osm:relation/9940746",
-  "verified": "2026-08-11"
+  "source": "osm:node/7960937785",
+  "verified": "2026-08-12"
+ },
+ "YOUR BASE — Rang Saint-Placide": {
+  "lat": 47.36836,
+  "lon": -70.61766,
+  "matched": "Rang Saint-Placide Sud, Baie-Saint-Paul, Charlevoix, Capital",
+  "query": "352 Rang Saint-Placide Sud, Baie-Saint-Paul, QC",
+  "region": "charlevoix",
+  "source": "gmaps: placed by hand on Google basemap (not in OpenStreetMap)",
+  "verified": "2026-08-13",
+  "was": "manual: Nominatim matched the road, not house 352 - the rang runs 8-13 km from town, so this point is approximate. Drag it to the house in Google My Maps."
  },
  "YOUR BASE — St-Jean-Baptiste": {
-  "lat": 46.80969,
-  "lon": -71.22299,
-  "matched": "Saint-Jean-Baptiste, La Cité-Limoilou, Québec, Agglomération",
-  "query": "Saint-Jean-Baptiste Quebec City",
+  "lat": 46.81494,
+  "lon": -71.21944,
+  "matched": "Le Caïman, 735, Boulevard Charest Est, Saint-Roch, La Cité-L",
+  "query": "735 Boulevard Charest Est, Quebec City, QC",
   "region": "quebec",
-  "source": "osm:relation/7716092",
-  "verified": "2026-08-11"
+  "source": "osm:way/332982652",
+  "verified": "2026-08-12"
  }
 }

@@ -28,3 +28,4 @@ secrets.json
 __pycache__/
 
 .tmp/
+destinations/*/maps/tripmap.kml
