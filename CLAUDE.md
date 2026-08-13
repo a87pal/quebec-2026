@@ -14,6 +14,16 @@ toolchain in `tools/`. Read `README.md` for the layout.
 
 ## Hard rules
 
+**Ask before building a map.** `tiles.py`, `resolve.py` and `routes.py` are the
+expensive third of the pipeline — a tile per HTTP request from Esri, Nominatim at
+one request a second, OpenRouteService key quota — and they are the only stages
+that can silently make the guide worse. **Get explicit approval every time**, and
+do not run them just because a rebuild looks tidy. Approval for one change does
+not carry to the next. `overlay.py`, `boxes.py`, `maps.py`, `validate.py` and
+`check.sh` are local, offline and idempotent: run those freely. Almost every map
+edit is one of those — nothing needs refetching unless a bbox, a zoom, a marker's
+identity or a leg's endpoints changed. `tools/README.md` has the detail.
+
 **Never hand-edit `lat`/`lon` in `places.json`.** Correct the pin in Google My
 Maps and re-run `tools/kml.py --import <file> --write`, fix the `query` and
 re-run `tools/resolve.py --write`, or pin it as `"source": "manual: <why>"`. The

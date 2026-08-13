@@ -614,3 +614,89 @@ All three are the kind of fact a traveller would rather have found here.
   route map printed earlier is wrong. Stated in the Québec base card rather than
   worked into the day plans, because the lift and the ferry mean they may never
   need a bus.
+
+
+---
+
+## 13. Guides, audio walks, and a price table that said nothing new
+
+### 13.1 Reference prices, cut
+
+The `#book` subsection listed fifteen adult prices "behind the estimates in the
+sheet above". Every one of them was already on the same page: eleven as rows of
+the planning sheet, and the other four — Flume Gorge, AURA, Strøm, the
+Baie-Saint-Paul upgrade — as rows of the game-time table, which is where they
+belong because they are decisions rather than bookings. A reader comparing the
+two was comparing a number with itself. Only the lodging footnote survived,
+because the sheet does not say that anywhere.
+
+### 13.2 The sheet can carry more than one link
+
+A row had one `url`. That was wrong for the rows that are one decision with
+several places to go and read: two operators run the same pay-what-you-wish
+walk, and the audio walks are five products across three apps. The workaround
+would have been extra rows, which makes the sheet lie about how many things
+there are to book — the count in the footer is a number the traveller reads.
+
+`links` is an optional 12th element of a SEED row, `[[label, href], …]`. It is
+deliberately **not** a FIELD: `rowsNow()` re-reads it from SEED on every render,
+so it can never be overridden by hand, never goes stale in localStorage, and
+updates when the guide updates. CSV export flattens it into the Link column.
+
+### 13.3 Greeters, moved rather than repeated
+
+The Greeters card was the longest thing in the guides section and duplicated a
+row that already existed on the sheet. Everything it said that was not on that
+row — theme requests, the six-person cap, the 2–4 week lead time, no programme
+in Québec City — moved into the row's notes, and the card went. What replaced
+the three-card grid is one card for the two walks with a person and two for the
+audio walks.
+
+### 13.4 Audio on the nine days that have no guide
+
+Four days in the plan are guided: the Greeter or the Old Montréal walk on Day 3,
+the pay-what-you-wish walk on Day 6, plus the prison in Trois-Rivières, the
+museum at Wendake, the naturalist on the whale boat and the warden on the
+riverboat. Everything else is self-guided, and the guide said so without doing
+anything about it.
+
+Seven stops now carry their own audio link, and all of them are aggregated onto
+the one sheet row so they can be bought and downloaded in a single sitting:
+
+| Day | Stop | What was added |
+|---|---|---|
+| 3 | Rue Saint-Paul & the Old Port | VoiceMap Old Montréal · **Cité Mémoire, free** |
+| 4 | The bagel walk | VoiceMap · Mile End meets Outremont |
+| 6 | On the walls | VoiceMap · The Fortifications |
+| 6 | Dufferin Terrace | VoiceMap · The Heart of Old Québec |
+| 6 | Down to Place Royale | VoiceMap · Place Royale & Petit-Champlain |
+| 7 | Montmorency | **BaladoDécouverte · Côte-de-Beaupré, free** |
+| 7 | Île d'Orléans | BaladoDécouverte, loaded before crossing the bridge |
+
+Two of the five are free, which was not previously stated anywhere: **Cité
+Mémoire** (Wed–Sun from nightfall, and the 2026 season started 17 May, so all
+three Montréal nights qualify) and **BaladoDécouverte**, whose Côte-de-Beaupré
+heritage circuit runs the exact coast road of Day 7.
+
+**Sourcing note:** `voicemap.me` is blocked by the local DNS filter, so the tour
+pages could not be opened from this machine. Every slug written into the guide
+came from a search index's own result URL for that named tour, not from
+extrapolating the URL pattern — which is the mistake that would have produced
+five plausible dead links.
+
+### 13.5 The food rows the dining rebuild left behind
+
+The rebuild made the everyday dinner an explicit rule — one out, under C$25 a
+head, where Quebecers eat — and named the restaurants. The sheet never caught
+up: four of the eleven dinners (Aug 29, Aug 30, Aug 31, Sep 2) had no line at
+all, because they were folded into a `groceries` row of US$40 a day for two that
+also claimed to cover breakfast and lunch. It could not.
+
+Split into **groceries at US$330** (breakfast, market lunches, the three packed
+ones) and **the four everyday dinners at C$200**, with the named walk-ins in the
+notes. The projected total barely moves — about US$4 — but the plan is now
+visible, which was the point.
+
+Also unstaled from the measured pass: the Montréal lodging note still said
+fifteen minutes to Esplanade Tranquille, and the Charlevoix one still said a ten
+minute drive.

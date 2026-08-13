@@ -45,7 +45,36 @@ Three of those touch the network and none of them run in CI: `tiles.py`,
 `resolve.py` and `routes.py`. Their output — tiles, `places.json`, `routes.json` —
 is committed, which is why `check.sh` and `build.py` work offline.
 
-Run order for a full map rebuild:
+### Ask before you build a map
+
+**`tiles.py`, `resolve.py` and `routes.py` need explicit approval every time.
+Do not run them because a rebuild seems tidy.** They are the expensive third of
+the pipeline and the cost is not yours to spend:
+
+- `tiles.py` pulls **one HTTP request per tile** from Esri's basemap service.
+  A single z16 neighbourhood map is 20–25 tiles; a four-map pass was 294. That
+  is someone else's free tier and someone else's bandwidth.
+- `resolve.py` hits Nominatim, which asks for **one request per second and no
+  bulk geocoding**, and falls through to Wikidata, which needs a search call
+  plus a claims call per candidate and throttles hard — 55 places can take half
+  an hour.
+- `routes.py` hits OSRM's demo server or spends **OpenRouteService API-key
+  quota**, both rate-limited.
+
+They are also the only stages that can *silently* make the guide worse: a
+geocoder hit can overwrite a hand-reasoned pin (see "Things that have bitten
+us"), and a re-fetch can move a route under a caption that still describes the
+old one.
+
+The free stages — `overlay.py`, `boxes.py`, `maps.py`, `validate.py`,
+`check.sh`, `build.py` — are local, offline and idempotent. **Run those freely.
+Almost every map change is one of those**: nothing needs re-downloading unless a
+bounding box, a zoom, a marker's identity or a leg's endpoints actually changed.
+
+Approval means the person asked for it or agreed to it for this change. It does
+not carry over to the next one.
+
+Run order for a full map rebuild — **the first six lines need approval**:
 
 ```sh
 D=montreal-quebec                                  # or omit --dest if there is only one
