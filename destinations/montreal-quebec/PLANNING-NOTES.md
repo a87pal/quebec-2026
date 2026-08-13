@@ -451,8 +451,50 @@ places, in one case as a headline reason to walk up the hill. Replaced by Metro
 Plus at 860 bd Charest Est — two minutes from the Saint-Roch apartment, on the
 flat — and Le Grand Marché de Québec for the producers.
 
-### 11.4 Still to verify before paying
+### 11.4 Correction: Gardens of Light is missed, by three days
 
+This one was got wrong twice and is worth recording as a method failure, not
+just a fact fix.
+
+The guide had Gardens of Light booked for Sunday 30 August and described it as
+the event's opening weekend. Challenged on it, a round of searching returned
+**"August 29 to November 2"** from what looked like three independent sources —
+Space for Life's own English release, a French-language release, and Tourisme
+Montréal — plus the matching *Shan Hai Jing* Chinese Garden theme. That was
+treated as confirmation and the date was left in place.
+
+**All three were the same 2025 press release.** Aug 29 – Nov 2 is the **2025**
+run, the *Shan Hai Jing* creation is the **13th edition**, and the search index
+was serving last year's material against a 2026 query with no year visible in
+the summary. The failure was not the sources; it was **counting repetitions of
+one document as independent confirmation**, and doing so on a fact where the
+prior — a fall event opening in August — was already suspicious enough to have
+prompted the check in the first place.
+
+The 2026 edition opens **September 3**. The Montréal leg is 28–31 August, so it
+is missed by three days, and tickets were not yet on sale, which is what
+prompted the challenge. There is no fix: catching it means moving the whole
+Montréal leg into September, which costs the Chemin du Roy day and pushes the
+whale window later. **Taken as a miss and stated plainly on the day**, per §12
+of the preferences file.
+
+Sunday evening goes back to **MUTEK's closing night** — free, outdoors, and
+already in the plan for the other two Montréal nights.
+
+Knock-on: this also changes the AURA decision. With Gardens of Light out of
+range, the three Montréal evenings are MUTEK three nights running, and AURA
+becomes the only ticketed evening on offer rather than one of two. It stays a
+game-time call, but the argument is now "wet, buy it; dry, keep the C$80 and
+remember Lumina is the better Moment Factory night", not "skip unless it rains".
+
+**Note for the next destination:** two sources agreeing is not confirmation if
+they can be the same document. For a dated event, the check is whether the page
+states the year *in the text being quoted* — and if it does not, treat it as
+unconfirmed however many times it appears.
+
+### 11.5 Still to verify before paying
+
+- **Gardens of Light's 2026 opening date** — recorded here as Sep 3, from the traveller, not from a source this machine could reach; espacepourlavie.ca is blocked by the local DNS filter
 - Légende's 2026 tasting-menu price and the vegetarian menu, at booking
 - Sagamité's broth (game-based or not) and whether it needs a reservation
 - AURA's 2026 showtimes if the Saturday turns wet

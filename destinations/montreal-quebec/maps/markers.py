@@ -90,7 +90,7 @@ def build(m):
     b.append(m.marker(P, 45.5045, -73.5560, "Notre-Dame Basilica + AURA", "", "hi"))
     b.append(m.marker(P, 45.5024, -73.5541, "Pointe-à-Callière", "", "stop", r=7))
     b.append(m.marker(P, 45.5085, -73.5654, "Esplanade Tranquille", "MUTEK free stage, 5 p.m.", "ev"))
-    b.append(m.marker(P, 45.5590, -73.5620, "Botanical Garden", "Gardens of Light", "ev"))
+    b.append(m.marker(P, 45.5590, -73.5620, "Botanical Garden", "Biodôme · rain plan", "stop", r=7))
     b.append(m.marker(P, 45.4790, -73.5793, "Atwater Market", "Lachine Canal", "stop", r=6))
     frag['montreal'] = m.wrap('montreal', ''.join(b),
         '<span><i class="lg base"></i>Your base</span><span><i class="lg hi"></i>Marquee</span>'
