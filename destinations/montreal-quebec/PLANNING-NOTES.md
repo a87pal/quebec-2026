@@ -32,13 +32,51 @@ something the river does at that point:
 | Tadoussac | A 270 m fjord empties in, forcing up the cold water the whales feed in |
 
 This is verifiable at every stop, it explains why the days run in this order, and
-it never has to be accepted — only noticed. Two things are stated plainly as
-*not* fitting: Franconia is on the itinerary because it is four hours from the
-driveway and on the way north, and it goes first because it is the only
-weather-cancellable day. And *Je me souviens* is now a single factual card —
+it never has to be accepted — only noticed. And *Je me souviens* is now a single factual card —
 Eugène-Étienne Taché carved it under the Parliament Building's arms in 1883 and
 never explained it; it has been on the plates since 1978 — rather than the
 organising claim of the whole document.
+
+### The ice, added as a prologue — and why it is not the through line
+
+Franconia was the hole in the river: a Merrimack-watershed day in a St. Lawrence
+document, previously handled by admitting it did not fit. The Laurentide Ice
+Sheet closes it — it carved Franconia Notch *and* made the river, so the ridge on
+Day 1 and the whales on Day 9 are the same event 800 km apart.
+
+It was deliberately **not** promoted to the through line. The river is an axis of
+travel: it has a direction, so it orders the days and explains why the whales are
+last. The ice is a time story with no such axis, and running the trip on it would
+mean asking the reader to read a 20,000-year retreat as a twelve-day drive —
+which is the *la survivance* failure mode above, rebuilt.
+
+So it appears exactly once, as one paragraph opening part one, and never again as
+a theme. It earns that paragraph because the copy was already leaning on it
+unnamed in six places: the Flume "since the ice left", the Basin's glacial
+pothole, Canyon Sainte-Anne "since the ice left", "Ice deepened it" at Charlevoix,
+the glacial trough at Hautes-Gorges, and the 270 m fjord driving the Tadoussac
+upwelling. Naming the agent once costs a paragraph and pays off six times.
+
+**Guard:** if the ice starts appearing in tick lists or day ledes, it has become
+la survivance and should be cut back to the one paragraph.
+
+The hero one-liner also swapped "three nights in Montréal" — logistics already in
+the itinerary table — for Mount Royal standing out of the Champlain Sea as an
+island, which pays off on Day 4 when they climb it.
+
+**From `.tmp/throughline.md`, deliberately not used** (unsupported or wrong, held
+to the same standard as the fact-check log below): puffins nesting and sharks
+swimming at Montréal; the crust depressed "over a kilometre" (far too much for
+the St. Lawrence lowland — the guide says only that the land went below sea
+level); the named beluga skeleton "Felix"; rebound "a few millimetres per
+century" (the units are off by ~1000×); the St. Lawrence as "one of the youngest
+rivers in the world" at 6,000 years; and cold-based ice preserving the Franconia
+crest specifically (genuine research, but contested and studied on Mount
+Washington, not Franconia).
+
+**Open, not actioned:** §2's Charlevoix lede dates the impact to 350 Ma, matching
+the older 342 ± 15 Ma figure; more recent work puts it near 450 Ma. Worth a check
+since it anchors the whole Charlevoix section.
 
 ### Structural changes to the copy
 
