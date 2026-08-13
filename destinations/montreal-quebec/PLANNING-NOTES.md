@@ -574,10 +574,15 @@ Two findings were worth more than the numbers:
   guide, and the reasoning kept here: La Malbaie saves roughly an hour on Day 10
   and half an hour on Day 9, gives most of it back on Sunday, and loses on Route
   362 being driven in the wrong direction at the wrong time of day. It was
-  decided in favour of Baie-Saint-Paul and then **the farmhouse booking undercut
-  the deciding argument anyway** — "park once and walk to dinner" is not true at
-  352 rang Saint-Placide. The decision still stands on Route 362 and on dinner
-  prices; it no longer stands on walkability, and the guide says so.
+  decided in favour of Baie-Saint-Paul and then the farmhouse booking removed
+  one of its arguments — "park once and walk to dinner" is not true at 352 rang
+  Saint-Placide. **That turned out not to matter, and the guide should not
+  imply otherwise.** Nothing on the itinerary happens *inside* Baie-Saint-Paul
+  except one evening on rue Saint-Jean-Baptiste; the whales and the gorge both
+  start with getting in the car from any Charlevoix base. Trading a walkable
+  main street for a cheaper booking on the Labour Day weekend was the right
+  call, and §5 of the preferences file now says so as a general rule. The
+  decision still stands on Route 362 and on dinner prices.
 - **Named producers** (À Chacun Son Pain, Vergers Pedneault, Laiterie
   Charlevoix's Le 1608) already appear on Days 9–10 and in the food cards, so
   the base card points at them rather than repeating the list.

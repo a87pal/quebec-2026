@@ -75,8 +75,10 @@ Also check, every time:
 
 ## 5. Lodging
 
-- **Walking distance to everything** in cities. Non-negotiable.
+- **Walking distance to everything** in cities. Non-negotiable *there* — see the rural exception two bullets down.
 - **Authentic residential neighbourhoods, not tourist zones.** We want the street locals live on — real cafés, real grocery stores, real prices — with a 10-minute walk to the monuments. Explicitly steer us *away* from the pretty historic core if that's where the tourist trap is.
+- **Outside cities, walkability is not the requirement — the itinerary is.** Before paying for a main street, ask what we are actually *doing in that town*. If the answer is one dinner and a bakery run, a cheaper place ten or fifteen minutes out is the better booking, and the car is a normal tool rather than a compromise — in a nature base every real day starts with getting in it anyway. Do not write these bases up as a downgrade.
+- **What a non-walkable base does owe us is the consequences, stated plainly:** who is driving after dinner, how far the nearest full grocery is and when it shuts, that a forgotten item costs the round trip, and any leg the extra distance lengthens.
 - **Budget: ~US$100/night target.** Up to **US$150–200 if it's genuinely amazing**. Above ~$150, tell us honestly whether a hotel beats an apartment at that price in that city — often it does.
 - **Airbnb and hotels both fine.** Give **live search links with our dates pre-filled**, plus 2–4 named specific properties per base with rough prices.
 - **Parking must be confirmed** in writing before booking, in any city.

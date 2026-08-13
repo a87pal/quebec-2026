@@ -228,7 +228,7 @@ def build(m):
     frag['home-bsp'] = m.wrap('home-bsp', ''.join(b),
         '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Everything else</span>'
         '<span><i class="lg ln"></i>The drive into town</span>',
-        'The whole of this base in one picture: the farmhouse is up the valley and the town is 14 km away, so the shop, dinner and the bakery are all a drive. Nothing here is walkable and there is no transport of any kind.',
+        'The whole of this base in one picture: the farmhouse is up the valley and the town is 14 km away, so the shop, dinner and the bakery are all a drive. Nothing on the itinerary happens inside Baie-Saint-Paul except one evening, so that is a fair price for a cheaper booking on the Labour Day weekend.',
         'https://www.google.com/maps/dir/352+Rang+Saint-Placide+Sud,+Baie-Saint-Paul,+QC/IGA,+Baie-Saint-Paul,+QC/Laiterie+Charlevoix,+Baie-Saint-Paul,+QC')
 
     return frag
