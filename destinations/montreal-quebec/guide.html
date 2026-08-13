@@ -343,7 +343,8 @@ footer a{color:#b9d6c3}
    is what makes a drag-to-resize handle possible at all */
 table.sheet{table-layout:fixed;font-size:.85rem}
 table.sheet th{position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  user-select:none;-webkit-user-select:none;cursor:pointer;padding-right:12px}
+  user-select:none;-webkit-user-select:none;cursor:pointer;padding:10px 12px 10px 8px;
+  font-size:.72rem;letter-spacing:.045em}
 table.sheet th:hover{background:#e7dfcf}
 th .dir{color:var(--gold);margin-left:5px;font-size:.66rem;vertical-align:1px}
 th .grip{position:absolute;top:0;right:0;bottom:0;width:9px;cursor:col-resize;border-radius:3px}
@@ -373,13 +374,25 @@ table.sheet tr{border-bottom:1px solid var(--line)}
   cursor:pointer;font-size:.9rem;padding:0;line-height:30px}
 .stnone:hover{color:var(--wine)}
 .stnone.walk:hover:after{content:"\2610"}
+.c-base select{text-align:center;font-weight:700;color:#6b7a71;font-size:.82rem;padding:6px 2px}
 .caticon{position:relative;height:30px}
-.caticon span{display:block;text-align:center;font-size:.95rem;line-height:30px;
-  filter:saturate(.72);cursor:pointer}
+.caticon span{display:block;width:22px;height:22px;margin:4px auto 0;border-radius:7px;
+  font:800 .72rem Inter,system-ui,sans-serif;line-height:22px;text-align:center;cursor:pointer}
+.cat-lodging{background:#e6efe8;color:#2b5540}
+.cat-food{background:#f6ead8;color:#7a5321}
+.cat-transportation{background:#e6eff3;color:#2f5563}
+.cat-attractions{background:#eae8f5;color:#4e4877}
+.cat-admin{background:#ece8e0;color:#6b6355}
+.filt{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:#fff;
+  border-radius:999px;padding:3px 5px 3px 12px;font:800 .72rem Inter,system-ui,sans-serif;
+  letter-spacing:.03em;color:var(--muted);text-transform:uppercase}
+.filt select{border:none;background:transparent;font:700 .78rem Inter,system-ui,sans-serif;
+  color:var(--forest);text-transform:none;letter-spacing:0;padding:4px 2px;cursor:pointer;max-width:150px}
+.filt select:focus{outline:2px solid rgba(38,80,63,.25);border-radius:6px}
 .caticon select{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;
   padding:0;border:none;cursor:pointer}
 .catkey{font-size:.78rem;color:var(--muted)}
-.catkey b{font-weight:400;margin-right:3px}
+.catkey b{font-weight:800;color:var(--forest);margin-right:3px}
 .c-start,.c-end{position:relative;overflow:visible}
 .dtbtn{display:block;width:100%;text-align:left;border:1px solid transparent;background:transparent;
   border-radius:8px;padding:7px 6px;font:inherit;font-size:.78rem;color:#3b4741;cursor:pointer;
@@ -1363,11 +1376,10 @@ th.ra,.costs td+td{text-align:right}
 
 <div class="planbar">
 <div class="chips">
-<button class="chip on" data-filter="all" type="button">All</button>
-<button class="chip" data-filter="todo" type="button">To do</button>
-<button class="chip" data-filter="booked" type="button">Booked</button>
-<button class="chip" data-filter="walkin" type="button">No booking</button>
-<button class="chip" data-filter="skip" type="button">Skipped</button>
+<label class="filt">Status<select id="fStatus"></select></label>
+<label class="filt">Base<select id="fBase"></select></label>
+<label class="filt">Category<select id="fCat"></select></label>
+<button class="pbtn" id="pkClear" type="button">Clear</button>
 </div>
 <div class="planbtns">
 <label class="ratew">C$1 = US$<input id="pkRate" inputmode="decimal" type="text" value="0.73"/></label>
@@ -1387,7 +1399,7 @@ th.ra,.costs td+td{text-align:right}
 </table>
 </div>
 <div class="sheetfoot"><button class="pbtn" id="pkAdd" type="button">+ add a row</button><span class="fine" id="pkCount"></span><span class="catkey" id="pkKey"></span></div>
-<p class="fine"><b>How it works.</b> Click a heading to sort, drag a heading to reorder the columns, drag a heading's right edge to resize it. The <b>✓</b> column is the booking: an empty box is still to do, a ticked box is booked, and <em>no box at all</em> means there is nothing to book — click one of those empty cells to cycle it to skipped and on to a to-do. Alt-click a box to skip that row. Ticking a box locks the amount: it becomes what you actually paid, in black, and you untick it to change it. Anything still grey is an estimate for two people, and <b>skipped</b> rows drop out of every total — the honest way to cut something rather than deleting it. Click a date to open a picker; only the month and day are shown, since every row is 2026. The <b>↗</b> beside a name opens its site, and the pencil on hover sets or changes that link. <b>Start and end are the itinerary's own slots, not operator confirmations</b> — move them as you book. Names and notes wrap and grow, so nothing is hidden behind a scroll.</p>
+<p class="fine"><b>How it works.</b> Click a heading to sort, drag a heading to reorder the columns, drag a heading's right edge to resize it. Filter with the three dropdowns above it — status, base and category, which combine. The <b>✓</b> column is the booking: an empty box is still to do, a ticked box is booked, and <em>no box at all</em> means there is nothing to book — click one of those empty cells to cycle it to skipped and on to a to-do. Alt-click a box to skip that row. Ticking a box locks the amount: it becomes what you actually paid, in black, and you untick it to change it. Anything still grey is an estimate for two people, and <b>skipped</b> rows drop out of every total — the honest way to cut something rather than deleting it. <b>Base</b> is which of the four beds you sleep in the night a row happens — 1 Lincoln, 2 Montréal, 3 Québec City, 4 Baie-Saint-Paul — and it is blank for the pre-trip errands and the things spread across all twelve days. Click a date to open a picker; only the month and day are shown on a 24-hour clock, since every row is 2026. The <b>↗</b> beside a name opens its site, and the pencil on hover sets or changes that link. <b>Start and end are the itinerary's own slots, not operator confirmations</b> — move them as you book. Names and notes wrap and grow, so nothing is hidden behind a scroll.</p>
 
 <h3 style="margin-top:30px">Cost breakdown</h3>
 <div class="tablewrap">
@@ -1962,24 +1974,37 @@ var body=document.getElementById('pkBody');
 if(!body) return;
 
 var KEY='travel.montreal-quebec.plan.v2', OLDKEY='travel.montreal-quebec.plan.v1', RATE0=0.73;
-var CATS=[['lodging','Lodging','\ud83d\udecf'],['food','Food','\ud83c\udf7d'],
-          ['transportation','Transportation','\ud83d\ude97'],
-          ['attractions','Attractions','\ud83c\udf9f'],['admin','Admin','\ud83d\udccb']];
+/* the letter is the first, except Admin - Attractions has eight times as many
+   rows, so it keeps the A and Admin takes its second letter */
+var CATS=[['lodging','Lodging','L'],['food','Food','F'],['transportation','Transportation','T'],
+          ['attractions','Attractions','A'],['admin','Admin','D']];
+var BASES=[['1','1 \u00b7 Lincoln, NH'],['2','2 \u00b7 Montr\u00e9al'],
+           ['3','3 \u00b7 Qu\u00e9bec City'],['4','4 \u00b7 Baie-Saint-Paul']];
+/* which bed you sleep in the night a row happens; blank means before the trip
+   or spread across all of it */
+var BASEOF={'stay-nh':'1','stay-mtl':'2','stay-qc':'3','stay-bsp':'4',
+ 'whale':'4','aura':'2','gardens':'2','lumina':'3','din-legende':'3','din-momo':'2',
+ 'din-damas':'2','din-traite':'3','greeter':'2','din-bsp':'4','prison':'3','pac':'2',
+ 'citadelle':'3','mcq':'3','wendat':'3','walkqc':'3','mnbaq':'3','spa':'3',
+ 'voicemap':'1','din-papillon':'2','walkmtl':'2','flume':'1','ghost':'3','offline':'1',
+ 'montmorency':'3','canyon':'3','sepaq':'4','ferry':'3','crypt':'3','parks':'3',
+ 'mutek':'2','tamtams':'2','din-nh':'1'};
 var STS=[['todo','To do'],['booked','Booked'],['walkin','No booking'],['skip','Skipped']];
 var CURS=[['USD','US$'],['CAD','C$']];
-var FIELDS=['pri','status','cat','item','url','start','end','cur','amt','notes'];
-var COLS=['id'].concat(FIELDS);
+var FIELDS=['pri','status','base','cat','item','url','start','end','cur','amt','notes'];
+var COLS=['id','pri','status','cat','item','url','start','end','cur','amt','notes'];
 
 /* key, heading, default width, kind */
 var COLDEF=[
  ['pri','#',50,'num'],
  ['status','\u2713',44,'status'],
- ['cat','Cat',54,'cat'],
+ ['base','Base',62,'base'],
+ ['cat','Cat',50,'cat'],
  ['item','Item',215,'item'],
- ['start','Start',126,'dt'],
- ['end','End',126,'dt'],
+ ['start','Start',112,'dt'],
+ ['end','End',112,'dt'],
  ['amt','Cost',132,'cost'],
- ['notes','Notes',400,'notes']
+ ['notes','Notes',380,'notes']
 ];
 var COLBY={},i0;
 for(i0=0;i0<COLDEF.length;i0++) COLBY[COLDEF[i0][0]]=COLDEF[i0];
@@ -2032,7 +2057,12 @@ var SEED=[
 ['fuel',42,'walkin','transportation','Fuel and tolls, about 2,400 km','','2026-08-26T09:00','2026-09-06T20:00','USD',340,'Fill in Vermont before crossing north, and in Québec City before Charlevoix. Stations thin out past Baie-Saint-Paul.'],
 ['groceries',43,'walkin','food','Groceries, lunches and coffee','','2026-08-26T18:00','2026-09-06T09:00','USD',480,'Breakfast at home, lunch grazed from markets, one proper dinner out. Roughly US$40 a day for two.'],
 ['border',44,'walkin','transportation','Check both border wait times','https://www.cbsa-asfc.gc.ca/bwt-taf/menu-eng.html','2026-08-28T11:00','2026-09-06T14:00','USD',0,'Northbound Derby Line, southbound probably Lacolle. Labour Day Sunday afternoon is the worst window of the year.']
-].map(function(a){ var o={},i; for(i=0;i<COLS.length;i++) o[COLS[i]]=a[i]; return o; });
+].map(function(a){
+  var o={},i;
+  for(i=0;i<COLS.length;i++) o[COLS[i]]=a[i];
+  o.base=BASEOF[o.id]||'';
+  return o;
+});
 
 var SEEDBY={},si;
 for(si=0;si<SEED.length;si++) SEEDBY[SEED[si].id]=SEED[si];
@@ -2092,7 +2122,7 @@ function loadState(){
   if(!st.sort||typeof st.sort!=='object') st.sort={key:'pri',dir:1};
   return st;
 }
-var S=loadState(), NEXT=1, FILTER='all';
+var S=loadState(), NEXT=1, FILTER={status:'',base:'',cat:''};
 S.extra.forEach(function(r){ var n=parseInt(String(r.id).slice(1),10); if(n>=NEXT) NEXT=n+1; });
 
 var savedTag=document.getElementById('pkSaved'), savedTimer=null;
@@ -2140,19 +2170,18 @@ var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','D
 function parts(v){
   var m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(v||'');
   if(!m) return null;
-  var h=parseInt(m[4],10);
-  return {mon:MONTHS[parseInt(m[2],10)-1],day:parseInt(m[3],10),
-          h12:(h%12)||12,min:m[5],ap:h<12?'am':'pm'};
+  return {mon:MONTHS[parseInt(m[2],10)-1],day:parseInt(m[3],10),hh:m[4],min:m[5]};
 }
-/* month and day only - the year is the same for every row on this trip */
+/* month and day only, on a 24-hour clock - the year is the same for every row
+   on this trip, and dropping am/pm buys back a column's worth of width */
 function shortDT(v){
   var p=parts(v);
-  return p? (p.mon+' '+p.day+', '+p.h12+':'+p.min+' '+p.ap) : '';
+  return p? (p.mon+' '+p.day+', '+p.hh+':'+p.min) : '';
 }
 function prettyDT(v){
   var p=parts(v);
   if(!p) return v||'';
-  return p.mon+' '+p.day+', 2026, '+p.h12+':'+p.min+' '+(p.ap==='am'?'a.m.':'p.m.');
+  return p.mon+' '+p.day+', 2026, '+p.hh+':'+p.min;
 }
 
 /* ---- header, colgroup, resize and reorder ---------------------------------- */
@@ -2261,7 +2290,7 @@ function bind(r,node,f,ev,tr){
     put(r.id,f,node.value);
     if(node.tagName==='INPUT') node.title=isDT?prettyDT(node.value):node.value;
     if(node.tagName==='TEXTAREA') grow(node);
-    if(f==='status'){ tr.setAttribute('data-st',node.value); renderBody(); return; }
+    if(f==='status'||f==='cat'||f==='base'){ renderBody(); return; }
     refresh();
   });
   return node;
@@ -2297,9 +2326,14 @@ function cellFor(r,k,tr){
       });
       td.appendChild(nb);
     }
+  } else if(kind==='base'){
+    var bs=pick([['','\u2013']].concat(BASES.map(function(b){ return [b[0],b[0]]; })),r.base||'');
+    bs.title=r.base?('Base '+label(BASES,r.base)):'Not tied to one base';
+    td.appendChild(bind(r,bs,'base','change',tr));
   } else if(kind==='cat'){
     var cwrap=document.createElement('div'); cwrap.className='caticon';
     var ic=document.createElement('span');
+    ic.className='cat-'+r.cat;
     ic.textContent=icon(r.cat); ic.setAttribute('aria-hidden','true');
     cwrap.appendChild(ic);
     var csel=pick(CATS.map(function(c){ return [c[0],c[2]+'  '+c[1]]; }),r.cat);
@@ -2389,6 +2423,7 @@ function sorted(rs){
     if(k==='pri'){ x=num(a.pri); y=num(b.pri); }
     else if(k==='amt'){ x=usd(a); y=usd(b); }
     else if(k==='cat'){ x=rank(CATS,a.cat); y=rank(CATS,b.cat); }
+    else if(k==='base'){ x=a.base?parseInt(a.base,10):99; y=b.base?parseInt(b.base,10):99; }
     else if(k==='status'){ x=rank(STS,a.status); y=rank(STS,b.status); }
     else { x=String(a[k]||'\uffff'); y=String(b[k]||'\uffff'); return d*(x<y?-1:x>y?1:0); }
     return d*(x-y);
@@ -2401,6 +2436,8 @@ function renderBody(){
     var r=rs[i], tr=document.createElement('tr');
     tr.setAttribute('data-id',r.id);
     tr.setAttribute('data-st',r.status);
+    tr.setAttribute('data-base',r.base||'');
+    tr.setAttribute('data-cat',r.cat);
     for(j=0;j<S.cols.length;j++) tr.appendChild(cellFor(r,S.cols[j],tr));
     var td=document.createElement('td'); td.className='c-del';
     var del=document.createElement('button');
@@ -2422,7 +2459,7 @@ function renderBody(){
 document.getElementById('pkAdd').addEventListener('click',function(){
   var rs=rowsNow(), top=0;
   for(var i=0;i<rs.length;i++) top=Math.max(top,num(rs[i].pri));
-  var r={id:'x'+(NEXT++),pri:top+1,status:'todo',cat:'attractions',item:'',url:'',
+  var r={id:'x'+(NEXT++),pri:top+1,status:'todo',base:'',cat:'attractions',item:'',url:'',
          start:'',end:'',cur:'CAD',amt:'',notes:''};
   S.extra.push(r); save(); renderBody();
   var n=body.querySelector('tr[data-id="'+r.id+'"] .c-item input');
@@ -2474,7 +2511,10 @@ function refresh(){
 
   var trs=body.querySelectorAll('tr[data-id]');
   for(i=0;i<trs.length;i++){
-    var show=(FILTER==='all')||(trs[i].getAttribute('data-st')===FILTER);
+    var rb=trs[i].getAttribute('data-base');
+    var show=(!FILTER.status||trs[i].getAttribute('data-st')===FILTER.status)
+          && (!FILTER.base||(FILTER.base==='-'?!rb:rb===FILTER.base))
+          && (!FILTER.cat||trs[i].getAttribute('data-cat')===FILTER.cat);
     trs[i].style.display=show?'':'none';
     if(show) shown++;
   }
@@ -2484,7 +2524,7 @@ function refresh(){
   if(key&&!key.firstChild) for(i=0;i<CATS.length;i++){
     var kb=document.createElement('b'); kb.textContent=CATS[i][2];
     key.appendChild(kb);
-    key.appendChild(document.createTextNode(CATS[i][1]+(i<CATS.length-1?'\u00a0\u00b7 ':'')));
+    key.appendChild(document.createTextNode(' '+CATS[i][1]+(i<CATS.length-1?'\u00a0\u00b7 ':'')));
   }
 }
 
@@ -2499,12 +2539,13 @@ function download(name,text,mime){
 function csvCell(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; }
 function exportCSV(){
   var rs=sorted(rowsNow()), out=[], i, r;
-  out.push(['Priority','Status','Category','Item','Link','Start','End','Currency','Amount',
+  out.push(['Priority','Status','Base','Category','Item','Link','Start','End','Currency','Amount',
             'Notes','Amount US$','Paid?'].map(csvCell).join(','));
   for(i=0;i<rs.length;i++){
     r=rs[i];
-    out.push([r.pri,label(STS,r.status),label(CATS,r.cat),r.item,r.url,r.start,r.end,r.cur,r.amt,
-              r.notes,usd(r).toFixed(2),r.status==='booked'?'paid':'estimate'].map(csvCell).join(','));
+    out.push([r.pri,label(STS,r.status),r.base?label(BASES,r.base):'',label(CATS,r.cat),r.item,r.url,
+              r.start,r.end,r.cur,r.amt,r.notes,usd(r).toFixed(2),
+              r.status==='booked'?'paid':'estimate'].map(csvCell).join(','));
   }
   out.push('');
   out.push([csvCell('Rate used'),csvCell('C$1 = US$'+S.rate)].join(','));
@@ -2585,14 +2626,30 @@ rateBox.addEventListener('input',function(){
   var v=parseFloat(rateBox.value);
   if(isFinite(v)&&v>0){ S.rate=v; save(); refresh(); }
 });
-var chips=document.querySelectorAll('.chip[data-filter]');
-for(var ci=0;ci<chips.length;ci++) chips[ci].addEventListener('click',(function(btn){
-  return function(){
-    FILTER=btn.getAttribute('data-filter');
-    for(var k=0;k<chips.length;k++) chips[k].className='chip'+(chips[k]===btn?' on':'');
-    refresh();
-  };
-})(chips[ci]));
+function fillFilter(id,all,opts){
+  var el=document.getElementById(id),i,o;
+  o=document.createElement('option'); o.value=''; o.textContent=all; el.appendChild(o);
+  for(i=0;i<opts.length;i++){
+    o=document.createElement('option');
+    o.value=opts[i][0]; o.textContent=opts[i][1];
+    el.appendChild(o);
+  }
+  el.addEventListener('change',function(){ FILTER[el.getAttribute('data-f')]=el.value; refresh(); });
+  return el;
+}
+document.getElementById('fStatus').setAttribute('data-f','status');
+document.getElementById('fBase').setAttribute('data-f','base');
+document.getElementById('fCat').setAttribute('data-f','cat');
+fillFilter('fStatus','Any status',STS);
+fillFilter('fBase','Any base',BASES.concat([['-','Not tied to one']]));
+fillFilter('fCat','Any category',CATS.map(function(c){ return [c[0],c[2]+'  '+c[1]]; }));
+document.getElementById('pkClear').addEventListener('click',function(){
+  FILTER={status:'',base:'',cat:''};
+  document.getElementById('fStatus').value='';
+  document.getElementById('fBase').value='';
+  document.getElementById('fCat').value='';
+  refresh();
+});
 
 renderHead();
 renderBody();
