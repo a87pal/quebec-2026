@@ -6,7 +6,16 @@
   "query": "Artists Bluff Franconia New Hampshire",
   "region": "franconia",
   "source": "osm:node/5352572570",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
+ },
+ "Ascenseur du Faubourg": {
+  "lat": 46.812,
+  "lon": -71.22276,
+  "matched": "Ascenseur du Faubourg, Rue Saint-Réal, Centreville, Saint-Ro",
+  "query": "Ascenseur du Faubourg Quebec City",
+  "region": "home-qc",
+  "source": "osm:node/2348883335",
+  "verified": "2026-08-13"
  },
  "Atwater Market": {
   "lat": 45.47964,
@@ -15,7 +24,7 @@
   "query": "Atwater Market Montreal, Quebec",
   "region": "montreal",
   "source": "osm:node/12125417451",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Baie-Saint-Paul": {
   "lat": 47.44565,
@@ -35,6 +44,15 @@
   "verified": "2026-08-13",
   "was": "typed-by-hand"
  },
+ "Black Mtn. Burger + Pub 32": {
+  "lat": 44.04964,
+  "lon": -71.65927,
+  "matched": "Black Mtn. Burger Co., Lodge Road, Lincoln, Grafton County, ",
+  "query": "Black Mtn Burger Co Lincoln New Hampshire",
+  "region": "home-nh",
+  "source": "osm:node/7092435585",
+  "verified": "2026-08-13"
+ },
  "Botanical Garden": {
   "lat": 45.55954,
   "lon": -73.56124,
@@ -42,23 +60,33 @@
   "query": "Montreal Botanical Garden",
   "region": "montreal",
   "source": "osm:way/87382664",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
+ },
+ "Bureau de Poste": {
+  "lat": 46.81366,
+  "lon": -71.22675,
+  "matched": "Le Bureau de poste, 296, Rue Saint-Joseph Est, Saint-Roch, L",
+  "query": "Le Bureau de poste, 296 Rue Saint-Joseph Est, Quebec",
+  "region": "home-qc",
+  "source": "osm:node/2409284128",
+  "verified": "2026-08-13"
  },
  "Cannon Mtn Tramway": {
   "lat": 44.17303,
   "lon": -71.69254,
-  "query": "Cannon Mountain Aerial Tramway New Hampshire",
+  "query": "260 Tramway Drive, Franconia, NH",
   "region": "franconia",
-  "source": "osm:way/328888941 (260 Tramway Drive - where you park and board)",
+  "source": "manual: way/328888941, 260 Tramway Drive - the valley station you park at and board. The two OSM nodes named 'Cannon Mountain Aerial Tramway' are roadside signs on the parkway, 700 m east of the lift.",
   "verified": "2026-08-13",
   "was": "manual: OSM node is the summit station ~1 km away; this is the base station you board at"
  },
  "Canyon Sainte-Anne": {
   "lat": 47.07449,
   "lon": -70.87704,
+  "matched": "Canyon Sainte-Anne, Saint-Ferréol-les-Neiges, La Côte-de-Bea",
   "query": "Canyon Sainte-Anne Quebec",
   "region": "beaupre",
-  "source": "osm:way/845887343 (the canyon site itself; the old pin was a stretch of Avenue Royale)",
+  "source": "osm:way/845887343",
   "verified": "2026-08-13",
   "was": "manual: OSM way spans the whole canyon; this is the visitor entrance"
  },
@@ -78,7 +106,7 @@
   "query": "Cheshire Connecticut",
   "region": "route",
   "source": "osm:relation/11049401",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Château Frontenac": {
   "lat": 46.81182,
@@ -90,6 +118,15 @@
   "verified": "2026-08-13",
   "was": "manual: geocoder returns a château of the same name in the Dordogne, France"
  },
+ "Common Man, Lincoln": {
+  "lat": 44.05128,
+  "lon": -71.65959,
+  "matched": "Common Man, Lincoln, 10, Pollard Road, Lincoln, Grafton Coun",
+  "query": "Common Man, 10 Pollard Road, Lincoln, New Hampshire",
+  "region": "home-nh",
+  "source": "osm:way/202292284",
+  "verified": "2026-08-13"
+ },
  "Derby Line": {
   "lat": 45.00533,
   "lon": -72.09965,
@@ -97,7 +134,7 @@
   "query": "Derby Line Vermont",
   "region": "route",
   "source": "osm:relation/199079",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Deschambault": {
   "lat": 46.64796,
@@ -116,7 +153,7 @@
   "query": "Esplanade Tranquille Montreal",
   "region": "montreal",
   "source": "osm:relation/17797676",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Fairmount Bagel": {
   "lat": 45.52289,
@@ -128,23 +165,24 @@
   "verified": "2026-08-13",
   "was": "typed-by-hand"
  },
- "Flume Gorge": {
-  "lat": 44.09712,
-  "lon": -71.67979,
-  "matched": "Flume Gorge & Visitor Center, 852, Daniel Webster Highway, L",
-  "query": "Flume Gorge Visitor Center, Lincoln, New Hampshire",
-  "region": null,
-  "source": "osm:way/180270356",
-  "verified": "2026-08-13"
- },
  "Flume Gorge Visitor Center": {
   "lat": 44.09712,
   "lon": -71.67979,
+  "matched": "Flume Gorge & Visitor Center, 852, Daniel Webster Highway, L",
   "query": "Flume Gorge Visitor Center New Hampshire",
   "region": "franconia",
-  "source": "osm:way/180270356 (Flume Gorge & Visitor Center, 852 Daniel Webster Hwy)",
+  "source": "osm:way/180270356",
   "verified": "2026-08-13",
   "was": "typed-by-hand"
+ },
+ "Gare du Palais": {
+  "lat": 46.81783,
+  "lon": -71.21387,
+  "matched": "Gare du Palais, Rue de la Gare-du-Palais, Vieux-Québec, Vieu",
+  "query": "Gare du Palais, Quebec",
+  "region": "home-qc",
+  "source": "osm:way/33893247",
+  "verified": "2026-08-13"
  },
  "Greenleaf Hut": {
   "lat": 44.16044,
@@ -153,7 +191,16 @@
   "query": "Greenleaf Hut New Hampshire",
   "region": "franconia",
   "source": "osm:way/328889921",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
+ },
+ "Gypsy Café": {
+  "lat": 44.04303,
+  "lon": -71.6703,
+  "matched": "Gypsy Café, Pleasant Street, Lincoln, Grafton County, New Ha",
+  "query": "Gypsy Cafe Lincoln New Hampshire",
+  "region": "home-nh",
+  "source": "osm:way/206157398",
+  "verified": "2026-08-13"
  },
  "Hautes-Gorges": {
   "lat": 47.85519,
@@ -171,7 +218,7 @@
   "query": "Kondiaronk Belvedere Montreal",
   "region": "montreal",
   "source": "osm:way/182750657",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "La Citadelle": {
   "lat": 46.80749,
@@ -180,7 +227,7 @@
   "query": "Citadelle of Quebec",
   "region": "quebec",
   "source": "osm:relation/5877711",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "La Malbaie": {
   "lat": 47.62044,
@@ -191,6 +238,15 @@
   "verified": "2026-08-13",
   "was": "typed-by-hand"
  },
+ "La Vieille Europe": {
+  "lat": 45.51594,
+  "lon": -73.5768,
+  "matched": "La Vieille Europe, 3855, Boulevard Saint-Laurent, Le Plateau",
+  "query": "La Vieille Europe, 3855 Boulevard Saint-Laurent, Montreal",
+  "region": "home-mtl",
+  "source": "osm:node/1571409723",
+  "verified": "2026-08-13"
+ },
  "Lafayette Place trailhead": {
   "lat": 44.1427,
   "lon": -71.68529,
@@ -198,7 +254,7 @@
   "query": "Lafayette Place Campground Franconia Notch New Hampshire",
   "region": "franconia",
   "source": "osm:way/291788963",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Les Éboulements": {
   "lat": 47.483,
@@ -233,7 +289,7 @@
   "query": "Little Haystack Mountain New Hampshire",
   "region": "franconia",
   "source": "osm:node/357730283",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Lévis ferry": {
   "lat": 46.81186,
@@ -261,7 +317,25 @@
   "query": "Jean-Talon Market Montreal",
   "region": "montreal",
   "source": "osm:way/22876797",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
+ },
+ "Metro Plus, bd Charest": {
+  "lat": 46.81619,
+  "lon": -71.21773,
+  "matched": "Metro, 860, Boulevard Charest Est, Saint-Roch, La Cité-Limoi",
+  "query": "Metro 860 Boulevard Charest Est Quebec City",
+  "region": "home-qc",
+  "source": "osm:node/2356601998",
+  "verified": "2026-08-13"
+ },
+ "Metro, av du Parc": {
+  "lat": 45.51041,
+  "lon": -73.575,
+  "matched": "Metro, Avenue du Parc, Le Plateau-Mont-Royal, Montréal, Aggl",
+  "query": "Metro, 3575 Avenue du Parc, Montreal",
+  "region": "home-mtl",
+  "source": "osm:node/926984552",
+  "verified": "2026-08-13"
  },
  "Montmorency Falls": {
   "lat": 46.89075,
@@ -270,7 +344,7 @@
   "query": "Montmorency Falls",
   "region": "beaupre",
   "source": "osm:node/1199354691",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Morrin Centre": {
   "lat": 46.81272,
@@ -279,7 +353,7 @@
   "query": "Morrin Centre Quebec City",
   "region": "quebec",
   "source": "osm:way/27073750",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Mt. Lafayette 5,249 ft": {
   "lat": 44.16071,
@@ -288,7 +362,7 @@
   "query": "Mount Lafayette New Hampshire",
   "region": "franconia",
   "source": "osm:node/357730240",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Mt. Lincoln 5,089 ft": {
   "lat": 44.14883,
@@ -297,7 +371,7 @@
   "query": "Mount Lincoln New Hampshire",
   "region": "franconia",
   "source": "osm:node/357730273",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Musée de la civilisation": {
   "lat": 46.81517,
@@ -306,7 +380,25 @@
   "query": "Musée de la civilisation Quebec City",
   "region": "quebec",
   "source": "osm:node/2546008681",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
+ },
+ "Métro Place-des-Arts": {
+  "lat": 45.5072,
+  "lon": -73.56944,
+  "matched": "Place-des-Arts Metro Station, Rue De Bleury, Quartier des Sp",
+  "query": "Place-des-Arts metro station, Montreal",
+  "region": "home-mtl",
+  "source": "osm:way/122209644",
+  "verified": "2026-08-13"
+ },
+ "Métro Sherbrooke": {
+  "lat": 45.51872,
+  "lon": -73.56805,
+  "matched": "Sherbrooke, Rue Berri, Le Plateau-Mont-Royal, Montréal, Aggl",
+  "query": "Sherbrooke station Berri Montreal",
+  "region": "home-mtl",
+  "source": "osm:node/7052605742",
+  "verified": "2026-08-13"
  },
  "Notre-Dame Basilica + AURA": {
   "lat": 45.50444,
@@ -315,7 +407,7 @@
   "query": "Notre-Dame Basilica Montreal",
   "region": "montreal",
   "source": "osm:way/4320792",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Notre-Dame de Québec": {
   "lat": 46.8138,
@@ -327,6 +419,15 @@
   "verified": "2026-08-13",
   "was": "typed-by-hand"
  },
+ "Parking, 450 rue du Parvis": {
+  "lat": 46.81375,
+  "lon": -71.22312,
+  "matched": "450, Rue du Parvis, Centreville, Saint-Roch, La Cité-Limoilo",
+  "query": "450 Rue du Parvis, Quebec",
+  "region": "home-qc",
+  "source": "osm:node/1198691725",
+  "verified": "2026-08-13"
+ },
  "Petit-Champlain": {
   "lat": 46.81146,
   "lon": -71.20353,
@@ -334,7 +435,7 @@
   "query": "Rue du Petit-Champlain Quebec City",
   "region": "quebec",
   "source": "osm:way/27369585",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Place Royale": {
   "lat": 46.81317,
@@ -343,7 +444,7 @@
   "query": "Place Royale Quebec City",
   "region": "quebec",
   "source": "osm:way/27073360",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Plains of Abraham": {
   "lat": 46.80746,
@@ -362,7 +463,7 @@
   "query": "Pointe-à-Callière Montreal, Quebec",
   "region": "montreal",
   "source": "osm:way/87411702",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Porte Saint-Louis": {
   "lat": 46.80944,
@@ -371,7 +472,16 @@
   "query": "Porte Saint-Louis Quebec City",
   "region": "quebec",
   "source": "osm:node/463014733",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
+ },
+ "Price Chopper": {
+  "lat": 44.04121,
+  "lon": -71.66996,
+  "matched": "Price Chopper, South Mountain Road, Lincoln, Grafton County,",
+  "query": "Price Chopper supermarket Lincoln New Hampshire",
+  "region": "home-nh",
+  "source": "osm:node/1270711785",
+  "verified": "2026-08-13"
  },
  "QUÉBEC CITY": {
   "lat": 46.81374,
@@ -380,7 +490,7 @@
   "query": "Quebec City",
   "region": "route",
   "source": "osm:relation/2319206",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Québec City": {
   "lat": 46.81494,
@@ -398,7 +508,7 @@
   "query": "Saint Joseph's Oratory Montreal",
   "region": "montreal",
   "source": "osm:relation/6275154",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Saint-Irénée": {
   "lat": 47.56379,
@@ -426,7 +536,7 @@
   "query": "Basilica of Sainte-Anne-de-Beaupré",
   "region": "beaupre",
   "source": "wikidata:Q810148",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "Sainte-Famille": {
   "lat": 46.97381,
@@ -444,9 +554,18 @@
   "matched": "La bibliothèque La ressource, Rue du Quai, Sainte-Pétronille",
   "query": "Bibliotheque Sainte-Petronille ile Orleans",
   "region": "beaupre",
-  "source": "osm:library",
+  "source": "osm:node/5117496984",
   "verified": "2026-08-13",
   "was": "typed-by-hand"
+ },
+ "Schwartz's": {
+  "lat": 45.51633,
+  "lon": -73.57765,
+  "matched": "Schwartz's, 3895, Boulevard Saint-Laurent, Le Plateau-Mont-R",
+  "query": "Schwartz's, 3895 Boulevard Saint-Laurent, Montreal",
+  "region": "home-mtl",
+  "source": "osm:node/343490371",
+  "verified": "2026-08-13"
  },
  "St-Benoît-du-Lac": {
   "lat": 45.16636,
@@ -468,6 +587,15 @@
   "verified": "2026-08-13",
   "was": "typed-by-hand"
  },
+ "Sushi Momo": {
+  "lat": 45.518,
+  "lon": -73.56953,
+  "matched": "Sushi Momo Végétalien, 3609, Rue Saint-Denis, Le Plateau-Mon",
+  "query": "Sushi Momo, 3609 Rue Saint-Denis, Montreal",
+  "region": "home-mtl",
+  "source": "osm:node/4724936328",
+  "verified": "2026-08-13"
+ },
  "Tadoussac": {
   "lat": 48.13937,
   "lon": -69.72659,
@@ -484,7 +612,7 @@
   "query": "George-Étienne Cartier Monument Montreal",
   "region": "montreal",
   "source": "osm:way/143352036",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
  },
  "The Basin": {
   "lat": 44.11988,
@@ -493,7 +621,16 @@
   "query": "The Basin Franconia Notch New Hampshire",
   "region": "franconia",
   "source": "osm:way/404865214",
-  "verified": "2026-08-11"
+  "verified": "2026-08-13"
+ },
+ "The Lodge at Lincoln Station": {
+  "lat": 44.04856,
+  "lon": -71.65768,
+  "matched": "The Lodge at Lincoln Station, Lodge Road, Lincoln, Grafton C",
+  "query": "Lincoln Station Lodge Road Lincoln New Hampshire",
+  "region": "home-nh",
+  "source": "osm:way/217470551",
+  "verified": "2026-08-13"
  },
  "Trois-Rivières": {
   "lat": 46.34511,
@@ -504,6 +641,15 @@
   "source": "osm:way/100252158",
   "verified": "2026-08-13",
   "was": "osm:relation/7711553"
+ },
+ "Woodstock Inn Brewery": {
+  "lat": 44.0319,
+  "lon": -71.68703,
+  "matched": "Woodstock Inn Company Store, 135, Main Street, North Woodsto",
+  "query": "Woodstock Inn Brewery 135 Main Street North Woodstock New Hampshire",
+  "region": "home-nh",
+  "source": "osm:node/6303787940",
+  "verified": "2026-08-13"
  },
  "YOUR BASE — Rang Saint-Placide": {
   "lat": 47.36836,
@@ -522,7 +668,7 @@
   "query": "735 Boulevard Charest Est, Quebec City, QC",
   "region": "quebec",
   "source": "osm:way/332982652",
-  "verified": "2026-08-12",
+  "verified": "2026-08-13",
   "was_key": "YOUR BASE — St-Jean-Baptiste"
  },
  "YOUR BASE — The Main": {
@@ -532,7 +678,7 @@
   "query": "3613 Boulevard Saint-Laurent, Montreal, QC",
   "region": "montreal",
   "source": "osm:node/7960937785",
-  "verified": "2026-08-12",
+  "verified": "2026-08-13",
   "was_key": "YOUR BASE — Plateau / Mile End"
  }
 }

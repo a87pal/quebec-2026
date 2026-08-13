@@ -4,5 +4,10 @@
   "montreal":   { "z": 13, "lat": [45.462,   45.578],  "lon": [-73.665,  -73.495],  "dispw": 1100, "context": "Montreal, Quebec" },
   "quebec":     { "z": 15, "lat": [46.7955,  46.8235], "lon": [-71.2400, -71.1855], "dispw": 1100, "context": "Quebec City" },
   "beaupre":    { "z": 12, "lat": [46.795,   47.095],  "lon": [-71.290,  -70.775],  "dispw": 1100, "context": "Quebec" },
-  "charlevoix": { "z": 10, "lat": [47.330,   48.230],  "lon": [-70.760,  -69.560],  "dispw": 720,  "context": "Charlevoix, Quebec" }
+  "charlevoix": { "z": 10, "lat": [47.330,   48.230],  "lon": [-70.760,  -69.560],  "dispw": 720,  "context": "Charlevoix, Quebec" },
+
+  "home-nh":    { "z": 15, "lat": [44.0290,  44.0570], "lon": [-71.6960, -71.6480], "dispw": 900,  "context": "Lincoln, New Hampshire" },
+  "home-mtl":   { "z": 16, "lat": [45.5065,  45.5215], "lon": [-73.5840, -73.5605], "dispw": 1000, "context": "Le Plateau-Mont-Royal, Montreal" },
+  "home-qc":    { "z": 16, "lat": [46.8085,  46.8205], "lon": [-71.2275, -71.2035], "dispw": 1000, "context": "Saint-Roch, Quebec City" },
+  "home-bsp":   { "z": 13, "lat": [47.3550,  47.4600], "lon": [-70.6450, -70.4950], "dispw": 900,  "context": "Baie-Saint-Paul, Charlevoix" }
 }

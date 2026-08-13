@@ -158,4 +158,77 @@ def build(m):
         'Day 9 goes out on Route 138 in the morning and comes back on Route 362 — the balcony road — in the evening light. Day 10 is the gold spur up to the gorge.',
         'https://www.google.com/maps/dir/Baie-Saint-Paul,+QC/Baie-Sainte-Catherine,+QC/La+Malbaie,+QC/Les+%C3%89boulements,+QC/Baie-Saint-Paul,+QC')
 
+    # ---------------- HOME MAPS ----------------
+    # One per booked address. The region maps above answer "what do we do here";
+    # these answer "how do we live here" - the shop, the station, the lift, the
+    # car, and how far the walk really is. Same engine, different question, so
+    # they are separate maps rather than more pins on an already busy one.
+    #
+    # Legend convention across all four: green = your door, wine = where the
+    # food comes from, gold = how you move, white = somewhere you walk to.
+
+    # ---------------- HOME · LINCOLN, NH ----------------
+    P, _ = m.mk('home-nh')
+    b = []
+    b.append(m.marker(P, 44.04883, -71.65759, "The Lodge at Lincoln Station", "36 Lodge Road · nights 1–2", "base", r=12))
+    b.append(m.marker(P, 44.04121, -71.66996, "Price Chopper", "the real shop · open to 11 p.m.", "hi", r=10))
+    b.append(m.marker(P, 44.04964, -71.65927, "Black Mtn. Burger + Pub 32", "2 min on foot", "stop", r=7))
+    b.append(m.marker(P, 44.05128, -71.65957, "Common Man, Lincoln", "9 min on foot", "stop", r=7))
+    b.append(m.marker(P, 44.04303, -71.67030, "Gypsy Café", "16 min walk · 3 min drive", "stop", r=7))
+    b.append(m.marker(P, 44.03407, -71.68556, "Woodstock Inn Brewery", "42 min walk — take the car", "stop", r=7))
+    frag['home-nh'] = m.wrap('home-nh', ''.join(b),
+        '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Groceries</span>',
+        'Everything white is genuinely walkable from the door. There is no public transport of any kind in Lincoln — the car does every mile that is not on this map, including the 13.5 miles north to the Franconia trailhead.',
+        'https://www.google.com/maps/dir/36+Lodge+Road,+Lincoln,+NH/Price+Chopper,+Lincoln,+NH/Woodstock+Inn+Brewery,+North+Woodstock,+NH')
+
+    # ---------------- HOME · MONTRÉAL ----------------
+    P, _ = m.mk('home-mtl')
+    b = []
+    b.append(m.marker(P, 45.51418, -73.57286, "YOUR BASE — The Main", "3613 bd Saint-Laurent", "base", r=12))
+    b.append(m.marker(P, 45.51041, -73.57500, "Metro, av du Parc", "full shop · 8–22 daily · 6 min", "hi", r=10))
+    b.append(m.marker(P, 45.51594, -73.57680, "La Vieille Europe", "cheese and charcuterie · 4 min", "hi", r=9))
+    b.append(m.marker(P, 45.51872, -73.56805, "Métro Sherbrooke", "orange line · 8 min", "ev", r=9))
+    b.append(m.marker(P, 45.50803, -73.56832, "Métro Place-des-Arts", "green line · 11 min", "ev", r=9))
+    b.append(m.marker(P, 45.51650, -73.57790, "Schwartz's", "4 min · 3 blocks north", "stop", r=7))
+    b.append(m.marker(P, 45.51780, -73.56950, "Sushi Momo", "the splurge · 8 min", "stop", r=7))
+    b.append(m.marker(P, 45.50960, -73.56493, "Esplanade Tranquille", "MUTEK, free · 10 min", "stop", r=7))
+    frag['home-mtl'] = m.wrap('home-mtl', ''.join(b),
+        '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Groceries</span>'
+        '<span><i class="lg ev"></i>Métro</span>',
+        'This is the lower Main, not Mile End — the bagel bakeries are 34 minutes north on foot, and everything on this map is under twelve. Two lines are walkable, the 55 bus stops at the corner, and there are five BIXI docks inside 300 m.',
+        'https://www.google.com/maps/dir/3613+Boulevard+Saint-Laurent,+Montreal/Metro,+3575+Avenue+du+Parc,+Montreal/Sherbrooke+station,+Montreal/Esplanade+Tranquille,+Montreal')
+
+    # ---------------- HOME · QUÉBEC CITY ----------------
+    P, _ = m.mk('home-qc')
+    b = []
+    b.append(m.marker(P, 46.81494, -71.21944, "YOUR BASE — Saint-Roch", "735 bd Charest Est", "base", r=12))
+    b.append(m.marker(P, 46.81619, -71.21773, "Metro Plus, bd Charest", "3 min · 8–22 daily", "hi", r=10))
+    b.append(m.marker(P, 46.81440, -71.22220, "Bureau de Poste", "menu under C$10 · 8 min", "stop", r=7))
+    b.append(m.marker(P, 46.81260, -71.22260, "Ascenseur du Faubourg", "free lift up the cliff", "ev", r=10))
+    b.append(m.marker(P, 46.81470, -71.22370, "Parking, 450 rue du Parvis", "the car lives here", "ev", r=9))
+    b.append(m.marker(P, 46.81832, -71.21435, "Gare du Palais", "coaches and trains · 9 min", "ev", r=9))
+    b.append(m.marker(P, 46.81090, -71.21170, "Porte Saint-Louis", "13 min — and 60 m up", "stop", r=7))
+    b.append(m.marker(P, 46.81200, -71.20520, "Château Frontenac", "19 min on the flat map", "hi", r=10))
+    frag['home-qc'] = m.wrap('home-qc', ''.join(b),
+        '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Groceries and the postcard</span>'
+        '<span><i class="lg ev"></i>How you move</span>',
+        'You are below the cliff. Everything in the walled city on this map is up 60 vertical metres from your door, and the gold dot on rue Saint-Vallier is the free public lift that does the climb for you. There is no métro in Québec City.',
+        'https://www.google.com/maps/dir/735+Boulevard+Charest+Est,+Quebec/Metro,+860+Boulevard+Charest+Est,+Quebec/Ascenseur+du+Faubourg,+Quebec/Ch%C3%A2teau+Frontenac,+Quebec')
+
+    # ---------------- HOME · BAIE-SAINT-PAUL ----------------
+    P, _ = m.mk('home-bsp')
+    b = []
+    b.append(m.leg(P, 'base-to-baie', fallback=[(47.36836, -70.61766), (47.395, -70.590), (47.420, -70.545), (47.44565, -70.51113)]))
+    b.append(m.marker(P, 47.36836, -70.61766, "YOUR BASE — Rang Saint-Placide", "352 rang Saint-Placide Sud", "base", r=12))
+    b.append(m.marker(P, 47.44565, -70.51113, "Baie-Saint-Paul", "IGA · Le Saint-Pub · the galleries", "hi", r=11))
+    # Laiterie Charlevoix is deliberately not drawn here. OSM puts it 3.3 km
+    # north-west of the town centre, resolve.py refused the move as beyond
+    # --max-accept, and it is not worth publishing a pin nobody has eyeballed on
+    # a map whose whole point is distance. It stays in the food section.
+    frag['home-bsp'] = m.wrap('home-bsp', ''.join(b),
+        '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Everything else</span>'
+        '<span><i class="lg ln"></i>The drive into town</span>',
+        'The whole of this base in one picture: the farmhouse is up the valley and the town is 14 km away, so the shop, dinner and the bakery are all a drive. Nothing here is walkable and there is no transport of any kind.',
+        'https://www.google.com/maps/dir/352+Rang+Saint-Placide+Sud,+Baie-Saint-Paul,+QC/IGA,+Baie-Saint-Paul,+QC/Laiterie+Charlevoix,+Baie-Saint-Paul,+QC')
+
     return frag

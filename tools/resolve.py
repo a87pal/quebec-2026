@@ -77,7 +77,12 @@ def nominatim(query):
 
 # --------------------------------------------------------------- seeding
 MARKER = re.compile(r'\bmarker\(P,\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*,\s*"([^"]+)"')
-REGION = re.compile(r"\bmk\('(\w+)'\)")
+# Map names may contain hyphens - maps.py has always accepted [a-z0-9_-]+ for a
+# tile directory. This used to be \w+, which matches neither "home-nh" nor any
+# part of it, so `region` silently kept the previous map's value and every
+# marker on a hyphenated map was seeded with the wrong context string. Silent is
+# the problem: the queries looked fine and pointed at the wrong province.
+REGION = re.compile(r"\bmk\('([\w-]+)'\)")
 
 def seed(dest):
     """Pull the current marker coordinates out of markers.py as a starting point."""

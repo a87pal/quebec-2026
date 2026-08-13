@@ -55,5 +55,11 @@
  "gorge-from-malbaie": {
   "map": "charlevoix", "cls": "spur", "style": "dash", "w": 6,
   "via": ["La Malbaie", "Hautes-Gorges"]
+ },
+
+ "_note-home-bsp": "The only leg on a home-* map. Every other base can be described in walking minutes; this one cannot, and the distance is the single most important fact about it, so it gets drawn rather than asserted.",
+ "base-to-baie": {
+  "map": "home-bsp", "cls": "rt",
+  "via": ["YOUR BASE — Rang Saint-Placide", "Baie-Saint-Paul"]
  }
 }
