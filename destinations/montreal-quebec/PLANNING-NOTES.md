@@ -335,3 +335,125 @@ Everything in the guide is a planning figure gathered ahead of the dates. The it
 - Notre-Dame de Montréal sightseeing hours and rates
 - Haskell Free Library access rules — these have changed recently and differ by which side you approach from
 - Québec Pride dates
+
+---
+
+## 11. The August 2026 review — activities audited, dining rebuilt
+
+Prompted by two questions: *are the activities actually good, and what do real
+reviews say* — and *is the dining list too expensive*. Both were answered by
+reading reviews and operator pages rather than by re-reasoning from the
+existing draft.
+
+### 11.1 What the activity audit changed
+
+Seventeen unbooked activities were checked against reviews and current operator
+pages. Fourteen survived unchanged. Three did not.
+
+**Cut outright — MNBAQ.** This is the substantive find. The museum has
+confirmed that **Espace Riopelle — the Michael Audain Pavilion — opens 22
+October 2026**, grand opening 22–25 October. Until then the **Gérard-Morisset
+and Charles-Baillairgé pavilions are closed** for the work and reopen only
+"gradually, in the months following". *Tribute to Rosa Luxemburg* — the sole
+reason the guide sent anyone there — **goes on view on 22 October**, seven
+weeks after they leave. The old note said "check whether it's still on view";
+the answer is no, and it is not a matter of checking. Cutting it also removes
+the only real competition for the Musée de la civilisation, which is open and
+complete.
+
+**Repriced and demoted — AURA.** Listed at C$30 a head; the real price is
+**C$40 alone, C$48 combined with daytime basilica admission**. Reviews are
+genuinely bimodal — "better than the laser shows at Epcot" against "not worth
+the money" — and the most consistent specific complaint is duration: reviewers
+repeatedly time the show at 20–25 minutes against an advertised 40–45. It is
+no longer a booking. It is the wet-weather plan for Saturday 29 August, and on
+a dry evening MUTEK is free, outdoors and ten minutes away. This is the right
+resolution of the AURA-versus-Gardens-of-Light comparison the guide already
+carried: Gardens of Light stays booked, AURA becomes conditional.
+
+**Caveated — the whale cruise.** AML stays, and the existing boat-versus-Zodiac
+analysis stands (the guarantee covers only the boat; the Acropole climb is the
+next morning). Two things were added. Reviewers do complain that the 3 h boat
+runs full — "absolutely rammed" on an afternoon sailing — so the 10:15
+departure is now explicit rather than incidental. And Otis Excursions and
+Croisières Essipit are genuinely better-reviewed small operators; they were not
+substituted because both sail from Tadoussac or further east, which adds the
+Saguenay ferry and 30–60 km to a day that already starts at 6:15 a.m.
+Baie-Sainte-Catherine avoids the ferry queue entirely. The free shore-watching
+at Pointe-Noire and Cap-de-Bon-Désir is now written up as the weather fallback
+rather than as a consolation.
+
+**Confirmed good, unchanged:** Pointe-à-Callière (reviews are strong and
+specific — the buried sewer walk is the thing people remember), the Old Prison
+of Trois-Rivières (guided by former inmates; "as memorable as Alcatraz"
+recurs), the Citadelle guided tour (4.7/5 over 66 reviews at ~C$16–18), the
+Musée de la civilisation, Onhwa' Lumina (C$33.75 + tax confirmed), Gardens of
+Light, the Wendat museum, the Lévis ferry, Montmorency, Canyon Sainte-Anne,
+Hautes-Gorges. The Canada Strong Pass was re-verified: **19 June – 7 September
+2026**, Parks Canada free for everyone; the national-museum benefit is
+children free and 18–24 half price, so it buys these two nothing at museums.
+
+### 11.2 Game-time decisions taken out of the planning sheet
+
+The sheet was carrying rows that cannot honestly be booked in advance — the
+Nordic spa, the ghost walk, Flume Gorge, AURA — which made the projected total
+read as a commitment when it was a maybe. They now live in **§ Not on the
+sheet**, a table of eight calls with the cost, the moment you decide and the
+rule for deciding, and each one is repeated in a purple block on the day it
+belongs to. Saying yes to all eight adds about C$430. The sheet's own footnote
+now says so instead of telling you to mark two rows skipped.
+
+### 11.3 The dining rebuild
+
+The brief: most meals under about US$20 a head, one or two splurges that have
+to be extraordinary for both of them.
+
+The old list booked **C$1,180 across six reservations covering seven dinners**.
+Four of those were C$60–100 a head. The rebuilt list books **about C$680** and
+buys more distinctively local food.
+
+- **Kept as splurge 1 — Légende par La Tanière**, ~C$150 a head, ~C$380 all in.
+  It earns it on a rule rather than a chef: strictly locavore, no chocolate,
+  pepper, citrus or vanilla, so what is on the plate is the boreal larder and
+  nothing else. One Michelin star in Québec's inaugural 2025 guide. They build
+  a full vegetarian tasting menu **if asked at booking**.
+- **Kept as splurge 2 — Sushi Momo**, ~C$130. Cheaper than Damas by C$50 and it
+  is the one dinner of twelve where the vegetarian is not the accommodated
+  party.
+- **Cut — Damas (C$180).** Superb, and Levantine food is not scarce in
+  Connecticut.
+- **Cut — La Traite (C$170), replaced by Restaurant Sagamité (C$70).** Same
+  cuisine, same village, a third of the price, and the sagamité soup itself is
+  on the menu. Day 8 already ends with a 1.2 km night walk; an C$85-a-head
+  dinner before it was the wrong shape as well as the wrong price.
+- **Cut — L'Orygine (C$60–90 a head).** Good, not distinctive.
+- **Off the sheet — Le Vin Papillon.** Kept on the page as an optional
+  wine-bar night; it does not take reservations, so it was never a booking.
+- **Off the sheet — the two Baie-Saint-Paul restaurant dinners (C$200),
+  replaced by Le Saint-Pub (~C$100 walk-in).** On Labour Day weekend the
+  microbrewery is the only place in town that does not need a reservation, and
+  it is 4.2/5 over 5,000 reviews.
+
+**Added: the canon.** Fifteen dishes and products that exist because of this
+place, each with a named address and a price — the honey-boiled bagel, the
+squeaky curd, pouding chômeur, Le 1608 from the Canadienne cow, ice cider,
+sagamité, queues de castor. This is what §6 of the preferences file means by
+"markets and producers over restaurant lists", and it had been under-served.
+
+**Added: breakfast, lunch and dinner on every one of the twelve days**, with
+prices, and four days flagged **PACK IT** — Franconia Ridge, the whale morning,
+Hautes-Gorges, and the drive home. Each grocery shop is named and placed on the
+day you do it.
+
+**Correction carried through the whole guide: Épicerie J.A. Moisan closed in
+January 2025.** The guide sent readers to 699 rue Saint-Jean in four separate
+places, in one case as a headline reason to walk up the hill. Replaced by Metro
+Plus at 860 bd Charest Est — two minutes from the Saint-Roch apartment, on the
+flat — and Le Grand Marché de Québec for the producers.
+
+### 11.4 Still to verify before paying
+
+- Légende's 2026 tasting-menu price and the vegetarian menu, at booking
+- Sagamité's broth (game-based or not) and whether it needs a reservation
+- AURA's 2026 showtimes if the Saturday turns wet
+- Strøm's same-day after-5 p.m. rate for a Wednesday

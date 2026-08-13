@@ -195,6 +195,23 @@ details.dayd[open]>summary .dnum{background:var(--wine)}
 .logistics{background:#f0ece3;border-top:1px solid var(--line);padding:18px 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;font-size:.88rem}
 .logistics b{display:block;color:var(--forest);margin-bottom:3px}
 
+/* the three meals, on every day */
+.meals{margin:16px 24px;background:#f3f6f1;border:1px solid #d7e0d5;border-radius:12px;padding:13px 17px;font-size:.9rem}
+.meals h6{margin:0 0 9px;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--forest);font-weight:800}
+.meals dl{display:grid;grid-template-columns:92px 1fr;gap:7px 14px;margin:0}
+.meals dt{font-weight:800;color:var(--forest)}
+.meals dd{margin:0}
+.meals .cost{color:var(--muted);white-space:nowrap}
+.meals .pk{display:inline-block;background:#fff1ed;border:1px solid #e6c8c1;color:var(--wine);font-size:.66rem;font-weight:800;letter-spacing:.05em;padding:1px 6px;border-radius:4px;margin-right:5px;vertical-align:middle}
+
+/* decided on the day, not in advance */
+.gtime{margin:16px 24px;background:#f7f2ff;border:1px solid #d9d2ea;border-radius:12px;padding:13px 17px;font-size:.9rem}
+.gtime h6{margin:0 0 8px;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:#4e4877;font-weight:800}
+.gtime ul{margin:0;padding-left:18px}
+.gtime li{margin-bottom:5px}
+.gtime b{color:#4e4877}
+@media(max-width:640px){.meals dl{grid-template-columns:1fr;gap:2px}.meals dt{margin-top:7px}}
+
 .priority{display:inline-block;font-size:.68rem;font-weight:800;border-radius:999px;padding:3px 8px;margin-right:6px;vertical-align:middle;letter-spacing:.04em}
 .must{background:#e7efe8;border:1px solid #c4d4c6;color:#2b5540}
 .should{background:#f6ead8;border:1px solid #ddc7a2;color:#6f4c26}
@@ -490,7 +507,7 @@ th.ra,.costs td+td{text-align:right}
 <tr><td><a class="daylink" href="#day-0"><b>0</b></a></td><td>Wed <b>Aug 26</b></td><td>Cheshire → Lincoln, NH</td><td>Lincoln, NH</td><td>Out of the driveway at 6 p.m.; in bed in the White Mountains by 10:45.</td></tr>
 <tr><td><a class="daylink" href="#day-1"><b>1</b></a></td><td>Thu <b>Aug 27</b></td><td>Franconia Notch, NH</td><td>Lincoln, NH</td><td><b>Franconia Ridge Loop</b> — 9 miles, 1.7 of them above treeline.</td></tr>
 <tr><td><a class="daylink" href="#day-2"><b>2</b></a></td><td>Fri <b>Aug 28</b></td><td>NH → Eastern Townships → Montréal</td><td>Plateau / Mile End</td><td>Border, Gregorian chant at the abbey, Bota Bota, MUTEK.</td></tr>
-<tr><td><a class="daylink" href="#day-3"><b>3</b></a></td><td>Sat <b>Aug 29</b></td><td>Old Montréal</td><td>Plateau / Mile End</td><td>Notre-Dame, Pointe-à-Callière, <b>AURA</b>, then MUTEK.</td></tr>
+<tr><td><a class="daylink" href="#day-3"><b>3</b></a></td><td>Sat <b>Aug 29</b></td><td>Old Montréal</td><td>Plateau / Mile End</td><td>Notre-Dame, Pointe-à-Callière, then MUTEK.</td></tr>
 <tr><td><a class="daylink" href="#day-4"><b>4</b></a></td><td>Sun <b>Aug 30</b></td><td>Mile End → Mount Royal → east end</td><td>Plateau / Mile End</td><td>Bagels, Jean-Talon, <b>Tam-Tams</b>, the Oratory, Gardens of Light.</td></tr>
 <tr><td><a class="daylink" href="#day-5"><b>5</b></a></td><td>Mon <b>Aug 31</b></td><td>Chemin du Roy: Trois-Rivières, Deschambault</td><td><b>Québec City</b></td><td>The oldest road in Canada, with two deliberate stops.</td></tr>
 <tr><td><a class="daylink" href="#day-6"><b>6</b></a></td><td>Tue <b>Sep 1</b></td><td>Old Québec, on foot</td><td>Québec City</td><td>Walls, Citadelle, the Plains, the cathedral, <b>ferry at sunset</b>.</td></tr>
@@ -587,6 +604,15 @@ th.ra,.costs td+td{text-align:right}
 <p class="logi" style="margin-top:14px"><b>Do tonight, not tomorrow:</b> fill the tank; buy trail food, salty snacks and 4 L of water at the supermarket on Main St in Lincoln if it's still open, otherwise first thing at 7 a.m.; lay out both packs; download the offline trail map; check the higher-summit forecast before you sleep.</p>
 </div>
 </div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>At home in Cheshire. <span class="cost">—</span></dd>
+<dt>Lunch</dt><dd>At home or at work — you leave at six. <span class="cost">—</span></dd>
+<dt>Dinner</dt><dd>Eat before you leave, or one stop around White River Junction. Do not plan on anything open in Lincoln at 10:30 p.m. <span class="cost">≈US$30</span></dd>
+<dt>Shop</dt><dd><b>Price Chopper, 10 Paper Mill Drive, Lincoln</b> — open to 11 p.m., so you can shop on arrival. Buy tomorrow's breakfast, the packed ridge lunch, salty snacks and 4 L of water tonight. <span class="cost">≈US$45</span></dd>
+</dl>
+</div>
 </details>
 <details class="day dayd" id="day-1">
 <summary><span class="dnum">1</span><span class="dttl">Franconia Ridge, on fresh legs<em>Thursday, August 27</em></span><span class="dld">VERY HARD: ~9 mi · ~3,900 ft gain · 7–9 h on foot</span><span class="chev">›</span></summary>
@@ -598,6 +624,21 @@ th.ra,.costs td+td{text-align:right}
 <div class="dayload">VERY HARD: ~9 mi · ~3,900 ft gain · 7–9 h on foot</div>
 <span class="sleep">Sleep · Lincoln, New Hampshire</span>
 <div class="route"><span>Lincoln → Lafayette Place 12 min</span><span>On trail 7:30 a.m.</span><span>Down by 4–5 p.m. · dinner in town</span></div></div>
+</div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>At the Airbnb at 6:30 — oatmeal, eggs, coffee, bought last night. <b>Eat more than feels reasonable;</b> you are about to burn 4,000 calories. <span class="cost">≈US$6</span></dd>
+<dt>Lunch</dt><dd><span class="pk">PACK IT</span> Two sandwiches each, bars, salty snacks, <b>3 L of water each</b> and electrolyte tablets. There is no water and nothing to buy on the ridge, and Greenleaf Hut is not a supply plan. <span class="cost">from last night's shop</span></dd>
+<dt>Dinner</dt><dd><b>Woodstock Inn Station &amp; Brewery</b>, North Woodstock — walkable, own beer, vegetarian mains that are not an afterthought, and exactly the right room after nine hours on a ridge. No booking. <b>Gypsy Café</b> in Lincoln is the more interesting kitchen. <span class="cost">≈US$50 for two</span></dd>
+</dl>
+</div>
+<div class="gtime">
+<h6>Game-time calls — decide on the day</h6>
+<ul>
+<li><b>Franconia Ridge or the wet-weather plan.</b> Go/no-go on the higher-summit forecast the night before: thunderstorms, sustained wind over 35 mph or visibility under 100 ft above treeline and the ridge is off. <b>The substitute is Flume Gorge</b> — US$18 online, US$21 at the gate, a 2 mi boardwalk loop of about 1½ h. It is pleasant, it is crowded, and at that price it is only worth it as a rain plan, not as a choice.</li>
+<li><b>Franconia Ridge, either direction.</b> Clockwise up Falling Waters is the harder climb with the better payoff order. Decide at the car park, not in advance.</li>
+</ul>
 </div>
 <div class="strategy"><strong>The weather rule, and it is not negotiable:</strong> check the <a href="https://www.mountwashington.org/experience-the-weather/higher-summit-forecast.aspx">higher-summit forecast</a> tonight and again at the trailhead. Go only if wind, thunderstorms and visibility are all favourable. If any one of them isn't, today becomes Flume Gorge + The Basin + the Profile Plaza (the Cannon tramway is out of service — see below), and <b>tomorrow morning is your second attempt</b> — with the trade that a Friday ridge means reaching Montréal near 10 p.m. and losing the abbey. Two shots at the best hike of the trip is exactly why you drove up on Wednesday night.</div>
 <div class="timeline">
@@ -655,6 +696,15 @@ th.ra,.costs td+td{text-align:right}
 <div class="dayload">EASY–MODERATE: ≈4 h 15 driving + border, with a 2 h stop</div>
 <span class="sleep">Sleep · Plateau / Mile End, Montréal</span>
 <div class="route"><span>Lincoln → Stanstead border ≈2 h 15</span><span>Border → Abbey ≈35 min</span><span>Abbey → Montréal ≈1 h 30</span></div></div>
+</div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>At the Airbnb — finish the groceries. Anything fresh that is left goes in the bin, not the car: <b>no fruit or vegetables cross the border.</b> <span class="cost">≈US$6</span></dd>
+<dt>Lunch</dt><dd><b>At the Abbaye de Saint-Benoît-du-Lac.</b> Buy <b>Bleu Bénédictin</b>, cider and bread in the monks' shop and eat it on the lawn above the lake. This is a canon item and a lunch at the same time. <span class="cost">≈C$20 for two</span></dd>
+<dt>Dinner</dt><dd><b>★ SPLURGE · Sushi Momo</b>, rue Saint-Denis, 7:30 p.m. Fully vegan sushi — K orders from the whole menu for once. <b>Reserve now.</b> <span class="cost">≈C$120 for two</span></dd>
+<dt>Shop</dt><dd><b>Segal's</b> or <b>Provigo</b> on bd Saint-Laurent as you come in — three mornings of breakfast for the Plateau apartment. <span class="cost">≈C$40</span></dd>
+</dl>
 </div>
 <div class="strategy"><strong>If yesterday was rained out:</strong> today is the ridge. Start at 6 a.m., hike, then drive straight through to Montréal — you'll arrive around 9–10 p.m. and you will skip the abbey. That is an acceptable trade exactly once.</div>
 <div class="timeline">
@@ -738,7 +788,21 @@ th.ra,.costs td+td{text-align:right}
 <span class="sleep">Sleep · Plateau / Mile End</span>
 <div class="route"><span>Plateau → Old Montréal 20–25 min by Métro</span><span>Everything in Old Montréal is 5–10 min apart on foot</span><span>Car stays parked</span></div></div>
 </div>
-<div class="strategy"><strong>Book before you leave home:</strong> AURA for Saturday evening (it sells out on summer weekends), and either a Montréal Greeter or a place on the 10 a.m. free walking tour. Notre-Dame's daytime sightseeing hours are shorter on Sundays, which is why the basilica sits on Saturday.</div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>At the apartment, or walk ten minutes to <b>St-Viateur Bagel</b> (open 24 h) for hot sesame bagels and cream cheese. <span class="cost">≈C$10 for two</span></dd>
+<dt>Lunch</dt><dd>Old Montréal is the one part of the city priced for cruise passengers. Two honest options: <b>carry a bagel-and-cheese lunch</b> and eat it in the Old Port looking at the river, or eat before you go at <b>Trip de Bouffe</b> on av Mont-Royal E, under C$10 a head. <span class="cost">≈C$20 for two</span></dd>
+<dt>Dinner</dt><dd><b>La Banquise</b>, 994 rue Rachel E — open 24 h, thirty poutines and <b>a vegetarian gravy</b>, so you both eat the national dish at one table. The correct move after AURA or MUTEK, at any hour. A can cross Parc La Fontaine to <b>Ma Poule Mouillée</b> for the piri-piri version. <span class="cost">≈C$32 for two</span></dd>
+</dl>
+</div>
+<div class="gtime">
+<h6>Game-time calls — decide on the day</h6>
+<ul>
+<li><b>AURA at Notre-Dame — the rain plan, and only that.</b> It is <b>C$40 a head, not C$30</b> as the sheet used to say, for a show reviewers consistently clock at 20–25 minutes against an advertised 45. Reviews are genuinely split: "better than Epcot" and "not worth the money" in the same week. <b>If Saturday evening is dry, skip it and stay at MUTEK, which is free and outdoors.</b> If it rains, buy it that afternoon.</li>
+</ul>
+</div>
+<div class="strategy"><strong>Book before you leave home:</strong> either a Montréal Greeter or a place on the 10 a.m. free walking tour. Notre-Dame's daytime sightseeing hours are shorter on Sundays, which is why the basilica sits on Saturday.</div>
 <div class="timeline">
 <div class="tlhead"><h5>The day, stop by stop</h5><button class="expandall" type="button" data-expand>Expand all ▾</button></div>
 <ol class="stops">
@@ -778,7 +842,7 @@ th.ra,.costs td+td{text-align:right}
 </li>
 <li>
 <details class="l2">
-<summary><span class="n">4</span><span class="gt"><span class="priority must">★ Essential</span> AURA — then MUTEK, ten minutes away</span><span class="gm">30 min show · ≈C$30 · Sells out — book now</span><span class="chev">›</span></summary>
+<summary><span class="n">4</span><span class="gt"><span class="priority should">○ Worth doing</span> AURA — the rain plan — then MUTEK, ten minutes away</span><span class="gm">20–30 min show · ≈C$40 · Sells out — book now</span><span class="chev">›</span></summary>
 <div class="stopbody"><div class="photo"><img alt="Notre-Dame Basilica interior lit for AURA" src="images/ndbasilica.jpg" data-k="ndbasilica"/></div><div><div class="meta"><span class="pill walk">30 min show</span><span class="pill paid">≈C$30</span><span class="pill book">Sells out — book now</span><span class="pill time">Evening</span></div>
 <p class="hl">30 minutes<i>·</i>Moment Factory<i>·</i>MUTEK is a ten-minute walk afterwards</p>
 <p class="desc">Moment Factory — the Montréal studio behind Cirque du Soleil's lighting and Onhwa' Lumina on Day 8 — turns the basilica's own architecture into the screen. Projection climbs the columns, the vault dissolves, an orchestral score fills the nave. Thirty minutes, and the most spectacular half-hour available to you in this city.</p><p class="logi"><b>Then walk ten minutes north to Esplanade Tranquille</b> for the <b>MUTEK</b> free outdoor stage, running to midnight. Two completely different Montréals in one evening, both of them free or nearly. <a href="https://www.basiliquenotredame.ca/en/events/the-aura-experience">Book AURA →</a> · <a href="https://montreal.mutek.org/en/esplanade-tranquille">MUTEK tonight →</a></p></div></div>
@@ -803,6 +867,14 @@ th.ra,.costs td+td{text-align:right}
 <div class="dayload">MODERATE–FULL: 6–8 miles of walking, one real hill</div>
 <span class="sleep">Sleep · Plateau / Mile End</span>
 <div class="route"><span>Base → Mile End: Métro Saint-Laurent to Laurier, 15 min</span><span>Mile End → Jean-Talon 25 min walk</span><span>Mountain → Oratory 30 min over the summit</span></div></div>
+</div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd><b>Fairmount Bagel</b>, then <b>Drogheria Fine</b> two doors along for six-dollar gnocchi out of a window. Same walk, both canon, ten minutes total. <span class="cost">≈C$14 for two</span></dd>
+<dt>Lunch</dt><dd><b>Marché Jean-Talon, as lunch — not as sightseeing.</b> A baguette, a wedge from a fromagerie, a bag of squeaky curds, tomatoes, a peach, a cider. The single best-value meal of the trip. <span class="cost">≈C$28 for two</span></dd>
+<dt>Dinner</dt><dd><b>Early</b>, before the 8 p.m. Gardens of Light. <b>Queen Sheba</b> in Mile End — one Ethiopian platter, a dozen stews, half of them vegan, eaten off the same injera; you order once and you both eat everything. <b>Umami Ramen</b> in Mile-Ex is the other answer. <span class="cost">≈C$45 for two</span></dd>
+</dl>
 </div>
 <div class="timeline">
 <div class="tlhead"><h5>The day, stop by stop</h5><button class="expandall" type="button" data-expand>Expand all ▾</button></div>
@@ -883,6 +955,15 @@ th.ra,.costs td+td{text-align:right}
 <span class="sleep">Sleep · Faubourg Saint-Jean-Baptiste, Québec City</span>
 <div class="route"><span>Montréal → Trois-Rivières 1 h 30</span><span>Trois-Rivières → Deschambault 1 h</span><span>Deschambault → Québec City 45 min</span></div></div>
 </div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>Clear the Montréal fridge. Coffee at the apartment. <span class="cost">≈C$5</span></dd>
+<dt>Lunch</dt><dd><b>Trois-Rivières</b>, after the Old Prison — the old town has plenty of cheap counters within two streets of the site. <span class="cost">≈C$25 for two</span></dd>
+<dt>Dinner</dt><dd><b>Chez Victor</b> on rue Saint-Jean, two minutes from the new apartment — serious vegetarian and vegan burger builds rather than a token patty, and three poutine gravies including a vegan one. Arrival night, no reservation, no decisions. <span class="cost">≈C$45 for two</span></dd>
+<dt>Shop</dt><dd><b>Metro Plus, 860 bd Charest Est</b> — 8 a.m.–10 p.m., <b>two minutes from your door.</b> Four mornings of breakfast. <span class="cost">≈C$50</span></dd>
+</dl>
+</div>
 <div class="strategy"><strong>Order of the day:</strong> leave the Plateau by 8:30 (or 9:30 if you're doing the Oratory on the way out). Trois-Rivières 10:30–12:30 with lunch. Deschambault 1:45–2:45. Québec City by 4 p.m., which leaves you the whole first evening on rue Saint-Jean. If you're running late, cut Deschambault, not Trois-Rivières.</div>
 <div class="timeline">
 <div class="tlhead"><h5>The day, stop by stop</h5><button class="expandall" type="button" data-expand>Expand all ▾</button></div>
@@ -912,8 +993,8 @@ th.ra,.costs td+td{text-align:right}
 <details class="l2">
 <summary><span class="n">3</span><span class="gt">Arrive Québec City · rue Saint-Jean in the evening</span><span class="gm">Evening on foot · Free</span><span class="chev">›</span></summary>
 <div class="stopbody"><div class="photo"><img alt="Rue Saint-Jean, Québec City" src="images/ruestjean.jpg" data-k="ruestjean"/></div><div><div class="meta"><span class="pill walk">Evening on foot</span><span class="pill free">Free</span></div>
-<p class="hl">Park once, until Wednesday<i>·</i>Free<i>·</i>Épicerie J.A. Moisan, trading since 1871</p>
-<p class="desc">Park the car and leave it until Wednesday morning. Then walk up into the Faubourg Saint-Jean-Baptiste — fifteen minutes and a real climb from your door in Saint-Roch — for rue Saint-Jean, which is where Québec City actually eats and drinks. Stop at <b>Épicerie J.A. Moisan</b> at number 699 — opened in 1871, tin ceilings, apothecary drawers, and a plausible claim to being the oldest grocery store in North America. Buy breakfast for the week.</p><p class="logi"><b>Note:</b> the Musée de la civilisation is closed Mondays, so nothing is lost by arriving late today.</p></div></div>
+<p class="hl">Park once, until Wednesday<i>·</i>Free<i>·</i>Metro Plus is two minutes from the door</p>
+<p class="desc">Park the car and leave it until Wednesday morning. Then walk up into the Faubourg Saint-Jean-Baptiste — fifteen minutes and a real climb from your door in Saint-Roch — for rue Saint-Jean, which is where Québec City actually eats and drinks. <b>Do not go looking for Épicerie J.A. Moisan.</b> Earlier drafts of this guide sent you to number 699 for the 1871 tin ceilings and apothecary drawers and the claim to be the oldest grocery in North America. <b>It closed for good in January 2025.</b> Buy the week's breakfast at <b>Metro Plus, 860 bd Charest Est</b> instead — open to 10 p.m. and two minutes from your door, at the bottom of the hill rather than the top — and keep rue Saint-Jean for eating and drinking, which is what it is now for.</p><p class="logi"><b>Note:</b> the Musée de la civilisation is closed Mondays, so nothing is lost by arriving late today.</p></div></div>
 </details>
 </li>
 </ol>
@@ -921,7 +1002,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="logistics">
 <div><b>Picnic</b>You bought it at Jean-Talon yesterday. Eat it at Deschambault on the cape above the river rather than in a restaurant.</div>
 <div><b>Parking</b>Confirm your Québec City spot before you arrive. Do not plan to find street parking near the walls.</div>
-<div><b>Groceries tonight</b>IGA or Metro on rue Saint-Jean for the real shop; J.A. Moisan for the good stuff.</div>
+<div><b>Groceries tonight</b><b>Metro Plus, 860 bd Charest Est</b> — 8 a.m.–10 p.m., two minutes away and no hill. Le Grand Marché de Québec, 250 bd Wilfrid-Hamel, for the good stuff, on Thursday's way out to Wendake.</div>
 </div>
 </div>
 </details>
@@ -950,6 +1031,14 @@ th.ra,.costs td+td{text-align:right}
 <div class="dayload">MODERATE–HARD: 6–7 miles, real hills, stairs, cobbles</div>
 <span class="sleep">Sleep · Québec City</span>
 <div class="route"><span>Everything on foot once you are up</span><span>Base → Porte Saint-Jean: 15 min and a climb up the côte d'Abraham</span><span>Upper → Lower Town: the Casse-Cou steps or the funicular</span></div></div>
+</div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>At the apartment before the climb up the côte d'Abraham. <span class="cost">≈C$5</span></dd>
+<dt>Lunch</dt><dd>On rue Saint-Jean, mid-walk. <b>Le Billig</b> for a buckwheat galette and cider by the bowl, or <b>Chez Ashton</b> at 54 côte du Palais for the poutine Quebecers actually compare everything else against — note its classic gravy is beef-based. <span class="cost">≈C$30 for two</span></dd>
+<dt>Dinner</dt><dd><b>★ SPLURGE · Légende par La Tanière</b>, 255 rue Saint-Paul, 7:30 p.m. One Michelin star, strictly boreal, no ingredient that does not grow here. <b>Ask for the vegetarian tasting menu when you book, not on the night.</b> Ten minutes from where the Lévis ferry lands, which is where this day ends. <span class="cost">≈C$380 for two, all in</span></dd>
+</dl>
 </div>
 <div class="strategy"><strong>Run the day in this order:</strong> 9:00 ramparts · 10:00 free walking tour or VoiceMap · 11:30 Citadelle guided tour · 1:00 lunch + Plains of Abraham · 3:00 cathedral and Dufferin Terrace · 4:30 down Casse-Cou to Petit-Champlain and Place Royale · <b>sunset on the Lévis ferry</b> · dinner in the Lower Town or back up on rue Saint-Jean. Petit-Champlain is unbearable at midday and lovely at six — the cruise crowds leave.</div>
 <div class="timeline">
@@ -1039,7 +1128,7 @@ th.ra,.costs td+td{text-align:right}
 </div>
 <div class="logistics">
 <div><b>Feet</b>This is the hardest city day of the trip — cobbles, stairs, a real hill. Broken-in shoes, not new ones.</div>
-<div><b>Cut list</b>If you're flagging: drop the Morrin Centre and the Promenade des Gouverneurs. Never drop the ferry.</div><div><b>Optional add — the MNBAQ</b>The Musée national des beaux-arts stands <b>on the Plains</b>, 400 m from the battlefield monuments, so it costs no travel. Riopelle's 40-metre <em>Tribute to Rosa Luxemburg</em>, a world-class Inuit collection, and galleries inside a preserved 1867 prison. Allow 2 h. See the museums section.</div>
+<div><b>Cut list</b>If you're flagging: drop the Morrin Centre and the Promenade des Gouverneurs. Never drop the ferry.</div><div><b>The MNBAQ is off the plan</b>It stands 400 m away on the Plains and it would otherwise be the obvious add. But <b>Espace Riopelle opens 22 October 2026</b> and until then the Gérard-Morisset and Charles-Baillairgé pavilions are shut — <b><em>Tribute to Rosa Luxemburg</em> goes on view the same day</b>, seven weeks after you drive home. Cut. See the museums section.</div>
 <div><b>Dinner</b>Book it. See the food section — Saint-Jean-Baptiste and Saint-Roch are both a short walk home.</div>
 </div>
 </div>
@@ -1063,6 +1152,21 @@ th.ra,.costs td+td{text-align:right}
 <div class="dayload">MODERATE: ≈110 km of easy driving, several short walks, one long stair if you want it</div>
 <span class="sleep">Sleep · Québec City</span>
 <div class="route"><span>City → Montmorency 15 min</span><span>Montmorency → Sainte-Anne 20 min</span><span>Sainte-Anne → Canyon 8 min</span><span>Island loop 67 km</span></div></div>
+</div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>At the apartment — you want to be at Montmorency by ten. <span class="cost">≈C$5</span></dd>
+<dt>Lunch</dt><dd><b>Île d'Orléans is the food island</b> and the reason to do the loop slowly: a bakery at Sainte-Famille, a roadside farm stand, and <b>Cassis Monna &amp; Filles</b> at Sainte-Pétronille for the blackcurrant tasting and a terrace looking straight back at the city. <span class="cost">≈C$30 for two</span></dd>
+<dt>Dinner</dt><dd><b>Nina Pizza Napolitaine</b> on rue Saint-Jean — wood-fired, and two fully vegan pizzas as standard. Or <b>Bureau de Poste</b> in Saint-Roch, where the entire food menu is under C$10 and the walk home is flat. <span class="cost">≈C$35 for two</span></dd>
+</dl>
+</div>
+<div class="gtime">
+<h6>Game-time calls — decide on the day</h6>
+<ul>
+<li><b>Strøm Nordic Spa, Old Québec — C$69 after 5 p.m., up to C$104 at peak.</b> Well reviewed and genuinely restorative, and it is the obvious line to cut if the total looks wrong. <b>Decide at about 4 p.m. based on how the legs feel</b> after two hard city days and with Hautes-Gorges three days out. Book same-day online; weekday evenings are the cheap, quiet slot.</li>
+<li><b>The Île d'Orléans loop, long or short.</b> The full 67 km circuit is the whole afternoon. If Montmorency and the Canyon have already eaten the day, cut at Sainte-Famille and come back the way you came — you keep Sainte-Pétronille for sunset either way.</li>
+</ul>
 </div>
 <div class="strategy"><strong>Leave at 8:15 and go to the falls first.</strong> Montmorency is a coach-tour magnet from ten onward; at nine it is nearly yours. Then run the coast outward — basilica, canyon — and take the island on the way home so you finish at sunset on the west tip of Île d'Orléans looking back at the city.</div>
 <div class="timeline">
@@ -1146,6 +1250,20 @@ th.ra,.costs td+td{text-align:right}
 <span class="sleep">Sleep · Québec City</span>
 <div class="route"><span>City → Wendake 20 min</span><span>Onhwa' Lumina · 8:00 / 8:20 / 8:40 p.m.</span></div></div>
 </div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>At the apartment. <span class="cost">≈C$5</span></dd>
+<dt>Lunch</dt><dd><b>Le Grand Marché de Québec</b>, 250 bd Wilfrid-Hamel — 33 permanent stalls, boreal-ingredient producers, cafés in the hall, and it is <b>on the road out to Wendake rather than a detour</b>. <span class="cost">≈C$25 for two</span></dd>
+<dt>Dinner</dt><dd><b>Restaurant Sagamité, Wendake</b>, 6 p.m. — the corn-bean-squash soup the nation has eaten for centuries, bannock alongside, then Onhwa' Lumina at 8:20 a few minutes away. <b>Ask whether the broth is game-based.</b> This replaces La Traite and saves about C$100. <span class="cost">≈C$65 for two</span></dd>
+</dl>
+</div>
+<div class="gtime">
+<h6>Game-time calls — decide on the day</h6>
+<ul>
+<li><b>Les Promenades Fantômes, 8:30 p.m.</b> — C$30 a head, lantern-lit, and rated by serious travellers for the 17th-century social history rather than the ghosts. It is a lot of stairs and a lot of walking. <b>Only if Lumina has not already filled the evening</b>, which on most nights it will have.</li>
+</ul>
+</div>
 <div class="strategy"><strong>Book Onhwa' Lumina now.</strong> Your window, Aug 28 – Sep 6, is the last stretch of the season that runs <b>nightly</b> — from Sep 11 it drops to Fridays and Saturdays only — so you can take any evening you like, and the entries are at 8:00, 8:20 and 8:40 p.m. C$33.75 plus tax, parking C$10.50. Take the 8:00 slot and eat at La Traite beforehand.</div>
 <div class="timeline">
 <div class="tlhead"><h5>The day, stop by stop</h5><button class="expandall" type="button" data-expand>Expand all ▾</button></div>
@@ -1174,9 +1292,9 @@ th.ra,.costs td+td{text-align:right}
 </li>
 <li>
 <details class="l2">
-<summary><span class="n">3</span><span class="gt"><span class="priority must">★ Essential</span> Dinner at La Traite · then Onhwa' Lumina</span><span class="gm">Dinner 6:00 · walk 8:00 p.m. · ≈C$34 + tax · parking C$10.50 · Book both</span><span class="chev">›</span></summary>
-<div class="stopbody"><div class="photo"><img alt="Chute Kabir Kouba, Wendake" src="images/kabirkouba.jpg" data-k="kabirkouba"/></div><div><div class="meta"><span class="pill walk">Dinner 6:00 · walk 8:00 p.m.</span><span class="pill paid">≈C$34 + tax · parking C$10.50</span><span class="pill book">Book both</span></div>
-<p class="hl">Indigenous fine dining<i>·</i>1.2-km night trail by Moment Factory<i>·</i>Book both</p><p class="desc"><b>La Traite</b>, in the Hôtel-Musée Premières Nations, is one of the very few restaurants in Canada doing serious Indigenous cooking — boreal herbs, wild mushrooms, fir, sumac, corn, squash and beans — with proper vegetarian composition rather than a sad afterthought. Eat early.</p><p class="desc"><b>Then walk into the woods.</b> <b>Onhwa' Lumina</b> is a 1.2-kilometre night trail by Moment Factory, made with the Huron-Wendat Nation: projection, light, sculpture and an original score built from Wendat song and story. It runs about an hour, mostly outdoors, and it is the emotional close of your Québec City stay.</p><p class="logi">Dress warm — early September evenings in the woods north of the city drop to 8–10 °C. Flat shoes; the path is gravel. <a href="https://onhwalumina.ca/en/">onhwalumina.ca →</a></p><details class="l3"><summary><span>Why this pairing works</span></summary><div class="l3body"><ul class="ticks">
+<summary><span class="n">3</span><span class="gt"><span class="priority must">★ Essential</span> Dinner at Sagamité · then Onhwa' Lumina</span><span class="gm">Dinner 6:00 · walk 8:00 p.m. · ≈C$34 + tax · parking C$10.50 · Book both</span><span class="chev">›</span></summary>
+<div class="stopbody"><div class="photo"><img alt="Chute Kabir Kouba, Wendake" src="images/kabirkouba.jpg" data-k="kabirkouba"/></div><div><div class="meta"><span class="pill walk">Dinner 6:00 · walk 8:00 p.m.</span><span class="pill paid">Lumina ≈C$33.75 + tax · parking C$10.50 · dinner ≈C$65 for two</span><span class="pill book">Book both</span></div>
+<p class="hl">The soup the nation is named for<i>·</i>1.2-km night trail by Moment Factory<i>·</i>Book both</p><p class="desc"><b>Restaurant Sagamité</b>, in the village since 1999, is named after the dish itself — corn, beans and squash, the three sisters, simmered into the soup the Wendat have eaten for centuries, with bannock alongside. <b>Ask whether the broth is game-based;</b> they will make it work. This replaces <b>La Traite</b> at the Hôtel-Musée, which is the grander room and roughly three times the price for the same cuisine in the same village — a poor trade on an evening that already ends with a 1.2-kilometre walk in the woods. Eat early, 6 p.m.</p><p class="desc"><b>Then walk into the woods.</b> <b>Onhwa' Lumina</b> is a 1.2-kilometre night trail by Moment Factory, made with the Huron-Wendat Nation: projection, light, sculpture and an original score built from Wendat song and story. It runs about an hour, mostly outdoors, and it is the emotional close of your Québec City stay.</p><p class="logi">Dress warm — early September evenings in the woods north of the city drop to 8–10 °C. Flat shoes; the path is gravel. <a href="https://onhwalumina.ca/en/">onhwalumina.ca →</a></p><details class="l3"><summary><span>Why this pairing works</span></summary><div class="l3body"><ul class="ticks">
 <li>Runs nightly through Sep 6, then weekends only — you can pick any evening</li>
 <li>Moment Factory, the same studio behind AURA in Montréal</li>
 <li>Made with the Nation, not about it</li>
@@ -1218,6 +1336,21 @@ th.ra,.costs td+td{text-align:right}
 <div class="dayload">LONG BUT EASY: ≈330 km driving across the day, 3–3½ h on a boat</div>
 <span class="sleep">Sleep · Baie-Saint-Paul, Charlevoix</span>
 <div class="route"><span>Depart 6:15 a.m.</span><span>QC → Baie-Sainte-Catherine 2 h 55</span><span>Cruise 10:15 a.m. – ≈1:30 p.m.</span><span>Return by Rte 362 · arrive ≈6:30 p.m.</span></div></div>
+</div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd><span class="pk">PACK IT</span> In the car at 6:15 a.m., made last night, with a thermos of coffee. Nothing worth stopping for is open on Route 138 at that hour. <span class="cost">from the shop</span></dd>
+<dt>Lunch</dt><dd><span class="pk">PACK IT</span> Eaten on the boat or on the quay at Baie-Sainte-Catherine. The cruise runs 10:15 to about 1:30 and the on-board canteen is not a plan. <span class="cost">from the shop</span></dd>
+<dt>Dinner</dt><dd><b>Le Saint-Pub · Microbrasserie Charlevoix</b>, 2 rue Racine, Baie-Saint-Paul — beer brewed on the premises, no booking needed on a Labour Day weekend when everything else needs one. Arrive around 7:30 after Route 362. <span class="cost">≈C$50 for two</span></dd>
+<dt>Shop</dt><dd><b>Buy tomorrow's picnic tonight</b>, on the way in: <b>Laiterie Charlevoix</b> for Le 1608 and <b>A Chacun Son Pain</b> on rue Saint-Jean-Baptiste for the loaf — both close early. <b>IGA Baie-Saint-Paul</b> is the backup. <span class="cost">≈C$35</span></dd>
+</dl>
+</div>
+<div class="gtime">
+<h6>Game-time calls — decide on the day</h6>
+<ul>
+<li><b>Whale cruise, boat or Zodiac — but book the boat.</b> The reasoning is in the stop above: the guarantee only covers the boat, and you climb the Acropole tomorrow. <b>The one game-time call is the weather:</b> AML sails in most conditions, but if the estuary is being hammered, the free shore-watching at <b>Pointe-Noire</b> (Parks Canada, free to Sep 7) and <b>Cap-de-Bon-Désir</b> is real whale watching from the rocks, not a consolation prize.</li>
+</ul>
 </div>
 <div class="strategy"><strong>Book the 10:15 a.m. departure from Baie-Sainte-Catherine the day you finalise this trip.</strong> Croisières AML run 10:15, 1:30 and 4:30 from the Charlevoix side; the 10:15 gives you calm morning water and leaves the entire afternoon for Route 362. <b>Leave Québec City at 6:15, not later.</b> Routing puts the drive at 2 h 55 without a single stop, so a 6:45 departure has you at the pier around 9:40 with boarding already open — no margin for fuel, coffee or a slow morning. Leaving at 6:15 buys you half an hour you will be glad of. <b>Take seasickness tablets an hour before boarding whether or not you think you need them</b> — the confluence is choppy and three hours is a long time to regret it.</div>
 <div class="timeline">
@@ -1282,6 +1415,20 @@ th.ra,.costs td+td{text-align:right}
 <span class="sleep">Sleep · Baie-Saint-Paul</span>
 <div class="route"><span>Baie-Saint-Paul → park 1 h 15</span><span>Leave by 7:15 a.m. for the Acropole</span><span>Mandatory free shuttle inside the park</span></div></div>
 </div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd>At the house, early — 7:15 out of the door if you are climbing the Acropole. <span class="cost">≈C$6</span></dd>
+<dt>Lunch</dt><dd><span class="pk">PACK IT</span> <b>The Route des Saveurs picnic</b> — Le 1608 from the Canadienne cow, a wedge of Migneron, a Pedneault cider, yesterday's loaf. <b>There is no shop inside the park</b> and the drive in is 1 h 15. This is the best lunch of the trip and it costs about fifteen dollars. <span class="cost">≈C$30 for two</span></dd>
+<dt>Dinner</dt><dd><b>Le Saint-Pub</b> again — genuinely no hardship — or, if Saturday feels like the night for it, <b>Les Faux Bergers</b> or <b>Le Mouton Noir</b> on rue Saint-Jean-Baptiste. Neither is booked; book on Friday if you want one. <span class="cost">≈C$50, or ≈C$110 for two</span></dd>
+</dl>
+</div>
+<div class="gtime">
+<h6>Game-time calls — decide on the day</h6>
+<ul>
+<li><b>Acropole des Draveurs or the valley floor.</b> 800 m of climbing in 5 km, and the summit is exposed. <b>Decide at Le Draveur visitor centre.</b> If the cloud is on the tops, take the valley plan and the <b>bateau-mouche</b> instead — one hour, commentary from a park warden, and <b>day access to the park is included in the cruise price</b>, which makes it the cheaper of the two ways to spend the morning.</li>
+</ul>
+</div>
 <div class="strategy"><strong>Decide at the trailhead, not the night before.</strong> Stop at the <b>Félix-Antoine-Savard</b> visitor centre where a Sépaq naturalist runs a kiosk daily 9–11 a.m. through Sep 12 — ask them about conditions and the summit cut-off, buy your day access, and take the free shuttle to the Draveur sector. Strong legs and stable weather: the Acropole. Anything less: the valley plan below, which is not a consolation prize.</div>
 <div class="timeline">
 <div class="tlhead"><h5>The day, stop by stop</h5><button class="expandall" type="button" data-expand>Expand all ▾</button></div>
@@ -1343,6 +1490,14 @@ th.ra,.costs td+td{text-align:right}
 <div class="dayload">LONG TRANSFER: ≈915 km · 10 h 30 – 11 h driving + border</div>
 <span class="sleep">Home</span>
 <div class="route"><span>Depart 5:30 a.m.</span><span>Swap drivers every 2 h</span><span>Border mid-morning, ahead of the holiday rush</span></div></div>
+</div>
+<div class="meals">
+<h6>Breakfast · lunch · dinner</h6>
+<dl>
+<dt>Breakfast</dt><dd><span class="pk">PACK IT</span> In the car at 5:30 a.m. Thermos filled the night before. <span class="cost">from the shop</span></dd>
+<dt>Lunch</dt><dd><span class="pk">PACK IT</span> Eaten in the car — but <b>nothing fresh crosses the border southbound.</b> Cheese, bread, baked goods and sealed dry goods are fine; fruit and vegetables are not. Eat or bin the produce before the crossing. <span class="cost">from the shop</span></dd>
+<dt>Dinner</dt><dd>Home, or one stop in Vermont on the way down. <span class="cost">≈US$30</span></dd>
+</dl>
 </div>
 <div class="strategy"><strong>Why 5:30 a.m.:</strong> it is the Sunday of Labour Day weekend and every Quebecer with a cottage is heading home the same day. Leaving before six puts you through Québec City and Montréal before the traffic builds and at the border in the morning window rather than the afternoon queue. Check <a href="https://bwt.cbp.gov/">US border waits</a> before you commit to a crossing, and keep a second crossing in mind.</div>
 <div class="logistics">
@@ -1408,7 +1563,29 @@ th.ra,.costs td+td{text-align:right}
 <tbody class="costs" id="pkCost"></tbody>
 </table>
 </div>
-<p class="fine">Canadian figures converted at the rate in the toolbar. The projection runs above the <b>US$3,300–4,400</b> this guide planned for, and two lines account for most of it: lodging came in at <b>US$2,025.78</b> against a US$1,450–1,950 estimate, and the marquee dinners are itemised at menu prices rather than averaged into a daily figure. Mark the Nordic spa and the ghost walk as skipped and it falls back toward the top of the range.</p>
+<p class="fine">Canadian figures converted at the rate in the toolbar. The projection runs above the <b>US$3,300–4,400</b> this guide planned for, and two lines account for most of it: lodging came in at <b>US$2,025.78</b> against a US$1,450–1,950 estimate, and the marquee dinners are itemised at menu prices rather than averaged into a daily figure. The eight game-time calls below are deliberately <b>not</b> in these figures — say yes to all of them and add roughly <b>C$430</b>.</p>
+</div>
+
+<div class="subsec" id="gametime">
+<div class="kicker">Not on the sheet</div>
+<h3>Eight calls you make on the day, not now.</h3>
+<p class="lede">Every one of these depends on weather, on how the legs feel, or on how the total is running — so committing to them in advance either wastes money or locks you into the wrong choice. None of them is in the planning sheet. All of them are repeated on the day they belong to, in <a href="#days">Day by day</a>, where you will actually be standing when you decide.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th style="width:52px">Day</th><th>The call</th><th style="width:118px">If you say yes</th><th style="width:150px">When you decide</th><th>The rule</th></tr></thead>
+<tbody>
+<tr><td><a href="#day-1">1</a></td><td><b>Franconia Ridge, or Flume Gorge as the wet plan</b></td><td>US$36 for two</td><td>The night before, on the higher-summit forecast</td><td>Thunderstorms, sustained wind over 35 mph, or visibility under 100 ft above treeline and the ridge is off. Flume is a pleasant, crowded 1½ h boardwalk — worth it as a rain plan, not as a choice.</td></tr>
+<tr><td><a href="#day-3">3</a></td><td><b>AURA at Notre-Dame</b></td><td>C$80 for two</td><td>Saturday afternoon, on the sky</td><td><b>C$40 a head, not C$30.</b> Reviewers repeatedly clock the show at 20–25 min against an advertised 45, and opinion splits hard. If Saturday evening is dry, stay at MUTEK — free, outdoors, ten minutes from the basilica.</td></tr>
+<tr><td><a href="#day-7">7</a></td><td><b>Strøm Nordic Spa, Old Québec</b></td><td>C$138–208 for two</td><td>About 4 p.m. that afternoon</td><td>C$69 each after 5 p.m., up to C$104 at peak; weekday evenings are the cheap, quiet slot. Genuinely restorative after two hard city days — and the obvious line to cut if the total looks wrong. Book same-day online.</td></tr>
+<tr><td><a href="#day-7">7</a></td><td><b>Île d'Orléans — full loop or turn back</b></td><td>Free</td><td>At Sainte-Famille, mid-afternoon</td><td>The full circuit is 67 km and the whole afternoon. If Montmorency and the Canyon have already eaten the day, turn back — you keep Sainte-Pétronille for sunset either way.</td></tr>
+<tr><td><a href="#day-8">8</a></td><td><b>Les Promenades Fantômes</b></td><td>C$60 for two</td><td>Same evening</td><td>Rated by serious travellers for the 17th-century social history rather than the ghosts, and it is a lot of stairs. Only if Onhwa' Lumina has not already filled the evening — on most nights it will have.</td></tr>
+<tr><td><a href="#day-9">9</a></td><td><b>Whale cruise, or the shore</b></td><td>Free fallback</td><td>Morning of, on the estuary forecast</td><td>Book the boat, not the Zodiac — the guarantee only covers the boat and you climb the Acropole tomorrow. If it is being hammered out there, <b>Pointe-Noire and Cap-de-Bon-Désir</b> are real shore whale-watching, free to Sep 7, not a consolation prize.</td></tr>
+<tr><td><a href="#day-10">10</a></td><td><b>Acropole des Draveurs, or the valley and the bateau-mouche</b></td><td>≈C$90 for two</td><td>At Le Draveur visitor centre</td><td>800 m of climbing in 5 km, and the summit is exposed. If cloud is on the tops, take the one-hour riverboat with a park warden on the microphone — <b>day access to the park is included in the cruise price</b>, which makes it the cheaper morning as well as the safer one.</td></tr>
+<tr><td><a href="#day-10">10</a></td><td><b>One nicer Baie-Saint-Paul dinner</b></td><td>≈C$110 more</td><td>Friday, on arrival</td><td>Les Faux Bergers or Le Mouton Noir, booked the day before. Le Saint-Pub twice is genuinely no hardship and it is the only walk-in in town on a Labour Day weekend.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="warn" style="margin-top:16px"><strong>And one thing that came off the plan entirely: the MNBAQ.</strong> The Musée national des beaux-arts is a fine museum and on any other date it would stay. But <b>Espace Riopelle opens on October 22, 2026</b> — seven weeks after you leave — and while it is being finished the <b>Gérard-Morisset and Charles-Baillairgé pavilions are closed</b>, reopening only in the months after that launch. <b>Riopelle's 40-metre <em>Tribute to Rosa Luxemburg</em>, the single reason this guide sent you there, goes on view the same day.</b> You would be paying C$50 for a fraction of a museum and missing the thing you came for. Cut, not deferred to a game-time call.</div>
 </div>
 
 <div class="subsec" id="book">
@@ -1423,7 +1600,7 @@ th.ra,.costs td+td{text-align:right}
 <tr><td>Parks Canada sites — Fortifications, Saint-Louis Forts &amp; Châteaux, Pointe-Noire, Artillery Park</td><td><b>Free</b></td><td><b>Canada Strong Pass, to Sep 7, 2026.</b> No pass to obtain — just turn up. This is worth roughly C$60–80 to you.</td></tr>
 <tr><td>Whale cruise, 3 h boat (AML, Charlevoix)</td><td>from ≈C$135</td><td>Zodiac options ≈C$100–135. Whale guarantee applies.</td></tr>
 <tr><td>Onhwa' Lumina</td><td>≈C$33.75 + tax</td><td>Parking C$10.50. Aug 28 – Sep 6 only.</td></tr>
-<tr><td>AURA, Notre-Dame Basilica</td><td>≈C$30</td><td>Separate from daytime basilica admission.</td></tr>
+<tr><td>AURA, Notre-Dame Basilica</td><td><b>≈C$40</b> (combo with daytime basilica ≈C$48)</td><td>Not C$30, as earlier drafts of this sheet said. Reviewers time the show at 20–25 min against an advertised 45.</td></tr>
 <tr><td>Pointe-à-Callière</td><td>≈C$30</td><td></td></tr>
 <tr><td>La Citadelle guided tour</td><td>≈C$16–18</td><td>Includes the Royal 22<sup>e</sup> Régiment Museum.</td></tr>
 <tr><td>Notre-Dame de Québec crypt</td><td>C$5</td><td>Church itself free. The Holy Door is free.</td></tr>
@@ -1432,7 +1609,9 @@ th.ra,.costs td+td{text-align:right}
 <tr><td>Sépaq day access, Hautes-Gorges</td><td>≈C$10 pp/day</td><td>Bateau-mouche cruise extra. Internal shuttle free.</td></tr>
 <tr><td>Québec–Lévis ferry</td><td>C$4.25 each way</td><td>Best-value view in Canada.</td></tr>
 <tr><td>Flume Gorge</td><td>US$18 online / US$21 gate</td><td>Save US$3 by booking ahead.</td></tr>
-<tr><td>Strøm Nordic Spa, Vieux-Québec</td><td>C$69 after 5 p.m. – C$104 peak</td><td>Optional. Robe, towel, locker included.</td></tr>
+<tr><td>Strøm Nordic Spa, Vieux-Québec</td><td>C$69 after 5 p.m. – C$104 peak</td><td><b>Game-time call, not a booking.</b> Robe, towel, locker included. Weekday evenings are the cheap, quiet slot.</td></tr>
+<tr><td>Restaurant Sagamité, Wendake</td><td>soup ≈C$9–16 · mains from ≈C$25</td><td>Replaces La Traite, which ran ≈C$85 a head.</td></tr>
+<tr><td>Légende par La Tanière</td><td>≈C$150 tasting menu</td><td>Before tax and tip. Vegetarian menu on request <b>at booking</b>.</td></tr>
 </tbody>
 </table>
 </div>
@@ -1482,7 +1661,7 @@ th.ra,.costs td+td{text-align:right}
 <p><b>Two good alternates:</b> <b>Saint-Roch</b> in the Lower Town — younger, design-and-restaurant heavy, superb food, but a real hill to climb home. <b>Montcalm / avenue Cartier</b> — leafier, quieter, stately houses, best if you want calm and the Plains at your door.</p>
 <p><b>Realistic price:</b> C$160–230 (≈US$115–170) for an apartment. <b>Here a hotel is often the better buy</b> — Québec has excellent small independents at Airbnb money.</p>
 <p><b>Hotels worth it:</b> <b>Hôtel du Vieux-Québec</b> (breakfast basket to your door, genuinely well run) · <b>Le Clos Saint-Louis</b> (two Victorian houses inside the walls, usually under C$260) · <b>Hôtel Château Bellevue</b> (steps from Dufferin Terrace, plain but unbeatable location) · and the splurge, <b>Auberge Saint-Antoine</b>, a Relais &amp; Châteaux built <em>over its own archaeological dig</em> with artefacts displayed in the walls of the rooms.</p>
-<p><b>Groceries, and one of them is a sight:</b> <b>Épicerie J.A. Moisan</b>, 699 rue Saint-Jean — opened 1871 and claims to be the oldest grocery store in North America. Creaking floors, tin ceilings, apothecary drawers. Go for the room; buy cheese, terrine and local cider. Then do the real shop at the <b>IGA</b> and <b>Metro</b> on rue Saint-Jean, or drive 10 minutes to <b>Le Grand Marché de Québec</b> at ExpoCité for producers.</p>
+<p><b>Groceries:</b> the real shop is <b>Metro Plus, 860 bd Charest Est</b> — 8 a.m. to 10 p.m., two minutes from the apartment, and on the flat rather than up the hill. The one that is also a sight is <b>Le Grand Marché de Québec</b>, 250 bd Wilfrid-Hamel at ExpoCité: 33 permanent stalls and 80-odd seasonal ones, producers, boreal ingredients, cafés inside the hall. <b>Épicerie J.A. Moisan at 699 rue Saint-Jean — the 1871 grocery that earlier drafts of this guide sent you to, and the one every other guide still does — closed for good in January 2025.</b> Do not walk up the hill for it.</p>
 <p><b>Parking:</b> get it confirmed in writing before you book. Old Québec street parking is a genuine trap and the tow lots are busy.</p>
 <div class="quicklinks"><a href="https://www.airbnb.com/s/Saint-Jean-Baptiste--Quebec-City/homes?checkin=2026-08-31&amp;checkout=2026-09-04&amp;adults=2">Airbnb · St-Jean-Baptiste</a><a href="https://www.airbnb.com/s/Saint-Roch--Quebec-City/homes?checkin=2026-08-31&amp;checkout=2026-09-04&amp;adults=2">Airbnb · Saint-Roch</a><a href="https://www.quebec-cite.com/en/neighbourhoods-quebec-city/saint-jean-baptiste">Visit Québec City · the neighbourhood</a></div>
 </div>
@@ -1520,47 +1699,86 @@ th.ra,.costs td+td{text-align:right}
 </details>
 
 <details class="l1" id="food">
-<summary><span class="l1t">Eating, two ways — one vegetarian, one omnivore, no compromises</span><span class="l1s">21 places, every one tagged · the two phrases that save the week</span><span class="l1c">›</span></summary>
+<summary><span class="l1t">Eating, two ways — one vegetarian, one omnivore, no compromises</span><span class="l1s">The canon, the cheap list, two splurges · every meal of every day planned</span><span class="l1c">›</span></summary>
 <div class="l1body">
 <p class="lede">Montréal is one of the most vegetarian-friendly cities in North America. Québec City is not — it is a terroir city built on game, pork and fish — but it has more than enough, and it hides its best options outside the walls, which is where you're staying anyway. Below, everything is tagged.</p>
 <p><span class="veg v100">FULLY VEG</span> entirely vegetarian or vegan &nbsp; <span class="veg vfr">BOTH</span> excellent for K <em>and</em> serious food for A &nbsp; <span class="veg omni">A ONLY</span> worth it, but K will want to be elsewhere</p>
 
+<div class="note"><strong>The rule this section is built on.</strong> Breakfast at the apartment every single day. Lunch grazed from a market, a bakery or a pack. <b>One dinner out, under C$25 a head</b>, most nights — that is roughly US$18, and it is what the food actually costs when you eat where Quebecers eat. <b>Two meals in twelve days break that rule on purpose</b>, and they are the two below. Everything that used to sit between C$60 and C$100 a head has been cut: at those prices you are buying a dining room, not a memory, and Québec's best food is not in dining rooms — it is in a cheese dairy in Baie-Saint-Paul, a wood-fired bagel oven at two in the morning, and a market in Little Italy.
+<p style="margin:8px 0 0">The old list came to <b>C$1,180</b> across six bookings covering seven dinners. This one comes to about <b>C$680 for the same seven nights</b>, buys more local food, and still keeps a Michelin star.</p></div>
+
 <div class="warn"><strong>Two phrases that will save you all week.</strong> «&nbsp;Je suis végétarienne — est-ce qu'il y a du bouillon de viande dedans&nbsp;?&nbsp;» (<em>I'm vegetarian — is there meat stock in it?</em>) and «&nbsp;sans lard, s'il vous plaît&nbsp;» (<em>without bacon, please</em>). In traditional Québécois kitchens, <b>fish, bacon lardons and chicken stock are frequently not considered "meat"</b> — including in soups, poutine gravy and vegetable dishes. Ask every time, politely and specifically. Everyone will be gracious about it.</div>
+
+<h3 style="margin-top:34px">The canon — the fifteen things you can only eat here</h3>
+<p class="lede" style="font-size:1rem">Not a restaurant list. These are the dishes and products that exist <em>because of this place</em> — a breed of cow brought from France in the 1600s, a Depression-era pudding, a bagel boiled in honey because the water was wrong for New York's method. Each one has a named best address and a price. Work through this list and you will have eaten Québec, for about the cost of two of the dinners that used to be on this page.</p>
+<div class="grid3">
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> 1 · The Montréal bagel</h4><small>St-Viateur, 263 rue Saint-Viateur O · Fairmount, 74 av Fairmount O · both 24 h · ≈C$2 each</small><p>Smaller, denser and sweeter than New York's, hand-rolled, <b>boiled in honey water</b> and baked in a wood-fired oven that has never gone out. Buy one hot sesame from each shop, four minutes apart, and settle the argument yourselves. <b>Do it at midnight</b> — that is when the ovens are best and the queue is Montrealers.</p></div>
+<div class="card foodcard"><h4><span class="veg omni">A ONLY</span> 2 · Smoked meat</h4><small>Schwartz's, 3895 bd Saint-Laurent · ≈C$13–16 · 3 blocks from your door</small><p>Beef brisket dry-cured with spice for ten days, smoked, then steamed. Schwartz's has done it since 1928 and there is genuinely nothing on the menu for a vegetarian. <b>Take it away while K is at Fairmount</b>, or cross the street to <b>Main Deli</b> — same meat, no queue, and the locals' pick.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> 3 · Poutine, with a gravy K can eat</h4><small>La Banquise, 994 rue Rachel E, open 24 h · ≈C$14–17 · Patati Patata, 4177 bd Saint-Laurent · under C$10</small><p>Thirty-odd poutines and — the rare and crucial part — <b>a vegetarian gravy</b>, so you both eat the national dish at the same table. Order <em>La Végé</em> or <em>La Matty</em>. Patati Patata does the small, cheap, greasy-spoon version two minutes from the apartment.</p></div>
+<div class="card foodcard"><h4><span class="veg omni">A ONLY</span> 4 · The Wilensky Special</h4><small>Wilensky's Light Lunch, 34 av Fairmount O · under C$6 · since 1932</small><p>Beef bologna and salami on a pressed roll. <b>Always with mustard. Never cut in half.</b> Those are the rules and they are not negotiable, which is the entire point. Four minutes from Fairmount Bagel — do both in one walk.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> 5 · Fromage en grains — the squeak</h4><small>Marché Jean-Talon · Le Grand Marché de Québec · Laiterie Charlevoix · ≈C$7–9 a bag</small><p>Cheddar curds eaten the day they are made, when they still <b>squeak against your teeth</b>. Refrigeration kills the squeak, which is why this barely exists outside Québec. Buy a bag at a market, eat it standing up, and you will understand what poutine is actually about.</p></div>
+<div class="card foodcard"><h4><span class="veg omni">A ONLY</span> 6 · Tourtière, ragoût de boulettes, cipaille</h4><small>Buffet de l'Antiquaire, 95 rue Saint-Paul, Québec City · ≈C$15–22</small><p>Spiced pork pie, meatball stew in gravy, and a layered game-and-pastry pie that takes six hours. A 1970s diner serving a room of regulars, not tourists — <b>the real traditional cooking</b>, and almost nothing for a vegetarian. Go for breakfast, when it is at its best and its busiest.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> 7 · Pouding chômeur &amp; tarte au sucre</h4><small>La Binerie Mont-Royal, 367 av Mont-Royal E · Grand Marché bakeries · ≈C$6–9</small><p>&laquo;&nbsp;Unemployed man's pudding&nbsp;&raquo; — cake batter drowned in hot maple syrup and cream, <b>invented in the Depression</b> because syrup was cheaper than sugar. Sugar pie is its Christmas cousin. Both are absurd and both are the point.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> 8 · Casse-croûte poutine, the Québec City way</h4><small>Chez Ashton, 54 côte du Palais · ≈C$10 · Snack Bar St-Jean, rue Saint-Jean · C$7–23</small><p>Ashton is the chain Quebecers are actually loyal to — since 1972, and the poutine locals compare everything else against. <b>Its classic gravy is beef-based:</b> for K, go to <b>Chez Victor</b> on rue Saint-Jean, which runs three gravies including a vegan one and several serious veggie builds.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> 9 · Queues de castor</h4><small>rue du Petit-Champlain, Lower Town · ≈C$8 · Day 6, after the ferry</small><p>&laquo;&nbsp;Beaver tails&nbsp;&raquo; — whole-wheat dough stretched by hand into a paddle, deep-fried, and covered in maple butter or cinnamon sugar. Invented in Ontario, perfected as a Québec winter-street institution. Eat it walking down the oldest commercial street in North America.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> 10 · Le 1608, and the cow it comes from</h4><small>Laiterie Charlevoix, 1167 bd Monseigneur-De Laval, Baie-Saint-Paul · ≈C$8–12 a wedge · free museum</small><p>A washed-rind cheese made from the milk of the <b>Canadienne — the only dairy breed ever developed in North America</b>, brought from France in the 1600s and down to a few hundred animals. A working dairy with a small museum attached. <b>This is the single most place-specific thing you will eat all trip.</b></p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> 11 · Bleu Bénédictin</h4><small>Abbaye de Saint-Benoît-du-Lac · ≈C$12–18 · on Day 2's route, no detour</small><p>Blue cheese made by Benedictine monks on a lake that straddles the border, sold in their own shop after you have heard them sing the office in Gregorian chant. Buy it, plus their cider, and eat it on the abbey lawn — <b>that is Day 2's lunch</b>.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> 12 · Cidre de glace &amp; crème de cassis</h4><small>Cassis Monna &amp; Filles, 721 ch Royal, Saint-Pétronille, Île d'Orléans · tasting ≈C$5–10</small><p><b>Ice cider is a Québec invention</b> — apples left to freeze on the tree, pressed at −10 °C, the sugar concentrated by ice rather than heat. Monna is three generations of blackcurrant growers on the island, with a terrace looking straight back at the city. Day 7 passes the door.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> 13 · Sagamité</h4><small>Restaurant Sagamité, Wendake · soup ≈C$9–16 · Day 8, before Lumina</small><p>Corn, beans and squash — the three sisters — simmered into the soup the Wendat have eaten for centuries and named the restaurant after. Bannock alongside. <b>Ask whether the broth is game-based</b>; they will make it work. The affordable way to eat Indigenous cuisine on this trip.</p></div>
+<div class="card foodcard"><h4><span class="veg omni">A ONLY</span> 14 · Portuguese piri-piri chicken</h4><small>Ma Poule Mouillée, 969 rue Rachel E · ≈C$15 · 10 min from your door</small><p>Montréal's Portuguese community turned charcoal rotisserie chicken into a second civic dish, and Ma Poule Mouillée put it <b>on top of a poutine</b>. It is as good as that sounds. Directly across Parc La Fontaine from La Banquise, so this and #3 are one walk.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> 15 · The boreal larder</h4><small>Le Grand Marché de Québec, 250 bd Wilfrid-Hamel · free to browse · Légende to eat it cooked</small><p>Fir tips, sumac, sea buckthorn, Labrador tea, wild mushrooms, sea parsley — the ingredients that grow north of the St. Lawrence and nowhere you shop at home. <b>Browse the market stalls for free</b>, buy a jar to take back, and see what a Michelin kitchen does with them at Légende on Day 6.</p></div>
+</div>
 
 <h3 style="margin-top:34px">Montréal</h3>
 <div class="grid3">
-<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Sushi Momo</h4><small>Plateau · rue Saint-Denis · ≈C$45–75 · reserve</small><p>Vegan sushi that food critics write about without the qualifier. Oyster mushroom, smoked tofu, fermented everything, plating that belongs in a much more expensive room. <b>This is K's special dinner in Montréal.</b> Book it now.</p></div>
-<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Aux Vivres</h4><small>bd Saint-Laurent · ≈C$18–30</small><p>The city's original vegan restaurant, running since 1997. Bowls, the famous BLT with coconut bacon, house dragon sauce. Casual, always busy, a Montréal institution in its own right.</p></div>
-<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Umami Ramen &amp; Izakaya</h4><small>Mile-Ex · ≈C$20–35</small><p>Montréal's first fully vegan ramen shop — noodles made in house from organic wheat, broths brewed for hours, proper izakaya plates alongside. Twenty minutes from Jean-Talon and the right dinner after a market afternoon.</p></div>
-<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> ChuChai</h4><small>rue Saint-Denis, Plateau · ≈C$25–40</small><p>Vegan Thai that has been converting sceptics for two decades. The seitan "duck" is the dish people come back for. Walkable from the Plateau.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Le Vin Papillon</h4><small>Little Burgundy · small plates · no reservations — check</small><p>A wine bar from the Joe Beef family that became internationally known for <b>cooking vegetables better than almost anyone in Canada</b> — charred cabbage, whole celery root, squash that has been treated like a steak. There is meat on the board too. If you eat at one place together in Montréal, make it this.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Damas</h4><small>Outremont · Syrian · ≈C$60–100</small><p>Routinely named among the best restaurants in Canada. The mezze list is enormous and mostly vegetarian — muhammara, fattoush, labneh, stuffed vine leaves — while the lamb and the cherry kebab hold up his end. Grand room, worth dressing for.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> La Banquise</h4><small>Plateau, opposite Parc La Fontaine · open 24 h · ≈C$15</small><p>Thirty-odd poutines, and crucially <b>a vegetarian gravy</b>, so you can both eat the national dish at the same table at two in the morning. Order <em>La Végé</em> or <em>La Matty</em>. This is the correct post-MUTEK move.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> St-Viateur &amp; Fairmount Bagel</h4><small>Mile End · open 24 h · ≈C$2 each</small><p>Wood-fired, honey-boiled, hand-rolled. Buy one hot sesame from each, four minutes apart, and settle the argument yourselves.</p></div>
-<div class="card foodcard"><h4><span class="veg omni">A ONLY</span> Schwartz's &amp; Wilensky's</h4><small>bd Saint-Laurent / Mile End · ≈C$15–25</small><p><b>Schwartz's</b> has been smoking brisket since 1928 and there is genuinely nothing on the menu for a vegetarian — take it away while K is at Fairmount. <b>Wilensky's Light Lunch</b> (1932) serves one sandwich, always with mustard, and will not cut it in half. Both are the real thing.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Falafel Yoni</h4><small>Plateau · pita C$8 · plate C$11 · walk-in</small><p>Eight dollars, made in front of you, and better than most sit-down falafel in North America. The obvious lunch on any Plateau day and the fallback on any night nobody wants to decide.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Drogheria Fine</h4><small>68 av Fairmount O, Mile End · C$6 · takeout window only</small><p>One thing, out of a window, since 2012: gnocchi in <em>salsa della nonna</em>, six dollars, eaten on the kerb. A Mile End ritual. <b>Do it on the bagel walk</b> — it is two doors from Fairmount.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Café Santropol</h4><small>3990 rue Saint-Urbain · C$14–18 · garden out back</small><p>A 1976 Plateau institution built on absurdly tall vegetarian sandwiches and soup, with one of the best hidden gardens in the city behind it. Cold-brew coffee, no rush, and a table under the trees after a morning on foot.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Queen Sheba</h4><small>Mile End · veg platter ≈C$20 for two to share · injera</small><p>Ethiopian, and the smartest possible answer to the vegetarian/omnivore split: one enormous platter, a dozen separate stews, half of them vegan, everything eaten with your hands off the same injera. <b>You order once and you both eat everything.</b></p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Aux Vivres</h4><small>bd Saint-Laurent · C$18–24 · 12 min walk</small><p>The city's original vegan restaurant, running since 1997. Bowls, the famous BLT with coconut bacon, house dragon sauce. Casual, always busy, an institution in its own right — and the closest good vegan dinner to your door.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Umami Ramen &amp; Izakaya</h4><small>Mile-Ex · ramen C$17–21 · izakaya plates from C$6</small><p>Montréal's first fully vegan ramen shop — noodles made in house from organic wheat, broths brewed for hours, proper izakaya plates alongside. Twenty minutes from Jean-Talon and the right dinner after a market afternoon.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Trip de Bouffe</h4><small>av Mont-Royal E, Plateau · under C$10</small><p>Lebanese <em>manouche</em> — flatbread baked to order under za'atar, cheese or spiced meat — plus falafel and shawarma from the same counter. Under ten dollars, five minutes off Saint-Laurent, and open late.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Marché Jean-Talon, as lunch</h4><small>7070 av Henri-Julien · C$25–30 feeds both of you · Day 4</small><p>North America's largest open-air market, 150 vendors, running since 1933. <b>Do not treat this as sightseeing — treat it as lunch.</b> A baguette, a wedge from a fromagerie, curds, tomatoes, a peach, and a cider. Better than any restaurant meal you would buy for the same money.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Le Vin Papillon <em>— optional, and pricier</em></h4><small>Little Burgundy · small plates C$14–24 · no reservations · ≈C$45–60 a head with wine</small><p>The Joe Beef family's wine bar, internationally known for <b>cooking vegetables better than almost anyone in Canada</b>. It is genuinely excellent and it is genuinely not a C$25 dinner. <b>It is no longer booked.</b> If you want one wine-bar night in Montréal, walk in at 3 p.m. when the doors open, share four plates and skip the bottle.</p></div>
 </div>
-
 <h3 style="margin-top:34px">Québec City</h3>
 <div class="grid3">
-<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Bistro Hortus</h4><small>rue Saint-Jean, inside the walls · ≈C$45–70</small><p>Vegetarian and largely vegan, using produce grown on the restaurant's own rooftop. Small, seasonal, properly cooked — and a ten-minute walk from your door. The most reliable good vegetarian dinner in the city.</p></div>
-<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Le Don Végane</h4><small>Lower Town / Saint-Roch · ≈C$25–50 · reserve</small><p>The city's best-known fully vegan restaurant; official city tourism tells people to book because it fills. Comfort-leaning, generous, good for a night when you want volume rather than refinement.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Buvette Scott</h4><small>Saint-Jean-Baptiste · natural wine + small plates · ≈C$50–80</small><p>A tiny, dark, brilliant wine bar three minutes from your door, cooking vegetable-forward small plates alongside charcuterie and fish. Locals' answer to "where should we actually eat". Go early or late.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Le Billig</h4><small>rue Saint-Jean · Breton crêperie · ≈C$20–35</small><p>Buckwheat galettes — a genuinely Breton tradition that came over with the settlers — with plenty of vegetarian fillings, dessert crêpes, and Norman-style cider by the bowl. The best casual lunch on your street.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Chez Victor</h4><small>Saint-Jean-Baptiste · ≈C$20–30</small><p>A Québec City institution for burgers, with several serious vegetarian and vegan builds rather than a token patty. Unpretentious, always full of locals, two minutes from the apartment.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Légende par La Tanière</h4><small>Lower Town · boreal tasting menu · C$150+ · book weeks ahead</small><p><b>The splurge.</b> A tasting menu built entirely from Québec's boreal larder — fir, sumac, sea buckthorn, wild mushrooms, lake fish, game — and they will build a full vegetarian tasting menu if you ask when booking. Tell them at reservation, not on the night.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> L'Orygine</h4><small>Saint-Roch · organic &amp; local · ≈C$60–90</small><p>Certified-organic kitchen with serious vegetable cooking and a good wine list. Confirm vegetarian options when you book — they are accommodating with notice.</p></div>
-<div class="card foodcard"><h4><span class="veg omni">A ONLY</span> Le Buffet de l'Antiquaire &amp; Chez Ashton</h4><small>Lower Town / everywhere · ≈C$15–25</small><p><b>Buffet de l'Antiquaire</b> is a 1970s Québécois diner doing tourtière, ragoût de boulettes and pouding chômeur to a room of regulars — the real traditional cooking, and almost nothing for a vegetarian. <b>Chez Ashton</b> is the local poutine chain Quebecers are loyal to.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> La Traite · Wendake</h4><small>Hôtel-Musée Premières Nations · ≈C$60–100 · book</small><p>Indigenous fine dining — boreal herbs, corn, squash, beans, wild mushrooms, sumac — with vegetarian dishes that are composed rather than subtracted. Pair it with Onhwa' Lumina on Day 8.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Bureau de Poste</h4><small>rue Saint-Joseph E, Saint-Roch · <b>everything on the food menu under C$10</b></small><p>The Saint-Roch local's answer, and the single best-value room in the city: the whole kitchen menu is under ten dollars and nothing on the drinks list is over thirteen. Loud, young, unpretentious, and a flat ten-minute walk from your door — no hill.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Chez Victor</h4><small>rue Saint-Jean · C$18–24 · 2 min from the apartment</small><p>A Québec City institution for burgers with <b>several serious vegetarian and vegan builds rather than a token patty</b>, plus three poutine gravies including a vegan one. Always full of locals. This is your default when the day has run long.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Le Billig</h4><small>rue Saint-Jean · galettes C$14–20 · cider by the bowl</small><p>Buckwheat galettes — a Breton tradition that came over with the settlers — with plenty of vegetarian fillings, dessert crêpes, and Norman-style cider drunk from a bowl. <b>The best cheap lunch on your street</b>, and the right stop mid-way through the Old Québec day.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> La Boîte à Pain</h4><small>rue Saint-Joseph E, Saint-Roch · sandwich or slice under C$14</small><p>A proper bakery that also does pizza, calzone and sandwiches on its own bread. <b>This is the breakfast-and-packed-lunch shop</b> for the Québec City base — buy the next day's hiking lunch here the evening before.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Nina Pizza Napolitaine &amp; Attaboy</h4><small>both on rue Saint-Jean · C$16–22 whole · Attaboy sells by the slice</small><p>Neapolitan, wood-fired, and <b>Nina runs two fully vegan pizzas</b> as standard rather than as a favour. Attaboy is the neighbourhood slice shop two minutes further along. Between them, no evening in Québec City has to be a decision.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Le Grand Marché de Québec</h4><small>250 bd Wilfrid-Hamel, ExpoCité · C$25–30 feeds both · 33 permanent stalls</small><p>The city's real market since 2019 — producers, a fromagerie, boreal-ingredient stalls, bakers, and cafés inside the hall. <b>This replaces J.A. Moisan</b>, the 1871 grocery on rue Saint-Jean that this guide used to send you to: <b>it closed for good in January 2025</b>. Do not walk up the hill looking for it.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Le Don Végane</h4><small>Saint-Roch · C$25–38 · reserve</small><p>The city's best-known fully vegan kitchen, and the one night in Québec City where K orders from the whole menu without a single question. Comfort-leaning and generous rather than refined. City tourism tells people to book because it fills.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> Bistro Hortus <em>— go at lunch</em></h4><small>rue Saint-Jean, inside the walls · dinner C$45–70 · <b>lunch far less</b></small><p>Vegetarian and largely vegan, using produce grown on the restaurant's own rooftop — properly cooked, seasonal, and ten minutes from your door. At dinner it is a C$50-a-head restaurant. <b>Go at lunch instead</b> and you get the same kitchen for half of it.</p></div>
+<div class="card foodcard"><h4><span class="veg omni">A ONLY</span> Buffet de l'Antiquaire &amp; Chez Ashton</h4><small>95 rue Saint-Paul / 54 côte du Palais · C$10–22</small><p>The two addresses in the canon list above, restated because they are also just cheap: the 1970s Québécois diner where the tourtière and the cipaille are real, and the poutine chain Quebecers are actually loyal to. Almost nothing at the Buffet for a vegetarian — pair it with Chez Victor.</p></div>
 </div>
-
 <h3 style="margin-top:34px">Charlevoix &amp; the road</h3>
 <div class="grid3">
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Baie-Saint-Paul dinners</h4><small>rue Saint-Jean-Baptiste · ≈C$40–90</small><p><b>Les Faux Bergers</b> — wood-fired, farm-driven, always something serious for a vegetarian. <b>Le Mouton Noir</b> — a terrace over the river, the town's classic. <b>Le Saint-Pub</b> — the microbrewery, casual, reliable after a mountain day. Book Friday and Saturday: it's Labour Day weekend.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> The Route des Saveurs</h4><small>Charlevoix · free to drive, pay at source</small><p>Québec's original flavour trail. <b>Laiterie Charlevoix</b> — a working cheese dairy with a small museum, making <em>Le 1608</em> from the milk of the near-extinct Canadienne cow, a breed brought from France in the 1600s. <b>Maison Maurice Dufour</b> for Le Migneron. <b>Vergers Pedneault</b> for cider and dried fruit. This is your Hautes-Gorges picnic and it is better than most restaurants.</p></div>
-<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> New Hampshire, nights 1–2</h4><small>Lincoln / North Woodstock · US$20–35</small><p><b>Woodstock Inn Station &amp; Brewery</b> — walkable, own beer, vegetarian options that aren't an afterthought, and exactly the right room to sit in after nine hours on the ridge. <b>Gypsy Café</b> in Lincoln is the more interesting kitchen if you want it.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Le Saint-Pub · Microbrasserie Charlevoix</h4><small>2 rue Racine, Baie-Saint-Paul · C$18–28 · no booking needed · 4.2★ over 5,000 reviews</small><p><b>Your default dinner both Charlevoix nights.</b> The region's brewery with its own kitchen — beer brewed on the premises, poutine, fish and chips, a proper gluten-free menu and vegetarian mains that are not an afterthought. Walk-in, in town, on a holiday weekend when everything else needs a reservation.</p></div>
+<div class="card foodcard"><h4><span class="veg v100">FULLY VEG</span> The Route des Saveurs picnic</h4><small>free to drive, pay at source · ≈C$30 buys two lunches</small><p>Québec's original flavour trail, 80-odd producers between Petite-Rivière-Saint-François and La Malbaie. <b>Laiterie Charlevoix</b> for Le 1608 and a free museum · <b>Maison Maurice Dufour</b> for Le Migneron · <b>Vergers Pedneault</b> for cider and dried fruit · <b>A Chacun Son Pain</b> on rue Saint-Jean-Baptiste for the loaf. <b>Buy it Friday evening; it is Saturday's Hautes-Gorges lunch</b> and it is better than any restaurant in the valley.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> Baie-Saint-Paul, if you want one nicer night</h4><small>rue Saint-Jean-Baptiste · C$40–60 a head · book ahead — Labour Day weekend</small><p><b>Les Faux Bergers</b> — wood-fired, farm-driven, always something serious for a vegetarian. <b>Le Mouton Noir</b> — a terrace over the river, the town's classic. <b>Neither is booked and neither needs to be.</b> If Saturday feels like the night for it, book one on arrival Friday; otherwise Le Saint-Pub twice is no hardship and saves about C$120.</p></div>
+<div class="card foodcard"><h4><span class="veg vfr">BOTH</span> New Hampshire, nights 1–2</h4><small>Lincoln / North Woodstock · US$18–28</small><p><b>Woodstock Inn Station &amp; Brewery</b> — walkable, own beer, vegetarian options that aren't an afterthought, and exactly the right room to sit in after nine hours on the ridge. <b>Gypsy Café</b> in Lincoln is the more interesting kitchen if you want it. <b>Price Chopper, 10 Paper Mill Drive, Lincoln</b> (open to 11 p.m.) is where Thursday's hiking food comes from.</p></div>
 </div>
 
-<div class="note"><strong>The provisioning rhythm that makes this trip cheap and better:</strong> breakfast at home every day from groceries (Provigo/IGA/Metro, J.A. Moisan, the markets) · lunch grazed from markets and farm stands · one proper dinner out most nights. That is roughly how Quebecers eat in summer, it suits a vegetarian far better than three restaurant meals a day, and it saves you US$60–90 a day.</div>
+<h3 style="margin-top:34px">The two splurges — and what got cut to pay for them</h3>
+<div class="grid2">
+<div class="card" style="background:#fbf7ee;border-color:#ddc9a5"><h4 style="margin-top:0"><span class="veg vfr">BOTH</span> Légende par La Tanière · Tuesday Sep 1</h4><small>255 rue Saint-Paul, Lower Town · tasting menu ≈C$150 a head · <b>book now, weeks ahead</b></small><p><b>One Michelin star in Québec's inaugural 2025 guide</b>, and the reason it earns the money is a rule rather than a chef: Légende is <b>strictly locavore</b> — no chocolate, no pepper, no citrus, no vanilla, nothing that does not grow or live here. What is left is the boreal larder — fir, sumac, sea buckthorn, wild mushrooms, lake fish, game — cooked at a level you cannot get anywhere else on earth, because nowhere else has these ingredients and this kitchen.</p><p><b>They will build a full vegetarian tasting menu.</b> Say so <em>when you reserve</em>, not on the night. Sister restaurant to the two-star Tanière³, at a third of the price. It is a ten-minute walk from the Lévis ferry landing, which is exactly where Day 6 ends.</p></div>
+<div class="card" style="background:#fbf7ee;border-color:#ddc9a5"><h4 style="margin-top:0"><span class="veg v100">FULLY VEG</span> Sushi Momo · Friday Aug 28</h4><small>rue Saint-Denis, Plateau · ≈C$65 a head all in · <b>reserve now</b></small><p>Vegan sushi that critics write about without the qualifier — oyster mushroom, smoked tofu, fermented everything, plating that belongs in a much more expensive room. It is the one dinner of the trip where <b>K is not the accommodated party</b>: the entire menu is hers, and A eats things he has no way of ordering at home.</p><p>Chosen over Damas (C$180 for two) as the second Montréal splurge because it costs C$50 less and does something Montréal does that Connecticut cannot. Damas is excellent and it is a Syrian restaurant — you can eat superb Levantine food thirty minutes from your house.</p></div>
+</div>
+
+<div class="warn" style="margin-top:20px"><strong>Cut from the booking list, and why.</strong>
+<b>Damas</b>, C$180 — grand room, brilliant mezze, but Levantine food is not scarce at home. <b>La Traite, Wendake</b>, C$170 — Indigenous fine dining is a real thing to want, and <b>Restaurant Sagamité in the same village does the same cuisine for a third</b>, with the sagamité soup itself on the menu; Day 8 already has Onhwa' Lumina at 8 p.m. and a C$170 dinner before it makes for a heavy evening. <b>L'Orygine</b>, C$60–90 a head — good, not distinctive. <b>Le Vin Papillon</b>, C$120 — kept on the page, taken off the sheet: it does not accept reservations anyway. <b>Two booked Baie-Saint-Paul restaurant dinners</b>, C$200 — replaced by Le Saint-Pub, which needs no booking on a Labour Day weekend when everything else does.
+<br/><br/><b>Net: C$1,180 → about C$680</b> across the same seven dinners — roughly <b>US$365 back</b>, and the food gets more local, not less.</div>
+
+<h3 style="margin-top:34px">Groceries, markets and the packing days</h3>
+<div class="grid3">
+<div class="card"><h4>Where you actually shop</h4><p><b>Lincoln, NH</b> — <b>Price Chopper</b>, 10 Paper Mill Drive, open to 11 p.m. Arrive Wednesday night and shop Thursday's hiking food before bed.</p><p><b>Montréal, Plateau</b> — <b>Segal's</b> on bd Saint-Laurent is the cheap one and has been on the Main for 90 years; <b>Supermarché PA</b> and <b>Provigo</b> for a full shop. All within a ten-minute walk of 3613.</p><p><b>Québec City, Saint-Roch</b> — <b>Metro Plus, 860 bd Charest Est</b>, 8 a.m.–10 p.m., which is <b>two minutes from your door</b>. Le Grand Marché for the good stuff.</p><p><b>Baie-Saint-Paul</b> — the <b>IGA</b> in town, plus the Route des Saveurs producers.</p></div>
+<div class="card"><h4>Three days you must pack a lunch</h4><p><b>Day 1 · Franconia Ridge.</b> Nine miles, 3,900 ft, no water and no food on the ridge. Two sandwiches each, bars, salty snacks, <b>3 L of water each</b>, electrolyte tablets. Buy it Wednesday night at Price Chopper.</p><p><b>Day 9 · the whale boat.</b> 6:15 a.m. departure, three hours on the water, nothing decent to buy at Baie-Sainte-Catherine. Pack breakfast <em>and</em> lunch the night before; fill a thermos.</p><p><b>Day 10 · Hautes-Gorges.</b> No shop inside the park and the drive in is 1 h 15. This is the <b>Route des Saveurs picnic</b> — buy it Friday evening on the way into Baie-Saint-Paul.</p><p><b>Day 11 · the drive home</b> is not a hike, but it is 10 h 53 of driving. Pack it or you will eat at a service plaza.</p></div>
+<div class="card"><h4>Crossing the border with food</h4><p><b>Northbound and southbound, leave the fresh produce behind.</b> No fresh fruit or vegetables, no plants, no firewood, in either direction. Cheese, bread, baked goods, sealed dry goods and cooked food are fine.</p><p>That matters twice: clear the Montréal fridge before Day 5, and <b>eat or bin the fresh things before Sunday's crossing</b>. The cheese you bought in Charlevoix comes home with you; the tomatoes do not.</p><p><b>Alcohol allowance:</b> 1.5 L of wine or 8.5 L of beer per adult back into the US, duty-free, after 48 hours away. A case of Microbrasserie Charlevoix is within it.</p></div>
+</div>
+
+<div class="note" style="margin-top:20px"><strong>The rhythm, in one line:</strong> breakfast at the apartment every day · lunch from a market, a bakery or a pack · one dinner out under C$25 a head · two splurges. That is how Quebecers eat in summer, and it suits a vegetarian far better than three restaurant meals a day. The rewritten dinner list hands back about <b>US$365</b> on its own; the breakfast-and-market rhythm saves <b>US$60–90 a day</b> on top of that — and nothing worth eating has been removed.</div>
 </div>
 </details>
 
@@ -1633,7 +1851,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="card">
 <h4>City kit</h4>
 <p style="margin:0 0 8px"><b>Shoes are the whole game.</b> Québec City is cobbles, stairs and a real hill; Montréal is 6–8 miles a day on pavement. Bring shoes you have already walked twenty miles in — this is not the week for new ones. A second pair so one can dry.</p>
-<p style="margin:0 0 8px"><b>Layers:</b> a light rain shell you'll carry daily, one warm layer for evenings, and one outfit each that works for a nice dinner (Légende, Damas, Le Vin Papillon, or a drink at the Château Frontenac's 1608 bar). Québec is not formal, but it is well dressed.</p>
+<p style="margin:0 0 8px"><b>Layers:</b> a light rain shell you'll carry daily, one warm layer for evenings, and one outfit each that works for a nice dinner (Légende above all, and a drink at the Château Frontenac's 1608 bar). Québec is not formal, but it is well dressed.</p>
 <p style="margin:0"><b>Small stuff:</b> daypack · reusable water bottles · umbrella · a tote for markets · swimwear <em>and</em> flip-flops if you do a Nordic spa.</p>
 </div>
 <div class="card">
@@ -1776,7 +1994,7 @@ th.ra,.costs td+td{text-align:right}
 <tr><td><b>Wed Aug 26</b></td><td>Arrival, White Mountains</td><td>Lincoln, NH</td><td>—</td></tr>
 <tr><td><b>Thu Aug 27</b></td><td>Post-ridge dinner and beer</td><td>Woodstock Inn Brewery</td><td>US$25</td></tr>
 <tr><td><b>Fri Aug 28</b></td><td><b>MUTEK · Expérience</b> — free outdoor stage, ambient / techno / live electronics, 5 p.m.–midnight</td><td>Esplanade Tranquille, Montréal</td><td><b>Free</b></td></tr>
-<tr><td><b>Sat Aug 29</b></td><td><b>AURA</b> at Notre-Dame Basilica (30 min) → <b>MUTEK Expérience</b>, 10 min walk<br/><em>or</em> <b>Gardens of Light</b> opening night at the Botanical Garden</td><td>Old Montréal → Quartier des Spectacles</td><td>≈C$30 + free</td></tr>
+<tr><td><b>Sat Aug 29</b></td><td><b>MUTEK Expérience</b> on Esplanade Tranquille — free, outdoors, 5 p.m. to midnight<br/><em>if it rains:</em> <b>AURA</b> at Notre-Dame first (20–30 min), then MUTEK 10 min away</td><td>Old Montréal → Quartier des Spectacles</td><td><b>Free</b>, or ≈C$40 each for AURA</td></tr>
 <tr><td><b>Sun Aug 30</b></td><td><b>Tam-Tams</b> drum circle on Mount Royal, ≈12–6 p.m. → <b>Gardens of Light</b> after dusk → <b>MUTEK closing night</b></td><td>Mount Royal · Botanical Garden · Esplanade Tranquille</td><td>Free / ticketed / <b>Free</b></td></tr>
 <tr><td><b>Mon Aug 31</b></td><td>Arrival evening on rue Saint-Jean — buskers and terraces</td><td>Saint-Jean-Baptiste, Québec</td><td><b>Free</b></td></tr>
 <tr><td><b>Tue Sep 1</b></td><td>Sunset crossing on the Lévis ferry; street performers on Dufferin Terrace</td><td>Old Québec</td><td>C$4.25</td></tr>
@@ -1788,7 +2006,7 @@ th.ra,.costs td+td{text-align:right}
 </table>
 </div>
 
-<div class="card" style="margin-top:18px;background:#fbf7ee;border-color:#ddc9a5"><h3 style="margin-top:0">AURA or Gardens of Light? You cannot do both on one evening.</h3><p>They are at opposite ends of the island, both start after dark, and both run about the same hours. Here is the honest comparison.</p><div class="tablewrap"><table><thead><tr><th></th><th>AURA · Notre-Dame Basilica</th><th>Gardens of Light · Botanical Garden</th></tr></thead><tbody><tr><td><b>What it is</b></td><td>Moment Factory turns the basilica's own vault, columns and altar into a projection surface, with an orchestral score through the nave.</td><td>A 2 km walk after dark through the Chinese, Japanese and First Nations gardens, lit by hand-made silk lanterns from Shanghai.</td></tr><tr><td><b>Time cost, door to door</b></td><td><b>≈90 min.</b> The show is 30 minutes; Old Montréal is 20 minutes from the Plateau.</td><td><b>≈3½ hours.</b> The garden is 1½–2 h on its feet, plus 35–40 min each way to Pie-IX.</td></tr><tr><td><b>Weather</b></td><td>Entirely indoors. <b>The rain plan.</b></td><td>Entirely outdoors. Rain ruins it.</td></tr><tr><td><b>Physical</b></td><td>You sit or stand still.</td><td>2 km on gravel, after a full day of walking.</td></tr><tr><td><b>Pairs with</b></td><td>The Old Montréal day, and <b>MUTEK is 10 minutes' walk away</b> afterwards.</td><td>Nothing — it is the whole evening, and it is the wrong side of the city from everything else.</td></tr><tr><td><b>Books out</b></td><td>Summer Fri/Sat sell out. Buy now.</td><td>Aug 29 is <b>opening weekend</b>. Buy now.</td></tr><tr><td><b>Which is more spectacular</b></td><td>Higher peak. Thirty minutes you will not forget.</td><td>Lower peak, longer and more romantic. A walk, not a show.</td></tr></tbody></table></div><p style="margin-bottom:0"><b>The recommendation, and why the itinerary is built this way:</b> <b>AURA on Saturday</b> — it caps the Old Montréal day and hands you MUTEK straight afterwards for free. <b>Gardens of Light on Sunday</b>, because Sunday has no competing evening. If you only want one: <b>take AURA.</b> It is a third of the time, it is rain-proof, and it is the more astonishing of the two. If you take both, be honest that Sunday becomes a very long day — bagels, Jean-Talon, Tam-Tams, the Oratory <em>and</em> a 2 km night walk in the east end. The clean fix is to move Saint Joseph's Oratory to Saturday afternoon.</p></div>
+<div class="card" style="margin-top:18px;background:#fbf7ee;border-color:#ddc9a5"><h3 style="margin-top:0">AURA or Gardens of Light? You cannot do both on one evening.</h3><p>They are at opposite ends of the island, both start after dark, and both run about the same hours. Here is the honest comparison.</p><div class="tablewrap"><table><thead><tr><th></th><th>AURA · Notre-Dame Basilica</th><th>Gardens of Light · Botanical Garden</th></tr></thead><tbody><tr><td><b>What it is</b></td><td>Moment Factory turns the basilica's own vault, columns and altar into a projection surface, with an orchestral score through the nave.</td><td>A 2 km walk after dark through the Chinese, Japanese and First Nations gardens, lit by hand-made silk lanterns from Shanghai.</td></tr><tr><td><b>Time cost, door to door</b></td><td><b>≈90 min.</b> The show is 30 minutes; Old Montréal is 20 minutes from the Plateau.</td><td><b>≈3½ hours.</b> The garden is 1½–2 h on its feet, plus 35–40 min each way to Pie-IX.</td></tr><tr><td><b>Weather</b></td><td>Entirely indoors. <b>The rain plan.</b></td><td>Entirely outdoors. Rain ruins it.</td></tr><tr><td><b>Physical</b></td><td>You sit or stand still.</td><td>2 km on gravel, after a full day of walking.</td></tr><tr><td><b>Pairs with</b></td><td>The Old Montréal day, and <b>MUTEK is 10 minutes' walk away</b> afterwards.</td><td>Nothing — it is the whole evening, and it is the wrong side of the city from everything else.</td></tr><tr><td><b>Books out</b></td><td>Summer Fri/Sat sell out. Buy now.</td><td>Aug 29 is <b>opening weekend</b>. Buy now.</td></tr><tr><td><b>Which is more spectacular</b></td><td>Higher peak. Thirty minutes you will not forget.</td><td>Lower peak, longer and more romantic. A walk, not a show.</td></tr></tbody></table></div><p style="margin-bottom:0"><b>The recommendation, and why it changed:</b> <b>Gardens of Light on Sunday</b> is booked, because Sunday has no competing evening and the lanterns are the more reliably good of the two. <b>AURA is now a rain plan, not a booking.</b> At <b>C$40 a head</b> — not the C$30 this guide first quoted — for a show that reviewers repeatedly time at 20–25 minutes against an advertised 45, and with opinion genuinely split between "better than Epcot" and "not worth the money", it does not earn a slot on a dry Saturday when <b>MUTEK is free, outdoors and ten minutes away</b>. If Saturday evening is wet, buy AURA that afternoon and it becomes the right call instantly: it is entirely indoors and it is thirty minutes. If you take both, be honest that Sunday becomes a very long day — bagels, Jean-Talon, Tam-Tams, the Oratory <em>and</em> a 2 km night walk in the east end. The clean fix is to move Saint Joseph's Oratory to Saturday afternoon.</p></div>
 <div class="grid2" style="margin-top:18px">
 <div class="card"><h4>MUTEK, in your favour</h4><p style="margin:0">The festival runs <b>Aug 25–30, 2026</b> — its 27th edition, with close to 120 artists from 28 countries. The <b>Expérience</b> series on Esplanade Tranquille is outdoors, free, and runs <b>every evening from 5 p.m. to midnight</b>. Your three Montréal nights are the 28th, 29th and 30th. There is no ticket to buy and no plan to make: walk in, stay as long as it holds you. Paid indoor programmes are entirely optional, and the full line-up publishes in spring. <a href="https://montreal.mutek.org/en/esplanade-tranquille">Programme →</a></p></div>
 <div class="card"><h4>Three honest notes</h4><p style="margin:0 0 8px"><b>JOAT opens the day after you leave Montréal.</b> The largest street dance festival in the Americas — battles, breaking, hip hop, popping, krump — runs <b>Sep 1–7, 2026</b> across the same Quartier des Spectacles, and you are in Québec City for all of it. The consolation is exact: MUTEK occupies the identical square on all three of your Montréal nights.</p><p style="margin:0 0 8px"><b>Québec City has no equivalent free festival in your window.</b> Envol et Macadam — the city's punk and hardcore festival, whose opening night at the Agora du Port de Québec is free — runs <b>Sep 10–12, 2026</b>, four days after you leave. Rather than pretend otherwise: your Québec City evenings are Onhwa' Lumina, the ferry at sunset, the performers on Dufferin Terrace, and rue Saint-Jean.</p><p style="margin:0"><b>Québec Pride (Fête Arc-en-ciel)</b> is expected around <b>Sep 4–6</b>. You leave the city on the 4th — expect extra activity around Place d'Youville that morning. Confirm dates closer to the time.</p></div>
@@ -1814,7 +2032,7 @@ th.ra,.costs td+td{text-align:right}
 </div>
 <div class="card" style="background:#fbf7ee">
 <h3>The three you're currently missing</h3>
-<p><b>1 · MNBAQ — Musée national des beaux-arts du Québec.</b> Ten minutes' walk from your door, standing <em>on</em> the Plains of Abraham. Four reasons it is the strongest addition available to you:</p><ul style="padding-left:18px;margin:0 0 10px"><li><b>Riopelle's <em>Tribute to Rosa Luxemburg</em>.</b> Thirty paintings forming a triptych <b>over 40 metres long</b> — the largest work Jean Paul Riopelle ever made, painted in a single furious autumn in 1992 after Joan Mitchell, his partner of twenty years, died. It has three custom-built galleries to itself. It is one of the great works of 20th-century Canadian art and almost no American visitor has heard of it.</li><li><b>The museum is partly a prison.</b> The Charles-Baillairgé Pavilion is the former Québec City jail, built 1861–67, absorbed into the museum in 1987 — and the <b>old cells are still there</b>, inside the galleries. There is a guided tour of them.</li><li><b>The Brousseau Inuit collection</b> — among the most important holdings of Inuit art anywhere, shown in purpose-built white galleries.</li><li><b>The building.</b> The Pierre Lassonde Pavilion (OMA New York with Provencher_Roy, 2016) cascades down Grande Allée in stacked glass boxes and is worth twenty minutes on its own.</li></ul><p style="margin:0 0 8px">And thematically it is the missing half of this trip: the Musée de la civilisation tells you what Québec <em>remembers</em>; the MNBAQ shows you what it <em>made</em>.</p><p style="margin:0 0 8px"><b>Where it fits:</b> <b>Day 6, straight after the Plains of Abraham</b> — it is 400 metres from the battlefield monuments, so it costs you no travel at all. If Day 6 is already too long, take it instead of the Musée de la civilisation on Day 8 morning; you cannot do both museums <em>and</em> Wendake in one day.</p><p style="margin:0"><b>⚠ Check before you go:</b> the new <b>Espace Riopelle – Michael Audain Pavilion</b> opens <b>20–21 October 2026</b>, six weeks after you leave. The Riopelle holdings may be partly de-installed in early September while they move. Confirm that <em>Tribute to Rosa Luxemburg</em> is on view before you build the day around it.</p>
+<p><b>1 · MNBAQ — Musée national des beaux-arts du Québec. <span style="color:var(--wine)">Cut, on your dates specifically.</span></b> Ten minutes' walk from your door, standing <em>on</em> the Plains of Abraham, and on any other date it would be the strongest addition available to you. Here is what you would be going for:</p><ul style="padding-left:18px;margin:0 0 10px"><li><b>Riopelle's <em>Tribute to Rosa Luxemburg</em>.</b> Thirty paintings forming a triptych <b>over 40 metres long</b> — the largest work Jean Paul Riopelle ever made, painted in a single furious autumn in 1992 after Joan Mitchell, his partner of twenty years, died. It has three custom-built galleries to itself. It is one of the great works of 20th-century Canadian art and almost no American visitor has heard of it.</li><li><b>The museum is partly a prison.</b> The Charles-Baillairgé Pavilion is the former Québec City jail, built 1861–67, absorbed into the museum in 1987 — and the <b>old cells are still there</b>, inside the galleries. There is a guided tour of them.</li><li><b>The Brousseau Inuit collection</b> — among the most important holdings of Inuit art anywhere, shown in purpose-built white galleries.</li><li><b>The building.</b> The Pierre Lassonde Pavilion (OMA New York with Provencher_Roy, 2016) cascades down Grande Allée in stacked glass boxes and is worth twenty minutes on its own.</li></ul><p style="margin:0 0 8px">And thematically it is the missing half of this trip: the Musée de la civilisation tells you what Québec <em>remembers</em>; the MNBAQ shows you what it <em>made</em>.</p><p style="margin:0 0 8px"><b>Where it fits:</b> <b>Day 6, straight after the Plains of Abraham</b> — it is 400 metres from the battlefield monuments, so it costs you no travel at all. If Day 6 is already too long, take it instead of the Musée de la civilisation on Day 8 morning; you cannot do both museums <em>and</em> Wendake in one day.</p><p style="margin:0" class="warn"><b>⚠ And here is why it is cut, not deferred.</b> The museum has confirmed the position: <b>Espace Riopelle — the Michael Audain Pavilion — opens on 22 October 2026</b>, with the grand opening 22–25 October. Until then the <b>Gérard-Morisset and Charles-Baillairgé pavilions are closed</b> for the construction and reopen only "gradually, in the months following". <b><em>Tribute to Rosa Luxemburg</em> goes into its purpose-built circular gallery on 22 October</b> — seven weeks after you drive home. On September 1 you would pay about C$50 for two, walk a fraction of the museum, and miss both of the things this page sent you for: the Riopelle and the 1861–67 prison cells. <b>Go to the Musée de la civilisation instead</b>, which is open, complete, and better on this trip's subject anyway.</p>
 <p><b>2 · McCord Stewart Museum, Montréal.</b> Compact, two hours, downtown. The social history of the city plus the <b>Notman Photographic Archives</b> — over a million 19th-century photographs of Montréal, and seeing the streets you just walked as they were in 1875 is genuinely startling. <b>Slot into Day 3 if Old Montréal runs short.</b></p>
 <p><b>3 · Montréal Museum of Fine Arts (MMFA).</b> Four connected pavilions, one of the largest art museums in Canada. Go specifically for the <b>Canadian and Indigenous art wing</b> — the Group of Seven, Riopelle, and a serious Inuit collection. A half-day if you're an art couple; skip if you're not.</p>
 <p style="margin-bottom:0"><b>Rain insurance:</b> <b>Space for Life</b> in Montréal — the <b>Biodôme</b> (four complete ecosystems indoors, including a Laurentian maple forest and a sub-Antarctic island with live penguins) and the rebuilt <b>Insectarium</b>, which is one of the most inventive natural-history spaces built anywhere this decade. Same site as the Botanical Garden, so it pairs with Gardens of Light on Day 4.</p>
@@ -1983,10 +2201,10 @@ var BASES=[['1','1 \u00b7 Lincoln, NH'],['2','2 \u00b7 Montr\u00e9al'],
 /* which bed you sleep in the night a row happens; blank means before the trip
    or spread across all of it */
 var BASEOF={'stay-nh':'1','stay-mtl':'2','stay-qc':'3','stay-bsp':'4',
- 'whale':'4','aura':'2','gardens':'2','lumina':'3','din-legende':'3','din-momo':'2',
- 'din-damas':'2','din-traite':'3','greeter':'2','din-bsp':'4','prison':'3','pac':'2',
- 'citadelle':'3','mcq':'3','wendat':'3','walkqc':'3','mnbaq':'3','spa':'3',
- 'voicemap':'1','din-papillon':'2','walkmtl':'2','flume':'1','ghost':'3','offline':'1',
+ 'whale':'4','gardens':'2','lumina':'3','din-legende':'3','din-momo':'2',
+ 'din-sagamite':'3','greeter':'2','din-bsp':'4','prison':'3','pac':'2',
+ 'citadelle':'3','mcq':'3','wendat':'3','walkqc':'3',
+ 'voicemap':'1','walkmtl':'2','offline':'1',
  'montmorency':'3','canyon':'3','sepaq':'4','ferry':'3','crypt':'3','parks':'3',
  'mutek':'2','tamtams':'2','din-nh':'1'};
 var STS=[['todo','To do'],['booked','Booked'],['walkin','No booking'],['skip','Skipped']];
@@ -2017,46 +2235,39 @@ var SEED=[
 ['stay-qc',3,'booked','lodging','Québec City — Airbnb',GM+'735+Boulevard+Charest+Est+Quebec+QC+G1K+3J7','2026-08-31T16:00','2026-09-04T11:00','USD',788.52,'735 bd Charest Est, Saint-Roch. Four nights. Parking at 450 rue du Parvis, 4 min walk. Access details 24 h before arrival. Old Québec is up a real hill.'],
 ['stay-bsp',4,'booked','lodging','Baie-Saint-Paul — Airbnb',GM+'352+Rang+Saint-Placide+Sud+Baie-Saint-Paul+QC+G3Z3A9','2026-09-04T16:00','2026-09-06T11:00','USD',376.98,'352 rang de Saint-Placide Sud. Two nights. Lockbox, free parking. Up the valley — a 10 min drive into town, so you are driving to dinner.'],
 
-['whale',5,'todo','attractions','Whale cruise, AML 3 h','https://www.croisieresaml.com/en/our-cruises/charlevoix','2026-09-04T10:15','2026-09-04T13:15','CAD',270,'Baie-Sainte-Catherine. From about C$135 each. Whale guarantee applies. The most urgent thing left on this sheet.'],
-['aura',6,'todo','attractions','AURA, Notre-Dame Basilica','https://www.basiliquenotredame.ca/en/events/the-aura-experience','2026-08-29T19:30','2026-08-29T20:00','CAD',60,'Thirty minutes, indoors, the rain plan. Summer Fri/Sat sell out. Separate from daytime basilica admission — confirm the showtime.'],
-['gardens',7,'todo','attractions','Gardens of Light, Botanical Garden','https://espacepourlavie.ca/en/gardens-light','2026-08-30T20:00','2026-08-30T22:00','CAD',50,'Aug 29 is opening weekend; Sunday is the night that fits. A 2 km walk after dark, and rain ruins it.'],
-['lumina',8,'todo','attractions','Onhwa\' Lumina, Wendake','https://onhwalumina.ca/en/','2026-09-03T20:00','2026-09-03T21:15','CAD',88,'About C$33.75 + tax each, plus C$10.50 parking. Nightly Aug 28 – Sep 6 only. Slots at 8:00, 8:20 and 8:40 p.m.'],
-['din-legende',9,'todo','food','Légende par La Tanière',GM+'Legende+par+La+Taniere+Quebec+City','2026-09-01T19:30','2026-09-01T22:00','CAD',380,'The splurge, C$150+ each. Book weeks ahead and ask for the vegetarian tasting menu at reservation — not on the night.'],
-['din-momo',10,'todo','food','Sushi Momo',GM+'Sushi+Momo+Montreal','2026-08-28T19:30','2026-08-28T21:00','CAD',130,'Fully vegan, Plateau. K\'s special dinner in Montréal — reserve now.'],
-['din-damas',11,'todo','food','Damas',GM+'Damas+Outremont+Montreal','2026-08-30T19:00','2026-08-30T21:30','CAD',180,'Syrian, Outremont. Grand room, worth dressing for. Reserve.'],
-['din-traite',12,'todo','food','La Traite, Wendake',GM+'La+Traite+Hotel-Musee+Premieres+Nations+Wendake','2026-09-03T18:00','2026-09-03T19:45','CAD',170,'Indigenous fine dining, and it pairs with Onhwa\' Lumina the same evening.'],
-['greeter',13,'todo','attractions','Montréal Greeter walk','https://internationalgreeter.org/destinations/montreal','2026-08-29T10:00','2026-08-29T12:30','CAD',0,'Free, volunteers, limited slots. Request 2–4 weeks ahead and name a theme. Either this or the free Old Montréal tour, not both.'],
-['din-bsp',14,'todo','food','Baie-Saint-Paul dinners ×2',GM+'restaurants+rue+Saint-Jean-Baptiste+Baie-Saint-Paul','2026-09-04T19:30','2026-09-05T21:00','CAD',200,'Les Faux Bergers or Le Mouton Noir, Friday and Saturday. Labour Day weekend — book both, and remember you are driving in.'],
-['prison',15,'todo','attractions','Old Prison, Trois-Rivières',GM+'Vieille+prison+de+Trois-Rivieres','2026-08-31T13:00','2026-08-31T14:30','CAD',40,'On the drive to Québec City. Toured by former inmates. English times are limited — book before you leave Montréal.'],
-['pac',16,'todo','attractions','Pointe-à-Callière','https://pacmusee.qc.ca/en/plan-your-visit/hours-and-rates/','2026-08-29T13:00','2026-08-29T15:30','CAD',60,'About C$30 each. Built over the 1642 founding site; you walk a buried river.'],
-['citadelle',17,'todo','attractions','La Citadelle guided tour','https://www.lacitadelle.qc.ca/en/admission-hours','2026-09-01T11:30','2026-09-01T13:00','CAD',36,'Includes the Royal 22e Régiment Museum.'],
-['mcq',18,'todo','attractions','Musée de la civilisation','https://mcq.org/en/visit/schedule-and-rates/','2026-09-03T10:00','2026-09-03T12:30','CAD',48,'The First Peoples exhibition is the reason to go.'],
-['wendat',19,'todo','attractions','Musée huron-wendat','https://museehuronwendat.ca/en/','2026-09-03T14:00','2026-09-03T16:00','CAD',40,'The guided programme needs booking; general admission does not.'],
-['walkqc',20,'todo','attractions','Free walking tour, Québec City','https://www.guruwalk.com/quebec-city','2026-09-01T09:30','2026-09-01T11:00','CAD',50,'Pay-what-you-wish, budget C$20–25 each. 48 h minimum, group sizes capped in Petit-Champlain.'],
-['mnbaq',21,'todo','attractions','MNBAQ — the optional addition','https://www.mnbaq.org/en','2026-09-01T14:00','2026-09-01T16:30','CAD',50,'Check that Tribute to Rosa Luxemburg is still on view — the Riopelle rooms move for the new pavilion in October.'],
-['spa',22,'todo','attractions','Bota Bota or Strøm Nordic spa',GM+'Strom+Nordic+Spa+Vieux-Quebec','2026-09-02T17:00','2026-09-02T20:00','CAD',210,'Optional. C$69 after 5 p.m. at Strøm, up to C$104 peak. The obvious line to cut if the total looks wrong.'],
-['phone',23,'todo','transportation','Canada phone plan or eSIM','','2026-08-24T09:00','2026-08-24T10:00','USD',50,'Confirm the carrier rate or buy an eSIM. Roaming is where trip budgets quietly die.'],
-['card',24,'todo','admin','Travel card and C$150 cash','','2026-08-24T09:00','2026-08-24T10:00','USD',0,'A card with no foreign-transaction fee saves about 3% of the whole trip. Cash is for meters, tips and farm stands.'],
-['docs',25,'todo','admin','Passports and vehicle papers','','2026-08-25T09:00','2026-08-25T10:00','USD',0,'Passports, registration, proof of insurance. No fresh produce, plants or firewood across in either direction.'],
-['voicemap',26,'todo','attractions','VoiceMap audio tours','https://voicemap.me/tour/quebec-city','2026-08-27T20:00','2026-08-27T20:30','CAD',30,'About C$8–12 each, two or three is plenty. Download on wifi before you leave the room.'],
-['din-papillon',27,'todo','food','Le Vin Papillon',GM+'Le+Vin+Papillon+Montreal','2026-08-29T18:00','2026-08-29T20:00','CAD',120,'Little Burgundy. No reservations at last check — confirm the policy and go early.'],
-['walkmtl',28,'todo','attractions','Free walking tour, Old Montréal','https://freemontrealtours.com/free-old-montreal-tour/','2026-08-29T10:00','2026-08-29T11:30','CAD',50,'Tip-based, meet at Place Jacques-Cartier. The fallback if the Greeter request does not come through.'],
-['flume',29,'todo','attractions','Flume Gorge','https://www.nhstateparks.org/find-parks-trails/flume-gorge','2026-08-27T09:00','2026-08-27T11:00','USD',36,'Only if the forecast makes it the wet-weather plan instead of the ridge. US$18 online, US$21 at the gate.'],
-['ghost',30,'todo','attractions','Les Promenades Fantômes',GM+'Les+Promenades+Fantomes+Quebec+City','2026-09-02T20:30','2026-09-02T22:00','CAD',60,'Optional. Rated for the 17th-century social history, not the ghosts.'],
-['offline',31,'todo','admin','Offline maps and VoiceMap downloads','','2026-08-27T21:00','2026-08-27T21:30','USD',0,'Québec province and New Hampshire, plus every audio tour, on hotel wifi.'],
-['montmorency',32,'walkin','attractions','Montmorency Falls + cable car','https://www.sepaq.com/destinations/parc-chute-montmorency/','2026-09-02T10:00','2026-09-02T12:00','CAD',58,'About C$13.90 access and C$14.95 cable car return, each. 83 m, thirty metres taller than Niagara.'],
-['canyon',33,'walkin','attractions','Canyon Sainte-Anne','https://canyonsa.qc.ca/en/','2026-09-02T13:00','2026-09-02T15:00','CAD',30,'Three suspension bridges. About C$15 each.'],
-['sepaq',34,'walkin','attractions','Hautes-Gorges day access + cruise','https://www.sepaq.com/pq/hgo/','2026-09-05T09:00','2026-09-05T16:00','CAD',100,'C$10 each per day for access; the bateau-mouche is extra, the internal shuttle is free.'],
-['ferry',35,'walkin','transportation','Québec–Lévis ferry, return for two','https://www.traversiers.com/en/our-ferries/quebec-city-levis-ferry/fares','2026-09-01T18:30','2026-09-01T19:30','CAD',17,'C$4.25 each way. Best-value view in Canada — go at sunset.'],
-['crypt',36,'walkin','attractions','Notre-Dame de Québec crypt',GM+'Notre-Dame+de+Quebec+Basilica-Cathedral','2026-09-01T12:00','2026-09-01T12:45','CAD',10,'The church and the Holy Door are free; the crypt is C$5 each.'],
-['parks',37,'walkin','attractions','Parks Canada sites, all four','https://parks.canada.ca/lhn-nhs/qc/fortifications','2026-09-01T09:00','2026-09-04T11:00','CAD',0,'Fortifications, Saint-Louis Forts & Châteaux, Artillery Park, Pointe-Noire. Free to Sep 7 on the Canada Strong Pass — nothing to obtain, turn up. Worth roughly C$60–80 to you.'],
-['mutek',38,'walkin','attractions','MUTEK Expérience, Esplanade Tranquille','https://montreal.mutek.org/en/esplanade-tranquille','2026-08-28T17:00','2026-08-30T23:59','CAD',0,'Free, outdoors, no ticket, 5 p.m. to midnight. Walk in on all three Montréal nights.'],
-['tamtams',39,'walkin','attractions','Tam-Tams, Mount Royal',GM+'Tam-Tams+Mount+Royal+Montreal','2026-08-30T12:00','2026-08-30T18:00','CAD',0,'Sundays only, and Sunday Aug 30 is yours. Free.'],
-['din-nh',40,'walkin','food','Woodstock Inn Station & Brewery',GM+'Woodstock+Inn+Station+and+Brewery+North+Woodstock+NH','2026-08-27T19:30','2026-08-27T21:00','USD',60,'Walkable from Lincoln, own beer, vegetarian options that are not an afterthought. No booking needed.'],
-['parkmeter',41,'walkin','transportation','Metered parking on day trips','','2026-08-26T09:00','2026-09-06T20:00','CAD',60,'All four stays include parking, so this is meters only. P$ Service mobile in Montréal, Copilote in Québec City.'],
-['fuel',42,'walkin','transportation','Fuel and tolls, about 2,400 km','','2026-08-26T09:00','2026-09-06T20:00','USD',340,'Fill in Vermont before crossing north, and in Québec City before Charlevoix. Stations thin out past Baie-Saint-Paul.'],
-['groceries',43,'walkin','food','Groceries, lunches and coffee','','2026-08-26T18:00','2026-09-06T09:00','USD',480,'Breakfast at home, lunch grazed from markets, one proper dinner out. Roughly US$40 a day for two.'],
-['border',44,'walkin','transportation','Check both border wait times','https://www.cbsa-asfc.gc.ca/bwt-taf/menu-eng.html','2026-08-28T11:00','2026-09-06T14:00','USD',0,'Northbound Derby Line, southbound probably Lacolle. Labour Day Sunday afternoon is the worst window of the year.']
+['whale',5,'todo','attractions','Whale cruise, AML 3 h','https://www.croisieresaml.com/en/our-cruises/charlevoix','2026-09-04T10:15','2026-09-04T13:15','CAD',270,'Baie-Sainte-Catherine — no Saguenay ferry queue, unlike Tadoussac. About C$135 each. Whale guarantee applies to the boat only. Reviewers do complain the 3 h boat runs full: book the 10:15 rather than an afternoon sailing. The most urgent thing left on this sheet.'],
+['gardens',6,'todo','attractions','Gardens of Light, Botanical Garden','https://espacepourlavie.ca/en/gardens-light','2026-08-30T20:00','2026-08-30T22:00','CAD',50,'Aug 29 is opening weekend; Sunday is the night that fits. A 2 km walk after dark, and rain ruins it.'],
+['lumina',7,'todo','attractions','Onhwa\' Lumina, Wendake','https://onhwalumina.ca/en/','2026-09-03T20:00','2026-09-03T21:15','CAD',88,'About C$33.75 + tax each, plus C$10.50 parking. Nightly Aug 28 – Sep 6 only. Slots at 8:00, 8:20 and 8:40 p.m.'],
+['din-legende',8,'todo','food','Légende par La Tanière',GM+'Legende+par+La+Taniere+Quebec+City','2026-09-01T19:30','2026-09-01T22:00','CAD',380,'Splurge 1 of 2. Menu about C$150 each before tax and tip; C$380 is the honest all-in. One Michelin star, strictly boreal. Ask for the vegetarian tasting menu at reservation — not on the night. The most urgent food booking left.'],
+['din-momo',9,'todo','food','Sushi Momo',GM+'Sushi+Momo+Montreal','2026-08-28T19:30','2026-08-28T21:00','CAD',130,'Splurge 2 of 2. Fully vegan, Plateau. The one dinner where K orders from the whole menu. Chosen over Damas, which was C$50 more for food you can get at home. Reserve now.'],
+['greeter',10,'todo','attractions','Montréal Greeter walk','https://internationalgreeter.org/destinations/montreal','2026-08-29T10:00','2026-08-29T12:30','CAD',0,'Free, volunteers, limited slots. Request 2–4 weeks ahead and name a theme. Either this or the free Old Montréal tour, not both.'],
+['din-bsp',11,'walkin','food','Le Saint-Pub, Baie-Saint-Paul ×2',GM+'restaurants+rue+Saint-Jean-Baptiste+Baie-Saint-Paul','2026-09-04T19:30','2026-09-05T21:00','CAD',100,'2 rue Racine. Microbrasserie Charlevoix’s own kitchen — no booking needed on the one weekend everything else needs one. Les Faux Bergers or Le Mouton Noir if Saturday feels like the night for it: book on arrival Friday, about C$110 more.'],
+['din-sagamite',12,'todo','food','Restaurant Sagamité, Wendake',GM+'Restaurant+Sagamite+Wendake','2026-09-03T18:00','2026-09-03T19:30','CAD',70,'Replaces La Traite and saves about C$100 for the same cuisine in the same village. Sagamité soup — corn, beans, squash — and bannock. Ask whether the broth is game-based. Reserve; it is 40 min before Lumina.'],
+['prison',13,'todo','attractions','Old Prison, Trois-Rivières',GM+'Vieille+prison+de+Trois-Rivieres','2026-08-31T13:00','2026-08-31T14:30','CAD',40,'On the drive to Québec City. Toured by former inmates. English times are limited — book before you leave Montréal.'],
+['pac',14,'todo','attractions','Pointe-à-Callière','https://pacmusee.qc.ca/en/plan-your-visit/hours-and-rates/','2026-08-29T13:00','2026-08-29T15:30','CAD',60,'About C$30 each. Built over the 1642 founding site; you walk a buried river.'],
+['citadelle',15,'todo','attractions','La Citadelle guided tour','https://www.lacitadelle.qc.ca/en/admission-hours','2026-09-01T11:30','2026-09-01T13:00','CAD',36,'Includes the Royal 22e Régiment Museum.'],
+['mcq',16,'todo','attractions','Musée de la civilisation','https://mcq.org/en/visit/schedule-and-rates/','2026-09-03T10:00','2026-09-03T12:30','CAD',48,'The First Peoples exhibition is the reason to go.'],
+['wendat',17,'todo','attractions','Musée huron-wendat','https://museehuronwendat.ca/en/','2026-09-03T14:00','2026-09-03T16:00','CAD',40,'The guided programme needs booking; general admission does not.'],
+['walkqc',18,'todo','attractions','Free walking tour, Québec City','https://www.guruwalk.com/quebec-city','2026-09-01T09:30','2026-09-01T11:00','CAD',50,'Pay-what-you-wish, budget C$20–25 each. 48 h minimum, group sizes capped in Petit-Champlain.'],
+['phone',19,'todo','transportation','Canada phone plan or eSIM','','2026-08-24T09:00','2026-08-24T10:00','USD',50,'Confirm the carrier rate or buy an eSIM. Roaming is where trip budgets quietly die.'],
+['card',20,'todo','admin','Travel card and C$150 cash','','2026-08-24T09:00','2026-08-24T10:00','USD',0,'A card with no foreign-transaction fee saves about 3% of the whole trip. Cash is for meters, tips and farm stands.'],
+['docs',21,'todo','admin','Passports and vehicle papers','','2026-08-25T09:00','2026-08-25T10:00','USD',0,'Passports, registration, proof of insurance. No fresh produce, plants or firewood across in either direction.'],
+['voicemap',22,'todo','attractions','VoiceMap audio tours','https://voicemap.me/tour/quebec-city','2026-08-27T20:00','2026-08-27T20:30','CAD',30,'About C$8–12 each, two or three is plenty. Download on wifi before you leave the room.'],
+['walkmtl',23,'todo','attractions','Free walking tour, Old Montréal','https://freemontrealtours.com/free-old-montreal-tour/','2026-08-29T10:00','2026-08-29T11:30','CAD',50,'Tip-based, meet at Place Jacques-Cartier. The fallback if the Greeter request does not come through.'],
+['offline',24,'todo','admin','Offline maps and VoiceMap downloads','','2026-08-27T21:00','2026-08-27T21:30','USD',0,'Québec province and New Hampshire, plus every audio tour, on hotel wifi.'],
+['montmorency',25,'walkin','attractions','Montmorency Falls + cable car','https://www.sepaq.com/destinations/parc-chute-montmorency/','2026-09-02T10:00','2026-09-02T12:00','CAD',58,'About C$13.90 access and C$14.95 cable car return, each. 83 m, thirty metres taller than Niagara.'],
+['canyon',26,'walkin','attractions','Canyon Sainte-Anne','https://canyonsa.qc.ca/en/','2026-09-02T13:00','2026-09-02T15:00','CAD',30,'Three suspension bridges. About C$15 each.'],
+['sepaq',27,'walkin','attractions','Hautes-Gorges day access + cruise','https://www.sepaq.com/pq/hgo/','2026-09-05T09:00','2026-09-05T16:00','CAD',100,'C$10 each per day for access; the bateau-mouche is extra, the internal shuttle is free.'],
+['ferry',28,'walkin','transportation','Québec–Lévis ferry, return for two','https://www.traversiers.com/en/our-ferries/quebec-city-levis-ferry/fares','2026-09-01T18:30','2026-09-01T19:30','CAD',17,'C$4.25 each way. Best-value view in Canada — go at sunset.'],
+['crypt',29,'walkin','attractions','Notre-Dame de Québec crypt',GM+'Notre-Dame+de+Quebec+Basilica-Cathedral','2026-09-01T12:00','2026-09-01T12:45','CAD',10,'The church and the Holy Door are free; the crypt is C$5 each.'],
+['parks',30,'walkin','attractions','Parks Canada sites, all four','https://parks.canada.ca/lhn-nhs/qc/fortifications','2026-09-01T09:00','2026-09-04T11:00','CAD',0,'Fortifications, Saint-Louis Forts & Châteaux, Artillery Park, Pointe-Noire. Free to Sep 7 on the Canada Strong Pass — nothing to obtain, turn up. Worth roughly C$60–80 to you.'],
+['mutek',31,'walkin','attractions','MUTEK Expérience, Esplanade Tranquille','https://montreal.mutek.org/en/esplanade-tranquille','2026-08-28T17:00','2026-08-30T23:59','CAD',0,'Free, outdoors, no ticket, 5 p.m. to midnight. Walk in on all three Montréal nights.'],
+['tamtams',32,'walkin','attractions','Tam-Tams, Mount Royal',GM+'Tam-Tams+Mount+Royal+Montreal','2026-08-30T12:00','2026-08-30T18:00','CAD',0,'Sundays only, and Sunday Aug 30 is yours. Free.'],
+['din-nh',33,'walkin','food','Woodstock Inn Station & Brewery',GM+'Woodstock+Inn+Station+and+Brewery+North+Woodstock+NH','2026-08-27T19:30','2026-08-27T21:00','USD',60,'Walkable from Lincoln, own beer, vegetarian options that are not an afterthought. No booking needed.'],
+['parkmeter',34,'walkin','transportation','Metered parking on day trips','','2026-08-26T09:00','2026-09-06T20:00','CAD',60,'All four stays include parking, so this is meters only. P$ Service mobile in Montréal, Copilote in Québec City.'],
+['fuel',35,'walkin','transportation','Fuel and tolls, about 2,400 km','','2026-08-26T09:00','2026-09-06T20:00','USD',340,'Fill in Vermont before crossing north, and in Québec City before Charlevoix. Stations thin out past Baie-Saint-Paul.'],
+['groceries',36,'walkin','food','Groceries, lunches and coffee','','2026-08-26T18:00','2026-09-06T09:00','USD',480,'Breakfast at home, lunch grazed from markets, one proper dinner out. Roughly US$40 a day for two.'],
+['border',37,'walkin','transportation','Check both border wait times','https://www.cbsa-asfc.gc.ca/bwt-taf/menu-eng.html','2026-08-28T11:00','2026-09-06T14:00','USD',0,'Northbound Derby Line, southbound probably Lacolle. Labour Day Sunday afternoon is the worst window of the year.']
 ].map(function(a){
   var o={},i;
   for(i=0;i<COLS.length;i++) o[COLS[i]]=a[i];
