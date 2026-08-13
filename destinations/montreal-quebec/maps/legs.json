@@ -1,0 +1,59 @@
+{
+ "_comment": "Drivable legs, fetched by tools/routes.py into routes.json. Via points are places.json keys, so a leg follows a pin corrected in Google My Maps. The Franconia ridge and the two city walks are not here: they are a hiking trail and pedestrian routes, drawn schematically in markers.py and labelled as such.",
+
+ "ct-franconia": {
+  "map": "route", "cls": "rt",
+  "via": ["Cheshire, CT", "Lincoln, NH"]
+ },
+ "franconia-abbey": {
+  "map": "route", "cls": "rt",
+  "via": ["Lincoln, NH", "Derby Line", "St-Benoît-du-Lac"]
+ },
+ "abbey-montreal": {
+  "map": "route", "cls": "rt",
+  "via": ["St-Benoît-du-Lac", "MONTRÉAL"]
+ },
+ "chemin-du-roy": {
+  "map": "route", "cls": "rt",
+  "via": ["MONTRÉAL", "Trois-Rivières", "Deschambault", "QUÉBEC CITY"]
+ },
+ "quebec-tadoussac": {
+  "map": "route", "cls": "rt",
+  "via": ["QUÉBEC CITY", "Baie-Saint-Paul", "Baie-Ste-Catherine"]
+ },
+ "gorge-spur": {
+  "map": "route", "cls": "spur", "style": "dash", "w": 6,
+  "via": ["Baie-Saint-Paul", "Hautes-Gorges"]
+ },
+ "run-home": {
+  "map": "route", "cls": "back", "style": "dash", "w": 4,
+  "via": ["Baie-Saint-Paul", "MONTRÉAL", "Cheshire, CT"]
+ },
+
+ "cote-de-beaupre": {
+  "map": "beaupre", "cls": "rt",
+  "via": ["Québec City", "Montmorency Falls", "Sainte-Anne-de-Beaupré", "Canyon Sainte-Anne"]
+ },
+ "chemin-royal": {
+  "map": "beaupre", "cls": "loop", "w": 5,
+  "via": ["Sainte-Pétronille", "Saint-Jean", "Sainte-Famille", "Cassis Monna & Filles", "Sainte-Pétronille"]
+ },
+
+ "rte-138-out": {
+  "map": "charlevoix", "cls": "rt",
+  "via": ["Baie-Saint-Paul", "La Malbaie", "Baie-Ste-Catherine"]
+ },
+ "rte-362-back": {
+  "map": "charlevoix", "cls": "scenic",
+  "via": ["Baie-Saint-Paul", "Les Éboulements", "Saint-Irénée", "La Malbaie"]
+ },
+ "_note-charlevoix-return": "The drawn 362 line above covers only Baie-Saint-Paul to La Malbaie, because that is the whole of Route 362. The guide's leg table row describes the entire evening drive back from the whales, which is Rte 138 down to La Malbaie and then 362 - a different span, so it gets its own entry rather than borrowing the drawn one's numbers.",
+ "charlevoix-return": {
+  "table-only": true,
+  "via": ["Baie-Ste-Catherine", "La Malbaie", "Saint-Irénée", "Les Éboulements", "Baie-Saint-Paul"]
+ },
+ "gorge-from-malbaie": {
+  "map": "charlevoix", "cls": "spur", "style": "dash", "w": 6,
+  "via": ["La Malbaie", "Hautes-Gorges"]
+ }
+}

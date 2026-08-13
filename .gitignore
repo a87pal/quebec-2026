@@ -7,6 +7,19 @@ dist/
 # re-hitting rate-limited Esri/Wikidata/OSM.
 destinations/*/maps/gmap_*.html
 destinations/*/maps/.resolve-cache.json
+destinations/*/maps/.routes-cache.json
+destinations/*/maps/.placement.json
+
+# Review surface for tools/kml.py, regenerated from places.json on demand.
+# routes.json IS tracked - it holds fetched OSRM geometry.
+destinations/*/maps/places.kml
+
+# API keys never belong in this repo - it is published to GitHub Pages.
+# routes.py reads ORS_API_KEY from the environment; nothing needs a key file.
+.env
+.env.*
+*.key
+secrets.json
 
 # local agent/session state, not project source
 .claude/

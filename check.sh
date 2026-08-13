@@ -14,10 +14,18 @@ for d in destinations/*/; do
   slug=$(basename "$d")
   [ -f "$d/maps/maps.json" ] || continue
   echo "== $slug"
+  # overlay.py places every label automatically and is fatal on a marker with no
+  # places.json entry, or one whose coordinate falls outside the map it is drawn
+  # on. boxes.py then re-checks the placement it produced.
   python3 tools/overlay.py  --dest "$slug"   # fragments from committed inputs
   python3 tools/boxes.py    --dest "$slug"   # must be 0 overlaps, 0 dot-covers
   python3 tools/maps.py     --dest "$slug"   # splice them into the guide
   python3 tools/validate.py --dest "$slug"   # structure + prose preservation
+  # Advisory, and offline: reports legs whose endpoints have moved since their
+  # geometry was fetched. Refetching needs the network, so it is not a gate.
+  if [ -f "$d/maps/legs.json" ]; then
+    python3 tools/routes.py --dest "$slug" | head -1
+  fi
   echo
 done
 

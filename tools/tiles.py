@@ -7,10 +7,10 @@ writes tiles to <slug>/images/tiles/<map>/<x>_<y>.jpg.
 Also writes tilemeta.json, the contract between this script and overlay.py: for
 each map it records zoom z, the tile range, the composite size W/H, and the
 pixel origin ox/oy of the top-left tile. A marker's SVG position is the
-web-mercator pixel at zoom z minus (ox, oy). Both scripts implement that
-projection and THEY MUST AGREE - if markers are uniformly offset, look here
-first. tilemeta.json must land where overlay.py reads it, which is why it is
-written next to maps.json rather than anywhere else.
+web-mercator pixel at zoom z minus (ox, oy). Both scripts get that projection
+from tools/_proj.py so they cannot disagree. tilemeta.json must still land
+where overlay.py reads it, which is why it is written next to maps.json rather
+than anywhere else.
 
 Esri's tile URL is /tile/{z}/{y}/{x} - row before column. Getting this
 backwards yields a plausible-looking map of somewhere else entirely.
@@ -19,20 +19,12 @@ Existing tiles are skipped, so re-running is cheap and offline.
 
 Usage:  python3 tools/tiles.py [--dest SLUG]
 """
-import json, math, os, time, urllib.request
+import json, os, time, urllib.request
 
-import _dest
+import _dest, _proj
 
 H = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/126.0 Safari/537.36'}
 TPL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
-
-
-def px(lat, lon, z):
-    n = 2 ** z
-    x = (lon + 180.0) / 360.0 * n * 256
-    lr = math.radians(lat)
-    y = (1.0 - math.log(math.tan(lr) + 1 / math.cos(lr)) / math.pi) / 2.0 * n * 256
-    return x, y
 
 
 def main():
@@ -43,15 +35,10 @@ def main():
 
     meta = {}
     for name, cfg in MAPS.items():
-        z = cfg['z']
-        x0, y1 = px(cfg['lat'][0], cfg['lon'][0], z)   # SW -> min x, max y
-        x1, y0 = px(cfg['lat'][1], cfg['lon'][1], z)   # NE -> max x, min y
-        tx0, tx1 = int(x0 // 256), int(x1 // 256)
-        ty0, ty1 = int(y0 // 256), int(y1 // 256)
-        nw, nh = tx1 - tx0 + 1, ty1 - ty0 + 1
-        meta[name] = dict(z=z, tx0=tx0, tx1=tx1, ty0=ty0, ty1=ty1, W=nw * 256, H=nh * 256,
-                          ox=tx0 * 256, oy=ty0 * 256)
-        print(name, 'z', z, 'tiles', nw, 'x', nh, '=', nw * nh, '  px', nw * 256, 'x', nh * 256)
+        m = _proj.tilemeta(cfg['z'], cfg['lat'], cfg['lon'])
+        meta[name] = m
+        nw, nh = m['tx1'] - m['tx0'] + 1, m['ty1'] - m['ty0'] + 1
+        print(name, 'z', m['z'], 'tiles', nw, 'x', nh, '=', nw * nh, '  px', m['W'], 'x', m['H'])
 
     metapath = os.path.join(dest.mapdir, 'tilemeta.json')
     os.makedirs(dest.mapdir, exist_ok=True)

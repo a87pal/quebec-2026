@@ -117,10 +117,11 @@ Put a guided walk on the **first full day** in each city, not the last.
 
 ## 8. Maps — required, and specific
 
-- **One overall route map** showing city-to-city, with a leg table: distance, driving time, and notes per leg.
+- **One overall route map** showing city-to-city, with a leg table: distance, driving time, and notes per leg. Distance and driving time come from the routing service via `routes.py`; the notes are yours.
 - **One detail map per region/city** showing the relative position of every attraction, the base, and the transit lines.
-- Maps should be **inline SVG drawn from real coordinates** so they always render and never depend on an API key or network. Say when they're schematic.
-- Pair maps with **live navigation links**; never expect the map to be used for actual wayfinding.
+- Maps should be **inline SVG drawn from real coordinates** so they always render and never depend on an API key or network. Say when they're schematic — a hiking trail or a walking tour that no car router can trace should say so in its caption.
+- Pair maps with **live navigation links**; never expect the map to be used for actual wayfinding. Every marker gets one, generated from its verified coordinate — not just one link per map.
+- **Google is the authoring surface, not the deliverable.** Verify pins on Google's basemap via `kml.py`, then ship static tiles plus SVG. An embedded live map fails the offline and printable requirements in §11.
 
 ---
 
@@ -241,10 +242,19 @@ What is already built and reusable:
   and Wikidata, and records the source and the date. **Coordinates are never
   typed by hand.** The first version of the Québec maps was, and three markers
   were 300–420 m out.
-- **`overlay.py`** — projects lat/lon onto the tiles and draws routes, markers
-  and labels as inline SVG.
-- **`boxes.py`** — refuses to let two labels overlap or a label cover another
-  marker's dot.
+- **`kml.py`** — exports those pins to KML for review in Google My Maps and
+  merges the corrections back. This is the step that catches a geocoder
+  answering with the right name in the wrong country, which is not a
+  hypothetical: "Château Frontenac" resolved to a château in the Dordogne.
+- **`routes.py`** — fetches real road geometry, distance and driving time from
+  OSRM for each leg declared in `legs.json`, so the route lines follow roads and
+  the leg table's numbers are measured rather than remembered.
+- **`overlay.py`** — projects lat/lon onto the tiles, draws routes as inline SVG,
+  and **places every label automatically**, trying positions around each dot
+  until one collides with nothing. It is fatal on a marker with no verified
+  coordinate, or one that falls outside the map it is drawn on.
+- **`boxes.py`** — re-checks that placement: no overlapping labels, no label
+  covering another marker's dot, nothing off the edge of the map.
 - **`maps.py` / `validate.py`** — splice into the guide and check nothing broke.
 - **`build.py`** (repo root) — inject the hosted-only `<head>` tags from
   `meta.json`, verify every asset resolves, render the landing page, write

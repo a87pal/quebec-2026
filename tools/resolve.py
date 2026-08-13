@@ -14,66 +14,40 @@ coordinates have to come from somewhere else. They come from here.
 
 Add --dest SLUG to target a specific destination.
 
-Sources, in order: Wikidata (P625), then OSM Nominatim. Both keyless and free.
+Sources, in order: OSM Nominatim, then Wikidata (P625). Both keyless and free.
+Nominatim goes first because it answers in one request; Wikidata needs a search
+call plus a claims call per candidate, and throttles hard enough that 55 places
+can take half an hour.
+
 Anything that moves further than --max-accept is REPORTED, never auto-applied:
 a bad search hit is worse than a coordinate that is 200 m off.
+
+This is the automated first pass. tools/kml.py is the human one: it exports
+places.json to KML for review on Google's basemap and merges the corrections
+back. A pin you dragged there outranks anything this script found.
 """
-import argparse, io, json, math, os, re, sys, time, urllib.parse, urllib.request
+import argparse, io, json, os, re, sys, time, urllib.parse
 
-import _dest
+import _dest, _http
+from _proj import metres
 
-UA = {"User-Agent": "travel-guide-toolchain/1.0 (personal itinerary; contact via github.com/a87pal)"}
+UA = "travel-guide-toolchain/1.0 (personal itinerary; contact via github.com/a87pal)"
 
 # Set by main() once --dest is resolved.
-PLACES = MARKERS = CACHE = None
-_cache = {}
+PLACES = MARKERS = None
+http = None
 
 
 def _bind(dest):
     """Point the module at one destination's map data."""
-    global PLACES, MARKERS, CACHE, _cache
+    global PLACES, MARKERS, http
     PLACES = os.path.join(dest.mapdir, "places.json")
     MARKERS = os.path.join(dest.mapdir, "markers.py")
-    CACHE = os.path.join(dest.mapdir, ".resolve-cache.json")
-    _cache = json.load(io.open(CACHE)) if os.path.exists(CACHE) else {}
+    http = _http.Http(os.path.join(dest.mapdir, ".resolve-cache.json"), UA)
 
 
-def _save_cache():
-    json.dump(_cache, io.open(CACHE, "w"))
-
-
-def get(url, pause=1.3):
-    """GET with backoff. Both APIs return 429 under scripted load; a plain
-    request loop will lose roughly half its lookups without this."""
-    if url in _cache:
-        return _cache[url]
-    delay = pause
-    for attempt in range(6):
-        time.sleep(delay)
-        try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
-                out = json.load(r)
-            _cache[url] = out
-            if len(_cache) % 10 == 0:
-                _save_cache()
-            return out
-        except urllib.error.HTTPError as e:
-            if e.code in (429, 500, 502, 503, 504):
-                delay = min(delay * 2.2, 45)      # 1.3, 2.9, 6.3, 14, 31, 45
-                continue
-            raise
-        except Exception:
-            delay = min(delay * 2.2, 45)
-    raise RuntimeError("gave up after 6 attempts: " + url[:80])
-
-
-def metres(a, b):
-    (la1, lo1), (la2, lo2) = a, b
-    R = 6371000.0
-    p1, p2 = math.radians(la1), math.radians(la2)
-    dp, dl = math.radians(la2 - la1), math.radians(lo2 - lo1)
-    h = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
-    return 2 * R * math.asin(math.sqrt(h))
+def get(url):
+    return http.get_json(url)
 
 
 # --------------------------------------------------------------- sources
@@ -127,7 +101,7 @@ def seed(dest):
     for k, v in existing.items():
         if k not in out:
             continue
-        if v.get("source", "").startswith(("wikidata:", "osm:", "manual:")):
+        if v.get("source", "").startswith(("wikidata:", "osm:", "manual:", "gmaps:")):
             out[k] = v                                  # resolved: keep the whole entry
             resolved += 1
         elif v.get("query"):
@@ -151,7 +125,10 @@ def resolve(write, max_accept, only):
         p = places[name]
         if only and only not in name:
             continue
-        if p.get("source", "").startswith("manual:"):    # deliberate override, leave alone
+        # Both are deliberate human overrides: "manual:" was reasoned about and
+        # written down, "gmaps:" was dragged into place on Google's basemap.
+        # A geocoder hit does not get to overrule either.
+        if p.get("source", "").startswith(("manual:", "gmaps:")):
             continue
         q = p.get("query") or name
         try:
@@ -191,7 +168,7 @@ def resolve(write, max_accept, only):
         print("\n--- no coordinate found (stays as typed) ---")
         for n in missed:
             print("  %s" % n)
-    _save_cache()
+    http.save()
     if write:
         json.dump(places, io.open(PLACES, "w"), indent=1, ensure_ascii=False, sort_keys=True)
         print("\nwrote %d accepted coordinates to places.json" % len(moved))

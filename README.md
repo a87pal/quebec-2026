@@ -24,10 +24,13 @@ destinations/<slug>/
   images/                       photos + images/tiles/<map>/ basemap tiles
   maps/
     maps.json                   bounding box, zoom, display width, query context
-    markers.py                  markers, routes, legends, captions - build(m)
-    places.json                 resolved coordinates, with source and date
+    markers.py                  markers, legs, legends, captions - build(m)
+    places.json                 verified coordinates, with source and date
+    legs.json                   which places each drivable leg runs through
+    routes.json                 road geometry, distance and driving time, from OSRM
     tilemeta.json               the tiles <-> overlay contract
     gmap_*.html                 generated, gitignored
+    places.kml                  pin review surface for Google My Maps, gitignored
 
 build.py                        -> dist/   (never committed)
 check.sh                        everything CI checks; run it locally too
@@ -44,9 +47,15 @@ deploy.sh                       check, build, commit, push
 ```
 
 `build.py` and `check.sh` touch no network, which is why CI can run them.
-`tools/tiles.py` (bulk Esri downloads) and `tools/resolve.py` (Wikidata/OSM)
-hit rate-limited third parties and stay local; their outputs are committed so
-CI never needs to re-fetch them.
+`tools/tiles.py` (bulk Esri downloads), `tools/resolve.py` (OSM/Wikidata) and
+`tools/routes.py` (OSRM, or OpenRouteService with a free key) hit rate-limited
+third parties and stay local; their outputs are committed so CI never needs to
+re-fetch them. No API key is ever committed, and neither the published page nor
+CI needs one — the OpenRouteService key lives in the macOS keychain:
+
+```sh
+security add-generic-password -U -a "$USER" -s ORS_API_KEY -w
+```
 
 ## Adding a destination
 
@@ -61,8 +70,11 @@ write `meta.json` and `maps/maps.json`, and run the pipeline:
 ```sh
 python3 tools/tiles.py    --dest germany                 # basemap tiles
 python3 tools/resolve.py  --dest germany --seed
-python3 tools/resolve.py  --dest germany --write         # coordinates
-python3 tools/overlay.py  --dest germany                 # draw the maps
+python3 tools/resolve.py  --dest germany --write         # coordinates, automatically
+python3 tools/kml.py      --dest germany --export        # then check the pins in Google My Maps
+python3 tools/kml.py      --dest germany --import out.kml --write
+python3 tools/routes.py   --dest germany --fetch         # road geometry + driving times
+python3 tools/overlay.py  --dest germany                 # draw the maps, place the labels
 python3 tools/boxes.py    --dest germany                 # 0 overlaps required
 python3 tools/maps.py     --dest germany                 # splice into the guide
 ./check.sh && ./deploy.sh "germany"
