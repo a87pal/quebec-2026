@@ -4,6 +4,128 @@ Everything that shaped the itinerary but doesn't belong in the guide: reasoning,
 
 ---
 
+## 0. The copy rewrite — the through line, and the fact-check log
+
+### Why the old through line went
+
+The guide asserted that the trip's *argument* was **la survivance**, and then bent
+every day to it. Franconia Ridge — a New Hampshire alpine day in the Merrimack
+watershed — was press-ganged into a story about French Canada surviving the
+Conquest, and a tick-list item under a Benedictine abbey read "Your first proof
+that the Church is why the language survived." The claim was unfalsifiable, the
+reader had to carry it, and it earned nothing. The Act I–IV headers ("The land,
+before anybody was on it", "Where the argument stops mattering") were the same
+problem in the table of contents.
+
+### What replaced it
+
+**The river, stated as geography rather than argued as a thesis.** Every base is
+one step further down the St. Lawrence, and each one is where it is because of
+something the river does at that point:
+
+| Base | What the river does there |
+|---|---|
+| Montréal | Island at the foot of the Lachine Rapids — the first place boats had to stop |
+| Québec City | The *kebec*: under 1 km wide beneath a 90 m cliff, so cannon could close it |
+| Île d'Orléans | Tidal and brackish; farms run in ribbons back from the water |
+| Charlevoix | 20 km across and fully salt |
+| Tadoussac | A 270 m fjord empties in, forcing up the cold water the whales feed in |
+
+This is verifiable at every stop, it explains why the days run in this order, and
+it never has to be accepted — only noticed. Two things are stated plainly as
+*not* fitting: Franconia is on the itinerary because it is four hours from the
+driveway and on the way north, and it goes first because it is the only
+weather-cancellable day. And *Je me souviens* is now a single factual card —
+Eugène-Étienne Taché carved it under the Parliament Building's arms in 1883 and
+never explained it; it has been on the plates since 1978 — rather than the
+organising claim of the whole document.
+
+### Structural changes to the copy
+
+- Every one of the **41 attraction blocks** now runs name → highlights (a new
+  `.hl` strip of three concrete facts) → description → logistics → full detail.
+- The **same 11-word layer-3 label** ("Full detail — what you walk through, and
+  every reason it earns the time") appeared on 35 stops. All are now specific.
+  Replaced by script with an exact-once assertion per substitution, per
+  `CLAUDE.md`.
+- **Part five was called "Stats"** and contains no stats. It is now "Why it's
+  worth it", with the nav updated.
+- Tick lists were carrying logistics ("Costs nothing and takes ninety minutes",
+  "Air-conditioned and indoors", "Lunch here is half Montréal prices"). Those
+  moved to `.logi` or went.
+- Cut: the goat rank joke, "a fairly precise metaphor for the province", "which
+  tells you everything about this city", "and honestly, maybe do this anyway",
+  "sore quads on day two become sore quads on day six", "the third-best waterfall
+  in the region", "this is not a footnote". Bota Bota was pitched twice; the Old
+  Montréal duplicate is gone. "Almost no Americans" appeared four times and now
+  appears once, where it is genuinely surprising.
+
+### Corrections forced by the repo's own measured data
+
+`routes.json` now carries real OSRM/ORS distances and times, and three prose
+figures contradicted them:
+
+| Was | Now | Source |
+|---|---|---|
+| Run home ≈870 km, 8 h 30 – 9 h 30 | **915 km, 10 h 53 measured** — an hour and a half longer | `routes.json: run-home` |
+| Day 9 depart 6:45, pier by 9:15 | Drive is **2 h 55**, so 6:45 arrives ~9:40 with boarding open. **Departure moved to 6:15** | `routes.json: quebec-tadoussac` |
+| Day 0 ≈230 mi | **≈245 mi / 395 km, 4 h 28** | `routes.json: ct-franconia` |
+
+The lodging comparison table's "Sunday drive home" row was updated to match
+(≈915 vs ≈975 km) even though that section was otherwise out of scope, because
+leaving a known-wrong number in place is worse than the scope line.
+
+### Corrections forced by the real Airbnb addresses
+
+The bases are booked and are not all where the prose assumed:
+
+- **Montréal — 3613 bd Saint-Laurent** is the lower Main, not Mile End. Day 4
+  opened with a bagel run "walk Mile End for an hour"; it is now a Métro ride up,
+  with the walking saved for Mount Royal.
+- **Québec — 735 bd Charest Est** is Saint-Roch, below the cliff. Day 6's route
+  chip said "Base → Porte Saint-Jean 6 min"; it is 15 minutes and a climb up the
+  côte d'Abraham. The act lede now says you sleep below the cliff.
+- **Baie-Saint-Paul — 352 Rang de Saint-Placide Sud** is a farmhouse ~10 min up
+  the valley, not the gallery street. Day 10's "shower, then walk rue
+  Saint-Jean-Baptiste end to end" now says drive down first, and settle who is
+  driving before the wine list arrives.
+
+**Still open:** two map marker labels are stale — `YOUR BASE — Plateau / Mile
+End` and `YOUR BASE — St-Jean-Baptiste`. Renaming them means changing the key in
+both `markers.py` and `places.json` and re-running overlay → maps. Not done here
+because it is map data, not copy.
+
+### Fact-check log
+
+Every claim checked against a source. Verdicts:
+
+| Claim | Verdict | Source |
+|---|---|---|
+| Cyclorama of Jerusalem, visitable next to the basilica | **WRONG — closed to the public since Oct 2018**, building for sale. It was sold three times as a stop, including as a rain plan. Replaced with Atelier Paré; the closure is now stated in red. | National Trust for Canada; CBC |
+| Manoir Montmorency "a 1780s villa built by the future King William IV's brother, the Duke of Kent" | **WRONG.** Built **1781 by Governor Frederick Haldimand**; the Duke of Kent was a tenant 1791–94, and is worth naming as **Queen Victoria's father**. Also burned 1993, rebuilt 1994. | Canadian Encyclopedia; Sépaq |
+| Sainte-Anne-de-Beaupré basilica "finished in 1926", "fifth church" | **WRONG.** Begun **1923**, interior finished **1946**, consecrated **1976**; sources give it as the **fourth** church on the site. | Wikipedia; Canadian Encyclopedia |
+| Île d'Orléans "the first historic district in Québec", 1970 | **WRONG** — Vieux-Québec was protected in 1963/64. Now "first **rural** historic district". | RPCQ; MRC de l'Île-d'Orléans |
+| Bonsecours Market "once Canada's parliament building's neighbour" | **WRONG and weaker than the truth** — it *housed* the Parliament of the Canadas in 1849 after the previous one was burned by rioters, then was city hall 1852–78. | Canadian Encyclopedia; HistoricPlaces.ca |
+| Flume Gorge walls "close to twelve feet apart" | **Imprecise** — 12 **to 20** ft apart, 70–90 ft high, 800 ft long. Added the 1808 discovery and the boulder swept away in 1883. | NH State Parks; Wikipedia |
+| Old Québec "first **urban site** in North America" listed by UNESCO | **Overclaim** (Antigua Guatemala, 1979). Softened to "the first **city** on the continent", which is how Québec itself puts it. | Ville de Québec; UNESCO |
+| Notre-Dame-des-Victoires "the oldest stone church on the continent, 1688" | **Softened** to "begun 1687 … generally called the oldest stone church in North America — certainly the oldest to have kept its original walls". | Parks Canada; Lonely Planet |
+| Onhwa' Lumina "nightly Aug 28 – Sep 6, the only ten days all season it isn't weekends-only" | **WRONG** — it runs nightly from **26 June**; weekends-only starts **Sep 11**. Price confirmed at C$33.75 + tax, parking C$10.50, entries 8:00/8:20/8:40. | Tourisme Wendake |
+| Haskell Free Library "access rules have changed — check before detouring" | **Vague, now specific.** The restriction applies to **Canadians** (US checkpoint required from Oct 2025; a Canadian-side door opened June 2026). Approaching from Derby Line before crossing, the front door is on US soil and there is nothing to arrange. | VTDigger; CBC; Seven Days |
+| Canada Strong Pass, Parks Canada free to Sep 7 | **CORRECT** — free **June 19 – Sep 7, 2026**. Leaned on six times; all hold. | canada.ca |
+| Citadelle ceremonial season ends Aug 30, 2026 | **CORRECT** — musical performances run to **Aug 30**, the day before arrival. | lacitadelle.qc.ca; quebec-cite.com |
+| MUTEK Aug 25–30, 27th edition, free stage 5 p.m.–midnight | **CORRECT.** ~120 artists from 28 countries. The named line-up ("Jeff Mills and Rival Consoles") was **cut** — unverified. | montreal.mutek.org |
+| Gardens of Light 13th edition, *Shan Hai Jing*, opens Aug 29 | **CORRECT**, and sharpened with Xiwangmu and the Jianmu tree. | espacepourlavie.ca |
+| AML whale cruise: 10:15/1:30/4:30, ≈C$135, guarantee excludes Zodiac | **CORRECT** — C$134.99 adult 2026, **3:00–3:30** duration (guide said a flat 3 h), season May 9 – Nov 1. | croisieresaml.com |
+| JOAT Sep 1–7; Envol et Macadam Sep 10–12 with free opening night | **CORRECT** — Envol's free night is Thursday Sep 10 at the Agora du Port de Québec. | joatfestival.com; envoletmacadam.com |
+
+**Not verified, left standing with their existing hedges:** J.A. Moisan "plausible
+claim to being the oldest grocery store in North America" (already hedged in the
+copy), Morrin Centre "oldest learned society in Canada", Tadoussac Petite
+Chapelle, Olmsted's road to the summit, and the MNBAQ's Riopelle holdings during
+the Espace Riopelle move (already carries a verify-first warning).
+
+---
+
 ## 1. What changed from the previous version, and why
 
 | Change | Reason |
