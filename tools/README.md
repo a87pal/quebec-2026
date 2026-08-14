@@ -31,6 +31,8 @@ routes.py     fetch real road geometry, distance and driving time from OSRM
    ↓          → maps/routes.json
 placeid.py    resolve each place to a Google Place ID, so links name it exactly
    ↓          → places.json again (place_id only; never a coordinate)
+extracoords.py  OSM/Wikidata coordinates for extras.json, for the My Maps export
+   ↓          → extras.json again
 overlay.py    project lat/lon → SVG, draw routes, place labels, emit fragments
    ↓          → maps/gmap_<map>.html  + maps/.placement.json
 boxes.py      re-check the placement: no overlaps, no covered dots, nothing off-map
@@ -45,9 +47,10 @@ validate.py   tag balance, duplicate ids, dead anchors, content preservation
 ../deploy.sh  check, build, commit, push
 ```
 
-Four of those touch the network and none of them run in CI: `tiles.py`,
-`resolve.py`, `routes.py` and `placeid.py`. Their output — tiles, `places.json`,
-`routes.json` — is committed, which is why `check.sh` and `build.py` work offline.
+Five of those touch the network and none of them run in CI: `tiles.py`,
+`resolve.py`, `routes.py`, `placeid.py` and `extracoords.py`. Their output —
+tiles, `places.json`, `routes.json`, `extras.json` — is committed, which is why
+`check.sh` and `build.py` work offline.
 
 `tripmap.py` sits outside the pipeline: it exports the whole trip as KML for
 import into Google My Maps, which is a different phone surface from the saved
@@ -55,9 +58,9 @@ list and needs no per-place tapping. See **Saved lists** below for which to use.
 
 ### Ask before you build a map
 
-**`tiles.py`, `resolve.py`, `routes.py` and `placeid.py` need explicit approval
-every time. Do not run them because a rebuild seems tidy.** They are the
-expensive third of the pipeline and the cost is not yours to spend:
+**`tiles.py`, `resolve.py`, `routes.py`, `placeid.py` and `extracoords.py` need
+explicit approval every time. Do not run them because a rebuild seems tidy.**
+They are the expensive third of the pipeline and the cost is not yours to spend:
 
 - `tiles.py` pulls **one HTTP request per tile** from Esri's basemap service.
   A single z16 neighbourhood map is 20–25 tiles; a four-map pass was 294. That
@@ -68,6 +71,8 @@ expensive third of the pipeline and the cost is not yours to spend:
   an hour.
 - `routes.py` hits OSRM's demo server or spends **OpenRouteService API-key
   quota**, both rate-limited.
+- `extracoords.py` hits the same Nominatim and Wikidata as `resolve.py`, for
+  every entry in `extras.json` rather than every marker.
 - `placeid.py` spends **Google Cloud quota on a billable account**. One
   destination fits many times over in the monthly free allowance, but the
   account behind the key is a real one with a card attached to it.
@@ -97,6 +102,7 @@ python3 tools/kml.py      --dest $D --import out.kml --write
 python3 tools/routes.py   --dest $D --fetch        # road geometry + driving times
 python3 tools/placeid.py  --dest $D                # dry run - review every delta
 python3 tools/placeid.py  --dest $D --write        # Place IDs, for exact Maps links
+python3 tools/extracoords.py --dest $D --write     # OSM coords for the extras
 python3 tools/overlay.py  --dest $D                # regenerate the fragments
 python3 tools/boxes.py    --dest $D                # must report 0 overlaps, 0 dot-covers
 python3 tools/savedlist.py --dest $D               # the saved-list checklist
@@ -392,6 +398,24 @@ Playwright or an extension means Google's terms, an account worth far more than
 the fifteen minutes it saves, and selectors written against a UI that rotates
 its class names. The sequencing was the slow part, and sequencing needs no
 automation.
+
+### Embedding: My Maps only
+
+A saved list **cannot be embedded**, public or not. `google.com/maps/placelists/`
+answers with `x-frame-options: SAMEORIGIN`, so the browser refuses to frame it on
+another origin, and sharing changes who may *open* it rather than who may frame
+it. The Maps Embed API's five modes — place, view, directions, streetview,
+search — have no list mode either.
+
+`google.com/maps/d/embed` sends no such header, so **My Maps is the embeddable
+surface**. Put its `mid` in `meta.json` as `mymaps` and every map grows a *Live
+map* button; `overlay.py` appends `&ll=` and `&z=` from that map's own bounding
+box, so going live keeps you on the same ground rather than the trip's centroid.
+The iframe is created by JS on first click and never on load, which is what keeps
+the offline guarantee intact.
+
+The custom map has to be shared "anyone with the link". That is a genuine
+exposure decision: the pins include where you sleep.
 
 ### Saved list or My Maps?
 

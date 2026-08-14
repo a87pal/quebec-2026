@@ -51,9 +51,10 @@ deploy.sh                       check, build, commit, push
 
 `build.py` and `check.sh` touch no network, which is why CI can run them.
 `tools/tiles.py` (bulk Esri downloads), `tools/resolve.py` (OSM/Wikidata),
-`tools/routes.py` (OSRM, or OpenRouteService with a free key) and
-`tools/placeid.py` (Google Place IDs) hit rate-limited third parties and stay
-local; their outputs are committed so CI never needs to re-fetch them. No API
+`tools/routes.py` (OSRM, or OpenRouteService with a free key), `tools/placeid.py`
+(Google Place IDs) and `tools/extracoords.py` (OSM coordinates for the extras)
+hit rate-limited third parties and stay local; their outputs are committed so CI
+never needs to re-fetch them. No API
 key is ever committed, and neither the published page nor CI needs one — the
 keys live in the macOS keychain:
 

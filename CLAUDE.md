@@ -14,11 +14,11 @@ toolchain in `tools/`. Read `README.md` for the layout.
 
 ## Hard rules
 
-**Ask before building a map.** `tiles.py`, `resolve.py`, `routes.py` and
-`placeid.py` are the expensive third of the pipeline — a tile per HTTP request
-from Esri, Nominatim at one request a second, OpenRouteService key quota, a
-billable Google Cloud project — and they are the only stages that can silently
-make the guide worse. **Get explicit approval every time**, and do not run them
+**Ask before building a map.** `tiles.py`, `resolve.py`, `routes.py`,
+`placeid.py` and `extracoords.py` are the expensive third of the pipeline — a
+tile per HTTP request from Esri, Nominatim at one request a second, Wikidata
+throttling hard, OpenRouteService key quota, a billable Google Cloud project —
+and they are the only stages that can silently make the guide worse. **Get explicit approval every time**, and do not run them
 just because a rebuild looks tidy. Approval for one change does not carry to the
 next. `overlay.py`, `boxes.py`, `savedlist.py`, `maps.py`, `validate.py` and
 `check.sh` are local, offline and idempotent: run those freely. Almost every map
@@ -94,9 +94,18 @@ recovery is a plain `cp`.
   "favicon": "🐋",
   "themeColor": "#1d5540",
   "appleTitle": "Québec 2026",
-  "listed": true
+  "listed": true,
+  "mymaps": "1AbCd…"
 }
 ```
+
+`mymaps` is the `mid` from a Google My Maps share URL. When present, every map
+gets a **Live map** button that swaps the Esri tiles for that custom map,
+centred and zoomed to the same ground. The iframe is built on first click and
+never on load, so the guide still opens with no signal. Omit the field and
+nothing is emitted. The map must be shared "anyone with the link" or the frame
+renders empty for everyone but you — a *saved list* cannot be embedded at all,
+whatever its sharing (`x-frame-options: SAMEORIGIN`).
 
 Slug comes from the folder name. `start`/`end` sort the landing page into
 Ahead/Been on their own as time passes. `listed: false` builds the guide but

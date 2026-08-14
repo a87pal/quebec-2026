@@ -60,6 +60,11 @@ class Maps(object):
         self.places = dest.load('places.json', default={})
         self.routes = dest.load('routes.json', default={})
         self.legs = dest.load('legs.json', default={})
+        # Optional: the Google My Maps id from meta.json. When set, each map gets
+        # a button that swaps the Esri tiles for the live map centred on the same
+        # ground. Absent, nothing is emitted and the guide is unchanged - which
+        # is the case for any destination that has not been imported to My Maps.
+        self.mymaps = (dest.meta().get('mymaps') or '').strip()
         self.unsourced = []
         self.outside = []
         self.schematic = []
@@ -397,13 +402,49 @@ class Maps(object):
                           if s in self.ROUTE_CREDIT)
         return ('<div class="gmapwrap">\n<div class="gmap" style="aspect-ratio:%d/%d">\n<div class="tiles">%s</div>\n'
                 '<svg class="ovl" viewBox="0 0 %d %d" preserveAspectRatio="none" role="img" aria-label="%s">%s</svg>\n</div>\n'
+                '%s'
                 '<div class="mapside"><button class="mapzoom" type="button" aria-expanded="false">'
-                '<span>Expand map</span> <i>⤢</i></button>\n'
+                '<span>Expand map</span> <i>⤢</i></button>\n%s'
                 '<div class="cap">%s <span class="attrib">Basemap: Esri World Topo — Esri, HERE, Garmin, USGS, NGA, OpenStreetMap contributors.%s</span></div></div>\n'
                 '<div class="gmapfoot"><div class="maplegend">%s</div>'
                 '<a class="gbtn" target="_blank" rel="noopener" href="%s">Open this route in Google Maps ↗</a></div>\n</div>'
-                % (W, H, ''.join(tiles), W, H, html.escape(cap[:110]), body, cap,
+                % (W, H, ''.join(tiles), W, H, html.escape(cap[:110]), body,
+                   self.live_host(name, W, H), self.live_button(name), cap,
                    ' ' + credit if credit else '', legend, gmaps))
+
+    # --------------------------------------------------------------- live map
+    def live_url(self, name):
+        """The My Maps embed for this map's ground, or '' when none is configured.
+
+        Same custom map every time - it is one map of the whole trip - but
+        centred and zoomed to match the Esri map it replaces, so "go live" keeps
+        you looking at the same place rather than dropping you at the trip's
+        centroid.
+        """
+        if not self.mymaps:
+            return ''
+        c = self.cfg.get(name, {})
+        if 'lat' not in c or 'lon' not in c:
+            return ''
+        lat = (c['lat'][0] + c['lat'][1]) / 2.0
+        lon = (c['lon'][0] + c['lon'][1]) / 2.0
+        return ('https://www.google.com/maps/d/embed?mid=%s&amp;ll=%.5f,%.5f&amp;z=%d'
+                % (html.escape(self.mymaps), lat, lon, c.get('z', 10)))
+
+    def live_host(self, name, W, H):
+        """Empty container. The iframe is built by JS on first click, never on
+        load, so a guide opened with no signal still costs nothing."""
+        u = self.live_url(name)
+        if not u:
+            return ''
+        return ('<div class="glive" data-embed="%s" style="aspect-ratio:%d/%d"></div>\n'
+                % (u, W, H))
+
+    def live_button(self, name):
+        if not self.live_url(name):
+            return ''
+        return ('<button class="maplive" type="button" aria-pressed="false">'
+                '<span>Live map</span> <i>◉</i></button>\n')
 
 
 def load_markers(dest):

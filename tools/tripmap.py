@@ -34,14 +34,19 @@ from kml import esc
 
 # Marker kinds -> a colour that survives Google's import, and a label.
 KIND = {
-    'base': ('ff2d8f4c', 'Where you sleep'),
-    'hi':   ('ff3023a3', 'Marquee sight'),
-    'ev':   ('ff26a3d0', 'Evening'),
-    'stop': ('ffb8791d', 'Stop'),
-    'home': ('ff404040', 'Home'),
+    'base':  ('ff2d8f4c', 'Where you sleep'),
+    'hi':    ('ff3023a3', 'Marquee sight'),
+    'ev':    ('ff26a3d0', 'Evening'),
+    'stop':  ('ffb8791d', 'Stop'),
+    'home':  ('ff404040', 'Home'),
+    # Named in the guide but not drawn on its maps - restaurants, shops, the
+    # sights inside a town whose pin is the town. They live in extras.json and
+    # carry their own coordinate, resolved from OSM by tools/extracoords.py.
+    'extra': ('ffa02f8b', 'Also in the guide'),
 }
 ICON = 'http://maps.google.com/mapfiles/kml/paddle/%s-blank.png'
-PADDLE = {'base': 'grn', 'hi': 'red', 'ev': 'blu', 'stop': 'ylw', 'home': 'wht'}
+PADDLE = {'base': 'grn', 'hi': 'red', 'ev': 'blu', 'stop': 'ylw', 'home': 'wht',
+          'extra': 'purple'}
 
 
 def hm(sec):
@@ -65,6 +70,7 @@ def main():
     dest, _ = _dest.from_args('Build a Google My Maps layer for driving.')
     m = collect(dest)
     places = dest.load('places.json', default={})
+    extras = dest.load('extras.json', default={})
     routes = dest.load('routes.json', default={})
     legs = dest.load('legs.json', default={})
     meta = dest.meta()
@@ -83,17 +89,57 @@ def main():
     o.append('<Style id="leg"><LineStyle><color>ff2d8f4c</color><width>4</width></LineStyle></Style>')
 
     # ---- one folder per region, markers in the order the guide draws them ----
-    seen, n = set(), 0
-    for region in sorted(m._specs, key=lambda r: order.index(r) if r in order else 99):
-        specs = m._specs[region]
-        if not specs:
+    # My Maps imports one layer per KML folder and caps a map at 10 layers, so
+    # a trip with more regions than that loses the overflow *on import* - which
+    # looks like a successful import missing a day. Collapse regions that share
+    # a prefix (home-nh, home-mtl, home-qc -> "home") until it fits, rather than
+    # letting Google silently drop the tail.
+    groups, LAYER_CAP = list(m._specs), 10
+    drives = 1 if routes else 0
+    folder_of = {r: r for r in groups}
+    if len(groups) + drives > LAYER_CAP:
+        folder_of = {r: r.split('-')[0] for r in groups}
+        merged = sorted(set(folder_of.values()))
+        print('%d regions + %d drive layer would exceed My Maps\' %d-layer cap; '
+              'merged to %d by prefix' % (len(groups), drives, LAYER_CAP, len(merged)))
+        if len(merged) + drives > LAYER_CAP:
+            print('!! still %d layers - Google will drop the overflow on import'
+                  % (len(merged) + drives))
+
+    def rank(r):
+        return order.index(r) if r in order else 99
+    ordered, seen_f = [], set()
+    for r in sorted(groups, key=rank):
+        f = folder_of[r]
+        if f not in seen_f:
+            seen_f.add(f)
+            ordered.append((f, [x for x in sorted(groups, key=rank) if folder_of[x] == f]))
+
+    # Extras have no region of their own: they sit in the folder belonging to
+    # the place they are `near`, so the whale wharf lands with Baie-Ste-Catherine
+    # rather than in a bucket of its own. One without a coordinate is skipped -
+    # a KML point needs one, and extracoords.py leaves it absent rather than
+    # guessing.
+    xtra, skipped = {}, []
+    for name in sorted(extras):
+        e = extras[name]
+        if e.get('lat') is None or e.get('lon') is None:
+            skipped.append(name)
             continue
-        o.append('<Folder><name>%s</name>' % esc(region))
+        anchor = places.get(e.get('near') or '') or {}
+        xtra.setdefault(folder_of.get(anchor.get('region'), 'elsewhere'), []).append((name, e))
+
+    seen, n = set(), 0
+    for folder, regions in ordered:
+        specs = [s for r in regions for s in m._specs[r]]
+        if not specs and not xtra.get(folder):
+            continue
+        o.append('<Folder><name>%s</name>' % esc(folder))
         for s in specs:
             key = s['label'].strip()
-            if (region, key) in seen:
+            if (folder, key) in seen:
                 continue
-            seen.add((region, key))
+            seen.add((folder, key))
             p = places.get(key, {})
             bits = []
             if s['sub']:
@@ -108,6 +154,12 @@ def main():
                      '<Point><coordinates>%.6f,%.6f,0</coordinates></Point></Placemark>'
                      % (esc(key), s['kind'] if s['kind'] in KIND else 'stop',
                         '<br/>'.join(bits), s['lon'], s['lat']))
+            n += 1
+        for name, e in xtra.pop(folder, []):
+            o.append('<Placemark><name>%s</name><styleUrl>#extra</styleUrl>'
+                     '<description>%s</description>'
+                     '<Point><coordinates>%.6f,%.6f,0</coordinates></Point></Placemark>'
+                     % (esc(name), esc(e.get('note', '')), e['lon'], e['lat']))
             n += 1
         o.append('</Folder>')
 
@@ -130,6 +182,11 @@ def main():
     io.open(path, 'w', encoding='utf-8').write('\n'.join(o))
     kb = os.path.getsize(path) // 1024
     print('wrote %d places and %d drives -> %s  (%d KB)' % (n, len(routes), path, kb))
+    if xtra:
+        print('!! %d extra(s) had no folder: %s'
+              % (sum(len(v) for v in xtra.values()), sorted(xtra)))
+    if skipped:
+        print('%d extra(s) left out, no coordinate: %s' % (len(skipped), ', '.join(skipped)))
     print('\nImport at https://www.google.com/mymaps → Create a new map → Import.')
     print('Then on the phone: Google Maps → Saved → Maps.')
     if kb > 4500:

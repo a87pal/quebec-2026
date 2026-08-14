@@ -10,6 +10,7 @@ destinations/*/maps/savedlist.html
 destinations/*/maps/.resolve-cache.json
 destinations/*/maps/.routes-cache.json
 destinations/*/maps/.placeid-cache.json
+destinations/*/maps/.extracoords-cache.json
 destinations/*/maps/.placement.json
 
 # Review surface for tools/kml.py, regenerated from places.json on demand.

@@ -198,6 +198,9 @@ def main():
     ap.add_argument("--max-town", type=float, default=6000,
                     help="metres; the looser cap for an entry marked "
                          '"place_scope": "town", where the centroid is what is wanted')
+    ap.add_argument("--max-extra", type=float, default=5000,
+                    help="metres; allowance for an extras.json entry, which is measured "
+                         "against a town anchor rather than against itself")
     ap.add_argument("--radius", type=float, default=800,
                     help="metres; location-bias radius around the verified coordinate")
     ap.add_argument("--only", default="", help="substring filter, for retrying one place")
@@ -232,20 +235,27 @@ def main():
     for name in sorted(places):
         p = places[name]
         if p.get("lat") is None or p.get("lon") is None:
-            work.append((name, None, None, p, "no coordinate to bias the search with"))
+            work.append((name, None, None, p, a.max_delta,
+                         "no coordinate to bias the search with"))
             continue
-        work.append((name, p.get("query") or name, (p["lat"], p["lon"]), p, None))
+        work.append((name, p.get("query") or name, (p["lat"], p["lon"]), p, a.max_delta, None))
     for name in sorted(extras):
         e = extras[name]
         anchor = places.get(e.get("near") or "")
+        # An extra is measured against its anchor, which is somewhere in the same
+        # town rather than the place itself, so it gets a much wider allowance -
+        # per-entry "max_m" where a place sits further out still. The check is
+        # not decorative even at this width: it is what catches a same-named
+        # restaurant in another city, which is the failure that actually happens.
+        maxd = float(e.get("max_m") or a.max_extra)
         if not anchor or anchor.get("lat") is None:
-            work.append((name, None, None, e,
+            work.append((name, None, None, e, maxd,
                          'extras: "near" does not name a place with a coordinate'))
             continue
-        work.append((name, e.get("query") or name, (anchor["lat"], anchor["lon"]), e, None))
+        work.append((name, e.get("query") or name, (anchor["lat"], anchor["lon"]), e, maxd, None))
 
     found, flagged, missed, skipped = [], [], [], 0
-    for name, query, here, p, problem in work:
+    for name, query, here, p, maxd, problem in work:
         if a.only and a.only.lower() not in name.lower():
             continue
         if p.get("place_id") and not a.refresh:
@@ -255,11 +265,12 @@ def main():
             missed.append((name, problem))
             continue
         try:
-            cands = search(http, key, query, here[0], here[1], a.radius)
+            cands = search(http, key, query, here[0], here[1],
+                           max(a.radius, min(maxd, 5000)))
         except Exception as e:
             print("  ! %-30s lookup failed: %s" % (name[:30], e))
             continue
-        got = pick(cands, here, a.max_delta, a.max_admin, a.max_town, p.get('place_scope'))
+        got = pick(cands, here, maxd, a.max_admin, a.max_town, p.get('place_scope'))
         if not got:
             missed.append((name, 'no result for "%s"' % query))
             continue
@@ -279,6 +290,8 @@ def main():
             mark = "" if rank == 0 else "  [hit #%d]" % (rank + 1)
             if lim < a.max_delta:
                 mark += "  [town: %dm limit]" % lim
+            elif lim > a.max_delta:
+                mark += "  [%dm limit]" % lim
             print("  %6.0f m  %-30s %-28s %s%s"
                   % (d, n[:30], pid[:28], gname[:34], mark))
 
@@ -298,6 +311,29 @@ def main():
     if skipped:
         print("\n%d place(s) already had an ID (--refresh to redo them)" % skipped)
 
+    # Two entries on one Place ID means one of them lost. "Main Deli" resolved to
+    # Schwartz's - the right answer for a *different* row - and a distance check
+    # cannot see that, because the wrong place was 444 m away and entirely
+    # plausible. Only the collision gives it away.
+    seen = {}
+    for src in (places, extras):
+        for k, v in src.items():
+            if v.get("place_id"):
+                seen.setdefault(v["place_id"], []).append(k)
+    # Include what this run *would* store, so a dry run reports the collision
+    # rather than only revealing it after --write.
+    for n, d_, pid, gname, rank, lim in found:
+        seen.setdefault(pid, [])
+        if n not in seen[pid]:
+            seen[pid].append(n)
+    clash = {pid: names for pid, names in seen.items() if len(names) > 1}
+    if clash:
+        print("\n--- SAME Place ID on more than one entry ---")
+        for pid, names in sorted(clash.items(), key=lambda kv: -len(kv[1])):
+            print("  %-28s %s" % (pid[:28], ' | '.join(sorted(names))))
+        print("  Deliberate for an alias (a base that doubles as its town's pin).")
+        print("  Otherwise one of them is wrong: sharpen its query and retry with --only.")
+
     http.save()
 
     if not a.write:
@@ -308,15 +344,19 @@ def main():
     if after != before:
         sys.exit("error: this script moved a coordinate, which it must never do. "
                  "Nothing written.")
+    # Count per file. `found` spans both, so reporting its length against
+    # places.json overstates what actually landed there.
     json.dump(places, io.open(path, "w", encoding="utf-8"),
               indent=1, ensure_ascii=False, sort_keys=True)
-    print("\nstored %d Place ID(s) -> %s" % (len(found), path))
+    n_places = sum(1 for n, *_ in found if n in places)
+    print("\nstored %d Place ID(s) -> %s" % (n_places, path))
     if extras:
         xpath = os.path.join(dest.mapdir, "extras.json")
         json.dump(extras, io.open(xpath, "w", encoding="utf-8"),
                   indent=1, ensure_ascii=False, sort_keys=True)
-        print("  and %d extra(s) -> %s"
-              % (sum(1 for v in extras.values() if v.get("place_id")), xpath))
+        print("  stored %d, %d with an ID -> %s"
+              % (len(found) - n_places,
+                 sum(1 for v in extras.values() if v.get("place_id")), xpath))
 
 
 if __name__ == "__main__":

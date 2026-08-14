@@ -132,6 +132,63 @@ def legtable(T, dest):
     return T, done, len(routes)
 
 
+LIVE_CSS = """
+.gmapwrap .glive{display:none;width:100%;border-radius:12px;overflow:hidden;background:#e9e4d8}
+.gmapwrap .glive iframe{display:block;width:100%;height:100%;border:0}
+.gmapwrap.livemode .gmap{display:none}
+.gmapwrap.livemode .glive{display:block;grid-column:1/-1}
+.maplive{background:#edf2ee;border:1px solid #c9d8cf;border-radius:999px;padding:7px 14px;
+  font:800 .76rem Inter,system-ui,sans-serif;color:var(--forest);cursor:pointer;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:7px;letter-spacing:.04em;text-transform:uppercase}
+.maplive:hover{background:#dfe9e2}
+.maplive i{font-style:normal;color:var(--wine);font-size:.7rem}
+.gmapwrap.livemode .mapzoom{display:none}
+@media print{.gmapwrap .glive{display:none!important}.maplive{display:none}
+ .gmapwrap.livemode .gmap{display:block}}
+"""
+
+LIVE_JS = """/* maps: swap the offline tiles for the live My Maps embed, on demand.
+   The iframe is created on first click and never on load, so a guide opened
+   with no signal costs nothing and still prints. */
+document.querySelectorAll('.gmapwrap').forEach(function(w){
+  var btn=w.querySelector('.maplive'), host=w.querySelector('.glive');
+  if(!btn||!host) return;
+  btn.addEventListener('click',function(){
+    var on=!w.classList.contains('livemode');
+    w.classList.toggle('livemode',on);
+    btn.setAttribute('aria-pressed',on?'true':'false');
+    btn.querySelector('span').textContent=on?'Offline map':'Live map';
+    if(on&&!host.firstChild){
+      var f=document.createElement('iframe');
+      f.setAttribute('title','Live Google map of this area');
+      f.setAttribute('loading','lazy');
+      f.setAttribute('allowfullscreen','');
+      f.src=host.getAttribute('data-embed');
+      host.appendChild(f);
+    }
+  });
+});
+"""
+
+
+def liveblock(T):
+    """Inject the live-map CSS and JS once.
+
+    Separate from the CSS/JS block below, which returns early on a guide that
+    already has it - so anything added there would never reach an existing
+    guide. Each half guards on its own marker instead.
+    """
+    if '.maplive{' not in T:
+        anchor = ".gmapwrap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:20px 0}"
+        need(T, anchor, 'live-map CSS')
+        T = T.replace(anchor, anchor + LIVE_CSS, 1)
+    if "/* maps: swap the offline tiles" not in T:
+        anchor = "/* print: everything open */"
+        need(T, anchor, 'live-map JS')
+        T = T.replace(anchor, LIVE_JS + anchor, 1)
+    return T
+
+
 def main():
     dest, _ = _dest.from_args('Splice generated map fragments into the guide.')
     src = dest.guide
@@ -170,6 +227,9 @@ def main():
     # Carries its own CSS and JS, so re-splicing replaces them wholesale and the
     # inject-once dance below does not apply to it.
     T, sl = savedlist(T, dest)
+
+    # ---- live-map toggle, if meta.json names a My Maps id ---------------------
+    T = liveblock(T)
 
     # ---- CSS: thumbnail by default, full size when opened --------------------
     ANCHOR = ".gmapwrap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:20px 0}"
