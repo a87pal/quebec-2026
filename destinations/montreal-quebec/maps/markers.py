@@ -48,17 +48,16 @@ def build(m):
     frag['route'] = m.wrap('route', ''.join(b),
         '<span><i class="lg base"></i>Base</span><span><i class="lg hi"></i>Marquee</span><span><i class="lg ev"></i>Whales</span>'
         '<span><i class="lg ln"></i>Outbound</span><span><i class="lg ln bk"></i>Direct run home</span>',
-        '<b>The numbered badges are day numbers — click one to jump to that day below.</b> The full loop: Cheshire → Franconia Notch → the abbey → Montréal → the Chemin du Roy → Québec City → Charlevoix → the whales, then straight home.',
-        'https://www.google.com/maps/dir/Cheshire,+CT/Lincoln,+NH/Saint-Beno%C3%AEt-du-Lac,+QC/Montreal,+QC/Trois-Rivi%C3%A8res,+QC/Quebec+City,+QC/Baie-Saint-Paul,+QC/Baie-Sainte-Catherine,+QC')
+        '<b>The numbered badges are day numbers — click one to jump to that day below.</b> The full loop: Cheshire → Franconia Notch → the abbey → Montréal → the Chemin du Roy → Québec City → Charlevoix → the whales, then straight home.')
 
     # ---------------- FRANCONIA ----------------
     # The trail lines are schematic: they are a hiking route, and the public
     # routing service these maps use routes cars.
     P, _ = m.mk('franconia')
     b = []
-    b.append(m.route(P, [(44.1417, -71.6816), (44.1401, -71.6757), (44.1387, -71.6688), (44.1392, -71.6598), (44.1402, -71.6508), (44.1413, -71.6437)], w=6))
-    b.append(m.route(P, [(44.1413, -71.6437), (44.1445, -71.6440), (44.1483, -71.6444), (44.1545, -71.6449), (44.1605, -71.6446)], "ridge", w=8))
-    b.append(m.route(P, [(44.1605, -71.6446), (44.1610, -71.6553), (44.1580, -71.6641), (44.1516, -71.6725), (44.1450, -71.6789), (44.1417, -71.6816)], w=6))
+    b.append(m.route(P, [(44.1417, -71.6816), (44.1401, -71.6757), (44.1387, -71.6688), (44.1392, -71.6598), (44.1402, -71.6508), (44.1413, -71.6437)], w=6, day=1))
+    b.append(m.route(P, [(44.1413, -71.6437), (44.1445, -71.6440), (44.1483, -71.6444), (44.1545, -71.6449), (44.1605, -71.6446)], "ridge", w=8, day=1))
+    b.append(m.route(P, [(44.1605, -71.6446), (44.1610, -71.6553), (44.1580, -71.6641), (44.1516, -71.6725), (44.1450, -71.6789), (44.1417, -71.6816)], w=6, day=1))
     b.append(m.marker(P, 44.1417, -71.6816, "Lafayette Place trailhead", "park by 7:15 a.m. · free", "base", r=10))
     b.append(m.marker(P, 44.1413, -71.6437, "Little Haystack ≈4,760 ft", "treeline · not on the NH48", "stop"))
     b.append(m.marker(P, 44.1483, -71.6444, "Mt. Lincoln 5,089 ft", "", "stop"))
@@ -72,14 +71,13 @@ def build(m):
     frag['franconia'] = m.wrap('franconia', ''.join(b),
         '<span><i class="lg base"></i>Base / trailhead</span><span><i class="lg hi"></i>High point</span>'
         '<span><i class="lg ln"></i>Trail</span><span><i class="lg ln rg"></i>Above treeline</span>',
-        'The loop runs clockwise: up Falling Waters, 1.7 miles along the open crest, down Greenleaf and the Old Bridle Path. The trail lines are schematic — follow the AMC map on the ground, not this.',
-        'https://www.google.com/maps/dir/Lincoln,+NH/Lafayette+Place+Campground,+Franconia,+NH')
+        'The loop runs clockwise: up Falling Waters, 1.7 miles along the open crest, down Greenleaf and the Old Bridle Path. The trail lines are schematic — follow the AMC map on the ground, not this.')
 
     # ---------------- MONTREAL ----------------
     P, _ = m.mk('montreal')
     b = []
-    b.append(m.dash('walk', P, [(45.5227, -73.6031), (45.5300, -73.6100), (45.5366, -73.6152)], 5))
-    b.append(m.dash('walk', P, [(45.5152, -73.5849), (45.5090, -73.5880), (45.5039, -73.5877), (45.4990, -73.6020), (45.4923, -73.6180)], 5))
+    b.append(m.dash('walk', P, [(45.5227, -73.6031), (45.5300, -73.6100), (45.5366, -73.6152)], 5, day=4))
+    b.append(m.dash('walk', P, [(45.5152, -73.5849), (45.5090, -73.5880), (45.5039, -73.5877), (45.4990, -73.6020), (45.4923, -73.6180)], 5, day=4))
     b.append(m.marker(P, 45.5230, -73.5960, "YOUR BASE — The Main", "nights 3–5 · bd Saint-Laurent", "base", r=12))
     b.append(m.marker(P, 45.5227, -73.6020, "St-Viateur Bagel", "24 h · Mile End", "stop", r=7))
     b.append(m.marker(P, 45.5229, -73.5952, "Fairmount Bagel", "24 h · 5 min from St-Viateur", "stop", r=7))
@@ -95,13 +93,12 @@ def build(m):
     frag['montreal'] = m.wrap('montreal', ''.join(b),
         '<span><i class="lg base"></i>Your base</span><span><i class="lg hi"></i>Marquee</span>'
         '<span><i class="lg ev"></i>Evening</span><span><i class="lg ln wk"></i>Suggested walk</span>',
-        'Everything here is Métro or foot. The dotted lines are the two walks worth doing end to end, drawn schematically: bagels to Jean-Talon, and Tam-Tams over the mountain to the Oratory.',
-        'https://www.google.com/maps/dir/Mile+End,+Montreal/March%C3%A9+Jean-Talon/Mont+Royal+Chalet/Saint+Joseph%27s+Oratory')
+        'Everything here is Métro or foot. The dotted lines are the two walks worth doing end to end, drawn schematically: bagels to Jean-Talon, and Tam-Tams over the mountain to the Oratory.')
 
     # ---------------- QUEBEC ----------------
     P, _ = m.mk('quebec')
     b = []
-    b.append(m.dash('walk', P, [(46.8108, -71.2247), (46.8112, -71.2188), (46.8109, -71.2117), (46.8078, -71.2065), (46.8030, -71.2192), (46.8072, -71.2150), (46.8120, -71.2052), (46.8144, -71.2076), (46.8137, -71.2049), (46.8123, -71.2028), (46.8135, -71.2033), (46.8135, -71.2003)], 5))
+    b.append(m.dash('walk', P, [(46.8108, -71.2247), (46.8112, -71.2188), (46.8109, -71.2117), (46.8078, -71.2065), (46.8030, -71.2192), (46.8072, -71.2150), (46.8120, -71.2052), (46.8144, -71.2076), (46.8137, -71.2049), (46.8123, -71.2028), (46.8135, -71.2033), (46.8135, -71.2003)], 5, day=6))
     b.append(m.marker(P, 46.8108, -71.2247, "YOUR BASE — Saint-Roch", "nights 6–9 · below the cliff", "base", r=12))
     b.append(m.marker(P, 46.8109, -71.2117, "Porte Saint-Louis", "start the ramparts", "stop", r=7))
     b.append(m.marker(P, 46.8078, -71.2065, "La Citadelle", "star fort", "hi"))
@@ -116,8 +113,7 @@ def build(m):
     frag['quebec'] = m.wrap('quebec', ''.join(b),
         '<span><i class="lg base"></i>Your base</span><span><i class="lg hi"></i>Marquee</span>'
         '<span><i class="lg ev"></i>Evening</span><span><i class="lg ln wk"></i>Day 6 walking route</span>',
-        'The dotted line is the whole of Day 6, in order — walls, Citadelle, Plains, cathedral, Dufferin Terrace, down the Breakneck Steps, out on the ferry. Under four miles, drawn schematically.',
-        'https://www.google.com/maps/dir/Porte+Saint-Louis,+Quebec+City/Citadelle+of+Quebec/Plains+of+Abraham/Ch%C3%A2teau+Frontenac/Place+Royale,+Quebec+City/Quebec+City+ferry+terminal')
+        'The dotted line is the whole of Day 6, in order — walls, Citadelle, Plains, cathedral, Dufferin Terrace, down the Breakneck Steps, out on the ferry. Under four miles, drawn schematically.')
 
     # ---------------- BEAUPRE ----------------
     P, _ = m.mk('beaupre')
@@ -135,8 +131,7 @@ def build(m):
     frag['beaupre'] = m.wrap('beaupre', ''.join(b),
         '<span><i class="lg base"></i>Base</span><span><i class="lg hi"></i>Marquee</span>'
         '<span><i class="lg ln"></i>Route 138 out</span><span><i class="lg ln lp"></i>Chemin Royal, 67 km</span>',
-        'Day 7 in one picture: out along the Côte-de-Beaupré on Route 138, then the island loop anticlockwise, finishing at Sainte-Pétronille for sunset.',
-        'https://www.google.com/maps/dir/Quebec+City/Montmorency+Falls/Basilica+of+Sainte-Anne-de-Beaupr%C3%A9/Canyon+Sainte-Anne/Sainte-P%C3%A9tronille,+QC')
+        'Day 7 in one picture: out along the Côte-de-Beaupré on Route 138, then the island loop anticlockwise, finishing at Sainte-Pétronille for sunset.')
 
     # ---------------- CHARLEVOIX ----------------
     P, _ = m.mk('charlevoix')
@@ -155,8 +150,7 @@ def build(m):
     frag['charlevoix'] = m.wrap('charlevoix', ''.join(b),
         '<span><i class="lg base"></i>Your base</span><span><i class="lg hi"></i>Hautes-Gorges</span>'
         '<span><i class="lg ev"></i>Whales</span><span><i class="lg ln"></i>Rte 138 out</span><span><i class="lg ln sc"></i>Rte 362 back</span>',
-        'Day 9 goes out on Route 138 in the morning and comes back on Route 362 — the balcony road — in the evening light. Day 10 is the gold spur up to the gorge.',
-        'https://www.google.com/maps/dir/Baie-Saint-Paul,+QC/Baie-Sainte-Catherine,+QC/La+Malbaie,+QC/Les+%C3%89boulements,+QC/Baie-Saint-Paul,+QC')
+        'Day 9 goes out on Route 138 in the morning and comes back on Route 362 — the balcony road — in the evening light. Day 10 is the gold spur up to the gorge.')
 
     # ---------------- HOME MAPS ----------------
     # One per booked address. The region maps above answer "what do we do here";
@@ -178,8 +172,7 @@ def build(m):
     b.append(m.marker(P, 44.03407, -71.68556, "Woodstock Inn Brewery", "42 min walk — take the car", "stop", r=7))
     frag['home-nh'] = m.wrap('home-nh', ''.join(b),
         '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Groceries</span>',
-        'Everything white is genuinely walkable from the door. There is no public transport of any kind in Lincoln — the car does every mile that is not on this map, including the 13.5 miles north to the Franconia trailhead.',
-        'https://www.google.com/maps/dir/36+Lodge+Road,+Lincoln,+NH/Price+Chopper,+Lincoln,+NH/Woodstock+Inn+Brewery,+North+Woodstock,+NH')
+        'Everything white is genuinely walkable from the door. There is no public transport of any kind in Lincoln — the car does every mile that is not on this map, including the 13.5 miles north to the Franconia trailhead.')
 
     # ---------------- HOME · MONTRÉAL ----------------
     P, _ = m.mk('home-mtl')
@@ -195,8 +188,7 @@ def build(m):
     frag['home-mtl'] = m.wrap('home-mtl', ''.join(b),
         '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Groceries</span>'
         '<span><i class="lg ev"></i>Métro</span>',
-        'This is the lower Main, not Mile End — the bagel bakeries are 34 minutes north on foot, and everything on this map is under twelve. Two lines are walkable, the 55 bus stops at the corner, and there are five BIXI docks inside 300 m.',
-        'https://www.google.com/maps/dir/3613+Boulevard+Saint-Laurent,+Montreal/Metro,+3575+Avenue+du+Parc,+Montreal/Sherbrooke+station,+Montreal/Esplanade+Tranquille,+Montreal')
+        'This is the lower Main, not Mile End — the bagel bakeries are 34 minutes north on foot, and everything on this map is under twelve. Two lines are walkable, the 55 bus stops at the corner, and there are five BIXI docks inside 300 m.')
 
     # ---------------- HOME · QUÉBEC CITY ----------------
     P, _ = m.mk('home-qc')
@@ -212,8 +204,7 @@ def build(m):
     frag['home-qc'] = m.wrap('home-qc', ''.join(b),
         '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Groceries and the postcard</span>'
         '<span><i class="lg ev"></i>How you move</span>',
-        'You are below the cliff. Everything in the walled city on this map is up 60 vertical metres from your door, and the gold dot on rue Saint-Vallier is the free public lift that does the climb for you. There is no métro in Québec City.',
-        'https://www.google.com/maps/dir/735+Boulevard+Charest+Est,+Quebec/Metro,+860+Boulevard+Charest+Est,+Quebec/Ascenseur+du+Faubourg,+Quebec/Ch%C3%A2teau+Frontenac,+Quebec')
+        'You are below the cliff. Everything in the walled city on this map is up 60 vertical metres from your door, and the gold dot on rue Saint-Vallier is the free public lift that does the climb for you. There is no métro in Québec City.')
 
     # ---------------- HOME · BAIE-SAINT-PAUL ----------------
     P, _ = m.mk('home-bsp')
@@ -228,7 +219,6 @@ def build(m):
     frag['home-bsp'] = m.wrap('home-bsp', ''.join(b),
         '<span><i class="lg base"></i>Your door</span><span><i class="lg hi"></i>Everything else</span>'
         '<span><i class="lg ln"></i>The drive into town</span>',
-        'The whole of this base in one picture: the farmhouse is up the valley and the town is 14 km away, so the shop, dinner and the bakery are all a drive. Nothing on the itinerary happens inside Baie-Saint-Paul except one evening, so that is a fair price for a cheaper booking on the Labour Day weekend.',
-        'https://www.google.com/maps/dir/352+Rang+Saint-Placide+Sud,+Baie-Saint-Paul,+QC/IGA,+Baie-Saint-Paul,+QC/Laiterie+Charlevoix,+Baie-Saint-Paul,+QC')
+        'The whole of this base in one picture: the farmhouse is up the valley and the town is 14 km away, so the shop, dinner and the bakery are all a drive. Nothing on the itinerary happens inside Baie-Saint-Paul except one evening, so that is a fair price for a cheaper booking on the Labour Day weekend.')
 
     return frag

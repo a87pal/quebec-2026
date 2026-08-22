@@ -20,8 +20,9 @@ tile per HTTP request from Esri, Nominatim at one request a second, Wikidata
 throttling hard, OpenRouteService key quota, a billable Google Cloud project —
 and they are the only stages that can silently make the guide worse. **Get explicit approval every time**, and do not run them
 just because a rebuild looks tidy. Approval for one change does not carry to the
-next. `overlay.py`, `boxes.py`, `savedlist.py`, `maps.py`, `validate.py` and
-`check.sh` are local, offline and idempotent: run those freely. Almost every map
+next. `overlay.py`, `boxes.py`, `inventory.py`, `dayroutes.py`, `savedlist.py`,
+`maps.py`, `validate.py` and `check.sh` are local, offline and idempotent: run
+those freely. Almost every map
 edit is one of those — nothing needs refetching unless a bbox, a zoom, a marker's
 identity or a leg's endpoints changed. `tools/README.md` has the detail.
 
@@ -43,6 +44,17 @@ collision. If a label cannot be placed, overlay.py fails; widen the bbox in
 Hand-drawn lines are allowed only where routing genuinely does not apply — a
 hiking trail, a walking tour — and their captions must say they are schematic,
 per §8.
+
+**Day and category live in `maps/inventory.json`**, the one hand-written file of
+the three. It joins `places.json` and `extras.json` by the same key and adds
+`day`, `cat`, an optional display `as`, and each day's ordered `route` and
+`legs`. Everything downstream — the map filters, the per-day Google Maps
+directions links, the saved list's ordering — reads it through
+`tools/inventory.py` rather than joining the files itself. Run
+`python3 tools/inventory.py --dest SLUG` after editing it; it is fatal on a key
+that is not a real place, a day the guide does not have, a stop routed on a day
+it is not tagged to, and on two consecutive stops further apart than the travel
+mode could cover. `tools/README.md` has the vocabulary and the shape.
 
 **Nothing in `tools/` may hardcode a slug, a machine path or a map name.** It
 is the engine. Trip data lives in `destinations/<slug>/`. Every script takes
@@ -99,13 +111,14 @@ recovery is a plain `cp`.
 }
 ```
 
-`mymaps` is the `mid` from a Google My Maps share URL. When present, every map
-gets a **Live map** button that swaps the Esri tiles for that custom map,
-centred and zoomed to the same ground. The iframe is built on first click and
-never on load, so the guide still opens with no signal. Omit the field and
-nothing is emitted. The map must be shared "anyone with the link" or the frame
-renders empty for everyone but you — a *saved list* cannot be embedded at all,
-whatever its sharing (`x-frame-options: SAMEORIGIN`).
+`mymaps` is the `mid` from a Google My Maps share URL — a note of which custom
+map holds this trip's KML, for a human. **No tool reads it.** It used to drive a
+*Live map* button that swapped the Esri tiles for a My Maps iframe on every map;
+that was retired, because the embed drew the same pins from the same
+`places.json` in a different renderer, and it required a map containing where
+you sleep to be public. The live surface is now the per-day directions links
+`tools/dayroutes.py` builds from the committed Place IDs. See `tools/README.md`,
+**Embedding: nothing, on purpose**.
 
 Slug comes from the folder name. `start`/`end` sort the landing page into
 Ahead/Been on their own as time passes. `listed: false` builds the guide but

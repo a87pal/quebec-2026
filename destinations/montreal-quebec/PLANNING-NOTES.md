@@ -741,7 +741,135 @@ minute drive.
 
 ---
 
-## 14. A guide at every stop: the attraction-level audit
+## 14. The mapping rebuild: one inventory, real day routes, filters
+
+Three things were wrong with the maps at once, and only one of them was the one
+that got noticed first.
+
+### 14.1 The live map was a copy of the static map
+
+Every one of the ten maps carried a **Live map** button that swapped the Esri
+tiles for a Google My Maps iframe. It embedded the *same* `mid` on all ten,
+varying only `&ll=` and `&z=` from that map's bounding-box centre. That custom
+map is imported from `tripmap.py`'s KML, which is generated from the same
+`places.json` and `extras.json` that draw the SVG. Same pins, same coordinates,
+different renderer.
+
+It also contradicted the spec it was built under. `TRAVEL-PREFERENCES.md` §8:
+*"An embedded live map fails the offline and printable requirements in §11"*,
+and, two lines earlier, what it asked for instead — *"live navigation links…
+Every marker gets one, generated from its verified coordinate — not just one
+link per map."* And it required a map containing where you sleep to be shared
+"anyone with the link".
+
+Removed everywhere. `meta.json` keeps `mymaps` as a note of which My Maps holds
+the trip; nothing reads it.
+
+### 14.2 The Place IDs were paid for and barely used
+
+All 165 places — 74 markers, 91 extras — carry a Google `place_id` verified by
+`placeid.py` against a coordinate we resolved ourselves. They powered exact
+per-marker `maps/search` links. The ten *route* links did not use them at all:
+they were hand-typed paths of free-text place names,
+
+    /maps/dir/Porte+Saint-Louis,+Quebec+City/Citadelle+of+Quebec/…
+
+one per **map**, which is not a unit anyone travels in. Google re-ran a search
+on each name at click time — precisely the ambiguity the Place IDs exist to
+remove.
+
+`dayroutes.py` builds the other thing: one set of links per **day**, in the
+order you travel, naming every stop exactly. 24 segment links and 10 whole-day
+links across the twelve days.
+
+Google's cap shapes the output and is the reason a day is often more than one
+link: *three waypoints on mobile browsers, nine otherwise*. This guide is read
+in a car, so segments are cut to five stops with consecutive links overlapping
+by one, and a whole-day link is emitted **only when it legally fits** — never by
+quietly dropping the stops past the cap. Where a day cannot be one link, the map
+footer points at the day card rather than at a truncated route.
+
+### 14.3 Nothing connected a place to a day
+
+There was no `day` field in any JSON in the repo. The only day linkage was nine
+hardcoded `day=` kwargs on route-map markers. So the 165-entry driving list
+could not be grouped, sequenced or routed.
+
+`maps/inventory.json` is that layer, and it is hand-authored: `resolve.py`,
+`placeid.py` and `extracoords.py` machine-write the other two files. 165 places
+tagged with a day and a category, twelve days with ordered routes. Seeded by
+`inventory.py --seed` matching keys against each day card's prose — which got
+124 of 165 — and finished by hand.
+
+**One error the seeding pass produced is worth recording.** `Place d'Armes` is a
+square in Old Montréal *and* the square outside the Château Frontenac in Québec.
+The `extras.json` entry is Québec's; it was tagged Day 3 and routed through an
+afternoon on foot in Old Montréal. The URL was perfectly well-formed and
+contained a 232 km walking hop. `inventory.py` now measures every consecutive
+pair of stops against what the mode could plausibly cover and fails on it.
+
+### 14.4 Filters, and what they deliberately do not do
+
+Each map has a Day row and a Show row (`Sleep`, `See & do`, `Eat & drink`,
+`Getting about` — four groups over twelve categories, because four chips are
+usable and twelve are not). A chip is only offered when it would change the
+picture: the Québec walking map has no Day 6 chip, because all eleven of its
+markers are Day 6.
+
+**Placement is never recomputed.** `overlay.py` places labels once against the
+full marker set; hiding some of them leaves a map that is sparser than optimal
+and never wrong. Recomputing per filter combination is combinatorial and buys
+nothing. `.placement.json`, `boxes.py` and the `crowded` gate are untouched —
+`boxes.py` still reports 0 overlaps and 0 dot-covers on all ten maps.
+
+### 14.5 The premise that was wrong: build speed
+
+The rebuild was asked for partly because "it takes a long time to build the
+static maps". Measured on this machine: `./check.sh` — overlay, boxes,
+inventory, dayroutes, savedlist, splice and validate across all ten maps — runs
+in about **1.3 s**. `overlay.py` alone builds all ten in **0.2 s**. There is no
+CPU problem.
+
+What is slow is the approval-gated network third, and it is slow by policy:
+Nominatim at one request a second, one HTTP GET per Esri tile (294 of them),
+OSRM and OpenRouteService quota, a billable Places key. All of it is cached and
+every output is committed, so a rebuild refetches nothing unless a bbox, a zoom,
+a marker's identity or a leg's endpoints changed.
+
+The real cost is the **authoring loop** — 85 hand-written `m.marker()` calls and
+the export-to-My-Maps-and-eyeball-the-pins round trip. Fewer maps would help
+that. It would not make the build faster.
+
+### 14.6 Map count: deferred on purpose
+
+The proposal was to collapse each `home-*` base inset into its region map, ten
+maps down to six. Not done, and not because it is a bad idea.
+
+§12.1 already litigated the substance: `home-mtl` is z16 over ~0.015° of
+latitude, `montreal` is z13 over ~0.116° — eight times the ground. The grocery,
+metro and walk-time markers would be pixels apart at z13 and would trip
+`overlay.py`'s `crowded` gate. And widening a parent bounding box means a fresh
+Esri tile fetch, so consolidating *costs* an approval-gated network run rather
+than saving one.
+
+Everything in this pass is offline and reversible; consolidating is neither. The
+question is better asked once the filters are on the page and it is possible to
+judge whether ten maps still read as ten. Two moves are available then, cheapest
+first: **relabel** the insets *"Base detail · Montréal"* so they read as a zoom
+of their hub (pure copy, no engine change), or **consolidate for real** (needs
+approval, and will cost some markers).
+
+### 14.7 One real speed-up, not taken here
+
+`resolve.py` and `extracoords.py` hit the same Nominatim and Wikidata for two
+files with two separate caches, so a place promoted from `extras.json` to a
+marker is refetched from scratch. Folding them into one pass over the joint
+inventory with one cache removes that. Worth doing as a follow-up; it is a
+network-stage change and had no business riding along with this one.
+
+---
+
+## 15. A guide at every stop: the attraction-level audit
 
 §13 answered the guide question at city level — two walks with a person, five
 audio walks, and a link on the seven stops that most obviously needed one. It
@@ -751,11 +879,11 @@ operator* run its own tour or audio guide, when, in what language, for how much.
 This section is that audit. It was written first, as a standalone pass with no
 edits; the findings have since been folded into `guide.html` — every affected
 stop now carries its operator's own departure time, language and price, and the
-tours drawer carries the day-by-day table from §14.7. The rationale stays here,
+tours drawer carries the day-by-day table from §15.7. The rationale stays here,
 per §11. What follows is the record of what was found, so a later pass can tell
 a checked fact from an assumed one.
 
-### 14.1 Three findings that contradict the guide as written
+### 15.1 Three findings that contradict the guide as written
 
 **The Canada Strong Pass claim is wrong.** The tours card says "*Free with the
 Canada Strong Pass: Parks Canada runs guided programmes at the Fortifications
@@ -784,7 +912,7 @@ Sun 12:30–16:00, last entry 4:30 p.m., on-site sales stop at 4 p.m. Several
 travel blogs advertise hourly C$25 guided tours and C$14 admission; the operator
 does not.
 
-### 14.2 Would benefit, the operator runs one, the guide does not say so
+### 15.2 Would benefit, the operator runs one, the guide does not say so
 
 | Day | Stop | What is offered | Price |
 |---|---|---|---|
@@ -796,7 +924,7 @@ does not.
 | 4 | Mount Royal | Les amis de la montagne summit walk, 2 h, ~3 km, from Smith House — **led in French**, English questions welcome. Their free walk, "Mission Mount Royal," is last-Friday-of-the-month only | ≈C$15 |
 | 5 | Trois-Rivières old quarter | 22 interpretation panels over 15 sites, plus a printed *Circuit patrimonial* from the tourist office at 1457 rue Notre-Dame Centre. No app | free |
 | 5 | Deschambault-Grondines | Culture et Patrimoine DG guides both village cores and the churches, and runs the Vieux Presbytère (1816), the Moulin de La Chevrotière (1802) and the Moulin à vent de Grondines — **350 years old in 2026** | ⚠ verify |
-| 6 | Fortifications | See §14.1 | C$22.75 |
+| 6 | Fortifications | See §15.1 | C$22.75 |
 | 6 | Saint-Louis Forts & Châteaux | 60 min through the ruins under Dufferin Terrace. **English 10:00, 11:00, 13:00, 14:00, 15:00** to 7 Sep, dropping to three departures from 8 Sep. Pay at the Frontenac Kiosk, meet at the Lorne Kiosk | ⚠ verify — the site's published range is C$8.50–22.75 |
 | 6 | Artillery Park | **English daily 14:30**, French 13:00. The Officers' Quarters can *only* be seen on the tour. The site's whole season is 19 Jun – 7 Sep | C$18.50 |
 | 6 | Plains of Abraham | **Abraham's Bus** — 45 min narrated in character, **English 10:15, 12:15, 15:00, 16:00**, 2 Jul – 7 Sep. Reservation required, arrive 15 min early | C$12.75 bus only, C$22.50 with the exhibitions; museum alone C$13.75 |
@@ -809,7 +937,7 @@ does not.
 | 8 | Musée de la civilisation | Guided tours are a group product (C$80 flat under 15 people). For two people, the Place-Royale Tour above *is* the guided offering | 35–64 **C$27**, 18–34 **C$22** |
 | 9 | Pointe-Noire | Parks Canada's **"Whales at Risk, It's Our Move!"** — **Wed–Sun 1:30–3 p.m., 24 Jun – 7 Sep**, included in admission, with naturalists on the deck. Centre open Wed–Sun 10–5 | free |
 
-### 14.3 Already guided, and left alone
+### 15.3 Already guided, and left alone
 
 La Citadelle (guided tour only) · the Vieille prison de Trois-Rivières, whose
 guides are former inmates — **English daily at 12:15**, one hour, ages 8 and up,
@@ -821,14 +949,14 @@ Lumina, which is a designed multimedia walk and would be spoilt by commentary
 (8:00 / 8:20 / 8:40 p.m. in the 28 Aug – 6 Sep window) · AURA and Flume Gorge,
 self-contained by design · Bota Bota and Strøm.
 
-### 14.4 No guide wanted
+### 15.4 No guide wanted
 
 Franconia Ridge · Artist's Bluff · The Basin · L'Acropole des Draveurs ·
 Tam-Tams · MUTEK · the bagel run · Marché Jean-Talon, which runs ticketed
 workshops but no market tour — the food tours are all third-party · Marché
 Bonsecours, which offers none · the Lévis ferry · Canyon Sainte-Anne · Route 362.
 
-### 14.5 Free apps the guide does not name
+### 15.5 Free apps the guide does not name
 
 **BaladoDécouverte** carries free circuits for the Québec City region with
 English, and three of them cover ground the guide currently buys VoiceMap for:
@@ -849,9 +977,9 @@ painted interpretation panels. Day 10's last evening currently has nothing.
 night projections. The same free app carries **daytime self-guided circuits** in
 four languages, with a 3-D map and your position on it.
 
-### 14.6 Do we write our own?
+### 15.6 Do we write our own?
 
-Mostly no. Once §14.2 and §14.5 are folded in, almost every stop has either an
+Mostly no. Once §15.2 and §15.5 are folded in, almost every stop has either an
 official tour or a free app, and a general-purpose audio walk would duplicate
 VoiceMap and Cité Mémoire — the same duplication §13.1 removed from the price
 table.
@@ -870,7 +998,7 @@ inside a `details.l3`. Text prints, works offline, needs no app and no download
 on a rural signal, and costs nothing to keep current. Baie-Saint-Paul is a
 fourth candidate only if *Parcourir Charlevoix* turns out to be thin.
 
-### 14.7 Who guides you, day by day
+### 15.7 Who guides you, day by day
 
 | Day | With a person | With an app | On your own |
 |---|---|---|---|
@@ -878,7 +1006,7 @@ fourth candidate only if *Parcourir Charlevoix* turns out to be thin.
 | 1 · Aug 27 | — | — | Franconia Ridge, Flume Gorge, the Notch |
 | 2 · Aug 28 | Haskell tour · Abbaye tour | — | Artist's Bluff, MUTEK, Bota Bota |
 | 3 · Aug 29 | Greeter *or* the free walk · **Pointe-à-Callière, included** | Cité Mémoire · VoiceMap | Notre-Dame (self-guided only), AURA |
-| 4 · Aug 30 | **Oratory 1:30** — see §14.8 | VoiceMap Mile End | bagels, Jean-Talon, Tam-Tams, MUTEK |
+| 4 · Aug 30 | **Oratory 1:30** — see §15.8 | VoiceMap Mile End | bagels, Jean-Talon, Tam-Tams, MUTEK |
 | 5 · Aug 31 | the prison, **English 12:15** · Deschambault village tours | — | rue des Ursulines, rue Saint-Jean |
 | 6 · Sep 1 | free walking tour · Citadelle · Saint-Louis Forts · Artillery Park · Abraham's Bus · Morrin Centre · Fortifications **if it runs** | VoiceMap ×3, or the free BaladoDécouverte circuits | Dufferin Terrace, Casse-Cou, the ferry |
 | 7 · Sep 2 | Montmorency tour · Sainte-Anne audio guide | BaladoDécouverte · LITTORAL | Canyon Sainte-Anne, the island villages |
@@ -887,7 +1015,7 @@ fourth candidate only if *Parcourir Charlevoix* turns out to be thin.
 | 10 · Sep 5 | the warden on the *bateau-mouche* | Parcourir Charlevoix | Acropole, Baie-Saint-Paul |
 | 11 · Sep 6 | — | — | the drive |
 
-### 14.8 Day 4, reshaped for the Oratory tour — applied
+### 15.8 Day 4, reshaped for the Oratory tour — applied
 
 The Oratory tour is daily at 1:30 p.m. and Day 4 currently puts the Oratory in
 the evening, after Tam-Tams, which runs roughly noon to six. The two cannot both
@@ -918,13 +1046,13 @@ language of the 1:30 departure, and if it is French-only the reshape is void and
 Day 4 stays as it is. Ask at the same time what an individual pays —
 514-733-8211. Reservation is required either way.
 
-### 14.9 Fixes to `guide.html` — all applied
+### 15.9 Fixes to `guide.html` — all applied
 
 Every item below is now in the guide. Kept as the record of what was wrong and
 why the change was made.
 
 - **The Canada Strong Pass conflation** in the tours card, and the `parks` SEED
-  row that assumes C$0 for tours that cost C$18.50–22.75. §14.1.
+  row that assumes C$0 for tours that cost C$18.50–22.75. §15.1.
 - **AURA disagrees with itself.** The stop summary reads `20–30 min show ·
   ≈C$40`; its own `.meta` pills still read `30 min show` and `≈C$30`. The
   game-time table says C$40 explicitly, and the operator says C$37 plus tax.
@@ -939,10 +1067,10 @@ why the change was made.
   Morrin Centre and the Promenade des Gouverneurs" — despite having six English
   departures a day and being enterable no other way. Worth reopening.
 
-### 14.10 Verify by phone before paying
+### 15.10 Verify by phone before paying
 
 1. **Saint Joseph's Oratory**, 514-733-8211 — the individual price, and whether
-   the 1:30 p.m. tour is in English. §14.8 depends on the answer.
+   the 1:30 p.m. tour is in English. §15.8 depends on the answer.
 2. **Fortifications of Québec**, 418-648-7016 — whether the guided tour runs
    31 Aug – 6 Sep at all.
 3. **Notre-Dame de Québec**, 418-692-2533 #1 — crypt tour price, times, English.

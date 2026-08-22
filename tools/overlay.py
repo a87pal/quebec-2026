@@ -23,6 +23,7 @@ Usage:  python3 tools/overlay.py [--dest SLUG]
 import html, importlib.util, json, os, sys
 
 import _dest, _metrics, _proj
+import dayroutes, inventory
 
 # Draw order for placement: the labels that matter most get first pick of the
 # space around them, and everything else places around what is already down.
@@ -60,11 +61,10 @@ class Maps(object):
         self.places = dest.load('places.json', default={})
         self.routes = dest.load('routes.json', default={})
         self.legs = dest.load('legs.json', default={})
-        # Optional: the Google My Maps id from meta.json. When set, each map gets
-        # a button that swaps the Esri tiles for the live map centred on the same
-        # ground. Absent, nothing is emitted and the guide is unchanged - which
-        # is the case for any destination that has not been imported to My Maps.
-        self.mymaps = (dest.meta().get('mymaps') or '').strip()
+        # Day and category, for the per-map filters and the footer's day-route
+        # links. Optional: a destination with no inventory.json draws exactly the
+        # map it drew before, with no chips and no footer links.
+        self.inv = inventory.load(dest)
         self.unsourced = []
         self.outside = []
         self.schematic = []
@@ -115,14 +115,28 @@ class Maps(object):
         self._sample(xy)
         return " ".join(("M" if i == 0 else "L") + "%s,%s" % p for i, p in enumerate(xy))
 
-    def dash(self, cls, P, pts, w):
-        return '<path class="%s" d="%s" stroke-width="%.1f"/>' % (cls, self.path(P, pts), w * self.k)
+    @staticmethod
+    def _dayg(svg, day):
+        """Tag a drawn line with the day that travels it.
 
-    def route(self, P, pts, cls="rt", w=7):
+        The day filter hides a road along with the stops it connects; an
+        untagged line has no day to disagree with and always stays drawn.
+        """
+        if day is None:
+            return svg
+        days = day if isinstance(day, (list, tuple)) else [day]
+        return '<g class="rtg" data-day="%s">%s</g>' % (' '.join(str(d) for d in days), svg)
+
+    def dash(self, cls, P, pts, w, day=None):
+        return self._dayg('<path class="%s" d="%s" stroke-width="%.1f"/>'
+                          % (cls, self.path(P, pts), w * self.k), day)
+
+    def route(self, P, pts, cls="rt", w=7, day=None):
         k = self.k
         d = self.path(P, pts)
-        return ('<path class="cas" d="%s" stroke-width="%.1f"/><path class="%s" d="%s" stroke-width="%.1f"/>'
-                % (d, (w + 5) * k, cls, d, w * k))
+        return self._dayg('<path class="cas" d="%s" stroke-width="%.1f"/>'
+                          '<path class="%s" d="%s" stroke-width="%.1f"/>'
+                          % (d, (w + 5) * k, cls, d, w * k), day)
 
     def leg(self, P, rid, fallback=None):
         """Draw a declared leg using the road geometry fetched by routes.py.
@@ -155,10 +169,14 @@ class Maps(object):
             self.schematic.append(rid)
             d = self.path(P, fallback)
         k = self.k
+        # The day comes from inventory.json's days[*].legs, so a leg is tied to
+        # its day once, where the day's stops are declared.
+        day = self.inv.day_of_leg(rid)
         if spec.get('style', 'route') == 'dash':
-            return '<path class="%s" d="%s" stroke-width="%.1f"/>' % (cls, d, w * k)
-        return ('<path class="cas" d="%s" stroke-width="%.1f"/><path class="%s" d="%s" stroke-width="%.1f"/>'
-                % (d, (w + 5) * k, cls, d, w * k))
+            return self._dayg('<path class="%s" d="%s" stroke-width="%.1f"/>' % (cls, d, w * k), day)
+        return self._dayg('<path class="cas" d="%s" stroke-width="%.1f"/>'
+                          '<path class="%s" d="%s" stroke-width="%.1f"/>'
+                          % (d, (w + 5) * k, cls, d, w * k), day)
 
     # ------------------------------------------------------------- markers
     def marker(self, P, lat, lon, label, sub="", kind="stop", n=None, anchor=None,
@@ -186,9 +204,14 @@ class Maps(object):
 
         x, y = P(lat, lon)
         rr = (r if r else (11 if kind in ('base', 'hi') else 8)) * k
+        # `day` here is the badge/deep-link on the route overview and stays a
+        # single number. The filter reads every day this place is tagged with,
+        # which is a different question - a base belongs to four of them.
         spec = dict(x=x, y=y, rr=rr, lat=lat, lon=lon, label=label, sub=sub, kind=kind,
                     n=n, day=day, daytext=daytext, k=k, map=name,
-                    anchor=anchor, dx=dx, dy=dy, lead=lead)
+                    anchor=anchor, dx=dx, dy=dy, lead=lead,
+                    days=self.inv.days_of(key), cat=self.inv.cat(key),
+                    grp=self.inv.group(key))
         if daytext:
             bw = (len(daytext) * 8.4 + 15) * k
             bh = 21 * k
@@ -327,7 +350,12 @@ class Maps(object):
         k = s['k']
         x, y, rr = s['x'], s['y'], s['rr']
         fs, fs2 = 16 * k, 13 * k
-        o = '<g class="mk %s">' % s['kind']
+        att = ''
+        if s.get('days'):
+            att += ' data-day="%s"' % ' '.join(str(d) for d in s['days'])
+        if s.get('cat'):
+            att += ' data-cat="%s" data-grp="%s"' % (s['cat'], s.get('grp') or '')
+        o = '<g class="mk %s"%s>' % (s['kind'], att)
         if b['lead']:
             ex = b['lx'] - (5 * k if b['anchor'] == 'start' else (-5 * k if b['anchor'] == 'end' else 0))
             ey = b['ly'] - fs * 0.35
@@ -378,7 +406,7 @@ class Maps(object):
         'ors': 'Routing: OpenRouteService — OpenStreetMap contributors, ODbL.',
     }
 
-    def wrap(self, name, body, legend, cap, gmaps):
+    def wrap(self, name, body, legend, cap):
         m = self.meta[name]
         if not self.collect_only:
             self._place(name)
@@ -404,47 +432,82 @@ class Maps(object):
                 '<svg class="ovl" viewBox="0 0 %d %d" preserveAspectRatio="none" role="img" aria-label="%s">%s</svg>\n</div>\n'
                 '%s'
                 '<div class="mapside"><button class="mapzoom" type="button" aria-expanded="false">'
-                '<span>Expand map</span> <i>⤢</i></button>\n%s'
+                '<span>Expand map</span> <i>⤢</i></button>\n'
                 '<div class="cap">%s <span class="attrib">Basemap: Esri World Topo — Esri, HERE, Garmin, USGS, NGA, OpenStreetMap contributors.%s</span></div></div>\n'
-                '<div class="gmapfoot"><div class="maplegend">%s</div>'
-                '<a class="gbtn" target="_blank" rel="noopener" href="%s">Open this route in Google Maps ↗</a></div>\n</div>'
+                '<div class="gmapfoot"><div class="maplegend">%s</div>%s</div>\n</div>'
                 % (W, H, ''.join(tiles), W, H, html.escape(cap[:110]), body,
-                   self.live_host(name, W, H), self.live_button(name), cap,
-                   ' ' + credit if credit else '', legend, gmaps))
+                   self.chipbar(name), cap, ' ' + credit if credit else '',
+                   legend, self.daybtns(name)))
 
-    # --------------------------------------------------------------- live map
-    def live_url(self, name):
-        """The My Maps embed for this map's ground, or '' when none is configured.
+    # ------------------------------------------------------- filters & links
+    def _map_days(self, name):
+        """Every day drawn on this map, from the markers it holds."""
+        return sorted({d for s in self._specs.get(name, []) for d in (s.get('days') or [])})
 
-        Same custom map every time - it is one map of the whole trip - but
-        centred and zoomed to match the Esri map it replaces, so "go live" keeps
-        you looking at the same place rather than dropping you at the trip's
-        centroid.
+    def chipbar(self, name):
+        """Day and category chips for one map, or '' when there is nothing to filter.
+
+        Generated from what this map actually draws, so a base inset showing one
+        day gets no day row rather than eleven dead buttons. Everything is a
+        plain <button>: with JS off the bar is inert and every marker stays
+        visible, which is also what @media print forces.
         """
-        if not self.mymaps:
+        specs = self._specs.get(name, [])
+        # Only offer a chip that would actually change the picture. A day every
+        # marker on the map shares hides nothing when you pick it, and a chip
+        # that does nothing reads as a broken one. Counted against the tagged
+        # markers, because an untagged marker is never hidden by either filter.
+        nd = sum(1 for s in specs if s.get('days'))
+        ng = sum(1 for s in specs if s.get('grp'))
+        days = [d for d in self._map_days(name)
+                if 0 < sum(1 for s in specs if d in (s.get('days') or [])) < nd]
+        grps = [g for g in inventory.GROUPS
+                if 0 < sum(1 for s in specs if s.get('grp') == g) < ng]
+        if len(days) < 2 and len(grps) < 2:
             return ''
-        c = self.cfg.get(name, {})
-        if 'lat' not in c or 'lon' not in c:
-            return ''
-        lat = (c['lat'][0] + c['lat'][1]) / 2.0
-        lon = (c['lon'][0] + c['lon'][1]) / 2.0
-        return ('https://www.google.com/maps/d/embed?mid=%s&amp;ll=%.5f,%.5f&amp;z=%d'
-                % (html.escape(self.mymaps), lat, lon, c.get('z', 10)))
+        o = ['<div class="mapfilt">']
+        if len(days) > 1:
+            o.append('<div class="mfrow"><span class="mfl">Day</span>'
+                     '<button type="button" class="mfc on" data-f="day" data-v="">All</button>')
+            o += ['<button type="button" class="mfc" data-f="day" data-v="%d">%d</button>' % (d, d)
+                  for d in days]
+            o.append('</div>')
+        if len(grps) > 1:
+            o.append('<div class="mfrow"><span class="mfl">Show</span>'
+                     '<button type="button" class="mfc on" data-f="grp" data-v="">All</button>')
+            o += ['<button type="button" class="mfc" data-f="grp" data-v="%s">%s</button>'
+                  % (g, html.escape(inventory.GROUP_LABEL[g])) for g in grps]
+            o.append('</div>')
+        o.append('</div>\n')
+        return ''.join(o)
 
-    def live_host(self, name, W, H):
-        """Empty container. The iframe is built by JS on first click, never on
-        load, so a guide opened with no signal still costs nothing."""
-        u = self.live_url(name)
-        if not u:
-            return ''
-        return ('<div class="glive" data-embed="%s" style="aspect-ratio:%d/%d"></div>\n'
-                % (u, W, H))
+    def daybtns(self, name):
+        """One navigation button per day this map draws.
 
-    def live_button(self, name):
-        if not self.live_url(name):
-            return ''
-        return ('<button class="maplive" type="button" aria-pressed="false">'
-                '<span>Live map</span> <i>◉</i></button>\n')
+        Replaces the single hand-typed /maps/dir/ path this footer used to
+        carry. A day whose stops fit inside Google's waypoint cap gets the real
+        directions link, built by dayroutes.py from the same Place IDs; a day
+        too long for one link points at its own card, where dayroutes.py has
+        already split it into legal chunks. It never links to a route that
+        quietly stops short.
+        """
+        out = []
+        for d in self._map_days(name):
+            links = dayroutes.day_links(self.inv, d)
+            if not links:
+                continue
+            whole = dayroutes.whole_day(self.inv, d)
+            if whole:
+                word, count, u = whole
+                out.append('<a class="gbtn" target="_blank" rel="noopener" href="%s">'
+                           'Day %d · %s %d stops ↗</a>'
+                           % (html.escape(u, quote=True), d, html.escape(word.lower()), count))
+            else:
+                out.append('<a class="gbtn alt" href="#day-%d">Day %d · %d links ↓</a>'
+                           % (d, d, len(links)))
+        # Wrapped, because .gmapfoot is justify-content:space-between and a
+        # dozen loose buttons would spread across the row one per line.
+        return '<div class="gbtns">%s</div>' % ''.join(out) if out else ''
 
 
 def load_markers(dest):

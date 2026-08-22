@@ -35,6 +35,7 @@ import os
 import urllib.parse
 
 import _dest
+import inventory
 
 MAX_MATCHED = 64
 
@@ -62,28 +63,43 @@ def link(name, p):
     return u
 
 
-def rows(dest, places, extras):
-    """Places grouped by region, in the order the maps are declared.
+def daylabel(days):
+    """"Day 6" or "Days 2–4" - a run of days collapses, a scatter lists."""
+    if len(days) == 1:
+        return 'Day %d' % days[0]
+    if days == list(range(days[0], days[-1] + 1)):
+        return 'Days %d\u2013%d' % (days[0], days[-1])
+    return 'Days ' + ', '.join(str(d) for d in days)
+
+
+def rows(dest, inv, places, extras):
+    """Places grouped by region, in the order the maps are declared, and inside
+    a region in the order the trip visits them.
 
     Regions that are not maps - the home-* legs - sort to the end rather than
-    being dropped, the same fallback tripmap.py uses.
+    being dropped, the same fallback tripmap.py uses. The region itself comes
+    from inventory.hub(), which is where the extras-inherit-their-anchor's-region
+    rule now lives, so the list and the maps cannot group a place differently.
 
-    Extras have no region of their own; they inherit the one belonging to the
-    place they sit near, so the whale wharf lands beside Baie-Ste-Catherine
-    rather than in a bucket of its own.
+    Loading a saved list is a sequencing job, so within a region the day wins:
+    you work down the list in the order you will actually stand in these places,
+    and a place with no day sorts to the end of its region rather than into a
+    bucket of its own.
     """
     order = list(dest.load('maps.json').keys())
     groups = {}
     for name, p in places.items():
         if p.get('lat') is None or p.get('lon') is None:
             continue
-        groups.setdefault(p.get('region') or 'elsewhere', []).append((name, p))
+        groups.setdefault(inv.hub(name) or 'elsewhere', []).append((name, p))
     for name, e in extras.items():
-        anchor = places.get(e.get('near') or '') or {}
-        groups.setdefault(anchor.get('region') or 'elsewhere', []).append((name, e))
+        groups.setdefault(inv.hub(name) or 'elsewhere', []).append((name, e))
     def rank(r):
         return (order.index(r), '') if r in order else (len(order), r)
-    return [(r, sorted(groups[r])) for r in sorted(groups, key=rank)]
+    def seq(item):
+        days = inv.days_of(item[0])
+        return (days[0] if days else 99, item[0])
+    return [(r, sorted(groups[r], key=seq)) for r in sorted(groups, key=rank)]
 
 
 CSS = """<style>
@@ -111,6 +127,10 @@ CSS = """<style>
 #savedlist .sl.slon .slrow.cur:after{content:"\\2190 Enter opens it";grid-column:2;
   font-size:.75rem;color:var(--forest);font-weight:700}
 #savedlist .slrow a{font-weight:700;font-size:.95rem}
+#savedlist .slday{font:800 .68rem Inter,system-ui,sans-serif;color:var(--forest);
+  background:#edf2ee;border-radius:5px;padding:1px 6px;margin-left:7px;white-space:nowrap}
+#savedlist .slcat{font-weight:700;color:var(--gold);text-transform:uppercase;
+  letter-spacing:.06em;font-size:.7rem;margin-right:6px}
 #savedlist .slsub{grid-column:2;font-size:.78rem;color:var(--muted)}
 #savedlist .slhint{padding:11px 17px;border-top:1px solid var(--line);
   font-size:.8rem;color:var(--muted);background:#f7f4ec}
@@ -199,7 +219,8 @@ def build(dest):
     places = dest.load('places.json', default={})
     extras = dest.load('extras.json', default={})
     meta = dest.meta()
-    grouped = rows(dest, places, extras)
+    inv = inventory.load(dest)
+    grouped = rows(dest, inv, places, extras)
     total = sum(len(v) for _, v in grouped)
     withid = sum(1 for _, v in grouped for _, p in v if p.get('place_id'))
 
@@ -224,10 +245,16 @@ def build(dest):
             sub = str(p.get('note') or p.get('matched') or p.get('source') or '')
             if len(sub) > MAX_MATCHED:
                 sub = sub[:MAX_MATCHED - 1] + '…'
+            days = inv.days_of(name)
+            # data-id stays the join key, never the display label: it is the
+            # localStorage key for a half-finished loading session.
             o.append('<li class="slrow" data-id="%s">'
-                     '<a href="%s" target="_blank" rel="noopener">%s</a>'
-                     '<span class="slsub">%s</span></li>'
-                     % (esc(name), esc(link(name, p)), esc(name), esc(sub)))
+                     '<a href="%s" target="_blank" rel="noopener">%s</a>%s'
+                     '<span class="slsub">%s%s</span></li>'
+                     % (esc(name), esc(link(name, p)), esc(inv.label(name)),
+                        ('<b class="slday">%s</b>' % esc(daylabel(days))) if days else '',
+                        ('<i class="slcat">%s</i>' % esc(inv.cat(name))) if inv.cat(name) else '',
+                        esc(sub)))
 
     o.append('</ol>')
     o.append('<div class="slhint">%d of %d places open an exact Google place; the rest '
