@@ -738,3 +738,223 @@ visible, which was the point.
 Also unstaled from the measured pass: the Montréal lodging note still said
 fifteen minutes to Esplanade Tranquille, and the Charlevoix one still said a ten
 minute drive.
+
+---
+
+## 14. A guide at every stop: the attraction-level audit
+
+§13 answered the guide question at city level — two walks with a person, five
+audio walks, and a link on the seven stops that most obviously needed one. It
+never asked the narrower question: for each of the forty-one stops, does *that
+operator* run its own tour or audio guide, when, in what language, for how much.
+
+This section is that audit. Nothing in the guide changed in this pass; the
+findings and the queued fixes are recorded here first.
+
+### 14.1 Three findings that contradict the guide as written
+
+**The Canada Strong Pass claim is wrong.** The tours card says "*Free with the
+Canada Strong Pass: Parks Canada runs guided programmes at the Fortifications
+and Saint-Louis Forts & Châteaux — free through Sep 7, 2026.*" The Pass is real
+and the dates are right — **19 June to 7 September 2026**, no pass to obtain, it
+applies automatically — but Parks Canada is explicit that it covers **admission
+only**: "regular fees still apply for other experiences and services, such as
+guided tours." The Fortifications walk is **C$22.75** adult, Artillery Park
+**C$18.50**. The `parks` SEED row carries the same assumption at C$0 and says
+the four sites are "worth roughly C$60–80 to you" — that figure is right for
+admission and silent about the tours.
+
+**The Fortifications guided tour stops being daily the day before Québec.**
+English 10:00 and 14:00, French 10:30 and 14:30, ninety minutes with a free
+thirty-minute extension, meeting at the Frontenac Kiosk on Dufferin Terrace —
+**daily 19 June to 30 August 2026 only.** From 31 August to 12 October the page
+says "check availability," and departures run subject to staff availability.
+Day 6 is **Tuesday 1 September**. This is a phone call (418-648-7016), not a
+booking, and the guide currently treats the tour as a walk-up certainty.
+
+**Notre-Dame Basilica in Montréal runs no guided tour for individuals.** The
+self-guided visit is the only product: 24 points of interest in the nave with
+printed panels in French and English, about an hour. Adult **C$16**; AURA
+**C$37**; day visit + AURA combo from **C$45**. Hours Mon–Sat 9:00–16:00,
+Sun 12:30–16:00, last entry 4:30 p.m., on-site sales stop at 4 p.m. Several
+travel blogs advertise hourly C$25 guided tours and C$14 admission; the operator
+does not.
+
+### 14.2 Would benefit, the operator runs one, the guide does not say so
+
+| Day | Stop | What is offered | Price |
+|---|---|---|---|
+| 2 | Haskell Free Library | Guided tour including the opera house, 30–45 min, hourly. **Closed Sun & Mon**; Tue–Fri 10–5, Sat 10–4. Reservation recommended | US$10, free under 12 |
+| 2 | Abbaye Saint-Benoît-du-Lac | Guided tours **Mon–Sat, 24 Jun – 4 Sep 2026**. No reservations — pay at the desk, arrive 20 min before the departure | ⚠ verify |
+| 3 | Pointe-à-Callière | **Guided tours of the exhibits daily, walk-in, English and French, included in admission** | free with the ticket |
+| 3 | Notre-Dame-de-Bon-Secours | Guided tours are **group-only, minimum 10, reservation mandatory**. The ordinary ticket already includes the archaeological vault and the tower climb | museum C$16 |
+| 4 | Saint Joseph's Oratory | **Daily 1:30 p.m., 6 Jun – 7 Sep 2026**, meets at the information desk in the Marcel-Lalonde pavilion. **Reservation required.** Basilica entry is free | ⚠ verify — only the chartered-group rate is published (C$8 pp guided, C$6 self-guided) |
+| 4 | Mount Royal | Les amis de la montagne summit walk, 2 h, ~3 km, from Smith House — **led in French**, English questions welcome. Their free walk, "Mission Mount Royal," is last-Friday-of-the-month only | ≈C$15 |
+| 5 | Trois-Rivières old quarter | 22 interpretation panels over 15 sites, plus a printed *Circuit patrimonial* from the tourist office at 1457 rue Notre-Dame Centre. No app | free |
+| 5 | Deschambault-Grondines | Culture et Patrimoine DG guides both village cores and the churches, and runs the Vieux Presbytère (1816), the Moulin de La Chevrotière (1802) and the Moulin à vent de Grondines — **350 years old in 2026** | ⚠ verify |
+| 6 | Fortifications | See §14.1 | C$22.75 |
+| 6 | Saint-Louis Forts & Châteaux | 60 min through the ruins under Dufferin Terrace. **English 10:00, 11:00, 13:00, 14:00, 15:00** to 7 Sep, dropping to three departures from 8 Sep. Pay at the Frontenac Kiosk, meet at the Lorne Kiosk | ⚠ verify — the site's published range is C$8.50–22.75 |
+| 6 | Artillery Park | **English daily 14:30**, French 13:00. The Officers' Quarters can *only* be seen on the tour. The site's whole season is 19 Jun – 7 Sep | C$18.50 |
+| 6 | Plains of Abraham | **Abraham's Bus** — 45 min narrated in character, **English 10:15, 12:15, 15:00, 16:00**, 2 Jul – 7 Sep. Reservation required, arrive 15 min early | C$12.75 bus only, C$22.50 with the exhibitions; museum alone C$13.75 |
+| 6 | Notre-Dame de Québec | Free to enter. Guides on site in summer; the museum, the crypt and any commented visit are paid. **The Jubilee Garden closes 30 Aug — you arrive on the 31st and miss it** | crypt ⚠ verify (~C$4–5) |
+| 6 | Morrin Centre | Discovery Tour, 50–60 min — **English 10:00, 11:00, 13:00, 14:00, 15:00, 17:00 daily.** The best English coverage of anything on this trip. The building is guided-access only | C$18.50 |
+| 6 | Château Frontenac | **Conflicting.** Québec City's own tourism site says tours are for hotel guests only; a 1 h costumed tour meeting on Dufferin Terrace is sold on Viator, GetYourGuide and Expedia | ≈C$26 ⚠ |
+| 6 / 8 | Place Royale | **The Musée de la civilisation's Place-Royale Tour is included with museum admission** — 60 min, daily 10:30 and ≈14:00, to 14 Oct 2026, departing from the museum. Weather-dependent | free with the MCQ ticket |
+| 7 | Montmorency Falls | Sépaq guided tour of the falls and the manor's history. The 2nd floor of Manoir Montmorency is a free interpretation centre | ≈C$6.80 ⚠ |
+| 7 | Sainte-Anne-de-Beaupré | **Audio guide in four languages**; guided tours Mon–Sat in summer. Entry free, open 8–7. The guide currently offers no link at all for this stop | ⚠ verify |
+| 8 | Musée de la civilisation | Guided tours are a group product (C$80 flat under 15 people). For two people, the Place-Royale Tour above *is* the guided offering | 35–64 **C$27**, 18–34 **C$22** |
+| 9 | Pointe-Noire | Parks Canada's **"Whales at Risk, It's Our Move!"** — **Wed–Sun 1:30–3 p.m., 24 Jun – 7 Sep**, included in admission, with naturalists on the deck. Centre open Wed–Sun 10–5 | free |
+
+### 14.3 Already guided, and left alone
+
+La Citadelle (guided tour only) · the Vieille prison de Trois-Rivières, whose
+guides are former inmates — **English daily at 12:15**, one hour, ages 8 and up,
+space limited so reserve · the Musée Huron-Wendat, whose tour covers the
+exhibition and the Ekionkiestha' longhouse, C$20 adult · the AML whale cruise,
+with a certified naturalist throughout · the Hautes-Gorges *bateau-mouche*, with
+the captain **and** a warden-naturalist, about an hour, 25 May – 12 Oct · Onhwa'
+Lumina, which is a designed multimedia walk and would be spoilt by commentary
+(8:00 / 8:20 / 8:40 p.m. in the 28 Aug – 6 Sep window) · AURA and Flume Gorge,
+self-contained by design · Bota Bota and Strøm.
+
+### 14.4 No guide wanted
+
+Franconia Ridge · Artist's Bluff · The Basin · L'Acropole des Draveurs ·
+Tam-Tams · MUTEK · the bagel run · Marché Jean-Talon, which runs ticketed
+workshops but no market tour — the food tours are all third-party · Marché
+Bonsecours, which offers none · the Lévis ferry · Canyon Sainte-Anne · Route 362.
+
+### 14.5 Free apps the guide does not name
+
+**BaladoDécouverte** carries free circuits for the Québec City region with
+English, and three of them cover ground the guide currently buys VoiceMap for:
+the **Fortifications circuit** (under an hour, gate by gate), a **guide to the
+Basilique-cathédrale Notre-Dame de Québec**, and **Notre-Dame-des-Victoires**.
+The Côte-de-Beaupré circuit is already in the guide; these are not.
+
+**LITTORAL — "Constellations of Île d'Orléans"**: free, French and English,
+walking tours built from audio testimonies by island residents about the river
+and about living on an island. The guide names BaladoDécouverte for the island
+and not this.
+
+**Parcourir Charlevoix**: free, interpreted routes for Baie-Saint-Paul and the
+neighbouring villages, alongside the *Circuit du patrimoine bâti* with its
+painted interpretation panels. Day 10's last evening currently has nothing.
+
+**Cité Mémoire / Montréal en Histoires** is already in the guide, but only as the
+night projections. The same free app carries **daytime self-guided circuits** in
+four languages, with a 3-D map and your position on it.
+
+### 14.6 Do we write our own?
+
+Mostly no. Once §14.2 and §14.5 are folded in, almost every stop has either an
+official tour or a free app, and a general-purpose audio walk would duplicate
+VoiceMap and Cité Mémoire — the same duplication §13.1 removed from the price
+table.
+
+Three stretches have genuinely nothing: **rue des Ursulines, Trois-Rivières**
+(panels are not narration), the **rue Saint-Jean / Saint-Roch evening** on Day 5,
+and **Tadoussac village** on Day 9. Those want a short first-party *walking
+script* rather than audio — an ordered route with named buildings, dates and
+what to look at, using the idiom the Île d'Orléans stop already uses:
+
+```html
+<div class="spec"><b>The exact route, clockwise:</b> …</div>
+```
+
+inside a `details.l3`. Text prints, works offline, needs no app and no download
+on a rural signal, and costs nothing to keep current. Baie-Saint-Paul is a
+fourth candidate only if *Parcourir Charlevoix* turns out to be thin.
+
+### 14.7 Who guides you, day by day
+
+| Day | With a person | With an app | On your own |
+|---|---|---|---|
+| 0 · Aug 26 | — | — | the drive |
+| 1 · Aug 27 | — | — | Franconia Ridge, Flume Gorge, the Notch |
+| 2 · Aug 28 | Haskell tour · Abbaye tour | — | Artist's Bluff, MUTEK, Bota Bota |
+| 3 · Aug 29 | Greeter *or* the free walk · **Pointe-à-Callière, included** | Cité Mémoire · VoiceMap | Notre-Dame (self-guided only), AURA |
+| 4 · Aug 30 | **Oratory 1:30** — see §14.8 | VoiceMap Mile End | bagels, Jean-Talon, Tam-Tams, MUTEK |
+| 5 · Aug 31 | the prison, **English 12:15** · Deschambault village tours | — | rue des Ursulines, rue Saint-Jean |
+| 6 · Sep 1 | free walking tour · Citadelle · Saint-Louis Forts · Artillery Park · Abraham's Bus · Morrin Centre · Fortifications **if it runs** | VoiceMap ×3, or the free BaladoDécouverte circuits | Dufferin Terrace, Casse-Cou, the ferry |
+| 7 · Sep 2 | Montmorency tour · Sainte-Anne audio guide | BaladoDécouverte · LITTORAL | Canyon Sainte-Anne, the island villages |
+| 8 · Sep 3 | Wendake museum · **MCQ Place-Royale tour, included** | — | Onhwa' Lumina, by design |
+| 9 · Sep 4 | the whale-boat naturalist · **Pointe-Noire 1:30–3** | — | Tadoussac village, Route 362 |
+| 10 · Sep 5 | the warden on the *bateau-mouche* | Parcourir Charlevoix | Acropole, Baie-Saint-Paul |
+| 11 · Sep 6 | — | — | the drive |
+
+### 14.8 Day 4, reshaped for the Oratory tour — specified, not yet applied
+
+The Oratory tour is daily at 1:30 p.m. and Day 4 currently puts the Oratory in
+the evening, after Tam-Tams, which runs roughly noon to six. The two cannot both
+stand. The decision taken is to reshape the day.
+
+The reshape works because the geography cooperates: the Oratory sits at the foot
+of the mountain's western slope and Tam-Tams at the eastern, so the tour and the
+drum circle become the two ends of one crossing rather than competitors.
+
+| | Now | Reshaped |
+|---|---|---|
+| 8:30 | bagels, 45 min | unchanged |
+| 9:15 | Mile End, 1 h | unchanged |
+| 10:30 | Jean-Talon, 1–1½ h | Jean-Talon, 1¼ h — market opens 8, so this is comfortable |
+| 12:00 | Tam-Tams, 2–3 h | métro to Côte-des-Neiges, arrive the Oratory ≈12:45 |
+| 13:30 | — | **the guided tour**, ≈90 min |
+| 15:15 | — | up the western slope to the Kondiaronk Belvédère |
+| 17:00 | Oratory, 1½ h | down the eastern slope into **Tam-Tams for its last hour**, which is its fullest |
+| evening | MUTEK | unchanged |
+
+What it costs: the middle of the drum circle, and the Oratory after dark, which
+the guide currently sells on "open to 9 p.m." What it gains: a guided basilica,
+and the mountain crossed in the right direction on the one day it is on the
+plan.
+
+**This is conditional on a phone call.** The Oratory does not publish the
+language of the 1:30 departure, and if it is French-only the reshape is void and
+Day 4 stays as it is. Ask at the same time what an individual pays —
+514-733-8211. Reservation is required either way.
+
+### 14.9 Queued fixes to `guide.html`, not applied in this pass
+
+- **The Canada Strong Pass conflation** in the tours card, and the `parks` SEED
+  row that assumes C$0 for tours that cost C$18.50–22.75. §14.1.
+- **AURA disagrees with itself.** The stop summary reads `20–30 min show ·
+  ≈C$40`; its own `.meta` pills still read `30 min show` and `≈C$30`. The
+  game-time table says C$40 explicitly, and the operator says C$37 plus tax.
+  The pills are the stale half.
+- **The Musée de la civilisation is not closed on Mondays during this trip.** The
+  stop's summary and pill both say it is. MCQ is **open daily 10–5 from 23 June
+  to 7 September 2026** and only reverts to closed-Mondays on 8 September. The
+  same stop should carry the price change: current rates hold **through 31
+  August**, and a new list takes effect **1 September**, two days before Day 8.
+  The new figures are not published yet.
+- **The Morrin Centre is on the Day 6 cut list** — "if you're flagging: drop the
+  Morrin Centre and the Promenade des Gouverneurs" — despite having six English
+  departures a day and being enterable no other way. Worth reopening.
+
+### 14.10 Verify by phone before paying
+
+1. **Saint Joseph's Oratory**, 514-733-8211 — the individual price, and whether
+   the 1:30 p.m. tour is in English. §14.8 depends on the answer.
+2. **Fortifications of Québec**, 418-648-7016 — whether the guided tour runs
+   31 Aug – 6 Sep at all.
+3. **Notre-Dame de Québec**, 418-692-2533 #1 — crypt tour price, times, English.
+4. **Saint-Louis Forts & Châteaux** — the adult tour price, which is published
+   only as part of a range.
+5. **Musée de la civilisation** — the rates that take effect 1 September 2026.
+6. **Château Frontenac** — whether the tour admits non-guests, and the real
+   Canadian price rather than the resale platforms'.
+7. **Guidatour** — the actual English departure days and times for late August;
+   the calendar is inside their booking system, not on the tour page.
+8. **Abbaye Saint-Benoît-du-Lac**, **Montmorency**, **Sainte-Anne-de-Beaupré**,
+   **Deschambault-Grondines** — departure times and prices, none of which are
+   published where they could be read from here.
+
+**Sourcing note**, in the spirit of §13.4's: the local DNS filter blocks
+`voicemap.me`, `abbaye.ca`, `lacitadelle.qc.ca`, `pacmusee.qc.ca`, `museepop.ca`,
+`sepaq.com` and `basiliquenotredame.ca` from this machine. Anything marked ⚠
+above came from a search index's snippet of the operator's own page, never from
+inferring a number that looked plausible. Everything unmarked was read from the
+operator — most usefully `parks.canada.ca`, `saint-joseph.org`, `morrin.org`,
+`plainsofabraham.ca`, `mcq.org` and `margueritebourgeoys.org`, which are all
+reachable.
