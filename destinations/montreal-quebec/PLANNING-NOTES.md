@@ -748,8 +748,12 @@ audio walks, and a link on the seven stops that most obviously needed one. It
 never asked the narrower question: for each of the forty-one stops, does *that
 operator* run its own tour or audio guide, when, in what language, for how much.
 
-This section is that audit. Nothing in the guide changed in this pass; the
-findings and the queued fixes are recorded here first.
+This section is that audit. It was written first, as a standalone pass with no
+edits; the findings have since been folded into `guide.html` — every affected
+stop now carries its operator's own departure time, language and price, and the
+tours drawer carries the day-by-day table from §14.7. The rationale stays here,
+per §11. What follows is the record of what was found, so a later pass can tell
+a checked fact from an assumed one.
 
 ### 14.1 Three findings that contradict the guide as written
 
@@ -883,7 +887,7 @@ fourth candidate only if *Parcourir Charlevoix* turns out to be thin.
 | 10 · Sep 5 | the warden on the *bateau-mouche* | Parcourir Charlevoix | Acropole, Baie-Saint-Paul |
 | 11 · Sep 6 | — | — | the drive |
 
-### 14.8 Day 4, reshaped for the Oratory tour — specified, not yet applied
+### 14.8 Day 4, reshaped for the Oratory tour — applied
 
 The Oratory tour is daily at 1:30 p.m. and Day 4 currently puts the Oratory in
 the evening, after Tam-Tams, which runs roughly noon to six. The two cannot both
@@ -914,7 +918,10 @@ language of the 1:30 departure, and if it is French-only the reshape is void and
 Day 4 stays as it is. Ask at the same time what an individual pays —
 514-733-8211. Reservation is required either way.
 
-### 14.9 Queued fixes to `guide.html`, not applied in this pass
+### 14.9 Fixes to `guide.html` — all applied
+
+Every item below is now in the guide. Kept as the record of what was wrong and
+why the change was made.
 
 - **The Canada Strong Pass conflation** in the tours card, and the `parks` SEED
   row that assumes C$0 for tours that cost C$18.50–22.75. §14.1.
