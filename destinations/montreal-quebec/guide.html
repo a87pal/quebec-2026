@@ -30,7 +30,7 @@ h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;font-weight:500}
   radial-gradient(120% 90% at 50% 0%,rgba(8,14,11,.10),rgba(8,14,11,.62) 70%),
   linear-gradient(180deg,rgba(8,14,11,.35) 0%,rgba(8,14,11,.05) 32%,rgba(8,14,11,.90) 100%)}
 .hero .inner{position:relative;z-index:2;max-width:1180px;width:100%;margin:auto;padding:64px 26px 70px;color:#fff}
-.kicker{text-transform:uppercase;letter-spacing:.2em;font-size:.74rem;font-weight:800}
+.kicker{text-transform:uppercase;letter-spacing:.14em;font-size:.82rem;font-weight:800}
 .hero .kicker{color:#e6c684}
 h1{font-size:clamp(3.2rem,9vw,7.2rem);line-height:.9;margin:.5rem 0 .2rem;max-width:16ch;font-style:italic;text-shadow:0 3px 40px rgba(0,0,0,.5)}
 .hero .translate{font-family:Georgia,serif;font-size:clamp(1.1rem,2.4vw,1.5rem);color:#e8ddc4;margin:0 0 18px;letter-spacing:.01em}
@@ -53,6 +53,7 @@ h3{font-size:1.35rem;margin:.2rem 0 .5rem}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px}
 .card h3,.card h4{margin:.1rem 0 .45rem}
+.card h4{font-size:1.2rem}
 .stat b{display:block;font-size:1.4rem;font-family:Georgia,serif;line-height:1.2}
 .stat span{color:var(--muted);font-size:.9rem}
 
@@ -61,8 +62,7 @@ h3{font-size:1.35rem;margin:.2rem 0 .5rem}
 .dayhead{display:grid;grid-template-columns:340px 1fr;min-height:220px}
 .dayhead>img{width:100%;height:100%;object-fit:cover;background:var(--soft)}
 .daycopy{padding:24px 28px}
-.date{font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;color:var(--wine);font-weight:800}
-.daycopy h3{font-size:1.85rem;margin:.25rem 0 .5rem}
+.daycopy h3{font-size:1.7rem;margin:0 0 .5rem}
 .sleep{display:inline-block;margin-top:10px;background:#edf2ee;border:1px solid #c9d8cf;border-radius:999px;padding:6px 12px;font-size:.8rem;font-weight:700;color:var(--forest)}
 .route{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
 .route span{font-size:.78rem;border:1px solid #d9d1c3;border-radius:999px;padding:5px 10px;background:#f4efe6}
@@ -93,7 +93,7 @@ ul.ticks li:before{content:"☐";position:absolute;left:2px;top:-1px;color:var(-
 .logi b{color:var(--forest)}
 /* ---- three-layer disclosure ---- */
 .tlhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px 8px}
-.tlhead h5{font-family:Inter,sans-serif;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:800}
+.tlhead h5{font-family:Inter,sans-serif;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:800}
 .expandall{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px;font:700 .74rem Inter,sans-serif;color:var(--forest);cursor:pointer;white-space:nowrap}
 .expandall:hover{background:var(--sand);border-color:#c9bda9}
 
@@ -153,7 +153,7 @@ details.l1[open]>summary .l1t{color:var(--wine)}
 section.part{margin:0;padding:64px 0 10px;scroll-margin-top:60px}
 section.part+section.part{border-top:2px solid #ddd2bd}
 .parthead{margin-bottom:34px}
-.pnum{text-transform:uppercase;letter-spacing:.22em;font-size:.7rem;font-weight:800;color:var(--gold)}
+.pnum{text-transform:uppercase;letter-spacing:.14em;font-size:.86rem;font-weight:800;color:var(--gold)}
 .parthead h2{font-size:clamp(2.4rem,5.2vw,3.4rem);line-height:1;margin:.18em 0 .3em;font-family:Georgia,'Times New Roman',serif}
 .plede{max-width:80ch;color:var(--muted);font-size:1.05rem;margin:0}
 .subsec{margin:0;padding:0 0 54px;scroll-margin-top:64px}
@@ -161,6 +161,9 @@ section.part+section.part{border-top:2px solid #ddd2bd}
 .subsec>h3{font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.5rem,2.7vw,1.95rem);
   line-height:1.16;margin:.12em 0 .5em}
 .subsec>.kicker{color:var(--wine)}
+.subsec>h3:has(+.deck){margin-bottom:.14em}
+.subsec>.deck{font-family:Georgia,'Times New Roman',serif;font-size:1.18rem;
+  line-height:1.4;color:var(--wine);margin:0 0 .55em;max-width:70ch}
 
 /* collapsed day cards */
 details.dayd{scroll-margin-top:64px;margin:12px 0}
@@ -173,17 +176,18 @@ details.dayd[open]>summary{border-bottom:1px solid var(--line);background:#f6f1e
 .dnum{width:34px;height:34px;border-radius:50%;background:var(--forest);color:#fff;font-weight:800;
   font-size:.9rem;display:grid;place-items:center}
 details.dayd[open]>summary .dnum{background:var(--wine)}
-.dttl{font-family:Georgia,'Times New Roman',serif;font-size:1.18rem;line-height:1.28}
+details.dayd[open]>summary .dttl{color:var(--wine)}
+.dttl{font-family:Georgia,'Times New Roman',serif;font-size:1.1rem;line-height:1.28;color:var(--forest)}
 .dttl em{display:block;font-style:normal;font-family:Inter,system-ui,sans-serif;font-size:.74rem;
   text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700;margin-top:3px}
 .dld{font-size:.76rem;font-weight:700;color:var(--blue);text-align:right;white-space:nowrap}
 .daybody>.dayhead{border-top:0}
-.daycopy h3{font-size:1.5rem}
 @media(max-width:760px){
  details.dayd>summary{grid-template-columns:36px minmax(0,1fr) 14px;padding:13px 14px;gap:0 12px}
  .dnum{width:30px;height:30px;font-size:.82rem}
  .dld{display:none}
  .dttl{font-size:1.05rem}
+ .daycopy h3{font-size:1.4rem}
  section.part{padding-top:44px}
 }
 @media(max-width:760px){
@@ -197,7 +201,7 @@ details.dayd[open]>summary .dnum{background:var(--wine)}
 
 /* the three meals, on every day */
 .meals{margin:16px 24px;background:#f3f6f1;border:1px solid #d7e0d5;border-radius:12px;padding:13px 17px;font-size:.9rem}
-.meals h6{margin:0 0 9px;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--forest);font-weight:800}
+.meals h6{margin:0 0 9px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--forest);font-weight:800}
 .meals dl{display:grid;grid-template-columns:92px 1fr;gap:7px 14px;margin:0}
 .meals dt{font-weight:800;color:var(--forest)}
 .meals dd{margin:0}
@@ -206,7 +210,7 @@ details.dayd[open]>summary .dnum{background:var(--wine)}
 
 /* decided on the day, not in advance */
 .gtime{margin:16px 24px;background:#f7f2ff;border:1px solid #d9d2ea;border-radius:12px;padding:13px 17px;font-size:.9rem}
-.gtime h6{margin:0 0 8px;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:#4e4877;font-weight:800}
+.gtime h6{margin:0 0 8px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#4e4877;font-weight:800}
 .gtime ul{margin:0;padding-left:18px}
 .gtime li{margin-bottom:5px}
 .gtime b{color:#4e4877}
@@ -513,8 +517,8 @@ th.ra,.costs td+td{text-align:right}
 <div class="parthead"><div class="pnum">Part one</div><h2>The trip</h2><p class="plede">The route, the four beds, the driving — and where each base sits on the river that connects them.</p></div>
 
 <div class="subsec" id="route">
-<div class="kicker">The shape of the trip</div>
-<h3>Four beds, eleven nights, three moves.</h3>
+<h3>The shape of the trip</h3>
+<p class="deck">Four beds, eleven nights, three moves.</p>
 <p class="lede">Hub and spoke. You unpack four times in twelve days, and eight of them start and end in the same bed. The car exists to reach trailheads, villages and whales — inside Montréal and Québec City it stays parked from the moment you arrive until the morning you leave.</p>
 <div style="margin-top:20px">
 <div class="gmapwrap">
@@ -580,8 +584,8 @@ th.ra,.costs td+td{text-align:right}
 </div>
 
 <div class="subsec" id="theme">
-<div class="kicker">The river</div>
-<h3>Every base is one step further down the St. Lawrence.</h3>
+<h3>The river</h3>
+<p class="deck">Every base is one step further down the St. Lawrence.</p>
 <p class="lede" style="margin-bottom:0">Montréal sits where the rapids stopped the boats. Québec City sits 275 km downstream where the river narrows to under a kilometre beneath a cliff. Charlevoix sits where it widens again, and Tadoussac where it has gone salt and a fjord comes in from the north. That is the order of the trip, and it is why the whales are at the end and not the beginning.</p>
 <details class="l1">
 <summary><span class="l1t">Where each base sits, and why the river put it there</span><span class="l1s">Two minutes · the geography behind the itinerary</span><span class="l1c">›</span></summary>
@@ -625,8 +629,7 @@ th.ra,.costs td+td{text-align:right}
 <summary><span class="dnum">0</span><span class="dttl">Cheshire → Lincoln, New Hampshire · 6:00 p.m.<em>Wednesday, August 26 · the head start</em></span><span class="dld">EASY: ≈230 mi · 4 h 00–4 h 30 · arrive 10:15–10:45 p.m.</span><span class="chev">›</span></summary>
 <div class="daybody">
 <div class="daycopy" style="padding:22px 28px">
-<div class="date">Day 0 · Wednesday, August 26 · the head start</div>
-<h3 style="font-size:1.5rem">Cheshire → Lincoln, New Hampshire · 6:00 p.m.</h3>
+<h3>Cheshire → Lincoln, New Hampshire · 6:00 p.m.</h3>
 <p style="margin:0 0 10px">Out of the driveway at six, straight up the valley, in bed in the White Mountains before eleven. This one decision is worth more than any other change to the plan: it turns tomorrow from a nine-hour hike bolted onto a pre-dawn drive into a proper mountain day on rested legs, with the trailhead twelve minutes away.</p>
 <div class="dayload">EASY: ≈230 mi · 4 h 00–4 h 30 · arrive 10:15–10:45 p.m.</div>
 <span class="sleep">Sleep · Lincoln, New Hampshire</span>
@@ -649,7 +652,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="Hikers on the open crest of Franconia Ridge" src="images/franconia_ridge.jpg" data-k="franconia_ridge"/>
-<div class="daycopy"><div class="date">Day 1 · Thursday, August 27</div><h3>Franconia Ridge, on fresh legs</h3>
+<div class="daycopy"><h3>Franconia Ridge, on fresh legs</h3>
 <p>Breakfast at half past six, out of the door by ten to seven, parked at Lafayette Place by 7:15 and walking by 7:30. <b>The drive is sixteen to twenty minutes</b> — take the northbound hiker lot, which is the larger one and the side you arrive on. You then have the whole day and the whole weather window, and you are not tired before you start.</p>
 <div class="dayload">VERY HARD: ~9 mi · ~3,900 ft gain · 7–9 h on foot</div>
 <span class="sleep">Sleep · Lincoln, New Hampshire</span>
@@ -721,7 +724,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="Abbaye de Saint-Benoît-du-Lac" src="images/abbey.jpg" data-k="abbey"/>
-<div class="daycopy"><div class="date">Day 2 · Friday, August 28</div><h3>Lincoln → the Abbey → Montréal</h3>
+<div class="daycopy"><h3>Lincoln → the Abbey → Montréal</h3>
 <p>Cross the border, and stop once — at a Benedictine monastery on a lake that straddles two countries, where the monks still sing the office in Gregorian chant and sell you blue cheese afterwards.</p>
 <div class="dayload">EASY–MODERATE: ≈4 h 15 driving + border, with a 2 h stop</div>
 <span class="sleep">Sleep · Plateau / Mile End, Montréal</span>
@@ -814,7 +817,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="The Old Port of Montréal" src="images/oldmtl.jpg" data-k="oldmtl"/>
-<div class="daycopy"><div class="date">Day 3 · Saturday, August 29</div><h3>Old Montréal, and a basilica that turns into light</h3>
+<div class="daycopy"><h3>Old Montréal, and a basilica that turns into light</h3>
 <p>The oldest quarter in the morning, the archaeology underneath it in the afternoon, and after dark the same basilica you walked through at noon, unrecognisable.</p>
 <div class="dayload">MODERATE: long walking day, flat, cobbles</div>
 <span class="sleep">Sleep · Plateau / Mile End</span>
@@ -894,7 +897,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="Marché Jean-Talon, Montréal" src="images/jeantalon.jpg" data-k="jeantalon"/>
-<div class="daycopy"><div class="date">Day 4 · Sunday, August 30</div><h3>Mile End, the mountain and the Oratory</h3>
+<div class="daycopy"><h3>Mile End, the mountain and the Oratory</h3>
 <p>The best day of the Montréal stay and almost entirely free. Sunday is the one day the mountain fills with drummers, and the one day the whole city is outside. It is also the longest walking day of the trip after the mountains — take the Métro north to start, and save the legs for Mount Royal.</p>
 <div class="dayload">MODERATE–FULL: 6–8 miles of walking, one real hill</div>
 <span class="sleep">Sleep · Plateau / Mile End</span>
@@ -981,7 +984,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="Deschambault above the St. Lawrence" src="images/deschambault.jpg" data-k="deschambault"/>
-<div class="daycopy"><div class="date">Day 5 · Monday, August 31</div><h3>The Chemin du Roy to Québec City</h3>
+<div class="daycopy"><h3>The Chemin du Roy to Québec City</h3>
 <p>Not a transfer — the oldest road in the country. The King's Road opened in 1737 as the first route in Canada built for carriages, running 280 km along the north shore between the two cities. You drive the fast road and drop onto the old one twice.</p>
 <div class="dayload">MODERATE: 3 h driving, 5–6 h with both stops</div>
 <span class="sleep">Sleep · Faubourg Saint-Jean-Baptiste, Québec City</span>
@@ -1060,7 +1063,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="La Citadelle de Québec from the air" src="images/citadelle.jpg" data-k="citadelle"/>
-<div class="daycopy"><div class="date">Day 6 · Tuesday, September 1</div><h3>Old Québec, top to bottom</h3>
+<div class="daycopy"><h3>Old Québec, top to bottom</h3>
 <p>The whole city in one day, in the order it was built: the walls, the citadel, the battlefield, the cathedral, then down the cliff by the oldest staircase in Canada into the oldest commercial street in North America — and out onto the river at sunset to see what you've been standing on.</p>
 <div class="dayload">MODERATE–HARD: 6–7 miles, real hills, stairs, cobbles</div>
 <span class="sleep">Sleep · Québec City</span>
@@ -1183,7 +1186,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="Montmorency Falls" src="images/montmorency.jpg" data-k="montmorency"/>
-<div class="daycopy"><div class="date">Day 7 · Wednesday, September 2</div><h3>Côte-de-Beaupré &amp; Île d'Orléans</h3>
+<div class="daycopy"><h3>Côte-de-Beaupré &amp; Île d'Orléans</h3>
 <p>A waterfall taller than Niagara before nine, a basilica that takes a million pilgrims a year by eleven, three suspension bridges over a canyon at one, and the afternoon driving an island of 17th-century farms. The single best-value day of the trip.</p>
 <div class="dayload">MODERATE: ≈110 km of easy driving, several short walks, one long stair if you want it</div>
 <span class="sleep">Sleep · Québec City</span>
@@ -1280,7 +1283,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="Place de la nation huronne-wendat, Wendake" src="images/wendake.jpg" data-k="wendake"/>
-<div class="daycopy"><div class="date">Day 8 · Thursday, September 3</div><h3>Wendake, and a night walk in the woods</h3>
+<div class="daycopy"><h3>Wendake, and a night walk in the woods</h3>
 <p>You have spent two days inside a French and then British story. Today you hear it from the nation that was already here, from their own museum, in their own community — and end after dark on a 1.2-kilometre light-and-sound walk through their forest.</p>
 <div class="dayload">MODERATE: a museum morning, a 20-minute drive, an evening walk</div>
 <span class="sleep">Sleep · Québec City</span>
@@ -1369,7 +1372,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="A whale breaching in the St. Lawrence at Tadoussac" src="images/whale.jpg" data-k="whale"/>
-<div class="daycopy"><div class="date">Day 9 · Friday, September 4</div><h3>Québec City → the whales → Route 362 → Baie-Saint-Paul</h3>
+<div class="daycopy"><h3>Québec City → the whales → Route 362 → Baie-Saint-Paul</h3>
 <p>The biggest day of the trip and the one you will talk about for years. Out early along the north shore, three hours and more on the water where the fjord meets the estuary, then home down Route 362 with the light going gold.</p>
 <div class="dayload">LONG BUT EASY: ≈330 km driving across the day, 3–3½ h on a boat</div>
 <span class="sleep">Sleep · Baie-Saint-Paul, Charlevoix</span>
@@ -1447,7 +1450,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="The Malbaie River in Hautes-Gorges" src="images/hautesgorges.jpg" data-k="hautesgorges"/>
-<div class="daycopy"><div class="date">Day 10 · Saturday, September 5</div><h3>Hautes-Gorges-de-la-Rivière-Malbaie</h3>
+<div class="daycopy"><h3>Hautes-Gorges-de-la-Rivière-Malbaie</h3>
 <p>A protected full day and the last great landscape of the trip. Franconia gave you the ridge from above; here you start on the valley floor with eight hundred metres of rock standing over you, and climb into it.</p>
 <div class="dayload">HARD if you climb the Acropole · MODERATE with the valley plan</div>
 <span class="sleep">Sleep · Baie-Saint-Paul</span>
@@ -1523,7 +1526,7 @@ th.ra,.costs td+td{text-align:right}
 <div class="daybody">
 <div class="dayhead">
 <img alt="Charlevoix and the St. Lawrence" src="images/stirenee.jpg" data-k="stirenee"/>
-<div class="daycopy"><div class="date">Day 11 · Sunday, September 6</div><h3>Baie-Saint-Paul → Cheshire</h3>
+<div class="daycopy"><h3>Baie-Saint-Paul → Cheshire</h3>
 <p>Not a sightseeing day. Two drivers, an early start, and a clean exit so that Labour Day Monday is genuinely yours. Routing puts this at 10 h 53 of driving before a single stop, so treat it as a full day and not a long afternoon.</p>
 <div class="dayload">LONG TRANSFER: ≈915 km · 10 h 30 – 11 h driving + border</div>
 <span class="sleep">Home</span>
@@ -1554,8 +1557,8 @@ th.ra,.costs td+td{text-align:right}
 <div class="parthead"><div class="pnum">Part three</div><h2>Planning</h2><p class="plede">A working sheet you fill in on this page — every booking, what it cost, what is still outstanding — and behind it the four beds, the guides and audio walks, and the food.</p></div>
 
 <div class="subsec" id="tracker">
-<div class="kicker">The spreadsheet</div>
-<h3>Every booking, what it cost, and what is still outstanding.</h3>
+<h3>The spreadsheet</h3>
+<p class="deck">Every booking, what it cost, and what is still outstanding.</p>
 <p class="lede">Fill this in on the page. It saves into this browser as you type — no account, no server, nothing leaves the machine. <b>Export CSV</b> to open it in a spreadsheet; <b>export JSON</b> to hand back for a guide update, or to carry the sheet to another device and <b>import</b> it there.</p>
 
 <div class="grid4" style="margin:22px 0 10px">
@@ -1605,8 +1608,8 @@ th.ra,.costs td+td{text-align:right}
 </div>
 
 <div class="subsec" id="gametime">
-<div class="kicker">Not on the sheet</div>
-<h3>Eight calls you make on the day, not now.</h3>
+<h3>Not on the sheet</h3>
+<p class="deck">Eight calls you make on the day, not now.</p>
 <p class="lede">Every one of these depends on weather, on how the legs feel, or on how the total is running — so committing to them in advance either wastes money or locks you into the wrong choice. None of them is in the planning sheet. All of them are repeated on the day they belong to, in <a href="#days">Day by day</a>, where you will actually be standing when you decide.</p>
 <div class="tablewrap">
 <table>
@@ -1882,8 +1885,8 @@ th.ra,.costs td+td{text-align:right}
 <div class="parthead"><div class="pnum">Part four</div><h2>Before you go</h2><p class="plede">What to wear on a summit and on a boat, what will catch you out on a Québec road, and a few hours of watching and reading that change what you notice once you are there.</p></div>
 
 <div class="subsec" id="gear">
-<div class="kicker">What to wear and carry</div>
-<h3>Two mountain days, nine city days, one boat.</h3>
+<h3>What to wear and carry</h3>
+<p class="deck">Two mountain days, nine city days, one boat.</p>
 <p class="lede">Late August into early September in Québec is the best weather of the year and also the most variable. Pack for 26 °C on a Montréal terrace and 4 °C with wind on a summit — in the same suitcase.</p>
 <div class="tablewrap" style="margin-bottom:20px">
 <table>
@@ -1919,8 +1922,8 @@ th.ra,.costs td+td{text-align:right}
 </div>
 
 <div class="subsec" id="drive">
-<div class="kicker">Driving in Québec</div>
-<h3>The things that will actually catch you out.</h3>
+<h3>Driving in Québec</h3>
+<p class="deck">The things that will actually catch you out.</p>
 <div class="grid3">
 <div class="card"><h4>Rules that differ from home</h4><p style="margin:0"><b>Right turn on red is illegal on the entire island of Montréal</b> — and only there. Elsewhere in Québec it's permitted unless signed. Everything is metric: 100 km/h on autoroutes, 50 km/h in towns. Radar enforcement is real and tickets follow you home. <b>Winter-tyre law doesn't apply</b> in September. Headlights on in rain. Hands-free only, strictly enforced.</p></div>
 <div class="card"><h4>Signage is French only</h4><p style="margin:0">Québec does not post bilingual road signs. Learn six words before you go: <b>Arrêt</b> (stop) · <b>Sortie</b> (exit) · <b>Ouest / Est / Nord / Sud</b> · <b>Voie réservée</b> (reserved lane) · <b>Stationnement interdit</b> (no parking) · <b>Sauf</b> (except — the critical word on parking signs). Parking signs are stacked and conditional; read all of them, then read them again.</p></div>
@@ -1932,8 +1935,8 @@ th.ra,.costs td+td{text-align:right}
 </div>
 
 <div class="subsec" id="watch">
-<div class="kicker">Before you go</div>
-<h3>Watch, read and listen your way in.</h3>
+<h3>Before you go</h3>
+<p class="deck">Watch, read and listen your way in.</p>
 <p class="lede">Québec has a film industry and a songbook that most Americans have never touched, and an evening of homework transforms what you notice on the ground. Cut to what earns its time: three films, one ten-minute short, and a listening order. Ranked.</p>
 <div class="grid3">
 <div class="card">
