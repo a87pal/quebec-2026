@@ -738,3 +738,131 @@ visible, which was the point.
 Also unstaled from the measured pass: the Montréal lodging note still said
 fifteen minutes to Esplanade Tranquille, and the Charlevoix one still said a ten
 minute drive.
+
+---
+
+## 14. The mapping rebuild: one inventory, real day routes, filters
+
+Three things were wrong with the maps at once, and only one of them was the one
+that got noticed first.
+
+### 14.1 The live map was a copy of the static map
+
+Every one of the ten maps carried a **Live map** button that swapped the Esri
+tiles for a Google My Maps iframe. It embedded the *same* `mid` on all ten,
+varying only `&ll=` and `&z=` from that map's bounding-box centre. That custom
+map is imported from `tripmap.py`'s KML, which is generated from the same
+`places.json` and `extras.json` that draw the SVG. Same pins, same coordinates,
+different renderer.
+
+It also contradicted the spec it was built under. `TRAVEL-PREFERENCES.md` §8:
+*"An embedded live map fails the offline and printable requirements in §11"*,
+and, two lines earlier, what it asked for instead — *"live navigation links…
+Every marker gets one, generated from its verified coordinate — not just one
+link per map."* And it required a map containing where you sleep to be shared
+"anyone with the link".
+
+Removed everywhere. `meta.json` keeps `mymaps` as a note of which My Maps holds
+the trip; nothing reads it.
+
+### 14.2 The Place IDs were paid for and barely used
+
+All 165 places — 74 markers, 91 extras — carry a Google `place_id` verified by
+`placeid.py` against a coordinate we resolved ourselves. They powered exact
+per-marker `maps/search` links. The ten *route* links did not use them at all:
+they were hand-typed paths of free-text place names,
+
+    /maps/dir/Porte+Saint-Louis,+Quebec+City/Citadelle+of+Quebec/…
+
+one per **map**, which is not a unit anyone travels in. Google re-ran a search
+on each name at click time — precisely the ambiguity the Place IDs exist to
+remove.
+
+`dayroutes.py` builds the other thing: one set of links per **day**, in the
+order you travel, naming every stop exactly. 24 segment links and 10 whole-day
+links across the twelve days.
+
+Google's cap shapes the output and is the reason a day is often more than one
+link: *three waypoints on mobile browsers, nine otherwise*. This guide is read
+in a car, so segments are cut to five stops with consecutive links overlapping
+by one, and a whole-day link is emitted **only when it legally fits** — never by
+quietly dropping the stops past the cap. Where a day cannot be one link, the map
+footer points at the day card rather than at a truncated route.
+
+### 14.3 Nothing connected a place to a day
+
+There was no `day` field in any JSON in the repo. The only day linkage was nine
+hardcoded `day=` kwargs on route-map markers. So the 165-entry driving list
+could not be grouped, sequenced or routed.
+
+`maps/inventory.json` is that layer, and it is hand-authored: `resolve.py`,
+`placeid.py` and `extracoords.py` machine-write the other two files. 165 places
+tagged with a day and a category, twelve days with ordered routes. Seeded by
+`inventory.py --seed` matching keys against each day card's prose — which got
+124 of 165 — and finished by hand.
+
+**One error the seeding pass produced is worth recording.** `Place d'Armes` is a
+square in Old Montréal *and* the square outside the Château Frontenac in Québec.
+The `extras.json` entry is Québec's; it was tagged Day 3 and routed through an
+afternoon on foot in Old Montréal. The URL was perfectly well-formed and
+contained a 232 km walking hop. `inventory.py` now measures every consecutive
+pair of stops against what the mode could plausibly cover and fails on it.
+
+### 14.4 Filters, and what they deliberately do not do
+
+Each map has a Day row and a Show row (`Sleep`, `See & do`, `Eat & drink`,
+`Getting about` — four groups over twelve categories, because four chips are
+usable and twelve are not). A chip is only offered when it would change the
+picture: the Québec walking map has no Day 6 chip, because all eleven of its
+markers are Day 6.
+
+**Placement is never recomputed.** `overlay.py` places labels once against the
+full marker set; hiding some of them leaves a map that is sparser than optimal
+and never wrong. Recomputing per filter combination is combinatorial and buys
+nothing. `.placement.json`, `boxes.py` and the `crowded` gate are untouched —
+`boxes.py` still reports 0 overlaps and 0 dot-covers on all ten maps.
+
+### 14.5 The premise that was wrong: build speed
+
+The rebuild was asked for partly because "it takes a long time to build the
+static maps". Measured on this machine: `./check.sh` — overlay, boxes,
+inventory, dayroutes, savedlist, splice and validate across all ten maps — runs
+in about **1.3 s**. `overlay.py` alone builds all ten in **0.2 s**. There is no
+CPU problem.
+
+What is slow is the approval-gated network third, and it is slow by policy:
+Nominatim at one request a second, one HTTP GET per Esri tile (294 of them),
+OSRM and OpenRouteService quota, a billable Places key. All of it is cached and
+every output is committed, so a rebuild refetches nothing unless a bbox, a zoom,
+a marker's identity or a leg's endpoints changed.
+
+The real cost is the **authoring loop** — 85 hand-written `m.marker()` calls and
+the export-to-My-Maps-and-eyeball-the-pins round trip. Fewer maps would help
+that. It would not make the build faster.
+
+### 14.6 Map count: deferred on purpose
+
+The proposal was to collapse each `home-*` base inset into its region map, ten
+maps down to six. Not done, and not because it is a bad idea.
+
+§12.1 already litigated the substance: `home-mtl` is z16 over ~0.015° of
+latitude, `montreal` is z13 over ~0.116° — eight times the ground. The grocery,
+metro and walk-time markers would be pixels apart at z13 and would trip
+`overlay.py`'s `crowded` gate. And widening a parent bounding box means a fresh
+Esri tile fetch, so consolidating *costs* an approval-gated network run rather
+than saving one.
+
+Everything in this pass is offline and reversible; consolidating is neither. The
+question is better asked once the filters are on the page and it is possible to
+judge whether ten maps still read as ten. Two moves are available then, cheapest
+first: **relabel** the insets *"Base detail · Montréal"* so they read as a zoom
+of their hub (pure copy, no engine change), or **consolidate for real** (needs
+approval, and will cost some markers).
+
+### 14.7 One real speed-up, not taken here
+
+`resolve.py` and `extracoords.py` hit the same Nominatim and Wikidata for two
+files with two separate caches, so a place promoted from `extras.json` to a
+marker is refetched from scratch. Folding them into one pass over the joint
+inventory with one cache removes that. Worth doing as a follow-up; it is a
+network-stage change and had no business riding along with this one.

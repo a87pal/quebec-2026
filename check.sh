@@ -19,6 +19,13 @@ for d in destinations/*/; do
   # on. boxes.py then re-checks the placement it produced.
   python3 tools/overlay.py  --dest "$slug"   # fragments from committed inputs
   python3 tools/boxes.py    --dest "$slug"   # must be 0 overlaps, 0 dot-covers
+  # The day/category layer, and the per-day Google Maps links built from it.
+  # Offline. inventory.py is fatal on a key that is not a real place, a day the
+  # guide does not have, or a route stop not tagged to the day it is routed on.
+  if [ -f "$d/maps/inventory.json" ]; then
+    python3 tools/inventory.py --dest "$slug" --brief
+    python3 tools/dayroutes.py --dest "$slug"
+  fi
   # Also regenerated from committed inputs (places.json), for the same reason:
   # it catches a guide whose checklist is stale with respect to the places.
   if grep -q 'id="savedlist"' "$d/guide.html" 2>/dev/null; then

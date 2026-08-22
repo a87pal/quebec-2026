@@ -10,6 +10,7 @@ Usage:  python3 tools/maps.py [--dest SLUG]
 import io, os, re, sys
 
 import _dest
+import dayroutes
 
 
 def close_div(s, i):
@@ -132,60 +133,115 @@ def legtable(T, dest):
     return T, done, len(routes)
 
 
-LIVE_CSS = """
-.gmapwrap .glive{display:none;width:100%;border-radius:12px;overflow:hidden;background:#e9e4d8}
-.gmapwrap .glive iframe{display:block;width:100%;height:100%;border:0}
-.gmapwrap.livemode .gmap{display:none}
-.gmapwrap.livemode .glive{display:block;grid-column:1/-1}
-.maplive{background:#edf2ee;border:1px solid #c9d8cf;border-radius:999px;padding:7px 14px;
-  font:800 .76rem Inter,system-ui,sans-serif;color:var(--forest);cursor:pointer;white-space:nowrap;
-  display:inline-flex;align-items:center;gap:7px;letter-spacing:.04em;text-transform:uppercase}
-.maplive:hover{background:#dfe9e2}
-.maplive i{font-style:normal;color:var(--wine);font-size:.7rem}
-.gmapwrap.livemode .mapzoom{display:none}
-@media print{.gmapwrap .glive{display:none!important}.maplive{display:none}
- .gmapwrap.livemode .gmap{display:block}}
+DR_OPEN = re.compile(r'<div class="dayroutes" data-day="(\d+)">')
+DAYCARD = r'<details class="day[^"]*" id="day-%s">'
+DAYBODY = '<div class="daybody">'
+
+
+def dayroutebars(T, dest):
+    """Splice each day's Google Maps navigation links into its day card.
+
+    The block lands after the first block inside .daybody - .dayhead where the
+    day has a photograph, .daycopy where it does not, which is why this counts
+    divs rather than looking for one class. That puts it directly under the
+    day's travel-time line and above the meals, which is where you look when
+    you are about to leave. Idempotent: any block already in the guide is cut
+    first, so re-running replaces rather than stacks.
+    """
+    frag = os.path.join(dest.mapdir, 'dayroutes.html')
+    if not os.path.exists(frag):
+        return T, 0
+    gen = io.open(frag, encoding='utf-8').read()
+    blocks = [(m.group(1), gen[m.start():close_div(gen, m.start())])
+              for m in DR_OPEN.finditer(gen)]
+
+    while True:
+        m = DR_OPEN.search(T)
+        if not m:
+            break
+        T = T[:m.start()].rstrip('\n') + '\n' + T[close_div(T, m.start()):].lstrip('\n')
+
+    done = 0
+    for day, block in blocks:
+        pat = re.compile(DAYCARD % day)
+        hits = pat.findall(T)
+        if len(hits) != 1:
+            sys.exit('error: day card id="day-%s" appears %d times, expected 1' % (day, len(hits)))
+        i = pat.search(T).end()
+        b = T.find(DAYBODY, i)
+        nxt = T.find('<details class="day', i)
+        if b < 0 or (nxt >= 0 and nxt < b):
+            sys.exit('error: day card id="day-%s" has no %s to hang its routes on'
+                     % (day, DAYBODY))
+        j = re.compile(r'<div[\s>]').search(T, b + len(DAYBODY)).start()
+        k = close_div(T, j)
+        T = T[:k] + '\n' + block + T[k:]
+        done += 1
+    return T, done
+
+
+FILT_CSS = """
+.mapfilt{display:none;flex-wrap:wrap;gap:7px 16px;margin:11px 0 0}
+.gmapwrap.mapopen .mapfilt{display:flex;order:2}
+.mfrow{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.mfl{font:800 .68rem Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-right:2px}
+.mfc{background:#f6f3ec;border:1px solid var(--line);border-radius:999px;padding:4px 11px;
+  font:700 .74rem Inter,system-ui,sans-serif;color:var(--forest);cursor:pointer;line-height:1.35}
+.mfc:hover{background:#ece6da}
+.mfc.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.ovl .mkoff{display:none}
+.gbtns{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end;margin-left:auto}
+.gbtns .gbtn{padding:5px 11px;font-size:.72rem}
+.gbtns .gbtn.alt{background:#f6f3ec;border-style:dashed}
+@media print{.mapfilt{display:none!important}.ovl .mkoff{display:inline!important}}
 """
 
-LIVE_JS = """/* maps: swap the offline tiles for the live My Maps embed, on demand.
-   The iframe is created on first click and never on load, so a guide opened
-   with no signal costs nothing and still prints. */
+FILT_JS = """/* maps: filter one map's markers and lines by day and by kind.
+   Placement was computed once against the full marker set and is never
+   recomputed - a filtered map is sparser than optimal, never wrong. Markers
+   carrying no data-day or no data-grp are map furniture and always stay. */
 document.querySelectorAll('.gmapwrap').forEach(function(w){
-  var btn=w.querySelector('.maplive'), host=w.querySelector('.glive');
-  if(!btn||!host) return;
-  btn.addEventListener('click',function(){
-    var on=!w.classList.contains('livemode');
-    w.classList.toggle('livemode',on);
-    btn.setAttribute('aria-pressed',on?'true':'false');
-    btn.querySelector('span').textContent=on?'Offline map':'Live map';
-    if(on&&!host.firstChild){
-      var f=document.createElement('iframe');
-      f.setAttribute('title','Live Google map of this area');
-      f.setAttribute('loading','lazy');
-      f.setAttribute('allowfullscreen','');
-      f.src=host.getAttribute('data-embed');
-      host.appendChild(f);
-    }
+  var bar=w.querySelector('.mapfilt'), svg=w.querySelector('.ovl');
+  if(!bar||!svg) return;
+  var sel={day:'',grp:''};
+  function apply(){
+    svg.querySelectorAll('[data-day],[data-grp]').forEach(function(el){
+      var d=el.getAttribute('data-day'), g=el.getAttribute('data-grp');
+      var okd=!sel.day||!d||d.split(' ').indexOf(sel.day)>=0;
+      var okg=!sel.grp||!g||g===sel.grp;
+      el.classList.toggle('mkoff',!(okd&&okg));
+    });
+  }
+  bar.querySelectorAll('.mfc').forEach(function(b){
+    b.addEventListener('click',function(){
+      var f=b.getAttribute('data-f');
+      sel[f]=b.getAttribute('data-v');
+      bar.querySelectorAll('.mfc[data-f="'+f+'"]').forEach(function(o){
+        o.classList.toggle('on',o===b);
+      });
+      apply();
+    });
   });
 });
 """
 
 
-def liveblock(T):
-    """Inject the live-map CSS and JS once.
+def filterblock(T):
+    """Inject the day-route and filter CSS/JS once.
 
-    Separate from the CSS/JS block below, which returns early on a guide that
-    already has it - so anything added there would never reach an existing
-    guide. Each half guards on its own marker instead.
+    Separate from the CSS/JS block in main(), which returns early on a guide
+    that already has the zoom behaviour - so anything added there would never
+    reach an existing guide. Each half guards on its own marker instead.
     """
-    if '.maplive{' not in T:
+    if '.mfc{' not in T:
         anchor = ".gmapwrap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:20px 0}"
-        need(T, anchor, 'live-map CSS')
-        T = T.replace(anchor, anchor + LIVE_CSS, 1)
-    if "/* maps: swap the offline tiles" not in T:
+        need(T, anchor, 'map-filter CSS')
+        T = T.replace(anchor, anchor + FILT_CSS + dayroutes.CSS, 1)
+    if "/* maps: filter one map's markers" not in T:
         anchor = "/* print: everything open */"
-        need(T, anchor, 'live-map JS')
-        T = T.replace(anchor, LIVE_JS + anchor, 1)
+        need(T, anchor, 'map-filter JS')
+        T = T.replace(anchor, FILT_JS + anchor, 1)
     return T
 
 
@@ -228,16 +284,20 @@ def main():
     # inject-once dance below does not apply to it.
     T, sl = savedlist(T, dest)
 
-    # ---- live-map toggle, if meta.json names a My Maps id ---------------------
-    T = liveblock(T)
+    # ---- per-day Google Maps navigation links ---------------------------------
+    T, dr = dayroutebars(T, dest)
+
+    # ---- filter chips and day-route styling -----------------------------------
+    T = filterblock(T)
 
     # ---- CSS: thumbnail by default, full size when opened --------------------
     ANCHOR = ".gmapwrap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:20px 0}"
     need(T, ANCHOR, 'map CSS')
     if ".mapzoom{" in T:
         io.open(src, "w", encoding="utf-8").write(T)
-        print("spliced %d maps, %d leg row(s)%s (css/js already present) · %d KB"
-              % (n, legs, ', saved list' if sl else '', len(T) // 1024))
+        print("spliced %d maps, %d leg row(s), %d day route bar(s)%s "
+              "(css/js already present) · %d KB"
+              % (n, legs, dr, ', saved list' if sl else '', len(T) // 1024))
         return
     CSS = ANCHOR + """
 .gmapwrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 16px;align-items:start}
@@ -295,8 +355,8 @@ document.querySelectorAll('.gmapwrap').forEach(function(w){
     T = T.replace(PA_OLD, PA_NEW, 1)
 
     io.open(src, "w", encoding="utf-8").write(T)
-    print("spliced %d maps, %d leg row(s)%s · %d KB"
-          % (n, legs, ', saved list' if sl else '', len(T) // 1024))
+    print("spliced %d maps, %d leg row(s), %d day route bar(s)%s · %d KB"
+          % (n, legs, dr, ', saved list' if sl else '', len(T) // 1024))
 
 
 if __name__ == '__main__':

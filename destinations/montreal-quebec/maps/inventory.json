@@ -1,0 +1,1320 @@
+{
+ "days": {
+  "0": {
+   "mode": "driving",
+   "route": [
+    "Cheshire, CT",
+    "Price Chopper",
+    "The Lodge at Lincoln Station"
+   ],
+   "legs": [
+    "ct-franconia"
+   ]
+  },
+  "1": {
+   "mode": "driving",
+   "route": [
+    "The Lodge at Lincoln Station",
+    "Lafayette Place trailhead",
+    "Woodstock Inn Brewery",
+    "The Lodge at Lincoln Station"
+   ]
+  },
+  "2": {
+   "mode": "driving",
+   "route": [
+    "The Lodge at Lincoln Station",
+    "Artist's Bluff",
+    "Derby Line",
+    "St-Benoît-du-Lac",
+    "YOUR BASE — The Main"
+   ],
+   "legs": [
+    "franconia-abbey",
+    "abbey-montreal"
+   ]
+  },
+  "3": {
+   "route": [
+    {
+     "label": "Down to Old Montréal",
+     "mode": "transit",
+     "stops": [
+      "YOUR BASE — The Main",
+      "Métro Sherbrooke",
+      "Notre-Dame Basilica + AURA"
+     ]
+    },
+    {
+     "label": "Old Montréal on foot",
+     "mode": "walking",
+     "stops": [
+      "Notre-Dame Basilica + AURA",
+      "Pointe-à-Callière",
+      "Place Jacques-Cartier",
+      "Château Ramezay",
+      "Notre-Dame-de-Bon-Secours Chapel",
+      "Bonsecours Market"
+     ]
+    },
+    {
+     "label": "Back for MUTEK",
+     "mode": "transit",
+     "stops": [
+      "Bonsecours Market",
+      "Esplanade Tranquille",
+      "YOUR BASE — The Main"
+     ]
+    }
+   ]
+  },
+  "4": {
+   "mode": "walking",
+   "route": [
+    "YOUR BASE — The Main",
+    "St-Viateur Bagel",
+    "Fairmount Bagel",
+    "Marché Jean-Talon",
+    "Tam-Tams",
+    "Kondiaronk Belvédère",
+    "Saint Joseph's Oratory",
+    "Esplanade Tranquille"
+   ]
+  },
+  "5": {
+   "mode": "driving",
+   "route": [
+    "YOUR BASE — The Main",
+    "Trois-Rivières",
+    "Deschambault",
+    "YOUR BASE — Saint-Roch"
+   ],
+   "legs": [
+    "chemin-du-roy"
+   ]
+  },
+  "6": {
+   "mode": "walking",
+   "route": [
+    "YOUR BASE — Saint-Roch",
+    "Porte Saint-Louis",
+    "La Citadelle",
+    "Plains of Abraham",
+    "Notre-Dame de Québec",
+    "Château Frontenac",
+    "Escalier Casse-Cou",
+    "Petit-Champlain",
+    "Place Royale",
+    "Lévis ferry"
+   ]
+  },
+  "7": {
+   "mode": "driving",
+   "route": [
+    "YOUR BASE — Saint-Roch",
+    "Montmorency Falls",
+    "Sainte-Anne-de-Beaupré",
+    "Canyon Sainte-Anne",
+    "Sainte-Pétronille",
+    "Saint-Jean",
+    "Sainte-Famille",
+    "YOUR BASE — Saint-Roch"
+   ],
+   "legs": [
+    "cote-de-beaupre",
+    "chemin-royal"
+   ]
+  },
+  "8": {
+   "route": [
+    {
+     "label": "Lower Town in the morning",
+     "mode": "walking",
+     "stops": [
+      "YOUR BASE — Saint-Roch",
+      "Musée de la civilisation"
+     ]
+    },
+    {
+     "label": "Out to Wendake",
+     "mode": "driving",
+     "stops": [
+      "YOUR BASE — Saint-Roch",
+      "Musée huron-wendat",
+      "Notre-Dame-de-Lorette chapel",
+      "Chute Kabir Kouba",
+      "Restaurant Sagamité",
+      "Onhwa' Lumina",
+      "YOUR BASE — Saint-Roch"
+     ]
+    }
+   ]
+  },
+  "9": {
+   "route": [
+    {
+     "label": "Out to the whales",
+     "mode": "driving",
+     "stops": [
+      "YOUR BASE — Saint-Roch",
+      "Croisières AML — whale wharf"
+     ]
+    },
+    {
+     "label": "The Saguenay crossing",
+     "mode": "driving",
+     "stops": [
+      "Croisières AML — whale wharf",
+      "Pointe-Noire",
+      "Tadoussac ferry landing",
+      "Tadoussac"
+     ]
+    },
+    {
+     "label": "Home down Route 362",
+     "mode": "driving",
+     "stops": [
+      "Tadoussac",
+      "La Malbaie",
+      "Saint-Irénée",
+      "Les Éboulements",
+      "YOUR BASE — Rang Saint-Placide"
+     ]
+    }
+   ],
+   "legs": [
+    "quebec-tadoussac",
+    "charlevoix-return"
+   ]
+  },
+  "10": {
+   "mode": "driving",
+   "route": [
+    "YOUR BASE — Rang Saint-Placide",
+    "Le Draveur visitor centre",
+    "Hautes-Gorges",
+    "Acropole des Draveurs",
+    "Baie-Saint-Paul",
+    "YOUR BASE — Rang Saint-Placide"
+   ],
+   "legs": [
+    "base-to-baie",
+    "gorge-spur"
+   ]
+  },
+  "11": {
+   "mode": "driving",
+   "route": [
+    "YOUR BASE — Rang Saint-Placide",
+    "Baie-Saint-Paul",
+    "Cheshire, CT"
+   ],
+   "legs": [
+    "run-home"
+   ]
+  }
+ },
+ "places": {
+  "Acropole des Draveurs": {
+   "day": [
+    10
+   ],
+   "cat": "hike"
+  },
+  "Artillery Park": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Artist's Bluff": {
+   "day": [
+    2
+   ],
+   "cat": "hike"
+  },
+  "Ascenseur du Faubourg": {
+   "cat": "transit",
+   "day": [
+    6,
+    8
+   ]
+  },
+  "Atelier Paré": {
+   "day": [
+    7
+   ],
+   "cat": "shop"
+  },
+  "Attaboy": {
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "cat": "food"
+  },
+  "Atwater Market": {
+   "cat": "market",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Aux Vivres": {
+   "cat": "food",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Baie-Saint-Paul": {
+   "day": [
+    9,
+    10,
+    11
+   ],
+   "cat": "town"
+  },
+  "Baie-Ste-Catherine": {
+   "cat": "town",
+   "day": [
+    9
+   ]
+  },
+  "Bistro Hortus": {
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "cat": "food"
+  },
+  "Black Mtn. Burger + Pub 32": {
+   "cat": "food",
+   "day": [
+    0,
+    1
+   ],
+   "as": "Black Mtn. Burger"
+  },
+  "Bois-de-Coulonge": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Bonsecours Market": {
+   "day": [
+    3
+   ],
+   "cat": "sight"
+  },
+  "Bota Bota": {
+   "day": [
+    2
+   ],
+   "cat": "sight"
+  },
+  "Botanical Garden": {
+   "cat": "sight",
+   "day": [
+    4
+   ]
+  },
+  "Buffet de l'Antiquaire": {
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "cat": "food"
+  },
+  "Bureau de Poste": {
+   "day": [
+    7
+   ],
+   "cat": "food"
+  },
+  "CJ's Penalty Box": {
+   "cat": "food",
+   "day": [
+    0,
+    1
+   ]
+  },
+  "Café Santropol": {
+   "cat": "food",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Cannon Mtn Tramway": {
+   "cat": "transit",
+   "day": [
+    1
+   ]
+  },
+  "Canyon Sainte-Anne": {
+   "day": [
+    7
+   ],
+   "cat": "sight"
+  },
+  "Cap-de-Bon-Désir": {
+   "day": [
+    9
+   ],
+   "cat": "view"
+  },
+  "Cassis Monna & Filles": {
+   "day": [
+    7
+   ],
+   "cat": "drink"
+  },
+  "Cheshire, CT": {
+   "cat": "town",
+   "day": [
+    0,
+    11
+   ]
+  },
+  "Chez Ashton": {
+   "day": [
+    6
+   ],
+   "cat": "food"
+  },
+  "Chez Victor": {
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "cat": "food"
+  },
+  "Chocolaterie de l'Île d'Orléans": {
+   "day": [
+    7
+   ],
+   "cat": "food"
+  },
+  "Chute Kabir Kouba": {
+   "day": [
+    8
+   ],
+   "cat": "sight"
+  },
+  "Château Frontenac": {
+   "day": [
+    6,
+    8
+   ],
+   "cat": "sight"
+  },
+  "Château Ramezay": {
+   "day": [
+    3
+   ],
+   "cat": "sight"
+  },
+  "Common Man, Lincoln": {
+   "cat": "food",
+   "day": [
+    0,
+    1
+   ]
+  },
+  "Croisières AML — whale wharf": {
+   "cat": "tour",
+   "day": [
+    9
+   ],
+   "as": "Croisières AML"
+  },
+  "Derby Line": {
+   "day": [
+    2
+   ],
+   "cat": "admin"
+  },
+  "Deschambault": {
+   "day": [
+    5
+   ],
+   "cat": "town"
+  },
+  "Domaine Forget": {
+   "day": [
+    9
+   ],
+   "cat": "sight"
+  },
+  "Drogheria Fine": {
+   "day": [
+    4
+   ],
+   "cat": "food"
+  },
+  "Dépenneur Ultra": {
+   "cat": "market",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Ekionkiestha' longhouse": {
+   "day": [
+    8
+   ],
+   "cat": "sight"
+  },
+  "Escalier Casse-Cou": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Espace Félix-Leclerc": {
+   "day": [
+    7
+   ],
+   "cat": "sight"
+  },
+  "Esplanade Tranquille": {
+   "day": [
+    2,
+    3,
+    4
+   ],
+   "cat": "sight"
+  },
+  "Fairmount Bagel": {
+   "day": [
+    4
+   ],
+   "cat": "food"
+  },
+  "Falafel Yoni": {
+   "cat": "food",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Flume Gorge Visitor Center": {
+   "cat": "sight",
+   "day": [
+    1
+   ]
+  },
+  "Fortifications of Québec": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Fresque des Québécois": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Gare du Palais": {
+   "cat": "transit",
+   "day": [
+    6
+   ]
+  },
+  "Gordi's Fish & Steak": {
+   "cat": "food",
+   "day": [
+    0,
+    1
+   ]
+  },
+  "Greenleaf Hut": {
+   "day": [
+    1
+   ],
+   "cat": "hike"
+  },
+  "Gypsy Café": {
+   "day": [
+    1
+   ],
+   "cat": "food"
+  },
+  "Haskell Free Library": {
+   "day": [
+    2
+   ],
+   "cat": "sight"
+  },
+  "Hautes-Gorges": {
+   "day": [
+    10
+   ],
+   "cat": "hike"
+  },
+  "Hôtel Tadoussac": {
+   "day": [
+    9
+   ],
+   "cat": "sight"
+  },
+  "IGA Baie-Saint-Paul": {
+   "day": [
+    9
+   ],
+   "cat": "market"
+  },
+  "Isle-aux-Coudres": {
+   "day": [
+    9
+   ],
+   "cat": "transit"
+  },
+  "Joan of Arc Garden": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Kondiaronk Belvédère": {
+   "day": [
+    4
+   ],
+   "cat": "view"
+  },
+  "La Banquise": {
+   "day": [
+    3
+   ],
+   "cat": "food"
+  },
+  "La Binerie Mont-Royal": {
+   "cat": "food",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "La Boîte à Pain": {
+   "cat": "food",
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  "La Citadelle": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "La Malbaie": {
+   "day": [
+    9
+   ],
+   "cat": "town"
+  },
+  "La Traite": {
+   "day": [
+    8
+   ],
+   "cat": "food"
+  },
+  "La Vieille Europe": {
+   "day": [
+    3
+   ],
+   "cat": "market"
+  },
+  "Lafayette Place trailhead": {
+   "cat": "hike",
+   "day": [
+    1
+   ]
+  },
+  "Laiterie Charlevoix": {
+   "day": [
+    9
+   ],
+   "cat": "market"
+  },
+  "Le Billig": {
+   "day": [
+    6
+   ],
+   "cat": "food"
+  },
+  "Le Don Végane": {
+   "cat": "food",
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  "Le Draveur visitor centre": {
+   "day": [
+    10
+   ],
+   "cat": "admin"
+  },
+  "Le Germain Charlevoix": {
+   "day": [
+    9,
+    10
+   ],
+   "cat": "sight"
+  },
+  "Le Grand Marché de Québec": {
+   "day": [
+    5,
+    8
+   ],
+   "cat": "market"
+  },
+  "Le Mouton Noir": {
+   "day": [
+    10
+   ],
+   "cat": "food"
+  },
+  "Le Saint-Pub": {
+   "day": [
+    9,
+    10
+   ],
+   "cat": "drink"
+  },
+  "Le Vin Papillon": {
+   "cat": "food",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Les Bonyeuses": {
+   "day": [
+    9
+   ],
+   "cat": "food"
+  },
+  "Les Faux Bergers": {
+   "day": [
+    10
+   ],
+   "cat": "food"
+  },
+  "Les Promenades Fantômes": {
+   "day": [
+    8
+   ],
+   "cat": "tour"
+  },
+  "Les Éboulements": {
+   "day": [
+    9
+   ],
+   "cat": "town"
+  },
+  "Lester's Deli": {
+   "day": [
+    4
+   ],
+   "cat": "food"
+  },
+  "Lincoln": {
+   "day": [
+    0,
+    1,
+    2
+   ],
+   "cat": "base"
+  },
+  "Lincoln, NH": {
+   "cat": "base",
+   "day": [
+    0,
+    1,
+    2
+   ]
+  },
+  "Little Haystack ≈4,760 ft": {
+   "cat": "hike",
+   "day": [
+    1
+   ],
+   "as": "Little Haystack"
+  },
+  "Lévis ferry": {
+   "day": [
+    6
+   ],
+   "cat": "transit"
+  },
+  "MONTRÉAL": {
+   "day": [
+    2,
+    3,
+    4
+   ],
+   "cat": "base",
+   "as": "Montréal"
+  },
+  "Ma Poule Mouillée": {
+   "day": [
+    3
+   ],
+   "cat": "food"
+  },
+  "Maison Maurice Dufour": {
+   "day": [
+    9,
+    10
+   ],
+   "cat": "market"
+  },
+  "Manoir Montmorency": {
+   "day": [
+    7
+   ],
+   "cat": "sight"
+  },
+  "Manoir Richelieu": {
+   "day": [
+    9
+   ],
+   "cat": "sight"
+  },
+  "Marché Brito": {
+   "cat": "market",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Marché Jean-Talon": {
+   "day": [
+    4
+   ],
+   "cat": "market"
+  },
+  "Martello Tower 1": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Metro Plus, bd Charest": {
+   "cat": "market",
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "as": "Metro Plus"
+  },
+  "Metro, av du Parc": {
+   "cat": "market",
+   "day": [
+    2,
+    3,
+    4
+   ],
+   "as": "Metro, avenue du Parc"
+  },
+  "Montmorency Falls": {
+   "day": [
+    7
+   ],
+   "cat": "sight"
+  },
+  "Morrin Centre": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Moulin de La Chevrotière": {
+   "day": [
+    5
+   ],
+   "cat": "sight"
+  },
+  "Mt. Lafayette 5,249 ft": {
+   "cat": "hike",
+   "day": [
+    1
+   ],
+   "as": "Mt. Lafayette"
+  },
+  "Mt. Lincoln 5,089 ft": {
+   "cat": "hike",
+   "day": [
+    1
+   ],
+   "as": "Mt. Lincoln"
+  },
+  "Musée POP": {
+   "day": [
+    5
+   ],
+   "cat": "sight"
+  },
+  "Musée de la civilisation": {
+   "day": [
+    6,
+    8
+   ],
+   "cat": "sight"
+  },
+  "Musée huron-wendat": {
+   "day": [
+    8
+   ],
+   "cat": "sight"
+  },
+  "Musée maritime de Charlevoix": {
+   "day": [
+    9
+   ],
+   "cat": "sight"
+  },
+  "Métro Place-des-Arts": {
+   "cat": "transit",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Métro Sherbrooke": {
+   "cat": "transit",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Nina Pizza Napolitaine": {
+   "day": [
+    7
+   ],
+   "cat": "food"
+  },
+  "Notre-Dame Basilica + AURA": {
+   "cat": "sight",
+   "day": [
+    3
+   ],
+   "as": "Notre-Dame Basilica"
+  },
+  "Notre-Dame de Québec": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Notre-Dame-de-Bon-Secours Chapel": {
+   "day": [
+    3
+   ],
+   "cat": "sight"
+  },
+  "Notre-Dame-de-Lorette chapel": {
+   "day": [
+    8
+   ],
+   "cat": "sight"
+  },
+  "Notre-Dame-des-Victoires": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Old Man of the Mountain Profile Plaza": {
+   "day": [
+    1
+   ],
+   "cat": "view"
+  },
+  "Onhwa' Lumina": {
+   "day": [
+    8
+   ],
+   "cat": "tour"
+  },
+  "Papeterie Saint-Gilles": {
+   "day": [
+    9
+   ],
+   "cat": "shop"
+  },
+  "Parc maritime": {
+   "day": [
+    7
+   ],
+   "cat": "sight"
+  },
+  "Parking, 450 rue du Parvis": {
+   "cat": "transit",
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "as": "Parking · rue du Parvis"
+  },
+  "Patati Patata": {
+   "cat": "food",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Petit-Champlain": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Place Jacques-Cartier": {
+   "day": [
+    3
+   ],
+   "cat": "sight"
+  },
+  "Place Royale": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Place d'Armes": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Plains of Abraham": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Pointe-Noire": {
+   "day": [
+    9
+   ],
+   "cat": "view"
+  },
+  "Pointe-à-Callière": {
+   "day": [
+    3
+   ],
+   "cat": "sight"
+  },
+  "Porte Kent": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Porte Prescott": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Porte Saint-Jean": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Porte Saint-Louis": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Price Chopper": {
+   "day": [
+    0,
+    1
+   ],
+   "cat": "market"
+  },
+  "Promenade des Gouverneurs": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "QUÉBEC CITY": {
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "cat": "town",
+   "as": "Québec City"
+  },
+  "Queen Sheba": {
+   "day": [
+    4
+   ],
+   "cat": "food"
+  },
+  "Québec City": {
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "cat": "base"
+  },
+  "Restaurant Sagamité": {
+   "day": [
+    8
+   ],
+   "cat": "food"
+  },
+  "Rialto Theatre": {
+   "day": [
+    4
+   ],
+   "cat": "sight"
+  },
+  "Rue Saint-Jean-Baptiste": {
+   "day": [
+    9,
+    10
+   ],
+   "cat": "shop"
+  },
+  "Saint Joseph's Oratory": {
+   "day": [
+    4
+   ],
+   "cat": "sight"
+  },
+  "Saint-Irénée": {
+   "day": [
+    9
+   ],
+   "cat": "town"
+  },
+  "Saint-Jean": {
+   "day": [
+    7
+   ],
+   "cat": "town"
+  },
+  "Saint-Louis Forts & Châteaux": {
+   "day": [
+    6
+   ],
+   "cat": "sight"
+  },
+  "Sainte-Anne-de-Beaupré": {
+   "day": [
+    7
+   ],
+   "cat": "sight"
+  },
+  "Sainte-Famille": {
+   "day": [
+    7
+   ],
+   "cat": "town"
+  },
+  "Sainte-Pétronille": {
+   "day": [
+    7
+   ],
+   "cat": "town"
+  },
+  "Schwartz's": {
+   "cat": "food",
+   "day": [
+    2,
+    3,
+    4
+   ]
+  },
+  "Segal's": {
+   "day": [
+    2
+   ],
+   "cat": "market"
+  },
+  "Snack Bar St-Jean": {
+   "day": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "cat": "food"
+  },
+  "St-Benoît-du-Lac": {
+   "cat": "sight",
+   "day": [
+    2
+   ]
+  },
+  "St-Viateur Bagel": {
+   "day": [
+    3,
+    4
+   ],
+   "cat": "food"
+  },
+  "Strøm Nordic Spa": {
+   "day": [
+    8
+   ],
+   "cat": "sight"
+  },
+  "Sushi Momo": {
+   "day": [
+    2
+   ],
+   "cat": "food"
+  },
+  "Tadoussac": {
+   "day": [
+    9
+   ],
+   "cat": "town"
+  },
+  "Tadoussac ferry landing": {
+   "day": [
+    9
+   ],
+   "cat": "transit"
+  },
+  "Tam-Tams": {
+   "day": [
+    4
+   ],
+   "cat": "sight"
+  },
+  "The Basin": {
+   "day": [
+    1
+   ],
+   "cat": "sight"
+  },
+  "The Lodge at Lincoln Station": {
+   "cat": "base",
+   "day": [
+    0,
+    1,
+    2
+   ],
+   "as": "Your base · Lincoln Station"
+  },
+  "Trip de Bouffe": {
+   "day": [
+    3
+   ],
+   "cat": "food"
+  },
+  "Trois-Rivières": {
+   "day": [
+    5
+   ],
+   "cat": "town"
+  },
+  "Umami Ramen & Izakaya": {
+   "day": [
+    4
+   ],
+   "cat": "food"
+  },
+  "Vergers Pedneault": {
+   "day": [
+    9
+   ],
+   "cat": "drink"
+  },
+  "Vieux Presbytère": {
+   "day": [
+    5
+   ],
+   "cat": "sight"
+  },
+  "Wilensky's Light Lunch": {
+   "day": [
+    4
+   ],
+   "cat": "food"
+  },
+  "Woodstock Inn Brewery": {
+   "cat": "drink",
+   "day": [
+    0,
+    1
+   ]
+  },
+  "YOUR BASE — Rang Saint-Placide": {
+   "cat": "base",
+   "day": [
+    9,
+    10,
+    11
+   ],
+   "as": "Your base · rang Saint-Placide"
+  },
+  "YOUR BASE — Saint-Roch": {
+   "cat": "base",
+   "day": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "as": "Your base · Saint-Roch"
+  },
+  "YOUR BASE — The Main": {
+   "cat": "base",
+   "day": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "as": "Your base · the Main"
+  }
+ }
+}

@@ -33,10 +33,16 @@ placeid.py    resolve each place to a Google Place ID, so links name it exactly
    ↓          → places.json again (place_id only; never a coordinate)
 extracoords.py  OSM/Wikidata coordinates for extras.json, for the My Maps export
    ↓          → extras.json again
+inventory.json  you write this: which day each place belongs to, what kind it is,
+   ↓            and the ordered stops of each day's travel
+inventory.py  coverage report and the gates on that file — offline
+   ↓
 overlay.py    project lat/lon → SVG, draw routes, place labels, emit fragments
    ↓          → maps/gmap_<map>.html  + maps/.placement.json
 boxes.py      re-check the placement: no overlaps, no covered dots, nothing off-map
    ↓
+dayroutes.py  per-day Google Maps directions links, from the committed Place IDs
+   ↓          → maps/dayroutes.html
 savedlist.py  build the checklist for loading a Google Maps saved list
    ↓          → maps/savedlist.html
 maps.py       splice the fragments into guide.html, fill the leg table
@@ -399,7 +405,7 @@ the fifteen minutes it saves, and selectors written against a UI that rotates
 its class names. The sequencing was the slow part, and sequencing needs no
 automation.
 
-### Embedding: My Maps only
+### Embedding: nothing, on purpose
 
 A saved list **cannot be embedded**, public or not. `google.com/maps/placelists/`
 answers with `x-frame-options: SAMEORIGIN`, so the browser refuses to frame it on
@@ -407,15 +413,20 @@ another origin, and sharing changes who may *open* it rather than who may frame
 it. The Maps Embed API's five modes — place, view, directions, streetview,
 search — have no list mode either.
 
-`google.com/maps/d/embed` sends no such header, so **My Maps is the embeddable
-surface**. Put its `mid` in `meta.json` as `mymaps` and every map grows a *Live
-map* button; `overlay.py` appends `&ll=` and `&z=` from that map's own bounding
-box, so going live keeps you on the same ground rather than the trip's centroid.
-The iframe is created by JS on first click and never on load, which is what keeps
-the offline guarantee intact.
+`google.com/maps/d/embed` sends no such header, so My Maps *is* embeddable, and
+for a while every map carried a **Live map** button that swapped the Esri tiles
+for the trip's custom map. **That is gone.** It embedded the same `mid` on all
+ten maps, varying only `&ll=` and `&z=`, and that custom map is imported from
+`tripmap.py`'s KML — which is built from the same `places.json` and
+`extras.json` that draw the SVG. Same pins, same coordinates, a different
+renderer, and it required a map containing where you sleep to be shared "anyone
+with the link". `TRAVEL-PREFERENCES.md` §8 had asked for the other thing all
+along: *live navigation links*, one per marker and one per day. That is what
+`dayroutes.py` and the per-marker `maps/search` links are.
 
-The custom map has to be shared "anyone with the link". That is a genuine
-exposure decision: the pins include where you sleep.
+If you want the whole trip live on a phone, import the KML into My Maps and open
+it there. `meta.json` still carries `mymaps` as a note of which map that is; no
+tool reads it.
 
 ### Saved list or My Maps?
 
@@ -426,6 +437,132 @@ custom maps cannot be downloaded for offline use from the phone.
 
 Use the saved list for driving. Use `tripmap.py` when you want the whole shape
 of the trip on a phone for free, or as a review surface. They are not exclusive.
+
+---
+
+## The inventory — which day, what kind
+
+`places.json` and `extras.json` say **where** a place is. `maps/inventory.json`
+says **when** you are there and **what it is**, and it is the only one of the
+three you write by hand — the other two are machine-written by `resolve.py`,
+`placeid.py` and `extracoords.py`, and `CLAUDE.md` forbids hand-editing them.
+
+```json
+{
+  "days": {
+    "6": { "mode": "walking",
+           "route": ["YOUR BASE — Saint-Roch", "Porte Saint-Louis", "La Citadelle"] },
+    "8": { "route": [
+             {"label": "Lower Town in the morning", "mode": "walking",
+              "stops": ["YOUR BASE — Saint-Roch", "Musée de la civilisation"]},
+             {"label": "Out to Wendake", "mode": "driving",
+              "stops": ["YOUR BASE — Saint-Roch", "Musée huron-wendat"]}],
+           "legs": ["cote-de-beaupre"] }
+  },
+  "places": {
+    "Château Frontenac":    { "day": [6], "cat": "sight" },
+    "YOUR BASE — The Main": { "day": [2, 3, 4], "cat": "base", "as": "Your base · the Main" }
+  }
+}
+```
+
+- **`day`** — an int or a list of ints, and every one must match an
+  `id="day-N"` in `guide.html`. A base belongs to all the nights you sleep in it.
+- **`cat`** — one of a closed vocabulary: `base town sight view hike food drink
+  market shop transit tour admin`. Each maps to one of four **groups** —
+  `stay do eat move` — and it is the group that the map filters offer, because
+  four chips are usable and twelve are not.
+- **`as`** — a display name, for keys that read like join keys. `YOUR BASE — The
+  Main` is shouted because it is a map label; the route link says *Your base ·
+  the Main*.
+- **`hub`** — an override only. The default is the marker's own `region`, or for
+  an extra the region of the place it sits `near` — the rule `savedlist.py` has
+  always used, now living in `Inventory.hub()` so the list and the maps cannot
+  group the same place differently.
+- **`days[N].route`** — the ordered stops. A flat list is the common case; the
+  object form is for a day that genuinely changes mode partway, which several do.
+- **`days[N].legs`** — which `legs.json` legs that day drives. This is also where
+  a drawn line learns its day: `overlay.py` asks `Inventory.day_of_leg()` rather
+  than reading a second `day` field off the leg, so there is one copy.
+
+`python3 tools/inventory.py --dest SLUG` is a coverage report and a gate. It is
+**fatal** on a key that is in neither `places.json` nor `extras.json`, a category
+outside the vocabulary, a day the guide does not have, a route stop not tagged to
+the day it is routed on, a `legs` id `legs.json` does not declare, a one-stop
+route, an unknown `travelmode` — and on **an implausible hop**: two consecutive
+stops further apart than that mode could cover. That last one is not theoretical.
+`--brief` is the one-line form `check.sh` runs. `--seed` proposes day tags and
+categories by matching keys against each day card's prose, the way
+`resolve.py --seed` works: it never overwrites a value you set, and every
+category it guesses is a guess.
+
+---
+
+## Day routes — the live map that actually navigates
+
+`dayroutes.py` turns each day's `route` into Google Maps **directions** links,
+using the Place IDs already committed by `placeid.py`:
+
+```
+https://www.google.com/maps/dir/?api=1
+  &origin=46.80944,-71.21130&origin_place_id=ChIJg85HYdmVuEwRryPtIzLI7l0
+  &destination=46.81186,-71.20199&destination_place_id=ChIJ9YG0ztyVuEwR4-k-MYBNlkY
+  &waypoints=46.80749,-71.20765|46.80746,-71.21246
+  &waypoint_place_ids=ChIJO_wtXNqVuEwRBoNhbzRrcZg|ChIJIU80X9eVuEwR0uvJ8xD1ZqA
+  &travelmode=walking
+```
+
+The coordinate is the visible value and the ID rides beside it, exactly as in
+`savedlist.py`: Google uses the ID when it resolves and falls back to the
+coordinate when it does not, so a stale ID degrades to the right spot rather
+than to a confident wrong guess. Place IDs are exempt from the 30-day caching
+restriction (see **Why not Google** above), which is what makes this offline.
+
+**Three constraints shape the output, all of them Google's:**
+
+1. *"Up to three waypoints supported on mobile browsers, and a maximum of nine
+   waypoints supported otherwise."* This guide is read in a car, so a segment is
+   cut into links of at most five stops — origin, three waypoints, destination —
+   with consecutive links **overlapping by one** so following them in order
+   walks the whole segment. A day that needs more than one link says so.
+2. A whole-day link is emitted **only when it genuinely fits** the desktop cap
+   and the day keeps one travel mode throughout. A link that silently dropped
+   every stop past the ninth waypoint would look complete and be wrong.
+3. `waypoint_place_ids` must match `waypoints` in count and order, and Google
+   matches them **by position** — so a partial list attaches the wrong ID to the
+   wrong stop. It is all the IDs or none.
+
+`maps.py` splices each day's block into its day card. Every map's footer carries
+the same links for the days it draws, generated by the same `day_links()` call,
+so a map and a day card cannot offer two different routes for one day; where a
+day is too long for one link, the footer points at the day card instead of at a
+truncated route.
+
+This replaced ten hand-typed `/maps/dir/Ch%C3%A2teau+Frontenac/…` paths of
+free-text place names — one per *map*, not per day, carrying none of the IDs we
+paid Google to verify, and re-running a search at click time on exactly the
+ambiguity `placeid.py` exists to remove.
+
+---
+
+## Filtering a static map
+
+Each map carries a chip bar: **Day** and **Show** (`Sleep`, `See & do`,
+`Eat & drink`, `Getting about`). `overlay.py` puts `data-day` and
+`data-cat`/`data-grp` on every marker `<g>` and `data-day` on every drawn line;
+`maps.py` injects one CSS block and one JS function for all of them.
+
+- **A chip is only offered if it would change the picture.** A day every marker
+  on the map shares hides nothing when you pick it, and a chip that does nothing
+  reads as a broken one — so the Québec walking map, where all eleven markers are
+  Day 6, has no Day 6 chip.
+- **Placement is computed once, against the full marker set, and never
+  recomputed.** `.placement.json`, `boxes.py` and the `crowded` gate are
+  untouched by filtering. A filtered map is *sparser than optimal*, never wrong.
+  Recomputing per filter combination is combinatorial and buys nothing.
+- **It degrades correctly.** No JS, everything visible. Printing forces
+  everything visible. A marker with no day or no category is map furniture and
+  is never hidden by either filter.
 
 ---
 
@@ -496,7 +633,21 @@ stays in one place rather than being reimplemented per tool.
 
 **`savedlist.py`** carries its own `<style>` and `<script>` inside the fragment,
 so re-splicing replaces them wholesale. That is idempotent by construction,
-rather than by the inject-once check `maps.py` needs for the map CSS.
+rather than by the inject-once check `maps.py` needs for the map CSS. It groups
+by region in map order and, inside a region, by day — loading a saved list is a
+sequencing job, so you work down it in the order you will stand in the places.
+
+**`inventory.py` and `dayroutes.py` are offline and idempotent**, like
+`overlay.py` and `savedlist.py`: they read committed JSON and write a fragment.
+Nothing in either touches the network. `dayroutes.html` is a build artifact and
+gitignored; `inventory.json` is an input and committed.
+
+**`maps.py`'s inject-once blocks each guard on their own sentinel.** The main
+CSS/JS block returns early on a guide that already has `.mapzoom{`, so anything
+added there would never reach an existing guide — `filterblock()` checks for
+`.mfc{` and for its own JS comment instead, and runs before that early return.
+The day-route splice is idempotent a third way: it cuts any `.dayroutes` block
+already in the guide before inserting, so re-running replaces rather than stacks.
 
 **`_proj.py`** is the web-mercator projection, the tile-range maths and the
 geodesic distance, shared by everything that needs them. **`_http.py`** is the
@@ -514,6 +665,14 @@ neighbours changed; look at the list, do not just read the count.
 ---
 
 ## Things that have bitten us
+
+- **The same place name in two cities.** `Place d'Armes` is a square in Old
+  Montréal *and* the square outside the Château Frontenac in Québec. The one in
+  `extras.json` is Québec's, and it got hand-tagged onto Day 3 in Montréal — so
+  an afternoon on foot in Old Montréal contained a 232 km walking hop, in a URL
+  that looked perfectly well-formed. `inventory.py` now measures every
+  consecutive pair of stops against what the travel mode could plausibly cover
+  and fails. Check the *coordinate*, not the name, when a key sounds generic.
 
 - **Wikimedia rate-limits scripted bulk downloads** (HTTP 429) and rejects
   arbitrary thumbnail widths (HTTP 400). Use the exact URLs the API returns, send
